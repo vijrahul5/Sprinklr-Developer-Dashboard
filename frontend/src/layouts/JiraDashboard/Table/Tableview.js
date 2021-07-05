@@ -10,7 +10,7 @@ const Tableview = ({ URL, heading, title, jql }) => {
 
     return (
         <>
-            <div style={{ maxWidth: "40rem" }}>
+            <div style={{ width:"100%" } } id="jiraTableView">
                 <Table columns={heading} data={data} />
                 <Pagination
                     numPages={totalPages}

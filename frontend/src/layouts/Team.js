@@ -74,7 +74,7 @@ function Team() {
                                 name="employeeEmail"
                                 className="form-control"
                             />
-                            <Button type="submit" className="submit" size={SIZE.compact}>
+                            <Button type="submit" className="submit" >
                                 Add
                             </Button>
                         </>
@@ -92,7 +92,7 @@ function Team() {
                                 name="employeeEmail"
                                 className="form-control"
                             />
-                            <Button type="submit" className="submit" size={SIZE.compact}>
+                            <Button type="submit" className="submit" >
                                 Delete
                             </Button>
                         </>

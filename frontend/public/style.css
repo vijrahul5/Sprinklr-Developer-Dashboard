@@ -233,7 +233,7 @@ span {
   font-size: 0.8rem;
 }
 .profile {
-  width: 14rem;
+  width: 20rem;
   height: 14rem;
   display: flex;
   flex-direction: column;
@@ -254,8 +254,8 @@ hr {
 }
 .profile .img-holder {
   margin-top: 1rem;
-  width: 50%;
-  height: 50%;
+  width: 7rem;
+  height: 7rem;
   border: 0.1rem solid black;
   object-fit: cover;
 }
@@ -280,12 +280,12 @@ hr {
   margin-bottom: 0.2rem;
 }
 .profile .param {
-  width: 35%;
+  width: 20%;
   margin: 0px;
   font-weight: 500;
 }
 .profile .value {
-  width: 65%;
+  width: 80%;
   margin: 0px;
 }
 .loader {
@@ -299,9 +299,9 @@ hr {
   margin-top: 3rem;
   margin-bottom: 3rem;
 }
-.jiraAuth {
-  width: 100%;
-  height: 60%;
+#jiraAuth {
+  width: 60%;
+  height: 40%;
   /* margin: auto; */
   margin: 0px auto;
   padding: 1rem;
@@ -313,10 +313,16 @@ hr {
     justify-content: space-around;
     align-items: center; */
 }
+#jiraTableView{
+  padding: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-top: 4px solid black;
+
+}
 .dashboard-container {
   display: grid;
   height: 100%;
-  grid-template-columns: 0.8fr 1fr 0.8fr;
+  grid-template-columns: 0.4fr 1fr 0.6fr;
   grid-template-rows: 0.2fr 0.3fr 1fr 1fr 0.7fr 1fr 1fr;
   grid-template-areas:
     "sidebar sidebar sidebar"
@@ -324,8 +330,8 @@ hr {
     "standup jira teamList"
     "standup jira teamList"
     "standup gitlab teamList"
-    "links gitlab teamForm1"
-    "links gitlab teamForm2";
+    "teamForm1 gitlab links"
+    "teamForm2 gitlab links";
   grid-gap: 1rem;
 }
 #jiraTable {

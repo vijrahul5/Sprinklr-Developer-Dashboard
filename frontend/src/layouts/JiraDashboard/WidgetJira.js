@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Input } from "baseui/input";
-import { Button } from "baseui/button";
+import { Button,SIZE } from "baseui/button";
 import Tableview from "./Table/Tableview";
 
 const CLOUD_ID = localStorage.getItem("CLOUD_ID");
@@ -13,7 +13,7 @@ const Widgetjira = () => {
     const [value, setValue] = useState("");
     return (
         <div id="jiraTable">
-            <div style={{ display: "flex", maxWidth: "40rem" }}>
+            <div style={{ display: "flex", width:"100%", marginBottom:"0.5rem" }}>
                 <Input
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
@@ -25,6 +25,7 @@ const Widgetjira = () => {
                         console.log("Clicked");
                         setJql(value);
                     }}
+                    style={{marginLeft:"1rem"}}
                 >
                     search
                 </Button>

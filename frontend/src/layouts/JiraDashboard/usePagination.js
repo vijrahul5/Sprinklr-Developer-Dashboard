@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import GeneralApis from "./GeneralApis";
-const EntryPerPage = 10;
+const EntryPerPage = 5;
 const usePagination = (URL, jql) => {
     const [pageNumber, setPageNumber] = useState(1);
     const [data, setData] = useState([]);
