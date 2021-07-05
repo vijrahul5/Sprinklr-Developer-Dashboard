@@ -29,7 +29,7 @@ const Widgetjira = () => {
                     style={{marginLeft:"1rem"}}
                     size={SIZE.compact}
                 >
-                    search
+                    Search
                 </Button>
             </div>
             <Tableview URL={URL} heading={heading} title={title} jql={jql} />

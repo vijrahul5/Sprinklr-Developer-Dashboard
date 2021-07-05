@@ -4,7 +4,8 @@ import Loader from "../components/Loader/Loader";
 import { useUpdateTeam, useFetchEmployeeTeamData } from "../Api";
 import { FormControl } from "baseui/form-control";
 import { Input } from "baseui/input";
-import { Button,SIZE } from "baseui/button";
+import { Button, SIZE } from "baseui/button";
+import { Heading, HeadingLevel } from "baseui/heading";
 
 function Team() {
     // Component for accessing team data and their stand ups
@@ -62,7 +63,11 @@ function Team() {
     } else {
         return (
             <>
-                <form className="teamForm" onSubmit={handleAddBtn} id="teamForm1">
+                <form
+                    className="teamForm"
+                    onSubmit={handleAddBtn}
+                    id="teamForm1"
+                >
                     <FormControl
                         label={() => "Add Team Member"}
                         className="form-control"
@@ -75,13 +80,21 @@ function Team() {
                                 className="form-control"
                                 size={SIZE.compact}
                             />
-                            <Button type="submit" className="submit" size={SIZE.compact}>
+                            <Button
+                                type="submit"
+                                className="submit"
+                                size={SIZE.compact}
+                            >
                                 Add
                             </Button>
                         </>
                     </FormControl>
                 </form>
-                <form className="teamForm" onSubmit={handleDeleteBtn} id="teamForm2">
+                <form
+                    className="teamForm"
+                    onSubmit={handleDeleteBtn}
+                    id="teamForm2"
+                >
                     <FormControl
                         label={() => "Delete Team Member"}
                         className="form-control"
@@ -94,24 +107,41 @@ function Team() {
                                 className="form-control"
                                 size={SIZE.compact}
                             />
-                            <Button type="submit" className="submit" size={SIZE.compact}>
+                            <Button
+                                type="submit"
+                                className="submit"
+                                size={SIZE.compact}
+                            >
                                 Delete
                             </Button>
                         </>
                     </FormControl>
                 </form>
-                {data.length !== 0 ? (
-                    <ul className="teamStandUpList">
-                        {data.map((teamMember) => {
+                <ul className="teamStandUpList">
+                    {data.length !== 0 ? (
+                        data.map((teamMember) => {
                             return (
                                 <TeamMember
                                     key={teamMember.email}
                                     teamMember={teamMember}
                                 />
                             );
-                        })}
-                    </ul>
-                ) : null}
+                        })
+                    ) : (
+                        <HeadingLevel>
+                            <Heading
+                                style={{
+                                    marginBottom: "2rem",
+                                    textAlign: "center",
+                                    fontSize: "1.5rem",
+                                    fontWeight: "250",
+                                }}
+                            >
+                                No team members added...
+                            </Heading>
+                        </HeadingLevel>
+                    )}
+                </ul>
             </>
         );
     }
