@@ -73,8 +73,9 @@ function Team() {
                                 placeholder="Enter Email"
                                 name="employeeEmail"
                                 className="form-control"
+                                size={SIZE.compact}
                             />
-                            <Button type="submit" className="submit" >
+                            <Button type="submit" className="submit" size={SIZE.compact}>
                                 Add
                             </Button>
                         </>
@@ -91,8 +92,9 @@ function Team() {
                                 placeholder="Enter Email"
                                 name="employeeEmail"
                                 className="form-control"
+                                size={SIZE.compact}
                             />
-                            <Button type="submit" className="submit" >
+                            <Button type="submit" className="submit" size={SIZE.compact}>
                                 Delete
                             </Button>
                         </>

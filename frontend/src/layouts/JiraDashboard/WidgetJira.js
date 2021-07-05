@@ -19,6 +19,7 @@ const Widgetjira = () => {
                     onChange={(e) => setValue(e.target.value)}
                     placeholder="Enter JQL to search issues"
                     clearOnEscape
+                    size={SIZE.compact}
                 />
                 <Button
                     onClick={() => {
@@ -26,6 +27,7 @@ const Widgetjira = () => {
                         setJql(value);
                     }}
                     style={{marginLeft:"1rem"}}
+                    size={SIZE.compact}
                 >
                     search
                 </Button>
