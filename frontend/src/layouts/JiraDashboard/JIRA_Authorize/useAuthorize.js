@@ -46,13 +46,13 @@ const useAuthorize = () => {
             "https://api.atlassian.com/oauth/token/accessible-resources",
             ACCESS_TOKEN
         );
-        let webhookId = await registerWebhoook(
-            `https://api.atlassian.com/ex/jira/${CLOUD_ID}/rest/api/2/webhook`,
-            ACCESS_TOKEN,
-            CLOUD_ID
-        );
+        // let webhookId = await registerWebhoook(
+        //     `https://api.atlassian.com/ex/jira/${CLOUD_ID}/rest/api/2/webhook`,
+        //     ACCESS_TOKEN,
+        //     CLOUD_ID
+        // );
 
-        localStorage.setItem("WEBHOOK", webhookId);
+        // localStorage.setItem("WEBHOOK", webhookId);
         saveTokens(AUTH_CODE, REFRESH_TOKEN, CLOUD_ID, ACCESS_TOKEN);
         goToHome();
         setDoneAuthentication(true);

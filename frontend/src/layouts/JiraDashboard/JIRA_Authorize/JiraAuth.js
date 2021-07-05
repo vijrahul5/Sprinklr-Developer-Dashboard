@@ -19,7 +19,7 @@ const JiraAuth = () => {
                         marginBottom: "2rem",
                         textAlign: "center",
                         fontSize: "2rem",
-                        fontWeight: "500",
+                        fontWeight: "250",
                     }}
                 >
                     Jira Authorization
@@ -38,6 +38,7 @@ const JiraAuth = () => {
                         localStorage.setItem("CLIENT_ID", clientId);
                         localStorage.setItem("CLIENT_SECRET", clientSecret);
                     }}
+                    size={SIZE.compact}
                     
                 >
                     Authorize
@@ -46,7 +47,7 @@ const JiraAuth = () => {
                 <Button
                     onClick={() => getTokens()}
                     style={{ marginLeft: "1rem" }}
-                    
+                    size={SIZE.compact}
                 >
                     Save
                 </Button>
