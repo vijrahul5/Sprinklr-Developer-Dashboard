@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Navbar from "../../components/Navbar/Navbar";
-import Loader from "../../components/Loader/Loader";
+import Navbar from "../Navbar/Navbar";
+import Loader from "../Loader/Loader";
 import Auth from "./Auth";
 import GoogleLogin from "react-google-login";
 import dotenv from "dotenv";
@@ -31,11 +31,11 @@ function SignIn() {
                 <div className="signin">
                     <h3>Sign In</h3>
                     <GoogleLogin
-                        clientId={`${process.env.REACT_APP_CLIENT_ID}`}
+                        clientId={process.env.REACT_APP_CLIENT_ID}
                         buttonText="Continue With Google"
                         onSuccess={handleGoogleLoginSuccess}
                         onFailure={handleGoogleLoginFailiure}
-                        cookiePolicy={"single_host_origin"}
+                        cookiePolicy="single_host_origin"
                     />
                 </div>
             </div>
