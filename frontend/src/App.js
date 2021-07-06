@@ -8,8 +8,10 @@ import SignIn from "./layouts/SignIn";
 import LandingPage from "./layouts/LandingPage";
 import Dashboard from "./layouts/Dashboard";
 
+//review-cycle-1: read about styletron and document it somewhere
 const engine = new Styletron();
 
+//review-cycle-1: check if there can be a single component only
 function App() {
     return (
         <BrowserRouter>
