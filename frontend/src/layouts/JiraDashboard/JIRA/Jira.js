@@ -5,17 +5,24 @@ import "react-notifications/lib/notifications.css";
 import { NotificationContainer } from "react-notifications";
 import Notification from "../Notify/Notification";
 import Widgetjira from "../WidgetJira";
-
+import Loader from "../../../components/Loader/Loader";
 const Jira = () => {
-    const { doneAuthentication } = useAuthorize();
+  const { doneAuthentication, loading } = useAuthorize();
 
-    return (
-        <>
-            {doneAuthentication === false ? <JiraAuth /> : <Widgetjira />}
-            <NotificationContainer />
-            <Notification />
-        </>
-    );
+  return (
+    <>
+      {loading === true ? (
+        <Loader />
+      ) : doneAuthentication === false ? (
+        <JiraAuth />
+      ) : (
+        <Widgetjira />
+      )}
+
+      <NotificationContainer />
+      <Notification />
+    </>
+  );
 };
 
 export default Jira;
