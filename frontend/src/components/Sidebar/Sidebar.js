@@ -12,6 +12,7 @@ function SidebarMenu() {
 
     const showSidebar = () => setSidebar(!sidebar);
 
+    //review-cycle-1: take out { color: "#fff" } in a constant
     return (
         <>
             <IconContext.Provider value={{ color: "#fff" }}>
