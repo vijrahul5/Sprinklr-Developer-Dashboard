@@ -51,7 +51,7 @@ body,
     margin-bottom: 3rem;
 }
 
-.home {
+.landingPage {
     background-image: linear-gradient(
             to bottom,
             rgba(0, 0, 0, 0.1),
@@ -66,7 +66,7 @@ body,
     display: flex;
     justify-content: center;
 }
-.home h1 {
+.landingPage h1 {
     text-align: center;
     opacity: 1;
     margin-top: 10rem;
@@ -208,10 +208,10 @@ span {
 .teamForm .submit {
     margin-left: 1rem;
 }
-#teamForm1 {
+#teamFormAdd {
     grid-area: teamForm1;
 }
-#teamForm2 {
+#teamFormDelete {
     grid-area: teamForm2;
 }
 .standUpForm {
@@ -299,30 +299,22 @@ hr {
 #jiraAuth {
     width: 60%;
     height: fit-content;
-    /* margin: auto; */
     margin: 0px auto;
     padding: 1rem;
     box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
     border-top: 4px solid black;
     grid-area: jira;
-    /* display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center; */
 }
 #jiraTableView {
     padding: 1rem;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-top: 4px solid black;
 }
-.dashboard-container {
+.dashboardContainer {
     display: grid;
     width: 100vw;
     height: 100vh;
     grid-template-columns: 0.4fr 1fr 0.6fr;
-    /* grid-template-rows: 0.2fr 0.3fr 1fr 1fr 1fr 0.1fr 0.1fr; */
-    /* grid-auto-rows: 240px; */
-    /* grid-auto-columns: 240px; */
     grid-template-areas:
         "profile jira teamList"
         "standup jira teamList"
@@ -341,7 +333,7 @@ hr {
     html {
         font-size: 90%;
     }
-    .dashboard-container {
+    .dashboardContainer {
         grid-template-columns: 0.6fr 1fr 1fr;
         grid-template-areas:
             "profile standup teamList"
@@ -357,7 +349,7 @@ hr {
     html {
         font-size: 85%;
     }
-    .dashboard-container {
+    .dashboardContainer {
         grid-template-columns: 0.8fr 1fr;
         grid-template-areas:
             "profile teamList"
@@ -373,7 +365,7 @@ hr {
     html {
         font-size: 90%;
     }
-    .dashboard-container {
+    .dashboardContainer {
         grid-template-columns: 1fr 1fr;
         grid-template-areas:
             "profile teamForm1"
@@ -384,5 +376,4 @@ hr {
             " jira jira"
             " gitlab gitlab";
     }
-    
 }

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { AppNavBar, setItemActive } from "baseui/app-nav-bar";
+import { AppNavBar } from "baseui/app-nav-bar";
 import { TriangleRight } from "baseui/icon";
 
 export default function Navbar() {

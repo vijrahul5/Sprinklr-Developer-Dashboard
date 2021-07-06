@@ -1,15 +1,17 @@
 import axios from "axios";
 
+
 class Auth {
     // Class that provides functions for authentication : 'login' and 'logout'
-    async login(tokenId) {
+    async login(tokenId,setLoading) {
+        setLoading(true);
         // Sends a post request to the backend server with tokenid from google and receives a session-token in the cookies
         try {
             const res = await axios.post("/api/auth/signin", {
                 token: tokenId,
             });
             if (res.data.status === "Success") {
-                alert("Sign In Complete");
+                setLoading(false);
                 window.location.replace("/dashboard");
             } else {
                 alert(res.data.status);
@@ -24,7 +26,6 @@ class Auth {
             const res = await axios.get("/api/auth/signout");
             if (res.data.status === "Success") {
                 window.location.replace("/");
-                alert("Sign Out Complete");
             } else {
                 throw new Error(res.data.status);
             }

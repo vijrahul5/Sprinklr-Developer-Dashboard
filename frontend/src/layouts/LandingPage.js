@@ -6,7 +6,7 @@ export default class LandingPage extends Component {
         return (
             <>
                 <Navbar />
-                <div className="home"></div>
+                <div className="landingPage"></div>
             </>
         );
     }

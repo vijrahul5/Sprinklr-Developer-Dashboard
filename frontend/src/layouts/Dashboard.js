@@ -1,8 +1,8 @@
 import SidebarMenu from "../components/Sidebar/Sidebar";
-import Team from "../layouts/Team";
-import TeamForm from "./TeamForm";
-import Profile from "../layouts/Profile";
-import StandUp from "./StandUp";
+import Team from "./Team/Team";
+import TeamForm from "./TeamForm/TeamForm";
+import Profile from "./Profile/Profile";
+import StandUp from "./StandUp/StandUp";
 import React from "react";
 import JiraDashboard from "./JiraDashboard/JIRA/Jira";
 
@@ -10,11 +10,12 @@ export default function Dashboard() {
     return (
         <>
             <SidebarMenu />
-            <div className="dashboard-container">
+            <div className="dashboardContainer">
                 <Profile />
                 <StandUp />
                 <Team />
-                <TeamForm />
+                <TeamForm type="Add" />
+                <TeamForm type="Delete" />
                 <JiraDashboard />
             </div>
         </>
