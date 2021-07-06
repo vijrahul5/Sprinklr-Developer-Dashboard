@@ -9,8 +9,8 @@ import JiraDashboard from "./JiraDashboard/JIRA/Jira";
 export default function Dashboard() {
     return (
         <>
+            <SidebarMenu />
             <div className="dashboard-container">
-                <SidebarMenu />
                 <Profile />
                 <StandUp />
                 <Team />
