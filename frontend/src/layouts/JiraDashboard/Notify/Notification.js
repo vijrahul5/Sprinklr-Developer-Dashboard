@@ -5,20 +5,21 @@ import axios from "axios";
 require("dotenv").config();
 
 const channelid = process.env.REACT_APP_CHANNEL_ID_JIRA;
-const cid = "123";
+let cid = "";
 const pusher = new Pusher(channelid, {
   cluster: "ap2",
 });
-async function configureConnection() {
-  let response = await axios.get("/api/jira/webhookToken");
-  if (response.data.status === "Success") {
-    cid = response.data.webhookId;
-  } else {
-    alert("Error to bind notification channel");
-  }
-}
+
 const Notification = () => {
   useEffect(() => {
+    (async function configureConnection() {
+      let response = await axios.get("/api/jira/webhookToken");
+      if (response.data.status === "Success") {
+        cid = response.data.webhookId;
+      } else {
+        alert("Error to bind notification channel");
+      }
+    })();
     const channel = pusher.subscribe("my-channel");
     channel.bind(cid, function (data) {
       NotificationManager.success(

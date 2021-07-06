@@ -199,7 +199,7 @@ async function getDataByJql(req, res) {
       data: dataJSON,
     });
   } catch (err) {
-    console.log(err.message);
+    // console.log(err.message);
     res.json({
       status: "Failed",
       error: err.message,
