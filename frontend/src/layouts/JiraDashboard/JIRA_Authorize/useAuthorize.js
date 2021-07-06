@@ -12,10 +12,7 @@ const useAuthorize = () => {
   async function isAuthenticated() {
     try {
       const res = await axios.get("/api/jira/authenticated");
-      console.log(res.data.status);
       if (res.data.status === "Success") {
-        console.log("hi", res.data.done_jira_authentication);
-
         const authenticated = res.data.done_jira_authentication;
         if (!authenticated) {
           setDoneAuthentication(false);

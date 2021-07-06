@@ -230,7 +230,48 @@ async function authenticated(req, res) {
     });
   }
 }
+
+async function getFilters(req, res) {
+  const email = req.email;
+  try {
+    const employee = await employeeModel.findOne({
+      email: email,
+    });
+    if (!employee) {
+      throw new Error("Can't get Employee");
+    }
+    const REFRESH_TOKEN = employee.refreshToken;
+    const CLOUD_ID = employee.cloudId;
+    const ACCESS_TOKEN = await getAccessToken(REFRESH_TOKEN);
+    if (ACCESS_TOKEN === -1) {
+      throw new Error("Can't get Access token");
+    }
+    const url_data_filter = `https://api.atlassian.com/ex/jira/${CLOUD_ID}/rest/api/3/filter/my`;
+    let data = await fetch(url_data_filter, {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
+      },
+      method: "GET",
+    });
+    if (data.status >= 400) {
+      throw new Error("Can't Get Data From Jira");
+    }
+    let dataJSON = await data.json();
+    res.json({
+      status: "Success",
+      data: dataJSON,
+    });
+  } catch (err) {
+    res.json({
+      status: "Failed",
+      error: err.message,
+    });
+  }
+}
 module.exports.setupJira = setupJira;
 module.exports.getDataByJql = getDataByJql;
 module.exports.authenticated = authenticated;
 module.exports.webhookToken = webhookToken;
+module.exports.getFilters = getFilters;

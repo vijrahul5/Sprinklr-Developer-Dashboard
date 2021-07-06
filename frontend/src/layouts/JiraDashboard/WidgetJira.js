@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Input } from "baseui/input";
 import { Button, SIZE } from "baseui/button";
 import Tableview from "./Table/Tableview";
-
+import { Select } from "baseui/select";
+import useFilters from "./useFilters";
 const CLOUD_ID = localStorage.getItem("CLOUD_ID");
 const URL = `https://api.atlassian.com/ex/jira/${CLOUD_ID}/rest/api/3/search`;
 const heading = ["Type", "Key", "Summary", "Priority"];
@@ -12,7 +13,8 @@ const recentJql = localStorage.getItem("recentJql");
 const Widgetjira = () => {
   const [jql, setJql] = useState(recentJql);
   const [value, setValue] = useState(recentJql);
-
+  const [filterValue, setFilterValue] = useState([]);
+  const { filters } = useFilters();
   return (
     <div id="jiraTable">
       <div style={{ display: "flex", width: "100%", marginBottom: "0.5rem" }}>
@@ -35,6 +37,19 @@ const Widgetjira = () => {
           Search
         </Button>
       </div>
+      <div style={{ marginBottom: "0.5rem" }}>
+        <Select
+          size={SIZE.compact}
+          options={filters}
+          value={filterValue}
+          placeholder="Select Filter"
+          onChange={(params) => {
+            setFilterValue(params.value);
+            if (params.value.length > 0) setJql(`filter=${params.value[0].id}`);
+          }}
+        />
+      </div>
+
       <Tableview URL={URL} heading={heading} title={title} jql={jql} />
     </div>
   );

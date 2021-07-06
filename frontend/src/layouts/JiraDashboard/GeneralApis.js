@@ -8,7 +8,6 @@ const GeneralApis = () => {
         maxResults: maxResults,
         jql: jql,
       };
-      console.log(data);
       let response = await axios.post("/api/jira/getDataByJql", data);
       if (response.data.status === "Failed") {
         throw new Error(response.data.error);

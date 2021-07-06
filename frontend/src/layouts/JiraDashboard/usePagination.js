@@ -17,7 +17,6 @@ const usePagination = (URL, jql) => {
 
     if (details) {
       let arr = details.issues.map((detail, index) => {
-        console.log(detail);
         let newItem = [
           detail.fields.issuetype.name,
           detail.key,
