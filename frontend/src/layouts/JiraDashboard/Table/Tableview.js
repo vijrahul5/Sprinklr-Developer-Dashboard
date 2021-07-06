@@ -5,7 +5,7 @@ import usePagination from "../usePagination.js";
 import Loader from "../../../components/Loader/Loader.js";
 const Tableview = ({ heading, jql }) => {
   const { data, pageNumber, totalPages, setPageNumber, loading } =
-    usePagination(URL, jql);
+    usePagination(jql);
 
   return (
     <>

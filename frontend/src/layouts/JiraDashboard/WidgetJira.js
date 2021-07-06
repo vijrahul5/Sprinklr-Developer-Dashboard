@@ -25,7 +25,6 @@ const Widgetjira = () => {
         />
         <Button
           onClick={() => {
-            console.log("Clicked");
             setJql(value);
             localStorage.setItem("recentJql", value);
           }}
