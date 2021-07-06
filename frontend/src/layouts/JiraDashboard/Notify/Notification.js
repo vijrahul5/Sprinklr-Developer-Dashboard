@@ -1,32 +1,38 @@
 import React, { useEffect } from "react";
 import Pusher from "pusher-js";
 import { NotificationManager } from "react-notifications";
+import axios from "axios";
 require("dotenv").config();
 
 const channelid = process.env.REACT_APP_CHANNEL_ID_JIRA;
-const cid = localStorage.getItem("WEBHOOK");
-// console.log(channelid);
+const cid = "123";
 const pusher = new Pusher(channelid, {
-    cluster: "ap2",
+  cluster: "ap2",
 });
-
+async function configureConnection() {
+  let response = await axios.get("/api/jira/webhookToken");
+  if (response.data.status === "Success") {
+    cid = response.data.webhookId;
+  } else {
+    alert("Error to bind notification channel");
+  }
+}
 const Notification = () => {
-    useEffect(() => {
-        const channel = pusher.subscribe("my-channel");
-        channel.bind(cid, function (data) {
-            // console.log("notification");
-            NotificationManager.success(
-                `${data.details.type}`,
-                `${data.details.key}`,
-                100000000000
-            );
-        });
-        return () => {
-            pusher.unsubscribe("my-channel");
-        };
-    }, []);
+  useEffect(() => {
+    const channel = pusher.subscribe("my-channel");
+    channel.bind(cid, function (data) {
+      NotificationManager.success(
+        `${data.details.type}`,
+        `${data.details.key}`,
+        100000000000
+      );
+    });
+    return () => {
+      pusher.unsubscribe("my-channel");
+    };
+  }, []);
 
-    return <></>;
+  return <></>;
 };
 
 export default Notification;

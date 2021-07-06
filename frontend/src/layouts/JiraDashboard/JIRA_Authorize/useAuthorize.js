@@ -1,69 +1,67 @@
-import { useState } from "react";
-import AuthApis from "./JiraAuthApi";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-
+import axios from "axios";
 const useAuthorize = () => {
-    const history = useHistory();
-    const [doneAuthentication, setDoneAuthentication] = useState(
-        isAuthenticated()
-    );
+  useEffect(() => {
+    isAuthenticated();
+  }, []);
+  const history = useHistory();
+  const [doneAuthentication, setDoneAuthentication] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-    const { getCloudId, getRefreshAndAccessCode, registerWebhoook } =
-        AuthApis();
+  async function isAuthenticated() {
+    try {
+      const res = await axios.get("/api/jira/authenticated");
+      console.log(res.data.status);
+      if (res.data.status === "Success") {
+        console.log("hi", res.data.done_jira_authentication);
 
-    function isAuthenticated() {
-        if (localStorage.getItem("CLOUD_ID") !== null) return true;
-        return false;
+        const authenticated = res.data.done_jira_authentication;
+        if (!authenticated) {
+          setDoneAuthentication(false);
+        } else {
+          setDoneAuthentication(res.data.done_jira_authentication);
+        }
+      } else {
+        throw new Error();
+      }
+    } catch {
+      setDoneAuthentication(false);
     }
+    setLoading(false);
+  }
 
-    function goToHome() {
-        history.replace("/dashboard");
-        window.location.href = "http://localhost:3000/dashboard";
-    }
-    function showAuthPage(URL) {
-        window.location.href = URL;
-    }
-    function getAuthCode() {
-        let len = window.location.href.length;
-        let AUTH_CODE = window.location.href.slice(37, len - 12);
-        console.log(AUTH_CODE);
-        return AUTH_CODE;
-    }
-    async function getTokens() {
-        let AUTH_CODE = getAuthCode();
-        let client_id = localStorage.getItem("CLIENT_ID");
-        let client_secret = localStorage.getItem("CLIENT_SECRET");
-        console.log(client_id, client_secret, AUTH_CODE);
-        let [REFRESH_TOKEN, ACCESS_TOKEN] = await getRefreshAndAccessCode(
-            "https://auth.atlassian.com/oauth/token",
-            client_id,
-            client_secret,
-            AUTH_CODE,
-            "http://localhost:3000/dashboard"
-        );
+  function goToHome() {
+    history.replace("/dashboard");
+    window.location.href = "http://localhost:3000/dashboard";
+  }
+  function showAuthPage(URL) {
+    window.location.href = URL;
+  }
+  function getAuthCode() {
+    let len = window.location.href.length;
+    let AUTH_CODE = window.location.href.slice(37, len - 12);
+    console.log(AUTH_CODE);
+    return AUTH_CODE;
+  }
 
-        let CLOUD_ID = await getCloudId(
-            "https://api.atlassian.com/oauth/token/accessible-resources",
-            ACCESS_TOKEN
-        );
-        // let webhookId = await registerWebhoook(
-        //     `https://api.atlassian.com/ex/jira/${CLOUD_ID}/rest/api/2/webhook`,
-        //     ACCESS_TOKEN,
-        //     CLOUD_ID
-        // );
-
-        // localStorage.setItem("WEBHOOK", webhookId);
-        saveTokens(AUTH_CODE, REFRESH_TOKEN, CLOUD_ID, ACCESS_TOKEN);
-        goToHome();
-        setDoneAuthentication(true);
+  async function setupJira() {
+    try {
+      const AUTH_CODE = getAuthCode();
+      const data = {
+        auth_code: AUTH_CODE,
+      };
+      let response = await axios.post("/api/jira", data);
+      if (response.data.status === "Failed") {
+        throw new Error();
+      }
+      setDoneAuthentication(true);
+    } catch (err) {
+      alert("Server Error : Please try again");
     }
-    function saveTokens(AUTH_CODE, REFRESH_TOKEN, CLOUD_ID, ACCESS_TOKEN) {
-        localStorage.setItem("AUTH_CODE", AUTH_CODE);
-        localStorage.setItem("REFRESH_TOKEN", REFRESH_TOKEN);
-        localStorage.setItem("CLOUD_ID", CLOUD_ID);
-        localStorage.setItem("ACCESS_TOKEN", ACCESS_TOKEN);
-    }
-    return { showAuthPage, getTokens, doneAuthentication, goToHome };
+    goToHome();
+  }
+  return { showAuthPage, setupJira, doneAuthentication, goToHome, loading };
 };
 
 export default useAuthorize;
