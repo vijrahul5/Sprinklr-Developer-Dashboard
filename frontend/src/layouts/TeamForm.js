@@ -12,6 +12,7 @@ function TeamForm() {
         useUpdateTeam(); // Provides functions for adding or deleting a team member
 
     useEffect(() => {
+        //review-cycle-1: why is this needed?
         setTimeout(() => {
             setLoading(false);
         }, 1000);
@@ -24,6 +25,7 @@ function TeamForm() {
         return <h1>{addError}</h1>;
     }
     async function handleAddBtn(e) {
+        //review-cycle-1: don't read from or update DOM
         // Event listener for adding a team member
         e.preventDefault();
         const formData = new FormData(e.target);
@@ -40,6 +42,7 @@ function TeamForm() {
         addTeamMember(data);
     }
     async function handleDeleteBtn(e) {
+        //review-cycle-1: don't read from or update DOM
         // Event Listener for deleting a team member
         e.preventDefault();
         const formData = new FormData(e.target);
@@ -57,6 +60,7 @@ function TeamForm() {
     }
 
     if (loading === true) {
+        //review-cycle-1: need some tombstone
         return (
             <>
                 <form className="teamForm" id="teamForm1">
