@@ -81,7 +81,6 @@ body,
   display: flex;
   justify-content: start;
   align-items: center;
-  grid-area: sidebar;
 }
 .sidebar h1 {
   all: unset;
@@ -158,7 +157,7 @@ span {
   margin-left: 16px;
 }
 .teamStandUpList {
-  width: 95%;
+  width: 100%;
   height: 100%;
   overflow: scroll;
   margin: 0rem auto;
@@ -188,7 +187,8 @@ span {
   margin-bottom: 0.2rem;
 }
 .teamForm {
-  width: 95%;
+  width: 100%;
+  height: auto;
   margin: 0rem auto;
   border-top: 4px solid black;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -215,7 +215,7 @@ span {
 }
 .standUpForm {
   border-top: 4px solid black;
-  width: 95%;
+  width: 100%;
   height: 100%;
   padding: 1rem;
   margin: auto;
@@ -233,8 +233,8 @@ span {
   font-size: 0.8rem;
 }
 .profile {
-  width: 20rem;
-  height: 14rem;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -320,9 +320,10 @@ hr {
   display: grid;
   height: 100%;
   grid-template-columns: 0.4fr 1fr 0.6fr;
-  grid-template-rows: 0.2fr 0.3fr 1fr 1fr 0.7fr 1fr 1fr;
+  /* grid-template-rows: 0.2fr 0.3fr 1fr 1fr 1fr 0.1fr 0.1fr; */
+  /* grid-auto-rows: 240px; */
+  /* grid-auto-columns: 240px; */
   grid-template-areas:
-    "sidebar sidebar sidebar"
     "profile jira teamList"
     "standup jira teamList"
     "standup jira teamList"
@@ -330,6 +331,7 @@ hr {
     "teamForm1 gitlab links"
     "teamForm2 gitlab links";
   grid-gap: 1rem;
+  padding: 1rem;
 }
 #jiraTable {
   grid-area: jira;
