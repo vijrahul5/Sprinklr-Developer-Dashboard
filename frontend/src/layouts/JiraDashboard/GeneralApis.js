@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const GeneralApis = () => {
+    //review-cycle-1: dont keep inside a general apis function. export each api separately
   async function getIssues(startAt, maxResults, jql) {
     try {
       let data = {
