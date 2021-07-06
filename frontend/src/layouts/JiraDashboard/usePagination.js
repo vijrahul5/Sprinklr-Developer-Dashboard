@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import GeneralApis from "./GeneralApis";
 const EntryPerPage = 5;
-const usePagination = (URL, jql) => {
+const usePagination = (jql) => {
   const [pageNumber, setPageNumber] = useState(1);
   const [data, setData] = useState([]);
   const { getIssues } = GeneralApis();
@@ -16,7 +16,7 @@ const usePagination = (URL, jql) => {
     );
 
     if (details) {
-      let arr = details.issues.map((detail, index) => {
+      let arr = details.issues.map((detail) => {
         let newItem = [
           detail.fields.issuetype.name,
           detail.key,
@@ -25,7 +25,7 @@ const usePagination = (URL, jql) => {
         if (detail.fields.priority) {
           newItem.push(detail.fields.priority.name);
         } else {
-          newItem.push("none");
+          newItem.push("NA");
         }
         return newItem;
       });
@@ -37,7 +37,7 @@ const usePagination = (URL, jql) => {
   }
   useEffect(() => {
     fillData();
-  }, [pageNumber, URL, jql]);
+  }, [pageNumber, jql]);
 
   return {
     pageNumber,

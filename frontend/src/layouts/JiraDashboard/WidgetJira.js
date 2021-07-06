@@ -4,8 +4,6 @@ import { Button, SIZE } from "baseui/button";
 import Tableview from "./Table/Tableview";
 import { Select } from "baseui/select";
 import useFilters from "./useFilters";
-const CLOUD_ID = localStorage.getItem("CLOUD_ID");
-const URL = `https://api.atlassian.com/ex/jira/${CLOUD_ID}/rest/api/3/search`;
 const heading = ["Type", "Key", "Summary", "Priority"];
 const title = "All Issues";
 const recentJql = localStorage.getItem("recentJql");
@@ -50,7 +48,7 @@ const Widgetjira = () => {
         />
       </div>
 
-      <Tableview URL={URL} heading={heading} title={title} jql={jql} />
+      <Tableview heading={heading} title={title} jql={jql} />
     </div>
   );
 };

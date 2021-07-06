@@ -3,7 +3,7 @@ import { Table } from "baseui/table-semantic";
 import { Pagination } from "baseui/pagination";
 import usePagination from "../usePagination.js";
 import Loader from "../../../components/Loader/Loader.js";
-const Tableview = ({ URL, heading, title, jql }) => {
+const Tableview = ({ heading, jql }) => {
   const { data, pageNumber, totalPages, setPageNumber, loading } =
     usePagination(URL, jql);
 
@@ -14,13 +14,16 @@ const Tableview = ({ URL, heading, title, jql }) => {
       ) : (
         <div style={{ width: "100%" }} id="jiraTableView">
           <Table columns={heading} data={data} />
-          <Pagination
-            numPages={totalPages}
-            currentPage={pageNumber}
-            onPageChange={({ nextPage }) => {
-              setPageNumber(Math.min(Math.max(nextPage, 1), totalPages));
-            }}
-          />
+          <div style={{ display: "flex" }}>
+            <div style={{ flexGrow: "1" }}></div>
+            <Pagination
+              numPages={totalPages}
+              currentPage={pageNumber}
+              onPageChange={({ nextPage }) => {
+                setPageNumber(Math.min(Math.max(nextPage, 1), totalPages));
+              }}
+            />
+          </div>
         </div>
       )}
     </>
