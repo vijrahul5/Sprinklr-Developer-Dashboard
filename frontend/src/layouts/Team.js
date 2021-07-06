@@ -12,12 +12,15 @@ function Team() {
     }
 
     if (loading === true) {
+        //review-cycle-1: need some tombstone
         return (
             <ul className="teamStandUpList">
                 <Loader />
             </ul>
         );
     } else {
+        //review-cycle-1: break into smaller components
+        //review-cycle-1: you don't need to check data.length !== 0. you can also check on data.length
         return (
             <>
                 <ul className="teamStandUpList">
@@ -33,6 +36,7 @@ function Team() {
                     ) : (
                         <HeadingLevel>
                             <Heading
+                            //review-cycle-1: take out constant
                                 style={{
                                     marginBottom: "2rem",
                                     textAlign: "center",
