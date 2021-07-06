@@ -5,6 +5,7 @@ import { TriangleRight } from "baseui/icon";
 export default function Navbar() {
     const [mainItems, setMainItems] = React.useState([
         { icon: TriangleRight, label: "Home", link: "/" },
+        //review-cycle-1: sign in should be the only available option
         { icon: TriangleRight, label: "SignIn", link: "/signin" },
     ]);
     function handleMainItemSelect(item) {
