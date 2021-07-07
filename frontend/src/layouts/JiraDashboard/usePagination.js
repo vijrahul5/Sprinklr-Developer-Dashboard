@@ -1,14 +1,19 @@
-import { useEffect, useState } from "react";
-import GeneralApis from "./GeneralApis";
+//hooks
+import React, { useEffect, useState } from "react";
+//components
+import GetIssuesApi from "./GetIssuesApi";
+import JiraTableBuilder from "./JiraTableBuilder";
+//constants
+const { getIssues } = GetIssuesApi();
 const EntryPerPage = 5;
+
 const usePagination = (jql) => {
   const [pageNumber, setPageNumber] = useState(1);
   const [data, setData] = useState([]);
-  const { getIssues } = GeneralApis();
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
 
-  async function fillData() {
+  async function fetchData() {
     let details = await getIssues(
       (pageNumber - 1) * EntryPerPage,
       EntryPerPage,
@@ -17,16 +22,15 @@ const usePagination = (jql) => {
 
     if (details) {
       let arr = details.issues.map((detail) => {
-        let newItem = [
-          detail.fields.issuetype.name,
-          detail.key,
-          detail.fields.summary,
-        ];
-        if (detail.fields.priority) {
-          newItem.push(detail.fields.priority.name);
-        } else {
-          newItem.push("NA");
-        }
+        let priority =
+          detail.fields.priority !== null ? detail.fields.priority.name : "";
+        let newItem = JiraTableBuilder()
+          .setIssueName(detail.fields.issuetype.name)
+          .setIssueSummary(detail.fields.summary)
+          .setIssueKey(detail.key)
+          .setIssuePriority(priority)
+          .setIssueStatus(detail.fields.status.name)
+          .build();
         return newItem;
       });
       setData(arr);
@@ -36,7 +40,7 @@ const usePagination = (jql) => {
     setLoading(false);
   }
   useEffect(() => {
-    fillData();
+    fetchData();
   }, [pageNumber, jql]);
 
   return {

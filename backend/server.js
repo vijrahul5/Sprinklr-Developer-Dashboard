@@ -19,6 +19,7 @@ app.use("/api/jiranotification", jiraNotificationRouter);
 app.use(protectRoute); // Middleware for protecting access to apis which require the user to be logged in
 app.use("/api/employee", employeeRouter); // All routes with '/api/employee' will be redirected to employeehRouter
 app.use("/api/jira", jiraRouter);
+
 let port = process.env.PORT;
 if (port == null || port == "") {
   port = 5000;

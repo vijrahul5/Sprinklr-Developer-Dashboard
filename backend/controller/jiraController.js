@@ -186,7 +186,7 @@ async function getDataByJql(req, res) {
       body: JSON.stringify({
         startAt: startAt,
         maxResults: maxResults,
-        fields: ["summary", "priority", "issuetype"],
+        fields: ["summary", "priority", "issuetype", "status"],
         jql: jql,
       }),
     });

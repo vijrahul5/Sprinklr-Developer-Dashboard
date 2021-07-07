@@ -2,29 +2,29 @@ import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 const useAuthorize = () => {
-  useEffect(() => {
-    isAuthenticated();
-  }, []);
   const history = useHistory();
-  const [doneAuthentication, setDoneAuthentication] = useState(false);
+  const [doneAuthentication, setDoneAuthentication] = useState(
+    isAuthenticated()
+  );
   const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    if (history.location.search.includes("code")) {
+      setupJira();
+    }
+  }, [history.location]);
+
   async function isAuthenticated() {
-    try {
-      const res = await axios.get("/api/jira/authenticated");
-      if (res.data.status === "Success") {
-        const authenticated = res.data.done_jira_authentication;
-        if (!authenticated) {
-          setDoneAuthentication(false);
-        } else {
-          setDoneAuthentication(res.data.done_jira_authentication);
-        }
-      } else {
-        throw new Error();
+    const res = await axios.get("/api/jira/authenticated");
+    if (res.data.status === "Success") {
+      const authenticated = res.data.done_jira_authentication;
+      if (authenticated) {
+        setDoneAuthentication(res.data.done_jira_authentication);
       }
-    } catch {
+    } else {
       setDoneAuthentication(false);
     }
+
     setLoading(false);
   }
 
@@ -43,8 +43,11 @@ const useAuthorize = () => {
   }
 
   async function setupJira() {
+    setLoading(true);
+    goToHome();
     try {
       const AUTH_CODE = getAuthCode();
+
       const data = {
         auth_code: AUTH_CODE,
       };
@@ -54,9 +57,9 @@ const useAuthorize = () => {
       }
       setDoneAuthentication(true);
     } catch (err) {
-      alert("Server Error : Please try again");
+      console.error("Server Error");
     }
-    goToHome();
+    setLoading(false);
   }
   return { showAuthPage, setupJira, doneAuthentication, goToHome, loading };
 };
