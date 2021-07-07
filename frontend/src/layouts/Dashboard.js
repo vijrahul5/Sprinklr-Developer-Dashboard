@@ -5,6 +5,7 @@ import Profile from "./Profile/Profile";
 import StandUp from "./StandUp/StandUp";
 import React from "react";
 import JiraDashboard from "./JiraDashboard/JIRA/Jira";
+import GitlabDashboard from "./GitlabDashboard/GitlabDashboard";
 
 export default function Dashboard() {
     return (
@@ -17,6 +18,7 @@ export default function Dashboard() {
                 <TeamForm type="Add" />
                 <TeamForm type="Delete" />
                 <JiraDashboard />
+                <GitlabDashboard/>
             </div>
         </>
     );
