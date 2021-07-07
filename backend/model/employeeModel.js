@@ -60,6 +60,9 @@ const employeeSchema = new Schema({
   jiraWebhookToken: {
     type: String,
   },
+  jiraBaseUrl: {
+    type: String,
+  },
 });
 
 const employeeModel = mongoose.model("employeeModel", employeeSchema);
