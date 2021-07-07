@@ -3,11 +3,11 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 const useAuthorize = () => {
   const history = useHistory();
-  const [doneAuthentication, setDoneAuthentication] = useState(
-    isAuthenticated()
-  );
+  const [doneAuthentication, setDoneAuthentication] = useState(false);
   const [loading, setLoading] = useState(true);
-
+  useEffect(() => {
+    isAuthenticated();
+  }, []);
   useEffect(() => {
     if (history.location.search.includes("code")) {
       setupJira();
@@ -44,7 +44,7 @@ const useAuthorize = () => {
 
   async function setupJira() {
     setLoading(true);
-    goToHome();
+
     try {
       const AUTH_CODE = getAuthCode();
 
@@ -59,6 +59,7 @@ const useAuthorize = () => {
     } catch (err) {
       console.error("Server Error");
     }
+    goToHome();
     setLoading(false);
   }
   return { showAuthPage, setupJira, doneAuthentication, goToHome, loading };

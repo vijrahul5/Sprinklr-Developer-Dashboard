@@ -11,8 +11,13 @@ const JiraTableBuilder = () => {
       this.issueName = issueName;
       return this;
     },
-    setIssueKey: function (issueKey) {
-      this.issueKey = issueKey;
+    setIssueKey: function (jiraBaseUrl, issueKey) {
+      const url = jiraBaseUrl + "/browse" + `/${issueKey}`;
+      this.issueKey = (
+        <a href={url} className="jiraissueurl">
+          {issueKey}
+        </a>
+      );
       return this;
     },
     setIssueSummary: function (issueSummary) {

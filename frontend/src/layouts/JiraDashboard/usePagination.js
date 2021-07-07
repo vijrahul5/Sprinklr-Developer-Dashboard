@@ -1,5 +1,5 @@
 //hooks
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 //components
 import GetIssuesApi from "./GetIssuesApi";
 import JiraTableBuilder from "./JiraTableBuilder";
@@ -14,20 +14,22 @@ const usePagination = (jql) => {
   const [loading, setLoading] = useState(true);
 
   async function fetchData() {
-    let details = await getIssues(
+    let data = await getIssues(
       (pageNumber - 1) * EntryPerPage,
       EntryPerPage,
       jql
     );
 
-    if (details) {
+    if (data) {
+      let details = data.details;
+      let jiraBaseUrl = data.jiraBaseUrl;
       let arr = details.issues.map((detail) => {
         let priority =
           detail.fields.priority !== null ? detail.fields.priority.name : "";
         let newItem = JiraTableBuilder()
           .setIssueName(detail.fields.issuetype.name)
           .setIssueSummary(detail.fields.summary)
-          .setIssueKey(detail.key)
+          .setIssueKey(jiraBaseUrl, detail.key)
           .setIssuePriority(priority)
           .setIssueStatus(detail.fields.status.name)
           .build();

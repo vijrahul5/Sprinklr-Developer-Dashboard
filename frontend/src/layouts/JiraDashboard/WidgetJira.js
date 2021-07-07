@@ -7,6 +7,7 @@ import { Select } from "baseui/select";
 import Table from "./Table/Table";
 import useFilters from "./useFilters";
 import useEmployeeFilter from "./useEmployeeFilter";
+
 const columnTitles = ["Type", "Key", "Summary", "Status", "Priority"];
 const title = "All Issues";
 const recentJql = localStorage.getItem("recentJql");

@@ -1,379 +1,429 @@
 * {
-    box-sizing: border-box;
-    margin: 0px;
-    padding: 0px;
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
 }
 
 :root {
-    --color-primary: black;
-    --font-primary: system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --color-primary: black;
+  --font-primary: system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 html {
-    font-size: 100%;
-    font-family: var(--font-primary);
+  font-size: 100%;
+  font-family: var(--font-primary);
 }
 html,
 body,
 #root {
-    height: 100%;
-    min-height: 100%;
+  height: 100%;
+  min-height: 100%;
 }
 
 .signin-container {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9);
 }
 
 .signin {
-    width: fit-content;
-    margin: auto;
-    background: #ffffff;
-    box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
-    border-radius: 2rem;
-    padding: 4rem 5rem;
-    transition: all 0.3s;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
+  width: fit-content;
+  margin: auto;
+  background: #ffffff;
+  box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
+  border-radius: 2rem;
+  padding: 4rem 5rem;
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .signin h3 {
-    all: unset;
-    font-size: 1.5rem;
-    font-weight: 500;
-    text-align: center;
-    margin: 0;
-    line-height: 1;
-    margin-bottom: 3rem;
+  all: unset;
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-align: center;
+  margin: 0;
+  line-height: 1;
+  margin-bottom: 3rem;
 }
 
 .landingPage {
-    background-image: linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 0.1),
-            rgba(0, 0, 0, 0.5)
-        ),
-        url("./assets/main.png");
-    background-blend-mode: luminosity;
-    background-size: cover;
-    background-position: center;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.1),
+      rgba(0, 0, 0, 0.5)
+    ),
+    url("./assets/main.png");
+  background-blend-mode: luminosity;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
 }
 .landingPage h1 {
-    text-align: center;
-    opacity: 1;
-    margin-top: 10rem;
-    color: black;
-    font-size: 8rem;
-    width: 80%;
+  text-align: center;
+  opacity: 1;
+  margin-top: 10rem;
+  color: black;
+  font-size: 8rem;
+  width: 80%;
 }
 
 .sidebar {
-    background-color: var(--color-primary);
-    height: 3.5rem;
-    display: flex;
-    justify-content: start;
-    align-items: center;
+  background-color: var(--color-primary);
+  height: 3.5rem;
+  display: flex;
+  justify-content: start;
+  align-items: center;
 }
 .sidebar h1 {
-    all: unset;
-    color: white;
-    font-size: 1.5rem;
-    width: 100%;
-    text-align: center;
-    margin: 0px !important;
+  all: unset;
+  color: white;
+  font-size: 1.5rem;
+  width: 100%;
+  text-align: center;
+  margin: 0px !important;
 }
 
 .menu-bars {
-    margin-left: 2rem;
-    font-size: 2rem;
-    background: none;
+  margin-left: 2rem;
+  font-size: 2rem;
+  background: none;
 }
 
 .sidebar-menu {
-    background-color: var(--color-primary);
-    width: 250px;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    position: fixed;
-    top: 0;
-    left: -100%;
-    transition: 850ms;
+  background-color: var(--color-primary);
+  width: 250px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: -100%;
+  transition: 850ms;
 }
 
 .sidebar-menu.active {
-    left: 0;
-    transition: 350ms;
+  left: 0;
+  transition: 350ms;
 }
 
 .sidebar-text {
-    display: flex;
-    justify-content: ce;
-    align-items: center;
-    padding: 8px 0px 8px 16px;
-    list-style: none;
-    height: 60px;
+  display: flex;
+  justify-content: ce;
+  align-items: center;
+  padding: 8px 0px 8px 16px;
+  list-style: none;
+  height: 60px;
 }
 
 .sidebar-text a {
-    text-decoration: none;
-    color: #f5f5f5;
-    font-size: 18px;
-    width: 95%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    padding: 0 16px;
-    border-radius: 4px;
+  text-decoration: none;
+  color: #f5f5f5;
+  font-size: 18px;
+  width: 95%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  border-radius: 4px;
 }
 
 .sidebar-text a:hover {
-    background-color: white;
-    color: var(--color-primary);
+  background-color: white;
+  color: var(--color-primary);
 }
 
 .sidebar-menu-items {
-    width: 100%;
+  width: 100%;
 }
 
 .sidebar-toggle {
-    background-color: var(--color-primary);
-    width: 100%;
-    height: 80px;
-    display: flex;
-    justify-content: start;
-    align-items: center;
+  background-color: var(--color-primary);
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
 }
 
 span {
-    margin-left: 16px;
+  margin-left: 16px;
 }
 .teamStandUpList {
-    width: 100%;
-    min-height: 40rem;
-    overflow: scroll;
-    margin: 0rem auto;
-    padding: 1rem;
-    border-top: 4px solid black;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    grid-area: teamList;
+  width: 100%;
+  min-height: 40rem;
+  overflow: scroll;
+  margin: 0rem auto;
+  padding: 1rem;
+  border-top: 4px solid black;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  grid-area: teamList;
 }
 .teamStandUpList ul {
-    list-style: none;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    background-color: #eeeeee;
+  list-style: none;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: #eeeeee;
 }
 .teamStandUpList ul li {
-    display: flex;
-    align-items: center;
-    font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
 }
 .teamStandUpList ul .param {
-    width: 40%;
-    margin-bottom: 0.2rem;
-    font-weight: 500;
+  width: 40%;
+  margin-bottom: 0.2rem;
+  font-weight: 500;
 }
 .teamStandUpList ul .value {
-    width: 60%;
-    margin-bottom: 0.2rem;
-    word-break: break-all;
+  width: 60%;
+  margin-bottom: 0.2rem;
+  word-break: break-all;
 }
 .teamForm {
-    width: 100%;
-    height: auto;
-    margin: 0rem auto;
-    border-top: 4px solid black;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    padding: 1rem;
+  width: 100%;
+  height: auto;
+  margin: 0rem auto;
+  border-top: 4px solid black;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 1rem;
 }
 .teamForm div {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .teamForm div input {
-    display: block;
-    width: 100%;
+  display: block;
+  width: 100%;
 }
 .teamForm .submit {
-    margin-left: 1rem;
+  margin-left: 1rem;
 }
 #teamFormAdd {
-    grid-area: teamForm1;
+  grid-area: teamForm1;
 }
 #teamFormDelete {
-    grid-area: teamForm2;
+  grid-area: teamForm2;
 }
 .standUpForm {
-    border-top: 4px solid black;
-    width: 100%;
-    height: 100%;
-    padding: 1rem;
-    margin: auto;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    font-size: 0.8rem;
-    grid-area: standup;
+  border-top: 4px solid black;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  margin: auto;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  font-size: 0.8rem;
+  grid-area: standup;
 }
 .standUpForm input {
-    display: block;
-    margin-bottom: 1rem;
-    overflow: scroll;
-    font-size: 0.8rem;
+  display: block;
+  margin-bottom: 1rem;
+  overflow: scroll;
+  font-size: 0.8rem;
 }
 .standUpForm .form-control {
-    font-size: 0.8rem;
+  font-size: 0.8rem;
 }
 .profile {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-top: 4px solid black;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    margin: auto;
-    grid-area: profile;
-    padding: 0.5rem 0px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-top: 4px solid black;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin: auto;
+  grid-area: profile;
+  padding: 0.5rem 0px;
 }
 hr {
-    border: 0;
-    clear: both;
-    display: block;
-    width: 96%;
-    background-color: blue;
-    height: 1px;
+  border: 0;
+  clear: both;
+  display: block;
+  width: 96%;
+  background-color: blue;
+  height: 1px;
 }
 .profile .img-holder {
-    width: 7rem;
-    height: 7rem;
-    border: 0.1rem solid black;
-    object-fit: cover;
+  width: 7rem;
+  height: 7rem;
+  border: 0.1rem solid black;
+  object-fit: cover;
 }
 .profile img {
-    height: 100%;
-    width: 100%;
+  height: 100%;
+  width: 100%;
 }
 .profile ul {
-    width: 100%;
-    height: 40%;
-    list-style: none;
-    margin-top: 1rem;
+  width: 100%;
+  height: 40%;
+  list-style: none;
+  margin-top: 1rem;
 }
 .profile li {
-    color: black;
-    font-size: 0.8rem;
-    list-style: none;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-bottom: 0.1rem;
+  color: black;
+  font-size: 0.8rem;
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 0.1rem;
 }
 .profile .param {
-    width: 20%;
-    margin-right: 3px;
-    font-weight: 500;
-    float: left;
+  width: 20%;
+  margin-right: 3px;
+  font-weight: 500;
+  float: left;
 }
 .profile .value {
-    width: 60%;
+  width: 60%;
 }
 .loader {
-    width: 100%;
-    height: 100%;
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 #jiraAuth {
-    width: 60%;
-    height: fit-content;
-    margin: 0px auto;
-    padding: 1rem;
-    box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
-    border-top: 4px solid black;
-    grid-area: jira;
+  width: 60%;
+  height: fit-content;
+  margin: 0px auto;
+  padding: 1rem;
+  box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+  border-top: 4px solid black;
+  grid-area: jira;
 }
 #jiraTableView {
-    padding: 1rem;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    border-top: 4px solid black;
+  padding: 1rem;
+  /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+  /* border-top: 4px solid black; */
 }
 .dashboardContainer {
-    display: grid;
-    width: 100vw;
-    height: 100vh;
-    grid-template-columns: 0.4fr 1fr 0.6fr;
-    grid-template-areas:
-        "profile jira teamList"
-        "standup jira teamList"
-        "standup gitlab teamList"
-        "standup gitlab teamList"
-        "teamForm1 gitlab links"
-        "teamForm2 gitlab links"
-        "k k k";
-    grid-gap: 1.5rem;
-    padding: 1.5rem;
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  grid-template-columns: 0.4fr 1fr 0.6fr;
+  grid-template-areas:
+    "profile jira teamList"
+    "standup jira teamList"
+    "standup gitlab teamList"
+    "standup gitlab teamList"
+    "teamForm1 gitlab links"
+    "teamForm2 gitlab links"
+    "k k k";
+  grid-gap: 1.5rem;
+  padding: 1.5rem;
 }
 #jiraTable {
-    grid-area: jira;
+  grid-area: jira;
+  width: 100%;
+  min-height: 40rem;
+  overflow: scroll;
+  margin: 0rem auto;
+  padding: 1rem;
+  border-top: 4px solid black;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+#table {
+  width: 100%;
+}
+#footer {
+  display: flex;
+}
+#footerleft {
+  flex-grow: 1;
+}
+#jiraJqlContainer {
+  display: flex;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+.mb12 {
+  margin-bottom: 0.5rem;
+}
+.ml1 {
+  margin-left: 1rem;
+}
+.jp {
+  width: 25px;
+  height: 25px;
+}
+.jiraauthHeading {
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 250;
+}
+.authbtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.jiraissueurl {
+  text-decoration: none;
+  color: black;
+}
+.jiraissueurl:hover {
+  color: blue;
+  text-decoration: underline;
 }
 @media only screen and (max-width: 1350px) {
-    html {
-        font-size: 90%;
-    }
-    .dashboardContainer {
-        grid-template-columns: 0.6fr 1fr 1fr;
-        grid-template-areas:
-            "profile standup teamList"
-            "links standup teamList"
-            "links teamForm1 teamList"
-            "links teamForm2 teamList"
-            "jira jira jira"
-            "gitlab gitlab gitlab";
-    }
+  html {
+    font-size: 90%;
+  }
+  .dashboardContainer {
+    grid-template-columns: 0.6fr 1fr 1fr;
+    grid-template-areas:
+      "profile standup teamList"
+      "links standup teamList"
+      "links teamForm1 teamList"
+      "links teamForm2 teamList"
+      "jira jira jira"
+      "gitlab gitlab gitlab";
+  }
 }
 
 @media only screen and (max-width: 900px) {
-    html {
-        font-size: 85%;
-    }
-    .dashboardContainer {
-        grid-template-columns: 0.8fr 1fr;
-        grid-template-areas:
-            "profile teamList"
-            "standup teamList"
-            "teamForm1 links"
-            "teamForm2 links"
-            " jira jira"
-            " gitlab gitlab";
-    }
+  html {
+    font-size: 85%;
+  }
+  .dashboardContainer {
+    grid-template-columns: 0.8fr 1fr;
+    grid-template-areas:
+      "profile teamList"
+      "standup teamList"
+      "teamForm1 links"
+      "teamForm2 links"
+      " jira jira"
+      " gitlab gitlab";
+  }
 }
 
 @media only screen and (max-width: 650px) {
-    html {
-        font-size: 90%;
-    }
-    .dashboardContainer {
-        grid-template-columns: 1fr 1fr;
-        grid-template-areas:
-            "profile teamForm1"
-            "profile teamForm2"
-            "teamList teamList"
-            "standup standup"
-            "links links"
-            " jira jira"
-            " gitlab gitlab";
-    }
+  html {
+    font-size: 90%;
+  }
+  .dashboardContainer {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "profile teamForm1"
+      "profile teamForm2"
+      "teamList teamList"
+      "standup standup"
+      "links links"
+      " jira jira"
+      " gitlab gitlab";
+  }
 }

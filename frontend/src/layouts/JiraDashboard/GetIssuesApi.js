@@ -11,7 +11,10 @@ const GetIssuesApi = () => {
     if (response.data.status === "Failed") {
       return null;
     }
-    return response.data.data;
+    return {
+      details: response.data.data,
+      jiraBaseUrl: response.data.jiraBaseUrl,
+    };
   }
   return { getIssues };
 };
