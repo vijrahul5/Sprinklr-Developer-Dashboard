@@ -16,7 +16,7 @@ const Widgetjira = () => {
   const { filters } = useFilters();
   return (
     <div id="jiraTable">
-    //review-cycle-1: don't use inline styles
+    {/* //review-cycle-1: don't use inline styles */}
       <div style={{ display: "flex", width: "100%", marginBottom: "0.5rem" }}>
         <Input
           value={value}
@@ -37,7 +37,7 @@ const Widgetjira = () => {
           Search
         </Button>
       </div>
-//review-cycle-1: don't use inline styles
+{/* //review-cycle-1: don't use inline styles */}
       <div style={{ marginBottom: "0.5rem" }}>
         <Select
           size={SIZE.compact}
