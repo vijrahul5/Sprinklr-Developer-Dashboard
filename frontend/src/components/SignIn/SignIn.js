@@ -19,10 +19,7 @@ function SignIn() {
     if (loading) {
         return (
             <>
-                <Navbar />
-                <div className="signin-container">
-                    <Loader />
-                </div>
+                <Loader />
             </>
         );
     }
