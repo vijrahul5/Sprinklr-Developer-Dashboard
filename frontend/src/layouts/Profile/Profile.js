@@ -5,7 +5,7 @@ import { useFetchEmployeeData } from "./profileHooks";
 function Profile() {
     const [loading, data, error] = useFetchEmployeeData(); // Fetches employee data using a custom hook
 
-    if (error !== false) {
+    if (error) {
         alert(error);
         window.location.reload();
     }

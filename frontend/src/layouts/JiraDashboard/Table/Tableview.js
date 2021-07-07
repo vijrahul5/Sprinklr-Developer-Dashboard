@@ -17,16 +17,16 @@ const Tableview = ({ heading, jql }) => {
         <Loader />
       ) : (
         <div style={{ width: "100%" }} id="jiraTableView">
-        //review-cycle-1: why is headline going in columns. something looks odd here
+        {/* review-cycle-1: why is headline going in columns. something looks odd here */}
           <Table columns={heading} data={data} />
-            //review-cycle-1: don't use inline styles. use scss
+            {/* review-cycle-1: don't use inline styles. use scss */}
           <div style={{ display: "flex" }}>
             <div style={{ flexGrow: "1" }}></div>
-//review-cycle-1: can rename to to table footer
+{/* review-cycle-1: can rename to to table footer */}
             <Pagination
               numPages={totalPages}
               currentPage={pageNumber}
-//review-cycle-1: take out function in a variable wrapped with useCallback. read about useCallback and useMemo hooks
+// review-cycle-1: take out function in a variable wrapped with useCallback. read about useCallback and useMemo hooks
               onPageChange={({ nextPage }) => {
                 setPageNumber(Math.min(Math.max(nextPage, 1), totalPages));
               }}

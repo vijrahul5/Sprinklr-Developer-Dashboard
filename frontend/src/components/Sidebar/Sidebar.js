@@ -5,7 +5,7 @@ import * as IoIcons from "react-icons/io";
 import { Link } from "react-router-dom";
 import { SidebarData } from "./SidebarData";
 import { IconContext } from "react-icons";
-import Auth from "../../layouts/SignIn/Auth";
+import Auth from "../../Auth";
 
 function SidebarMenu() {
     const [sidebar, setSidebar] = useState(false);

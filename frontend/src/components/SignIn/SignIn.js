@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Navbar from "../../components/Navbar/Navbar";
-import Loader from "../../components/Loader/Loader";
-import Auth from "./Auth";
+import Navbar from "../Navbar/Navbar";
+import Loader from "../Loader/Loader";
+import Auth from "../../Auth";
 import GoogleLogin from "react-google-login";
 import dotenv from "dotenv";
 dotenv.config();
@@ -16,13 +16,15 @@ function SignIn() {
         alert("Login Failed !");
         window.location.replace("/signin");
     }
-    if (loading === true) {
-        <>
-            <Navbar />
-            <div className="signin-container">
-                <Loader />
-            </div>
-        </>;
+    if (loading) {
+        return (
+            <>
+                <Navbar />
+                <div className="signin-container">
+                    <Loader />
+                </div>
+            </>
+        );
     }
     return (
         <>

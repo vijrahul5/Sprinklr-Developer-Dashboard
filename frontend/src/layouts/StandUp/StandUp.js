@@ -18,15 +18,15 @@ function StandUp() {
     const [loading, data, error] = useFetchEmployeeStandUp(setValue); // Fetches employee's stand up for the day
     const [addError, editError, addStandUp, editStandUp] = useUpdateEmployeeStandUp(); // Provides functions for adding or deleting stand up
 
-    if (error !== false) {
+    if (error) {
         alert(error);
         window.location.reload();
     }
-    if (addError !== false) {
+    if (addError) {
         alert(addError);
         window.location.reload();
     }
-    if (editError !== false) {
+    if (editError) {
         alert(editError);
         window.location.reload();
     }
@@ -40,8 +40,8 @@ function StandUp() {
                 return;
             }
         }
-        setValue({ question1: "", question2: "", question3: "" });
         addStandUp(value);
+        setValue({ question1: "", question2: "", question3: "" });
     }
 
     function handleEdit(e) {

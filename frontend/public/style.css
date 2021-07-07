@@ -176,16 +176,18 @@ span {
     display: flex;
     align-items: center;
     font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+
 }
 .teamStandUpList ul .param {
     width: 40%;
-    margin-bottom: 0.2rem;
     font-weight: 500;
 }
 .teamStandUpList ul .value {
     width: 60%;
-    margin-bottom: 0.2rem;
-    word-break: break-all;
+    /* word-break: break-all; */
+    background-color: white;
+    padding: 0.5rem;
 }
 .teamForm {
     width: 100%;
