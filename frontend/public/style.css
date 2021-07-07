@@ -5,8 +5,12 @@
 }
 
 :root {
-  --color-primary: black;
-  --font-primary: system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --color-primary: rgb(12,102,194);
+    --color-secondary: rgb(243,242,238);
+    --color-nav: rgb(12,102,194);
+    --color-widget: white;
+    --font-primary: system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --border: 4px solid var(--color-primary);
 }
 html {
   font-size: 100%;
@@ -15,8 +19,9 @@ html {
 html,
 body,
 #root {
-  height: 100%;
-  min-height: 100%;
+    height: 100%;
+    min-height: 100%;
+    background-color: var(--color-secondary);
 }
 
 .signin-container {
@@ -76,11 +81,11 @@ body,
 }
 
 .sidebar {
-  background-color: var(--color-primary);
-  height: 3.5rem;
-  display: flex;
-  justify-content: start;
-  align-items: center;
+    background-color: var(--color-nav);
+    height: 3.5rem;
+    display: flex;
+    justify-content: start;
+    align-items: center;
 }
 .sidebar h1 {
   all: unset;
@@ -98,15 +103,15 @@ body,
 }
 
 .sidebar-menu {
-  background-color: var(--color-primary);
-  width: 250px;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  position: fixed;
-  top: 0;
-  left: -100%;
-  transition: 850ms;
+    background-color: var(--color-nav);
+    width: 250px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    transition: 850ms;
 }
 
 .sidebar-menu.active {
@@ -136,8 +141,8 @@ body,
 }
 
 .sidebar-text a:hover {
-  background-color: white;
-  color: var(--color-primary);
+    background-color: white;
+    color: var(--color-nav);
 }
 
 .sidebar-menu-items {
@@ -145,26 +150,27 @@ body,
 }
 
 .sidebar-toggle {
-  background-color: var(--color-primary);
-  width: 100%;
-  height: 80px;
-  display: flex;
-  justify-content: start;
-  align-items: center;
+    background-color: var(--color-nav);
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
 }
 
 span {
   margin-left: 16px;
 }
 .teamStandUpList {
-  width: 100%;
-  min-height: 40rem;
-  overflow: scroll;
-  margin: 0rem auto;
-  padding: 1rem;
-  border-top: 4px solid black;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  grid-area: teamList;
+    width: 100%;
+    min-height: 40rem;
+    overflow: scroll;
+    margin: 0rem auto;
+    padding: 1rem;
+    border-top: var(--border);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    grid-area: teamList;
+    background-color: var(--color-widget);
 }
 .teamStandUpList ul {
   list-style: none;
@@ -173,27 +179,30 @@ span {
   background-color: #eeeeee;
 }
 .teamStandUpList ul li {
-  display: flex;
-  align-items: center;
-  font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+
 }
 .teamStandUpList ul .param {
-  width: 40%;
-  margin-bottom: 0.2rem;
-  font-weight: 500;
+    width: 40%;
+    font-weight: 500;
 }
 .teamStandUpList ul .value {
-  width: 60%;
-  margin-bottom: 0.2rem;
-  word-break: break-all;
+    width: 60%;
+    /* word-break: break-all; */
+    background-color: white;
+    padding: 0.5rem;
 }
 .teamForm {
-  width: 100%;
-  height: auto;
-  margin: 0rem auto;
-  border-top: 4px solid black;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  padding: 1rem;
+    width: 100%;
+    height: auto;
+    margin: 0rem auto;
+    border-top: var(--border);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 1rem;
+    background-color: var(--color-widget);
 }
 .teamForm div {
   width: 100%;
@@ -209,20 +218,23 @@ span {
   margin-left: 1rem;
 }
 #teamFormAdd {
-  grid-area: teamForm1;
+    grid-area: teamForm1;
+    background-color: var(--color-widget);
 }
 #teamFormDelete {
-  grid-area: teamForm2;
+    grid-area: teamForm2;
+    background-color: var(--color-widget);
 }
 .standUpForm {
-  border-top: 4px solid black;
-  width: 100%;
-  height: 100%;
-  padding: 1rem;
-  margin: auto;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  font-size: 0.8rem;
-  grid-area: standup;
+    border-top: var(--border);
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    margin: auto;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    font-size: 0.8rem;
+    grid-area: standup;
+    background-color: var(--color-widget);
 }
 .standUpForm input {
   display: block;
@@ -234,17 +246,18 @@ span {
   font-size: 0.8rem;
 }
 .profile {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-top: 4px solid black;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  margin: auto;
-  grid-area: profile;
-  padding: 0.5rem 0px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-top: var(--border);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin: auto;
+    grid-area: profile;
+    padding: 0.5rem 0px;
+    background-color: var(--color-widget);
 }
 hr {
   border: 0;
@@ -394,7 +407,14 @@ hr {
       "gitlab gitlab gitlab";
   }
 }
-
+.btnCustom{
+    background-color: var(--color-primary) !important;
+    color: white;
+}
+.inputCustom{
+    background-color: var(--color-secondary) !important;
+    color: black;
+}
 @media only screen and (max-width: 900px) {
   html {
     font-size: 85%;

@@ -8,6 +8,7 @@ import { Button, SIZE } from "baseui/button";
 
 function TeamForm({ type }) {
     const [value, setValue] = useState({ employeeEmail: "" });
+
     const [loading, setLoading] = useState(true);
     const [addError, deleteError, addTeamMember, deleteTeamMember] =
         useUpdateEmployeeTeam(); // Provides functions for adding or deleting a team member
@@ -18,11 +19,11 @@ function TeamForm({ type }) {
         }, 1000);
     }, []);
 
-    if (deleteError !== false) {
+    if (deleteError) {
         alert(deleteError);
         window.location.reload();
     }
-    if (addError !== false) {
+    if (addError) {
         alert(addError);
         window.location.reload();
     }
@@ -35,12 +36,12 @@ function TeamForm({ type }) {
                 return;
             }
         }
-        setValue({ employeeEmail: "" });
         if (type === "Add") addTeamMember(value);
         else if (type === "Delete") deleteTeamMember(value);
+        setValue({ employeeEmail: "" });
     }
 
-    if (loading === true) {
+    if (loading) {
         return (
             <>
                 <form className="teamForm" id={`teamForm${type}`}>
@@ -49,6 +50,7 @@ function TeamForm({ type }) {
             </>
         );
     }
+    
     return (
         <>
             <form
@@ -79,7 +81,7 @@ function TeamForm({ type }) {
                         />
                         <Button
                             type="submit"
-                            className="submit"
+                            className="submit btnCustom"
                             size={SIZE.compact}
                         >
                             {type}

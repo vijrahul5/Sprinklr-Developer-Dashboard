@@ -37,6 +37,7 @@ export const useUpdateEmployeeStandUp = function () {
             const res = await axios.post("/api/employee/standup", data);
             if (res.data.status === "Success") {
                 alert("Stand Up Submitted Successfully");
+                window.location.reload();
             } else {
                 throw new Error(res.data.status);
             }
@@ -50,6 +51,7 @@ export const useUpdateEmployeeStandUp = function () {
             const res = await axios.patch("/api/employee/standup", data);
             if (res.data.status === "Success") {
                 alert("Stand Up Edited Successfully");
+                window.location.reload();
             } else {
                 throw new Error(res.data.status);
             }

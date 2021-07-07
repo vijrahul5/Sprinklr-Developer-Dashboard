@@ -1,7 +1,10 @@
 import React from "react";
 import Loader from "../../components/Loader/Loader";
 import { useState } from "react";
-import { useFetchEmployeeStandUp, useUpdateEmployeeStandUp } from "./standUpHooks";
+import {
+    useFetchEmployeeStandUp,
+    useUpdateEmployeeStandUp,
+} from "./standUpHooks";
 import { FormControl } from "baseui/form-control";
 import { Button } from "baseui/button";
 import { Textarea } from "baseui/textarea";
@@ -16,17 +19,18 @@ function StandUp() {
     });
 
     const [loading, data, error] = useFetchEmployeeStandUp(setValue); // Fetches employee's stand up for the day
-    const [addError, editError, addStandUp, editStandUp] = useUpdateEmployeeStandUp(); // Provides functions for adding or deleting stand up
+    const [addError, editError, addStandUp, editStandUp] =
+        useUpdateEmployeeStandUp(); // Provides functions for adding or deleting stand up
 
-    if (error !== false) {
+    if (error) {
         alert(error);
         window.location.reload();
     }
-    if (addError !== false) {
+    if (addError) {
         alert(addError);
         window.location.reload();
     }
-    if (editError !== false) {
+    if (editError) {
         alert(editError);
         window.location.reload();
     }
@@ -40,8 +44,8 @@ function StandUp() {
                 return;
             }
         }
-        setValue({ question1: "", question2: "", question3: "" });
         addStandUp(value);
+        setValue({ question1: "", question2: "", question3: "" });
     }
 
     function handleEdit(e) {
@@ -74,11 +78,13 @@ function StandUp() {
                     <Textarea
                         value={value.question1}
                         name="question1"
-                        className="form-control"
+                        className="form-control inputCustom"
                         onChange={(e) => {
-                            setValue({
-                                ...value,
-                                question1: e.currentTarget.value,
+                            setValue((prevValue) => {
+                                return {
+                                    ...prevValue,
+                                    question1: e.currentTarget.value,
+                                };
                             });
                         }}
                         placeholder="Answer"
@@ -89,11 +95,13 @@ function StandUp() {
                     <Textarea
                         value={value.question2}
                         name="question2"
-                        className="form-control"
+                        className="form-control inputCustom"
                         onChange={(e) => {
-                            setValue({
-                                ...value,
-                                question2: e.currentTarget.value,
+                            setValue((prevValue) => {
+                                return {
+                                    ...prevValue,
+                                    question2: e.currentTarget.value,
+                                };
                             });
                         }}
                         placeholder="Answer"
@@ -104,18 +112,20 @@ function StandUp() {
                     <Textarea
                         value={value.question3}
                         name="question3"
-                        className="form-control"
+                        className="form-control inputCustom"
                         onChange={(e) => {
-                            setValue({
-                                ...value,
-                                question3: e.currentTarget.value,
+                            setValue((prevValue) => {
+                                return {
+                                    ...prevValue,
+                                    question3: e.currentTarget.value,
+                                };
                             });
                         }}
                         placeholder="Answer"
                         size={SIZE.mini}
                     />
                 </FormControl>
-                <Button type="submit" className="submit" size={SIZE.compact}>
+                <Button type="submit" className="submit btnCustom" size={SIZE.compact}>
                     {data ? "Edit" : "Submit"}
                 </Button>
             </form>
