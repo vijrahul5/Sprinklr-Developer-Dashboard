@@ -6,7 +6,6 @@ export const useFetchEmployeeStandUp = function (setValue) {
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState(null);
     const [error, setError] = useState(false);
-    console.log("I'm created again")
 
     useEffect(() => {
         (async function () {
@@ -38,7 +37,7 @@ export const useUpdateEmployeeStandUp = function () {
             const res = await axios.post("/api/employee/standup", data);
             if (res.data.status === "Success") {
                 alert("Stand Up Submitted Successfully");
-                // window.location.reload();
+                window.location.reload();
             } else {
                 throw new Error(res.data.status);
             }
@@ -52,7 +51,7 @@ export const useUpdateEmployeeStandUp = function () {
             const res = await axios.patch("/api/employee/standup", data);
             if (res.data.status === "Success") {
                 alert("Stand Up Edited Successfully");
-                // window.location.reload();
+                window.location.reload();
             } else {
                 throw new Error(res.data.status);
             }
