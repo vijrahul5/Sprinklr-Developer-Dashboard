@@ -8,12 +8,12 @@ function Team() {
     // Component for accessing team data and their stand ups
     const [loading, data, error] = useFetchEmployeeTeamData(); // Fetches the logged in employee's team data and their stand ups
 
-    if (error !== false) {
+    if (error) {
         alert(error);
         window.location.reload();
     }
 
-    if (loading === true) {
+    if (loading) {
         return (
             <ul className="teamStandUpList">
                 <Loader />
@@ -23,7 +23,7 @@ function Team() {
     return (
         <>
             <ul className="teamStandUpList">
-                {data.length !== 0 ? (
+                {data.length ? (
                     data.map((teamMember) => {
                         return (
                             <TeamMember

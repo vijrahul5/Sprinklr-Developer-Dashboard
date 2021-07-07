@@ -11,6 +11,7 @@ export const useUpdateEmployeeTeam = function () {
             const res = await axios.post("/api/employee/team", data);
             if (res.data.status === "Success") {
                 alert("Team Member Added");
+                window.location.reload();
             } else {
                 throw new Error(res.data.status);
             }
@@ -27,6 +28,7 @@ export const useUpdateEmployeeTeam = function () {
             });
             if (res.data.status === "Success") {
                 alert("Team Member Deleted");
+                window.location.reload();
             } else {
                 throw new Error(res.data.status);
             }
