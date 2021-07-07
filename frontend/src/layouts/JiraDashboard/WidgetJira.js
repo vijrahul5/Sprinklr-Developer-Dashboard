@@ -33,6 +33,7 @@ const Widgetjira = () => {
           }}
           style={{ marginLeft: "1rem" }}
           size={SIZE.compact}
+          className="btnCustom"
         >
           Search
         </Button>

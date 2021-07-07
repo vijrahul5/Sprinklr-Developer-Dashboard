@@ -18,7 +18,7 @@ export default function Dashboard() {
                 <TeamForm type="Add" />
                 <TeamForm type="Delete" />
                 <JiraDashboard />
-                <GitlabDashboard/>
+                {/* <GitlabDashboard/> */}
             </div>
         </>
     );

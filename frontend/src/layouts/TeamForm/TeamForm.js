@@ -81,7 +81,7 @@ function TeamForm({ type }) {
                         />
                         <Button
                             type="submit"
-                            className="submit"
+                            className="submit btnCustom"
                             size={SIZE.compact}
                         >
                             {type}

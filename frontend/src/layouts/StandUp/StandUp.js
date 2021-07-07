@@ -78,7 +78,7 @@ function StandUp() {
                     <Textarea
                         value={value.question1}
                         name="question1"
-                        className="form-control"
+                        className="form-control inputCustom"
                         onChange={(e) => {
                             setValue((prevValue) => {
                                 return {
@@ -95,7 +95,7 @@ function StandUp() {
                     <Textarea
                         value={value.question2}
                         name="question2"
-                        className="form-control"
+                        className="form-control inputCustom"
                         onChange={(e) => {
                             setValue((prevValue) => {
                                 return {
@@ -112,7 +112,7 @@ function StandUp() {
                     <Textarea
                         value={value.question3}
                         name="question3"
-                        className="form-control"
+                        className="form-control inputCustom"
                         onChange={(e) => {
                             setValue((prevValue) => {
                                 return {
@@ -125,7 +125,7 @@ function StandUp() {
                         size={SIZE.mini}
                     />
                 </FormControl>
-                <Button type="submit" className="submit" size={SIZE.compact}>
+                <Button type="submit" className="submit btnCustom" size={SIZE.compact}>
                     {data ? "Edit" : "Submit"}
                 </Button>
             </form>

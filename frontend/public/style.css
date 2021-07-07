@@ -5,8 +5,12 @@
 }
 
 :root {
-    --color-primary: black;
+    --color-primary: rgb(12,102,194);
+    --color-secondary: rgb(243,242,238);
+    --color-nav: rgb(12,102,194);
+    --color-widget: white;
     --font-primary: system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --border: 4px solid var(--color-primary);
 }
 html {
     font-size: 100%;
@@ -17,6 +21,7 @@ body,
 #root {
     height: 100%;
     min-height: 100%;
+    background-color: var(--color-secondary);
 }
 
 .signin-container {
@@ -76,7 +81,7 @@ body,
 }
 
 .sidebar {
-    background-color: var(--color-primary);
+    background-color: var(--color-nav);
     height: 3.5rem;
     display: flex;
     justify-content: start;
@@ -98,7 +103,7 @@ body,
 }
 
 .sidebar-menu {
-    background-color: var(--color-primary);
+    background-color: var(--color-nav);
     width: 250px;
     height: 100vh;
     display: flex;
@@ -137,7 +142,7 @@ body,
 
 .sidebar-text a:hover {
     background-color: white;
-    color: var(--color-primary);
+    color: var(--color-nav);
 }
 
 .sidebar-menu-items {
@@ -145,7 +150,7 @@ body,
 }
 
 .sidebar-toggle {
-    background-color: var(--color-primary);
+    background-color: var(--color-nav);
     width: 100%;
     height: 80px;
     display: flex;
@@ -162,9 +167,10 @@ span {
     overflow: scroll;
     margin: 0rem auto;
     padding: 1rem;
-    border-top: 4px solid black;
+    border-top: var(--border);
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     grid-area: teamList;
+    background-color: var(--color-widget);
 }
 .teamStandUpList ul {
     list-style: none;
@@ -177,6 +183,7 @@ span {
     align-items: center;
     font-size: 0.8rem;
     margin-bottom: 0.5rem;
+
 }
 .teamStandUpList ul .param {
     width: 40%;
@@ -192,9 +199,10 @@ span {
     width: 100%;
     height: auto;
     margin: 0rem auto;
-    border-top: 4px solid black;
+    border-top: var(--border);
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     padding: 1rem;
+    background-color: var(--color-widget);
 }
 .teamForm div {
     width: 100%;
@@ -211,12 +219,14 @@ span {
 }
 #teamFormAdd {
     grid-area: teamForm1;
+    background-color: var(--color-widget);
 }
 #teamFormDelete {
     grid-area: teamForm2;
+    background-color: var(--color-widget);
 }
 .standUpForm {
-    border-top: 4px solid black;
+    border-top: var(--border);
     width: 100%;
     height: 100%;
     padding: 1rem;
@@ -224,6 +234,7 @@ span {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     font-size: 0.8rem;
     grid-area: standup;
+    background-color: var(--color-widget);
 }
 .standUpForm input {
     display: block;
@@ -241,11 +252,12 @@ span {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-top: 4px solid black;
+    border-top: var(--border);
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     margin: auto;
     grid-area: profile;
     padding: 0.5rem 0px;
+    background-color: var(--color-widget);
 }
 hr {
     border: 0;
@@ -303,13 +315,15 @@ hr {
     margin: 0px auto;
     padding: 1rem;
     box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
-    border-top: 4px solid black;
+    border-top: var(--border);
     grid-area: jira;
+    background-color: var(--color-widget);
 }
 #jiraTableView {
     padding: 1rem;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    border-top: 4px solid black;
+    border-top: var(--border);
+    background-color: var(--color-widget);
 }
 .dashboardContainer {
     display: grid;
@@ -330,50 +344,6 @@ hr {
 #jiraTable {
     grid-area: jira;
 }
-.gitlab {
-    grid-area: gitlab;
-}
-
-#start-div {
-    display: block;
-}
-.gitlab button {
-    margin: 2rem 0;
-    padding: 1rem 2rem;
-    width: 120px;
-    cursor: pointer;
-    background-color: black;
-    color: white;
-    margin: 60px;
-}
-
-.gitlab img {
-    width: 120px;
-}
-.gitlab .App {
-    text-align: center;
-}
-
-.gitlab .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-    height: 40vmin;
-    pointer-events: none;
-}
-
-.gitlab .App-header {
-    background-color: #282c34;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-}
-
-.gitlab .App-link {
-    color: #61dafb;
-}
 @media only screen and (max-width: 1350px) {
     html {
         font-size: 90%;
@@ -389,7 +359,14 @@ hr {
             "gitlab gitlab gitlab";
     }
 }
-
+.btnCustom{
+    background-color: var(--color-primary) !important;
+    color: white;
+}
+.inputCustom{
+    background-color: var(--color-secondary) !important;
+    color: black;
+}
 @media only screen and (max-width: 900px) {
     html {
         font-size: 85%;
