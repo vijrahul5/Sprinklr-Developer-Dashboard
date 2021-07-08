@@ -1,9 +1,8 @@
-//hooks
 import { useEffect, useState } from "react";
-//components
+
 import GetIssuesApi from "./GetIssuesApi";
 import JiraTableBuilder from "./JiraTableBuilder";
-//constants
+
 const { getIssues } = GetIssuesApi();
 const EntryPerPage = 5;
 
