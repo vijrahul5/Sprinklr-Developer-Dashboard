@@ -59,7 +59,7 @@ const Widgetjira = () => {
           clearOnEscape
           size={SIZE.compact}
         />
-        <Button onClick={handleClick} className="ml1" size={SIZE.compact}>
+        <Button onClick={handleClick} className="ml1 btnCustom" size={SIZE.compact}>
           Search
         </Button>
       </div>

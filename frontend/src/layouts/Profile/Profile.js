@@ -20,10 +20,10 @@ function Profile() {
 
     return (
         <div className="profile">
-            <div className="img-holder">
-                <img src={data.picture} alt="" />
-            </div>
             <ul>
+                <div className="img-holder">
+                    <img src={data.picture} alt="" />
+                </div>
                 <li>
                     <p className="param">Name:</p>
                     <p className="value">{data.name}</p>

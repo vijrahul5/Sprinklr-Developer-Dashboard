@@ -12,13 +12,23 @@ export default function Dashboard() {
         <>
             <SidebarMenu />
             <div className="dashboardContainer">
-                <Profile />
-                <StandUp />
-                <Team />
-                <TeamForm type="Add" />
-                <TeamForm type="Delete" />
-                <JiraDashboard />
-                {/* <GitlabDashboard/> */}
+                <div id="basicInfo">
+                    <Profile />
+                    <StandUp />
+                </div>
+                <div id="sectionContainer">
+                    <div id="teamContainer">
+                        <h1>Team</h1>
+                        <Team />
+                        <TeamForm type="Add" />
+                        <TeamForm type="Delete" />
+                    </div>
+                    <div id="jiraContainer">
+                        <h1>Jira</h1>
+                        <JiraDashboard />
+                    </div>
+                    {/* <GitlabDashboard/> */}
+                </div>
             </div>
         </>
     );
