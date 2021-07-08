@@ -1,37 +1,38 @@
-//review-cycle-1: divide your imports into libraries, hooks, components, constants, utils. it gives more readability
+//hooks
 import { useEffect, useState } from "react";
-import GeneralApis from "./GeneralApis";
-const EntryPerPage = 5;
+//components
+import GetIssuesApi from "./GetIssuesApi";
+import JiraTableBuilder from "./JiraTableBuilder";
+//constants
+const { getIssues } = GetIssuesApi();
+const EntryPerPage = 8;
+
 const usePagination = (jql) => {
   const [pageNumber, setPageNumber] = useState(1);
   const [data, setData] = useState([]);
-  
-  //review-cycle-1: this can be written outside hook as well
-  const { getIssues } = GeneralApis();
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
 
-  //review-cycle-1: rename to fetchData/getData
-  async function fillData() {
-    let details = await getIssues(
+  async function fetchData() {
+    let data = await getIssues(
       (pageNumber - 1) * EntryPerPage,
       EntryPerPage,
       jql
     );
 
-    if (details) {
+    if (data) {
+      let details = data.details;
+      let jiraBaseUrl = data.jiraBaseUrl;
       let arr = details.issues.map((detail) => {
-        //review-cycle-1: you can use builder pattern here
-        let newItem = [
-          detail.fields.issuetype.name,
-          detail.key,
-          detail.fields.summary,
-        ];
-        if (detail.fields.priority) {
-          newItem.push(detail.fields.priority.name);
-        } else {
-          newItem.push("NA");
-        }
+        let priority =
+          detail.fields.priority !== null ? detail.fields.priority.name : "";
+        let newItem = JiraTableBuilder()
+          .setIssueName(detail.fields.issuetype.name)
+          .setIssueSummary(detail.fields.summary)
+          .setIssueKey(jiraBaseUrl, detail.key)
+          .setIssuePriority(priority)
+          .setIssueStatus(detail.fields.status.name)
+          .build();
         return newItem;
       });
       setData(arr);
@@ -41,7 +42,7 @@ const usePagination = (jql) => {
     setLoading(false);
   }
   useEffect(() => {
-    fillData();
+    fetchData();
   }, [pageNumber, jql]);
 
   return {

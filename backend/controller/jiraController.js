@@ -51,7 +51,7 @@ async function setupJira(req, res) {
       }
       let cloudDataJSON = await cloudData.json();
       let CLOUD_ID = cloudDataJSON[0].id;
-
+      await getBaseUrl(CLOUD_ID, email);
       // await registerWebhoook(CLOUD_ID, ACCESS_TOKEN, email);
 
       employee.refreshToken = REFRESH_TOKEN;
@@ -166,6 +166,7 @@ async function getDataByJql(req, res) {
     const employee = await employeeModel.findOne({
       email: email,
     });
+    const jiraBaseUrl = employee.jiraBaseUrl;
     if (!employee) {
       throw new Error("Can't get Employee");
     }
@@ -186,7 +187,7 @@ async function getDataByJql(req, res) {
       body: JSON.stringify({
         startAt: startAt,
         maxResults: maxResults,
-        fields: ["summary", "priority", "issuetype"],
+        fields: ["summary", "priority", "issuetype", "status"],
         jql: jql,
       }),
     });
@@ -197,6 +198,7 @@ async function getDataByJql(req, res) {
     res.json({
       status: "Success",
       data: dataJSON,
+      jiraBaseUrl: jiraBaseUrl,
     });
   } catch (err) {
     // console.log(err.message);
@@ -270,6 +272,32 @@ async function getFilters(req, res) {
     });
   }
 }
+async function getBaseUrl(CLOUD_ID, email) {
+  const URL = `https://api.atlassian.com/ex/jira/${CLOUD_ID}/rest/api/3/serverInfo`;
+
+  const employee = await employeeModel.findOne({
+    email: email,
+  });
+  if (!employee) {
+    throw new Error("Error in verify Authentication");
+  }
+  let data = await fetch(URL, {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    method: "GET",
+  });
+  let dataJSON = await data.json();
+
+  if (data.status >= 400) {
+    throw new Error();
+  }
+
+  employee.jiraBaseUrl = dataJSON.baseUrl;
+  await employee.save();
+}
+
 module.exports.setupJira = setupJira;
 module.exports.getDataByJql = getDataByJql;
 module.exports.authenticated = authenticated;

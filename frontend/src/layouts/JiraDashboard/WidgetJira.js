@@ -1,58 +1,88 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
+
 import { Input } from "baseui/input";
 import { Button, SIZE } from "baseui/button";
-import Tableview from "./Table/Tableview";
 import { Select } from "baseui/select";
+
+import Table from "./Table/Table";
 import useFilters from "./useFilters";
-const heading = ["Type", "Key", "Summary", "Priority"];
+import useEmployeeFilter from "./useEmployeeFilter";
+
+const columnTitles = ["Type", "Key", "Summary", "Status", "Priority"];
 const title = "All Issues";
 const recentJql = localStorage.getItem("recentJql");
 
 const Widgetjira = () => {
-  //review-cycle-1: why do you need both jql and value?
-  const [jql, setJql] = useState(recentJql);
-  const [value, setValue] = useState(recentJql);
-  const [filterValue, setFilterValue] = useState([]);
+  const [jqlQuery, setJqlQuery] = useState(recentJql); //jqlQuery that we pass as prop to table
+  const [inputValue, setInputValue] = useState(recentJql); //change in Input JQL query
+  const [filterValue, setFilterValue] = useState([]); //change in Filter dropdown
+  const [employeeFilterValue, setEmployeeFilterValue] = useState([]); //change in Employee Filter dropdown
+
   const { filters } = useFilters();
+  const { employeeDetails } = useEmployeeFilter();
+
+  const handleInputChange = useCallback(
+    (event) => {
+      setInputValue(event.target.value);
+    },
+    [inputValue]
+  );
+
+  const handleClick = useCallback(() => {
+    setJqlQuery(inputValue);
+    localStorage.setItem("recentJql", inputValue);
+  }, [inputValue]);
+
+  const handleFilter = useCallback(
+    (params) => {
+      setFilterValue(params.value);
+      if (params.value.length > 0) setJqlQuery(`filter=${params.value[0].id}`);
+    },
+    [filterValue]
+  );
+
+  const handleEmployeeFilter = useCallback(
+    (params) => {
+      setEmployeeFilterValue(params.value);
+      if (params.value.length > 0)
+        setJqlQuery(`assignee in ("${params.value[0].id}")`);
+    },
+    [filterValue]
+  );
   return (
     <div id="jiraTable">
-    {/* //review-cycle-1: don't use inline styles */}
-      <div style={{ display: "flex", width: "100%", marginBottom: "0.5rem" }}>
+      <div id="jiraJqlContainer">
         <Input
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
+          value={inputValue}
+          onChange={handleInputChange}
           placeholder="Enter JQL to search issues"
           clearOnEscape
           size={SIZE.compact}
         />
-        <Button
-//review-cycle-1: take out function in a variable and use useCallback
-          onClick={() => {
-            setJql(value);
-            localStorage.setItem("recentJql", value);
-          }}
-          style={{ marginLeft: "1rem" }}
-          size={SIZE.compact}
-        >
+        <Button onClick={handleClick} className="ml1 btnCustom" size={SIZE.compact}>
           Search
         </Button>
       </div>
-{/* //review-cycle-1: don't use inline styles */}
-      <div style={{ marginBottom: "0.5rem" }}>
+      <div className="mb12">
         <Select
           size={SIZE.compact}
           options={filters}
           value={filterValue}
           placeholder="Select Filter"
-//review-cycle-1: take out function in a variable and use useCallback
-          onChange={(params) => {
-            setFilterValue(params.value);
-            if (params.value.length > 0) setJql(`filter=${params.value[0].id}`);
-          }}
+          onChange={handleFilter}
+        />
+      </div>
+      <div className="mb12">
+        <Select
+          size={SIZE.compact}
+          options={employeeDetails}
+          value={employeeFilterValue}
+          placeholder="Select Employee to see Assigned issue to him/her"
+          onChange={handleEmployeeFilter}
         />
       </div>
 
-      <Tableview heading={heading} title={title} jql={jql} />
+      <Table columnTitles={columnTitles} title={title} jqlQuery={jqlQuery} />
     </div>
   );
 };
