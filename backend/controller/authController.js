@@ -22,6 +22,7 @@ async function signIn(req, res) {
                 picture,
                 given_name,
                 family_name,
+                managerAccess: false,
             });
         }
         res.cookie("session-token", token);
@@ -89,6 +90,7 @@ function signOut(req, res) {
         status: "Success",
     });
 }
+
 
 module.exports.protectRoute = protectRoute;
 module.exports.signIn = signIn;

@@ -27,3 +27,23 @@ export const useFetchEmployeeData = function () {
 
     return [loading, data, error];
 };
+
+export const useRequestManagerAccess = function () {
+    // Fetches Employee Data from the backend server
+    const [requestError, setRequestError] = useState(false);
+    const requestManagerAccess = async function () {
+        try {
+            const res = await axios.get("/api/employee/manageraccess");
+            if (res.data.status === "Success") {
+                alert("Request Granted !");
+                window.location.reload();
+            } else {
+                setRequestError(res.data.status);
+            }
+        } catch (err) {
+            setRequestError(err.message);
+        }
+    };
+
+    return [requestError, requestManagerAccess];
+};

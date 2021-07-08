@@ -29,8 +29,10 @@ const useAuthorize = () => {
   }
 
   function goToHome() {
+
     history.replace("/dashboard");
     window.location.href = "http://localhost:3000/dashboard";
+    window.location.reload();
   }
   function showAuthPage(URL) {
     window.location.href = URL;
@@ -61,6 +63,7 @@ const useAuthorize = () => {
     }
     goToHome();
     setLoading(false);
+
   }
   return { showAuthPage, setupJira, doneAuthentication, goToHome, loading };
 };

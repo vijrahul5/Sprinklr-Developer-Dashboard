@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 
 export const useFetchEmployeeStandUp = function (setValue) {
@@ -32,33 +32,33 @@ export const useUpdateEmployeeStandUp = function () {
     const [addError, setAddError] = useState(false);
     const [editError, setEditError] = useState(false);
 
-    const addStandUp = async function (data) {
+    const addStandUp = useCallback(async function (data,setValue) {
         try {
             const res = await axios.post("/api/employee/standup", data);
             if (res.data.status === "Success") {
                 alert("Stand Up Submitted Successfully");
-                window.location.reload();
+                setValue({ question1: "", question2: "", question3: "" });
             } else {
                 throw new Error(res.data.status);
             }
         } catch (err) {
             setAddError(err.message);
         }
-    };
+    }, []);
 
-    const editStandUp = async function (data) {
+    const editStandUp = useCallback(async function (data,setValue) {
         try {
             const res = await axios.patch("/api/employee/standup", data);
             if (res.data.status === "Success") {
                 alert("Stand Up Edited Successfully");
-                window.location.reload();
+                setValue((value) => value);
             } else {
                 throw new Error(res.data.status);
             }
         } catch (err) {
             setEditError(err.message);
         }
-    };
+    }, []);
 
     return [addError, editError, addStandUp, editStandUp];
 };

@@ -27,16 +27,17 @@ const GitlabProfile = (props) => {
                     ]}
                     data={currentpost}
                     className="gitlab"
+                    
                 />
 
-                <Pagination
-                    numPages={totalpages}
-                    currentPage={currentPage}
-                    onPageChange={({ nextPage }) => {
-                        setCurrentPage(Math.min(Math.max(nextPage, 1), 20));
-                    }}
-                    className="gitlab"
-                />
+                    <Pagination
+                        numPages={totalpages}
+                        currentPage={currentPage}
+                        onPageChange={({ nextPage }) => {
+                            setCurrentPage(Math.min(Math.max(nextPage, 1), 20));
+                        }}
+                        className="gitlab"
+                    />
             </div>
         )
     );

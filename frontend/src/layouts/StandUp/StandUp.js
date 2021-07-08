@@ -44,8 +44,8 @@ function StandUp() {
                 return;
             }
         }
-        addStandUp(value);
-        setValue({ question1: "", question2: "", question3: "" });
+        addStandUp(value,setValue);
+        
     }
 
     function handleEdit(e) {
@@ -57,7 +57,7 @@ function StandUp() {
                 return;
             }
         }
-        editStandUp(value);
+        editStandUp(value,setValue);
     }
 
     if (loading) {
@@ -80,11 +80,9 @@ function StandUp() {
                         name="question1"
                         className="form-control "
                         onChange={(e) => {
-                            setValue((prevValue) => {
-                                return {
-                                    ...prevValue,
+                            setValue({
+                                    ...value,
                                     question1: e.currentTarget.value,
-                                };
                             });
                         }}
                         placeholder="Answer"
@@ -101,11 +99,9 @@ function StandUp() {
                         name="question2"
                         className="form-control "
                         onChange={(e) => {
-                            setValue((prevValue) => {
-                                return {
-                                    ...prevValue,
+                            setValue({
+                                    ...value,
                                     question2: e.currentTarget.value,
-                                };
                             });
                         }}
                         placeholder="Answer"
@@ -118,11 +114,9 @@ function StandUp() {
                         name="question3"
                         className="form-control inputCustom"
                         onChange={(e) => {
-                            setValue((prevValue) => {
-                                return {
-                                    ...prevValue,
+                            setValue({
+                                    ...value,
                                     question3: e.currentTarget.value,
-                                };
                             });
                         }}
                         placeholder="Answer"
