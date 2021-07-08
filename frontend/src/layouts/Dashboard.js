@@ -12,6 +12,7 @@ export default function Dashboard() {
         <>
             <SidebarMenu />
             <div className="dashboardContainer">
+
                 <div id="basicInfo">
                     <Profile />
                     <StandUp />

@@ -1,11 +1,10 @@
 import { React, useEffect, useState } from "react";
 // import "./App.css";
 import LoginButton from "../../components/GitlabButtons/LoginButton";
-import LogoutButton from "../../components/GitlabButtons/LogoutButton";
 import Profile from "./GitlabProfile";
-import { Table } from "baseui/table-semantic";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Spinner } from "baseui/spinner";
+import { FcApproval, FcHighPriority, FcOk, FcCancel } from "react-icons/fc";
 const axios = require("axios");
 
 function GitlabApp() {
@@ -13,45 +12,42 @@ function GitlabApp() {
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(4);
     const [posts, setPosts] = useState([]);
-
+    const [eleminatelength, seteleminatelength] = useState(0);
     useEffect(() => {
         const fetchProjectids = async () => {
             const userdata = await axios.get(
                 "https://gitlab.com/api/v4/user?access_token=a47babe4ca273839ce99dc4e4a568ec343a17b3ca830128699c32b0f4e1c5555"
             );
-            //console.log(userdata);
+
             const username = userdata.data.username;
-            //console.log(username);
+
             const res = await axios.get(
                 `https://gitlab.com/api/v4/users?username=${username}`
             );
 
-            //console.log(res);
-
-            //console.log(res.data[0].id);
-
             const projects = await axios.get(
                 `https://gitlab.com/api/v4/users/${res.data[0].id}/projects`
             );
-            console.log(projects);
-            //console.log(projects);
+
             let arr = [];
-            let array_to_pass = [];
             arr.push([36528, "Bitcoin"]);
             projects.data.map((obj) => {
                 arr.push([obj.id, obj.name]);
-                //console.log(arr);
             });
-
+            seteleminatelength(arr.length);
             await arr.forEach(async (element) => {
                 const merge_ids_response = await axios.get(
                     `https://gitlab.com/api/v4/projects/${element[0]}/merge_requests`
                 );
 
-                //console.log(merge_ids_response);
                 if (merge_ids_response.data.length === 0) {
-                    array_to_pass.push([element[1], null, null, null, null]);
-                    console.log("entered");
+                    arr.push([
+                        element[1],
+                        "NO_Merge_Request",
+                        null,
+                        null,
+                        null,
+                    ]);
                 } else {
                     await merge_ids_response.data.forEach(async (merge_req) => {
                         if (merge_req.iid !== null) {
@@ -60,7 +56,7 @@ function GitlabApp() {
                             );
                             //console.log(Pipeline_status);
                             if (Pipeline_status.data.length == 0) {
-                                array_to_pass.push([
+                                arr.push([
                                     element[1],
                                     merge_req.title,
                                     merge_req.merged_by === null
@@ -74,12 +70,14 @@ function GitlabApp() {
                                     Pipeline_status.data[0].status;
                                 let GitlabApproval;
                                 if (Pipeline_stat == "success") {
-                                    GitlabApproval = "Approved";
+                                    GitlabApproval = <FcOk />;
+                                    Pipeline_stat = <FcApproval />;
                                 } else {
-                                    GitlabApproval = "Not_Approved_Yet";
+                                    GitlabApproval = <FcCancel />;
+                                    Pipeline_stat = <FcCancel />;
                                 }
 
-                                array_to_pass.push([
+                                arr.push([
                                     element[1],
                                     merge_req.title,
                                     merge_req.merged_by === null
@@ -90,7 +88,7 @@ function GitlabApp() {
                                 ]);
                             }
                         } else {
-                            array_to_pass.push([
+                            arr.push([
                                 element[1],
                                 merge_req.title,
                                 merge_req.merged_by === null
@@ -104,14 +102,14 @@ function GitlabApp() {
                 }
             });
 
-            setPosts(array_to_pass);
+            setPosts(arr);
         };
 
         fetchProjectids();
     }, []);
 
     const { isLoading } = useAuth0();
-    //console.log(isLoading);
+
     if (isLoading)
         return (
             <div>
@@ -119,19 +117,15 @@ function GitlabApp() {
             </div>
         );
 
-    console.log("1", posts);
-    //console.log(currentPage);
-
     return (
         <>
             <LoginButton />
-
-            <LogoutButton />
 
             <Profile
                 postsPerPage={postsPerPage}
                 currentPage={currentPage}
                 post={posts}
+                eleminatelength={eleminatelength}
             />
         </>
     );

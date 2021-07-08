@@ -7,7 +7,7 @@ const LoginButton = (props) => {
     console.log(isAuthenticated);
     return (
         !isAuthenticated && (
-            <div id="start-div" className="gitlab">
+            <div id="start-div">
                 <h2>Connect to Gitlab</h2>
                 <button
                     onClick={() => {
