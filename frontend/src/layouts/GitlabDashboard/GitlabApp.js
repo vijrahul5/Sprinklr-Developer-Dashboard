@@ -10,7 +10,7 @@ const axios = require("axios");
 function GitlabApp() {
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
-    const [postsPerPage] = useState(4);
+    const postsPerPage = 12;
     const [posts, setPosts] = useState([]);
     const [eleminatelength, seteleminatelength] = useState(0);
     useEffect(() => {
