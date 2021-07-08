@@ -12,7 +12,6 @@ export default function Dashboard() {
         <>
             <SidebarMenu />
             <div className="dashboardContainer">
-
                 <div id="basicInfo">
                     <Profile />
                     <StandUp />
@@ -28,7 +27,10 @@ export default function Dashboard() {
                         <h1>Jira</h1>
                         <JiraDashboard />
                     </div>
-                    {/* <GitlabDashboard/> */}
+                    <div id="gitlabContainer">
+                        <h1>Gitlab</h1>
+                        <GitlabDashboard />
+                    </div>
                 </div>
             </div>
         </>
