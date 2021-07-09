@@ -41,7 +41,7 @@ function StandUp() {
                 return;
             }
         }
-        addStandUp(value, setValue);
+        addStandUp(value);
         setValue({ question1: "", question2: "", question3: "" });
     }
 
@@ -54,7 +54,7 @@ function StandUp() {
                 return;
             }
         }
-        editStandUp(value, setValue);
+        editStandUp(value);
     }
 
     if (loading) {

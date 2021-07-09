@@ -4,9 +4,9 @@ import { BrowserRouter as Router, Switch, Redirect } from "react-router-dom";
 import { Client as Styletron } from "styletron-engine-atomic";
 import { Provider as StyletronProvider } from "styletron-react";
 import { PublicRoute, ProtectedRoute } from "./customRoutes/CustomRoutes";
-import SignIn from "./components/SignIn/SignIn";
-import LandingPage from "./layouts/LandingPage";
-import Dashboard from "./layouts/Dashboard";
+import SignIn from "./globalComponents/SignIn/SignIn";
+import LandingPage from "./components/LandingPage";
+import Dashboard from "./components/Dashboard";
 
 const engine = new Styletron();
 
