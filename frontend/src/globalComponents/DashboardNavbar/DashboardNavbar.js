@@ -4,7 +4,7 @@ import { IconContext } from "react-icons";
 import { FaSignOutAlt } from "react-icons/fa";
 import Auth from "../../Auth";
 
-function SidebarMenu() {
+function DashboardNavbar() {
     return (
         <>
             <IconContext.Provider value={{ color: "#fff" }}>
@@ -26,4 +26,4 @@ function SidebarMenu() {
     );
 }
 
-export default SidebarMenu;
+export default DashboardNavbar;

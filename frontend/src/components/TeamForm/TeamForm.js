@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import Loader from "../../components/Loader/Loader";
+import Loader from "../../globalComponents/Loader/Loader";
 import { useUpdateEmployeeTeam } from "./teamFormHooks";
 import { FormControl } from "baseui/form-control";
 import { Input } from "baseui/input";
@@ -8,7 +8,6 @@ import { Button, SIZE } from "baseui/button";
 
 function TeamForm({ type }) {
     const [value, setValue] = useState({ employeeEmail: "" });
-
     const [loading, setLoading] = useState(true);
     const [addError, deleteError, addTeamMember, deleteTeamMember] =
         useUpdateEmployeeTeam(); // Provides functions for adding or deleting a team member
@@ -21,12 +20,11 @@ function TeamForm({ type }) {
 
     if (deleteError) {
         alert(deleteError);
-        window.location.reload();
     }
     if (addError) {
         alert(addError);
-        window.location.reload();
     }
+
     async function handleSubmit(e) {
         // Event listener for adding a team member
         e.preventDefault();
@@ -36,8 +34,9 @@ function TeamForm({ type }) {
                 return;
             }
         }
-        if (type === "Add") addTeamMember(value,setValue);
-        else if (type === "Delete") deleteTeamMember(value,setValue);
+        if (type === "Add") addTeamMember(value);
+        else if (type === "Delete") deleteTeamMember(value);
+        setValue({ employeeEmail: "" });
     }
 
     if (loading) {
@@ -49,7 +48,7 @@ function TeamForm({ type }) {
             </>
         );
     }
-    
+
     return (
         <>
             <form
@@ -69,11 +68,9 @@ function TeamForm({ type }) {
                             className="form-control"
                             value={value.employeeEmail}
                             onChange={(e) => {
-                                setValue((prevValue) => {
-                                    return {
-                                        ...prevValue,
-                                        employeeEmail: e.currentTarget.value,
-                                    };
+                                setValue({
+                                    ...value,
+                                    employeeEmail: e.currentTarget.value,
                                 });
                             }}
                             size={SIZE.compact}

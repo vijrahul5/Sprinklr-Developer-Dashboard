@@ -9,7 +9,7 @@ function GitlabApp({ user }) {
     // For get table data -> Get request on '/api/gitlab'
 
     const [currentPage, setCurrentPage] = useState(1);
-    const postsPerPage = 7;
+    const postsPerPage = 10;
     const [posts, setPosts] = useState([]);
     const [eleminatelength, seteleminatelength] = useState(0);
     const accessToken =

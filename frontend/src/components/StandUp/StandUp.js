@@ -1,5 +1,5 @@
 import React from "react";
-import Loader from "../../components/Loader/Loader";
+import Loader from "../../globalComponents/Loader/Loader";
 import { useState } from "react";
 import {
     useFetchEmployeeStandUp,
@@ -24,15 +24,12 @@ function StandUp() {
 
     if (error) {
         alert(error);
-        window.location.reload();
     }
     if (addError) {
         alert(addError);
-        window.location.reload();
     }
     if (editError) {
         alert(editError);
-        window.location.reload();
     }
 
     function handleSubmit(e) {
@@ -44,8 +41,8 @@ function StandUp() {
                 return;
             }
         }
-        addStandUp(value,setValue);
-        
+        addStandUp(value, setValue);
+        setValue({ question1: "", question2: "", question3: "" });
     }
 
     function handleEdit(e) {
@@ -57,7 +54,7 @@ function StandUp() {
                 return;
             }
         }
-        editStandUp(value,setValue);
+        editStandUp(value, setValue);
     }
 
     if (loading) {
@@ -81,15 +78,14 @@ function StandUp() {
                         className="form-control "
                         onChange={(e) => {
                             setValue({
-                                    ...value,
-                                    question1: e.currentTarget.value,
+                                ...value,
+                                question1: e.currentTarget.value,
                             });
                         }}
                         placeholder="Answer"
                         size={SIZE.mini}
                         overrides={{
-                            style: {borderRadius: 
-                            "10px"},
+                            style: { borderRadius: "10px" },
                         }}
                     />
                 </FormControl>
@@ -100,8 +96,8 @@ function StandUp() {
                         className="form-control "
                         onChange={(e) => {
                             setValue({
-                                    ...value,
-                                    question2: e.currentTarget.value,
+                                ...value,
+                                question2: e.currentTarget.value,
                             });
                         }}
                         placeholder="Answer"
@@ -115,8 +111,8 @@ function StandUp() {
                         className="form-control inputCustom"
                         onChange={(e) => {
                             setValue({
-                                    ...value,
-                                    question3: e.currentTarget.value,
+                                ...value,
+                                question3: e.currentTarget.value,
                             });
                         }}
                         placeholder="Answer"

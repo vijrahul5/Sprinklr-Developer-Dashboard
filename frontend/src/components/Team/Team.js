@@ -1,6 +1,6 @@
 import React from "react";
 import TeamMember from "./TeamMember";
-import Loader from "../../components/Loader/Loader";
+import Loader from "../../globalComponents/Loader/Loader";
 import { useFetchEmployeeTeamData } from "./teamHooks";
 import { Heading, HeadingLevel } from "baseui/heading";
 
@@ -10,7 +10,6 @@ function Team() {
 
     if (error) {
         alert(error);
-        window.location.reload();
     }
 
     if (loading) {

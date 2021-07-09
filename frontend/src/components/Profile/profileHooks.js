@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 
 export const useFetchEmployeeData = function () {
@@ -7,8 +7,8 @@ export const useFetchEmployeeData = function () {
     const [data, setData] = useState(null);
     const [error, setError] = useState(false);
 
-    useEffect(() => {
-        (async function () {
+    const apiCall = useCallback(
+        async function () {
             try {
                 const res = await axios.get("/api/employee/profile");
                 if (res.data.status === "Success") {
@@ -22,7 +22,12 @@ export const useFetchEmployeeData = function () {
                 setLoading(false);
                 setError(err.message);
             }
-        })();
+        },
+        [setData, setLoading, setError]
+    );
+
+    useEffect(() => {
+        apiCall();
     }, []);
 
     return [loading, data, error];
@@ -31,19 +36,23 @@ export const useFetchEmployeeData = function () {
 export const useRequestManagerAccess = function () {
     // Fetches Employee Data from the backend server
     const [requestError, setRequestError] = useState(false);
-    const requestManagerAccess = async function () {
-        try {
-            const res = await axios.get("/api/employee/manageraccess");
-            if (res.data.status === "Success") {
-                alert("Request Granted !");
-                window.location.reload();
-            } else {
-                setRequestError(res.data.status);
+    
+    const requestManagerAccess = useCallback(
+        async function () {
+            try {
+                const res = await axios.get("/api/employee/manageraccess");
+                if (res.data.status === "Success") {
+                    alert("Request Granted !");
+                    window.location.reload();
+                } else {
+                    setRequestError(res.data.status);
+                }
+            } catch (err) {
+                setRequestError(err.message);
             }
-        } catch (err) {
-            setRequestError(err.message);
-        }
-    };
+        },
+        [setRequestError]
+    );
 
     return [requestError, requestManagerAccess];
 };

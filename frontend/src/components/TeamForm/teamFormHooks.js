@@ -6,12 +6,11 @@ export const useUpdateEmployeeTeam = function () {
     const [addError, setAddError] = useState(false);
     const [deleteError, setDeleteError] = useState(false);
 
-    const addTeamMember = useCallback(async function (data, setValue) {
+    const addTeamMember = useCallback(async function (data) {
         try {
             const res = await axios.post("/api/employee/team", data);
             if (res.data.status === "Success") {
                 alert("Team Member Added");
-                setValue({ employeeEmail: "" });
             } else {
                 throw new Error(res.data.status);
             }
@@ -19,16 +18,15 @@ export const useUpdateEmployeeTeam = function () {
             setAddError(err.message);
             alert(err.message);
         }
-    }, []);
+    }, [setAddError]);
 
-    const deleteTeamMember = useCallback(async function (data, setValue) {
+    const deleteTeamMember = useCallback(async function (data) {
         try {
             const res = await axios.delete("/api/employee/team", {
                 data: data,
             });
             if (res.data.status === "Success") {
                 alert("Team Member Deleted");
-                setValue({ employeeEmail: "" });
             } else {
                 throw new Error(res.data.status);
             }
@@ -36,7 +34,7 @@ export const useUpdateEmployeeTeam = function () {
             setDeleteError(err.message);
             alert(err.message);
         }
-    }, []);
+    }, [setDeleteError]);
 
     return [addError, deleteError, addTeamMember, deleteTeamMember];
 };

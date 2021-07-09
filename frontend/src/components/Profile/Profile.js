@@ -1,5 +1,5 @@
 import React from "react";
-import Loader from "../../components/Loader/Loader";
+import Loader from "../../globalComponents/Loader/Loader";
 import { useFetchEmployeeData, useRequestManagerAccess } from "./profileHooks";
 import { Button, SIZE } from "baseui/button";
 
@@ -9,11 +9,9 @@ function Profile() {
 
     if (error) {
         alert(error);
-        window.location.reload();
     }
     if(requestError){
         alert(requestError);
-        window.location.reload();
     }
 
     if (loading) {
