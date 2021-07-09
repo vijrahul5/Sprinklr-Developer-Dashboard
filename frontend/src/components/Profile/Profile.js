@@ -10,7 +10,7 @@ function Profile() {
     if (error) {
         alert(error);
     }
-    if(requestError){
+    if (requestError) {
         alert(requestError);
     }
 
@@ -50,7 +50,7 @@ function Profile() {
                         type="submit"
                         className="submit btnCustom"
                         size={SIZE.compact}
-                        onClick={(e)=>{
+                        onClick={(e) => {
                             requestManagerAccess();
                         }}
                     >

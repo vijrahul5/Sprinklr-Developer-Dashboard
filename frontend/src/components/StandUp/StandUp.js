@@ -1,6 +1,6 @@
 import React from "react";
 import Loader from "../../globalComponents/Loader/Loader";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
     useFetchEmployeeStandUp,
     useUpdateEmployeeStandUp,
@@ -18,9 +18,18 @@ function StandUp() {
         question3: "",
     });
 
-    const [loading, data, error] = useFetchEmployeeStandUp(setValue); // Fetches employee's stand up for the day
+    const [loading, data, error] = useFetchEmployeeStandUp(); // Fetches employee's stand up for the day
     const [addError, editError, addStandUp, editStandUp] =
         useUpdateEmployeeStandUp(); // Provides functions for adding or deleting stand up
+
+    useEffect(() => {
+        if (data)
+            setValue({
+                question1: data.question1,
+                question2: data.question2,
+                question3: data.question3,
+            });
+    }, [data]);
 
     if (error) {
         alert(error);
@@ -32,15 +41,19 @@ function StandUp() {
         alert(editError);
     }
 
-    function handleSubmit(e) {
-        // Event Listener for adding a standup
-        e.preventDefault();
+    function checkFieldEmpty() {
         for (let key in value) {
             if (value[key] === "") {
                 alert("Please Fill In All The Fields");
-                return;
+                return true;
             }
         }
+        return false;
+    }
+    function handleSubmit(e) {
+        // Event Listener for adding a standup
+        e.preventDefault();
+        if (checkFieldEmpty()) return;
         addStandUp(value);
         setValue({ question1: "", question2: "", question3: "" });
     }
@@ -48,14 +61,17 @@ function StandUp() {
     function handleEdit(e) {
         // Event Listener for editing a standup
         e.preventDefault();
-        for (let key in value) {
-            if (value[key] === "") {
-                alert("Please Fill In All The Fields");
-                return;
-            }
-        }
+        if (checkFieldEmpty()) return;
         editStandUp(value);
     }
+    
+    const changeValue = useCallback(
+        (e) => {
+            let valueName = e.currentTarget.name;
+            setValue({ ...value, [valueName]: e.currentTarget.value });
+        },
+        [setValue, value]
+    );
 
     if (loading) {
         return (
@@ -76,17 +92,9 @@ function StandUp() {
                         value={value.question1}
                         name="question1"
                         className="form-control "
-                        onChange={(e) => {
-                            setValue({
-                                ...value,
-                                question1: e.currentTarget.value,
-                            });
-                        }}
+                        onChange={changeValue}
                         placeholder="Answer"
                         size={SIZE.mini}
-                        overrides={{
-                            style: { borderRadius: "10px" },
-                        }}
                     />
                 </FormControl>
                 <FormControl label={() => "What is the agenda for today ?"}>
@@ -94,12 +102,7 @@ function StandUp() {
                         value={value.question2}
                         name="question2"
                         className="form-control "
-                        onChange={(e) => {
-                            setValue({
-                                ...value,
-                                question2: e.currentTarget.value,
-                            });
-                        }}
+                        onChange={changeValue}
                         placeholder="Answer"
                         size={SIZE.mini}
                     />
@@ -109,12 +112,7 @@ function StandUp() {
                         value={value.question3}
                         name="question3"
                         className="form-control inputCustom"
-                        onChange={(e) => {
-                            setValue({
-                                ...value,
-                                question3: e.currentTarget.value,
-                            });
-                        }}
+                        onChange={changeValue}
                         placeholder="Answer"
                         size={SIZE.mini}
                     />

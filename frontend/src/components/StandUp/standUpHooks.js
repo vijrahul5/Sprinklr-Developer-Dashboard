@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 
-export const useFetchEmployeeStandUp = function (setValue) {
+export const useFetchEmployeeStandUp = function () {
     // Fetches the logged in employee's stand up for the day
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState(null);
@@ -14,7 +14,6 @@ export const useFetchEmployeeStandUp = function (setValue) {
                 if (res.data.status === "Success") {
                     setLoading(false);
                     setData(() => res.data.standUp);
-                    setValue(() => res.data.standUp);
                 } else {
                     setLoading(false);
                 }

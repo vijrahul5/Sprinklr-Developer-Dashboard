@@ -36,7 +36,7 @@ export const useFetchEmployeeData = function () {
 export const useRequestManagerAccess = function () {
     // Fetches Employee Data from the backend server
     const [requestError, setRequestError] = useState(false);
-    
+
     const requestManagerAccess = useCallback(
         async function () {
             try {
