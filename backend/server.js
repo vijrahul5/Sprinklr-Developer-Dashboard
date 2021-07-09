@@ -5,6 +5,7 @@ const jiraNotificationRouter = require("./router/jiraNotificationRouter");
 const authRouter = require("./router/authRouter");
 const employeeRouter = require("./router/employeeRouter");
 const jiraRouter = require("./router/jiraRouter");
+const adminRouter = require("./router/adminRouter");
 const cors = require("cors");
 require("dotenv").config();
 
@@ -16,6 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use("/api/auth", authRouter); // All routes with '/api/auth' will be redirected to authRouter
 app.use("/api/jiranotification", jiraNotificationRouter);
+app.use("/api/admin",adminRouter);
 app.use(protectRoute); // Middleware for protecting access to apis which require the user to be logged in
 app.use("/api/employee", employeeRouter); // All routes with '/api/employee' will be redirected to employeehRouter
 app.use("/api/jira", jiraRouter);

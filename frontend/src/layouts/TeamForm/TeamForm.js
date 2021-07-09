@@ -36,9 +36,8 @@ function TeamForm({ type }) {
                 return;
             }
         }
-        if (type === "Add") addTeamMember(value);
-        else if (type === "Delete") deleteTeamMember(value);
-        setValue({ employeeEmail: "" });
+        if (type === "Add") addTeamMember(value,setValue);
+        else if (type === "Delete") deleteTeamMember(value,setValue);
     }
 
     if (loading) {
@@ -81,7 +80,7 @@ function TeamForm({ type }) {
                         />
                         <Button
                             type="submit"
-                            className="submit btnCustom"
+                            className="submit btnCustom ml1"
                             size={SIZE.compact}
                         >
                             {type}

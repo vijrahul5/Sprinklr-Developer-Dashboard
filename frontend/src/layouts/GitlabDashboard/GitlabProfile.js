@@ -39,7 +39,9 @@ const GitlabProfile = (props) => {
                     ]}
                     data={currentpost}
                     className="gitlab"
+                    
                 />
+
                 <Pagination
                     numPages={totalpages}
                     currentPage={currentPage}
@@ -48,6 +50,7 @@ const GitlabProfile = (props) => {
                     }}
                     className="gitlab"
                 />
+
             </div>
         )
     );

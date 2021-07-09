@@ -3,7 +3,7 @@ import GetIssuesApi from "./GetIssuesApi";
 import JiraTableBuilder from "./JiraTableBuilder";
 
 const { getIssues } = GetIssuesApi();
-const EntryPerPage = 8;
+const EntryPerPage = 5;
 
 const usePagination = (jql) => {
     const [pageNumber, setPageNumber] = useState(1);

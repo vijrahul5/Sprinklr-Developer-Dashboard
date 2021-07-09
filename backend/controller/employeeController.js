@@ -1,5 +1,6 @@
 const employeeModel = require("../model/employeeModel");
 const standUpModel = require("../model/standUpModel");
+const managerModel = require("../model/managerModel");
 const moment = require("moment");
 
 async function getProfile(req, res) {
@@ -279,6 +280,29 @@ async function deleteTeam(req, res) {
     }
 }
 
+async function getManagerAccess(req, res) {
+    // Deletes a team member from the employee's team
+    try {
+        const email = req.email;
+        const employee = await employeeModel.findOne({ email: email });
+        const checkManager = await managerModel.findOne({ email: email });
+        if (!checkManager || !employee) {
+            throw new Error("Request Denied !");
+        } else {
+            employee.managerAccess = true;
+            await employee.save();
+            return res.json({
+                status: "Success",
+            });
+        }
+    } catch (err) {
+        res.json({
+            status: "Failed",
+            error: err.message,
+        });
+    }
+}
+
 module.exports.getProfile = getProfile;
 module.exports.updateProfile = updateProfile;
 module.exports.deleteProfile = deleteProfile;
@@ -289,3 +313,4 @@ module.exports.getStandUp = getStandUp;
 module.exports.postStandUp = postStandUp;
 module.exports.updateStandUp = updateStandUp;
 module.exports.deleteStandUp = deleteStandUp;
+module.exports.getManagerAccess = getManagerAccess;

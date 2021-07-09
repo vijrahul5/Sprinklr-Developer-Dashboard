@@ -22,7 +22,7 @@ const JiraAuth = () => {
           onClick={() => {
             showAuthPage(URL);
           }}
-          size={SIZE.compact}
+          className="btnCustom"
         >
           Authorize
         </Button>
