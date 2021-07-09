@@ -10,7 +10,7 @@ import { useFetchEmployeeData } from "./Profile/profileHooks";
 import Loader from "../components/Loader/Loader";
 
 export default function Dashboard() {
-    const [loading, data, error] = useFetchEmployeeData();
+    const [loading, user, error] = useFetchEmployeeData();
     if (error) {
         alert(error);
         window.location.reload();
@@ -27,7 +27,7 @@ export default function Dashboard() {
                     <StandUp />
                 </div>
                 <div id="sectionContainer">
-                    {data.managerAccess ? (
+                    {user.managerAccess ? (
                         <div id="teamContainer">
                             <h1>Team</h1>
                             <Team />
@@ -41,7 +41,7 @@ export default function Dashboard() {
                     </div>
                     <div id="gitlabContainer">
                         <h1>Gitlab</h1>
-                        <GitlabDashboard />
+                        <GitlabDashboard user={user}/>
                     </div>
                 </div>
             </div>
