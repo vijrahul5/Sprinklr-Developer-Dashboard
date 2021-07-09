@@ -21,14 +21,17 @@ function Team() {
     }
     return (
         <>
-            <ul className="teamStandUpList">
+            <h1>Team</h1>
+            <ul>
                 {data.length ? (
                     data.map((teamMember) => {
                         return (
-                            <TeamMember
-                                key={teamMember.email}
-                                teamMember={teamMember}
-                            />
+                            <li>
+                                <TeamMember
+                                    key={teamMember.email}
+                                    teamMember={teamMember}
+                                />
+                            </li>
                         );
                     })
                 ) : (

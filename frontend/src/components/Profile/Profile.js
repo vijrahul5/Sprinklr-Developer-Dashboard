@@ -24,21 +24,21 @@ function Profile() {
     return (
         <>
             <div className="profile">
+                <div className="profile__imgHolder">
+                    <img src={data.picture} alt="" />
+                </div>
                 <ul>
-                    <div className="img-holder">
-                        <img src={data.picture} alt="" />
-                    </div>
                     <li>
-                        <p className="param">Name:</p>
-                        <p className="value">{data.name}</p>
+                        <p className="profile__param">Name:</p>
+                        <p className="profile__value">{data.name}</p>
                     </li>
                     <li>
-                        <p className="param">Email:</p>
-                        <p className="value">{data.email}</p>
+                        <p className="profile__param">Email:</p>
+                        <p className="profile__value">{data.email}</p>
                     </li>
                     <li>
-                        <p className="param">Reports to:</p>
-                        <p className="value">
+                        <p className="profile__param">Reports to:</p>
+                        <p className="profile__value">
                             {data.manager ? data.manager.email : "None"}
                         </p>
                     </li>

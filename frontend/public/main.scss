@@ -1,0 +1,526 @@
+@import "./resets";
+@import "./variables";
+
+@mixin flexCenter($dir) {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: $dir;
+}
+:root {
+    --color-primary: rgb(12, 102, 194);
+    --color-secondary: #eeeeee;
+    --color-nav: rgb(12, 102, 194);
+    --color-widget: white;
+    --font-primary: system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --border: 4px solid var(--color-primary);
+    --border-radius: 7px;
+    --shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    --padding: 1rem;
+}
+
+.signin-container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9);
+}
+
+// .signin {
+//     width: fit-content;
+//     margin: auto;
+//     background: #ffffff;
+//     box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
+//     border-radius: 2rem;
+//     padding: 4rem 5rem;
+//     transition: all 0.3s;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-around;
+//     align-items: center;
+// }
+
+// .signin h3 {
+//     all: unset;
+//     font-size: 1.5rem;
+//     font-weight: 500;
+//     text-align: center;
+//     margin: 0;
+//     line-height: 1;
+//     margin-bottom: 3rem;
+// }
+
+// .landingPage {
+//     background-image: linear-gradient(
+//             to bottom,
+//             rgba(0, 0, 0, 0.1),
+//             rgba(0, 0, 0, 0.5)
+//         ),
+//         url("./assets/main.png");
+//     background-blend-mode: luminosity;
+//     background-size: cover;
+//     background-position: center;
+//     width: 100%;
+//     height: 100%;
+//     display: flex;
+//     justify-content: center;
+// }
+// .landingPage h1 {
+//     text-align: center;
+//     opacity: 1;
+//     margin-top: 10rem;
+//     color: black;
+//     font-size: 8rem;
+//     width: 80%;
+// }
+
+.dashboardNavbar {
+    background-color: $color-nav;
+    width: 100%;
+    height: 3.5rem;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    @include flexCenter(row);
+    h1 {
+        all: unset;
+        font-size: map-get($font-sizes, "medium");
+        color: $color-widget;
+        margin: auto;
+        text-align: center;
+    }
+    #{&}__icon {
+        position: fixed;
+        right: 0;
+        font-size: map-get($font-sizes, "medium");
+        margin-right: 2rem;
+        cursor: "pointer";
+        color: $color-widget;
+    }
+}
+
+.dashboardContainer {
+    // display: flex;
+    margin-top: 3.5rem;
+    padding: map-get($paddings, "medium");
+}
+
+.basicInfo {
+    width: 25rem;
+    position: fixed;
+}
+
+.profile {
+    width: 100%;
+    height: fit-content;
+    @include flexCenter(column);
+    box-shadow: $shadow;
+    padding: map-get($paddings, "small");
+    border-radius: $border-radius;
+    margin-bottom: map-get($margins, "medium");
+    border-top: $border;
+
+    #{&}__imgHolder {
+        width: 7rem;
+        height: 7rem;
+        object-fit: cover;
+        margin: 0px auto;
+        margin-bottom: 0.5rem;
+    }
+
+    #{&}__param {
+        width: 25%;
+        font-weight: map-get($font-weights, "medium");
+        text-decoration: underline;
+    }
+
+    #{&}__value {
+        width: 75%;
+        word-break: break-all;
+        background-color: $color-widget;
+        padding: 0.5rem;
+        border-radius: $border-radius;
+        margin-left: map-get($margins, "small");
+        background-color: $color-secondary;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        border-radius: 70px;
+    }
+
+    ul {
+        width: 100%;
+        list-style: none;
+        padding: map-get($paddings, "small") 0px;
+        border-radius: $border-radius;
+    }
+
+    li {
+        font-size: map-get($font-sizes, "small");
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-bottom: 0.5rem;
+    }
+}
+
+.standUp {
+    width: 100%;
+    border-radius: $border-radius;
+    height: fit-content;
+    box-shadow: $shadow;
+    padding: map-get($paddings, "small");
+    font-size: map-get($font-sizes, "small");
+    background-color: $color-widget;
+    border-top: $border;
+
+    #{&}__input {
+        margin-bottom: map-get($margins, "small");
+        overflow: auto;
+        font-size: map-get($font-sizes, "small");
+    }
+}
+
+.sectionContainer {
+    margin-left: 25rem + 2rem;
+    height: fit-content;
+    @include flexCenter(column);
+}
+.section {
+    width: 100%;
+    height: fit-content;
+    margin-bottom: map-get($margins, "large");
+
+    h1 {
+        position: sticky;
+        color: $color-primary;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid $color-primary;
+        margin-bottom: map-get($margins, "medium");
+        font-weight: map-get($font-weights, "small");
+    }
+
+}
+
+.teamStandUpList {
+    width: 100%;
+    min-height: 40rem;
+    margin: 0rem auto;
+    padding: 2rem;
+    border-top: var(--border);
+    box-shadow: var(--shadow);
+    grid-area: teamList;
+    background-color: var(--color-widget);
+    border-radius: var(--border-radius);
+}
+.teamStandUpList ul{
+    overflow: auto;
+    max-height: 45rem;
+    padding: 1rem;
+    list-style: none;
+}
+.teamStandUpList ul ul {
+    list-style: none;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+.teamStandUpList ul ul li {
+    display: flex;
+    align-items: center;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+}
+.teamStandUpList ul ul .param {
+    width: 40%;
+    font-weight: 500;
+    text-decoration: underline;
+}
+.teamStandUpList ul ul .value {
+    width: 60%;
+    /* word-break: break-all; */
+    background-color: var(--color-secondary);
+    padding: 0.5rem;
+    border-radius: var(--border-radius);
+}
+.teamForm {
+    width: 100%;
+    margin: 0rem auto;
+    border-top: var(--border);
+    box-shadow: var(--shadow);
+    padding: 1rem;
+    background-color: var(--color-widget);
+    border-radius: var(--border-radius);
+    max-height: 8rem;
+}
+.teamForm div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.teamForm div input {
+    display: block;
+    width: 100%;
+}
+
+#teamFormAdd {
+    grid-area: teamForm1;
+}
+#teamFormDelete {
+    grid-area: teamForm2;
+}
+
+.loader {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#jiraAuth {
+    width: 80%;
+    height: 80%;
+    margin: 0px auto;
+    padding: 1rem;
+    box-shadow: var(--shadow);
+    border-top: var(--border);
+    border-radius: var(--border-radius);
+    grid-area: jira;
+}
+
+#teamContainer h1 {
+    color: var(--color-primary);
+    grid-area: teamHeading;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--color-primary);
+    margin-bottom: 2rem;
+    font-weight: 300;
+}
+#jiraContainer h1 {
+    color: var(--color-primary);
+    grid-area: jiraHeading;
+    padding-bottom: 0.5rem;
+    margin-bottom: 4rem;
+    border-bottom: 2px solid var(--color-primary);
+    font-weight: 300;
+}
+#gitlabContainer h1 {
+    color: var(--color-primary);
+    grid-area: gitlabHeading;
+    padding-bottom: 0.5rem;
+    margin-bottom: 4rem;
+    border-bottom: 2px solid var(--color-primary);
+    font-weight: 300;
+}
+
+#teamContainer {
+    display: grid;
+    width: 100%;
+    height: 85vh;
+    min-height: fit-content;
+    grid-template-columns: 1fr 0.6fr;
+    grid-template-rows: 1fr 2fr 2fr 20fr;
+    grid-template-areas:
+        "teamHeading teamHeading"
+        "teamList teamForm1"
+        "teamList teamForm2"
+        "teamList blank";
+    grid-gap: 2rem;
+    margin-bottom: 5rem;
+}
+#jiraContainer {
+    width: 100%;
+    min-height: 85vh;
+    margin-bottom: 5rem;
+}
+#gitlabContainer {
+    width: 100%;
+    min-height: 85vh;
+    margin-bottom: 5rem;
+}
+
+#jiraTable {
+    grid-area: jira;
+    width: 100%;
+    padding: 1rem;
+    border-top: var(--border);
+    box-shadow: var(--shadow);
+    background-color: var(--color-widget);
+    border-radius: var(--border-radius);
+}
+#gitlabTable {
+    grid-area: gitlab;
+    width: 100%;
+
+    padding: 1rem;
+    border-top: var(--border);
+    box-shadow: var(--shadow);
+    background-color: var(--color-widget);
+    border-radius: var(--border-radius);
+    table-layout: auto;
+}
+#table {
+    width: 100%;
+}
+#footer {
+    display: flex;
+}
+#footerleft {
+    flex-grow: 1;
+}
+#jiraJqlContainer {
+    display: flex;
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+.mb12 {
+    margin-bottom: 0.5rem;
+}
+
+.jp {
+    width: 25px;
+    height: 25px;
+}
+.jiraauthHeading {
+    margin-bottom: 10rem;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 250;
+}
+.authbtn {
+    margin-top: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.jiraissueurl {
+    text-decoration: none;
+    color: black;
+}
+.jiraissueurl:hover {
+    color: blue;
+    text-decoration: underline;
+}
+.btnCustom {
+    background-color: var(--color-primary) !important;
+    color: white;
+    border-radius: var(--border-radius) !important;
+}
+.inputCustom {
+    border-radius: var(--border-radius) !important;
+    color: black;
+}
+
+.requestForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0rem auto;
+    border-top: var(--border);
+    box-shadow: var(--shadow);
+    padding: 1rem;
+    background-color: var(--color-widget);
+    border-radius: var(--border-radius);
+    max-height: 8rem;
+    margin-bottom: 1.5rem;
+}
+
+.ml1 {
+    margin-left: 1rem !important;
+}
+
+@media only screen and (max-width: 1350px) {
+    html {
+        font-size: 90%;
+    }
+    .dashboardContainer {
+        display: block;
+        padding: 3rem;
+    }
+    .basicInfo {
+        margin: 0px;
+        position: unset;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 3rem;
+        width: 100%;
+        background-color: var(--color-widget);
+        padding: 0rem;
+        height: fit-content;
+    }
+    .sectionContainer {
+        width: 100%;
+        height: 100vh;
+        margin-left: 0px;
+    }
+    .profile {
+        margin: 0px;
+        margin-right: 2rem;
+        width: 50%;
+        height: 50%;
+        border-top: var(--border);
+    }
+    .standUp {
+        border-top: var(--border);
+    }
+}
+
+@media only screen and (max-width: 950px) {
+    html {
+        font-size: 90%;
+    }
+    .dashboardContainer {
+        padding: 2rem;
+    }
+    .teamContainer {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "teamHeading teamHeading"
+            "teamList teamList"
+            "teamForm1 teamForm2";
+        grid-gap: 2rem;
+        margin-bottom: 5rem;
+    }
+    .basicInfo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    .profile {
+        margin: 0px;
+        margin-bottom: 2rem;
+        width: 60%;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    html {
+        font-size: 85%;
+    }
+    .dashboardContainer {
+        padding: 1rem;
+    }
+    .teamContainer {
+        height: 95vh;
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "teamHeading teamHeading"
+            "teamList teamList"
+            "teamForm1 teamForm1"
+            "teamForm2 teamForm2";
+        grid-gap: 2rem;
+        margin-bottom: 5rem;
+    }
+    .profile {
+        width: 80%;
+    }
+}

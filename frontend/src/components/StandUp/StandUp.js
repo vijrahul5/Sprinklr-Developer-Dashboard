@@ -75,7 +75,7 @@ function StandUp() {
 
     if (loading) {
         return (
-            <form className="standUpForm">
+            <form className="standUp">
                 <Loader />
             </form>
         );
@@ -84,14 +84,14 @@ function StandUp() {
     return (
         <>
             <form
-                className="standUpForm"
+                className="standUp"
                 onSubmit={data ? handleEdit : handleSubmit}
             >
                 <FormControl label={() => "What work was done yesterday ?"}>
                     <Textarea
                         value={value.question1}
                         name="question1"
-                        className="form-control "
+                        className="standUp__input "
                         onChange={changeValue}
                         placeholder="Answer"
                         size={SIZE.mini}
@@ -101,7 +101,7 @@ function StandUp() {
                     <Textarea
                         value={value.question2}
                         name="question2"
-                        className="form-control "
+                        className="standUp__input "
                         onChange={changeValue}
                         placeholder="Answer"
                         size={SIZE.mini}
@@ -111,7 +111,7 @@ function StandUp() {
                     <Textarea
                         value={value.question3}
                         name="question3"
-                        className="form-control inputCustom"
+                        className="standUp__input"
                         onChange={changeValue}
                         placeholder="Answer"
                         size={SIZE.mini}

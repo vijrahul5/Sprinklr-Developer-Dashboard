@@ -22,6 +22,8 @@ const GitlabProfile = (props) => {
     }
     return (
         <div id="gitlabTable">
+            <h1>Gitlab</h1>
+
             <Table
                 columns={[
                     "ProjectName",

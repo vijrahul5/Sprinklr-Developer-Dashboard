@@ -21,25 +21,22 @@ export default function Dashboard() {
         <>
             <DashboardNavbar />
             <div className="dashboardContainer">
-                <div id="basicInfo">
+                <div className="basicInfo">
                     <Profile />
                     <StandUp />
                 </div>
-                <div id="sectionContainer">
+                <div className="sectionContainer">
                     {user.managerAccess ? (
-                        <div id="teamContainer">
-                            <h1>Team</h1>
+                        <div className="section teamStandUpList">
                             <Team />
-                            <TeamForm type="Add" />
-                            <TeamForm type="Delete" />
+                            {/* <TeamForm type="Add" />
+                            <TeamForm type="Delete" /> */}
                         </div>
                     ) : null}
-                    <div id="jiraContainer">
-                        <h1>Jira</h1>
+                    <div className="section">
                         <JiraDashboard />
                     </div>
-                    <div id="gitlabContainer">
-                        <h1>Gitlab</h1>
+                    <div className="section">
                         <GitlabDashboard user={user} />
                     </div>
                 </div>
