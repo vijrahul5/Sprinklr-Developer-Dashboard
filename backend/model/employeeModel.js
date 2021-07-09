@@ -66,6 +66,13 @@ const employeeSchema = new Schema({
     managerAccess: {
         type: Boolean,
     },
+    doneGitlabAuth: {
+        type: Boolean,
+        default: false,
+    },
+    gitlabAccessToken: {
+        type: String,
+    },
 });
 employeeSchema.pre("save", () => {
     employeeModel.managerAccess = false;

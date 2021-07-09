@@ -1,15 +1,13 @@
 import { React, useEffect, useState } from "react";
-// import "./App.css";
-import LoginButton from "../../components/GitlabButtons/LoginButton";
 import Profile from "./GitlabProfile";
-import { useAuth0 } from "@auth0/auth0-react";
-import { Spinner } from "baseui/spinner";
 import { FcApproval, FcHighPriority, FcOk, FcCancel } from "react-icons/fc";
-import LogoutButton from "../../components/GitlabButtons/LogoutButton";
 const axios = require("axios");
 
-function GitlabApp() {
-    const [loading, setLoading] = useState(false);
+function GitlabApp({ user }) {
+    // user.doneGitlabAuth === true -> Table Render else Access Token submission
+    // For access token submission -> Post request with exact key 'gitlabAccessToken' on '/api/gitlab'   {gitlabAccessData : ""}; await axios.post("/api/gtilab",{gitlabAccessToken : ""})
+    // For get table data -> Get request on '/api/gitlab'
+
     const [currentPage, setCurrentPage] = useState(1);
     const postsPerPage = 7;
     const [posts, setPosts] = useState([]);
@@ -100,19 +98,8 @@ function GitlabApp() {
         fetchProjectids();
     }, []);
 
-    const { isLoading } = useAuth0();
-
-    if (isLoading)
-        return (
-            <div>
-                <Spinner />
-            </div>
-        );
-
     return (
         <>
-            <LoginButton />
-
             <Profile
                 postsPerPage={postsPerPage}
                 currentPage={currentPage}
