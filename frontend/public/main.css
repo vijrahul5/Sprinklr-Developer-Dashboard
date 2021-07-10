@@ -573,21 +573,105 @@ body,
   color: black;
 }
 
-#jiraJqlContainer {
+#table {
+  width: 100%;
+}
+
+#footer {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+#footerleft {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+#jiraJqlContainer {
   width: 100%;
   margin-bottom: 0.5rem;
+}
+
+.btn--blue {
+  background-color: #0c66c2 !important;
+  color: white !important;
+  height: 2.2rem;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-left: 0.5rem !important;
+}
+
+.btn--white {
+  background-color: white !important;
+  color: #0c66c2 !important;
+  height: 2.2rem;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-left: 0.5rem !important;
+}
+
+.btnContainer {
+  margin-top: 2rem;
+}
+
+.instruction__item {
+  list-style: none;
+  margin: 0.8rem auto;
+  font-size: x-large;
+  font-weight: 250;
 }
 
 .mb12 {
   margin-bottom: 0.5rem;
 }
 
+.filterContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.jqlFilter {
+  width: 41rem;
+  margin-right: 1rem;
+}
+
+.filter {
+  margin-right: 1rem;
+  width: 20rem;
+}
+
+.search {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.flexGrow {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
 .jp {
   width: 25px;
   height: 25px;
+  margin-left: 1rem;
+}
+
+.jp__description {
+  display: none;
+}
+
+.jp:hover + .jp__description {
+  display: block;
+  position: relative;
+  z-index: 1;
+  margin-left: 0.5rem;
 }
 
 .jiraauthHeading {
@@ -598,30 +682,22 @@ body,
 }
 
 .authbtn {
-  margin-top: 10rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  background-color: #0c66c2 !important;
+  color: white !important;
+  height: 2.2rem;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
-.jiraissueurl {
-  text-decoration: none;
+.jiraIssueUrl {
   color: black;
+  font-weight: 500;
 }
 
-.jiraissueurl:hover {
+.jiraIssueUrl:hover {
   color: blue;
   text-decoration: underline;
-}
-
-.ml1 {
-  margin-left: 1rem !important;
 }
 
 @media only screen and (max-width: 1350px) {

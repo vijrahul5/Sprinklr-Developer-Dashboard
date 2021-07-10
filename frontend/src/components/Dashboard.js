@@ -8,42 +8,44 @@ import JiraDashboard from "./JiraDashboard/components/jira/Jira";
 import GitlabDashboard from "./GitlabDashboard/GitlabDashboard";
 import { useFetchEmployeeData } from "./Profile/profileHooks";
 import Loader from "../globalComponents/Loader/Loader";
+import { NotificationContainer } from "react-notifications";
 
 export default function Dashboard() {
-    const [loading, user, error] = useFetchEmployeeData();
-    if (error) {
-        alert(error);
-    }
-    if (loading) {
-        return <Loader />;
-    }
-    return (
-        <>
-            <DashboardNavbar />
-            <div className="dashboardContainer">
-                <div className="basicInfo">
-                    <Profile />
-                    <StandUp />
-                </div>
-                <div className="sectionContainer">
-                    {user.managerAccess ? (
-                        <div className="section teamStandUpList">
-                            <h1>Team</h1>
-                            <Team />
-                            {/* <TeamForm type="Add" />
+  const [loading, user, error] = useFetchEmployeeData();
+  if (error) {
+    alert(error);
+  }
+  if (loading) {
+    return <Loader />;
+  }
+  return (
+    <>
+      <DashboardNavbar />
+      <div className="dashboardContainer">
+        <div className="basicInfo">
+          <Profile />
+          <StandUp />
+        </div>
+        <div className="sectionContainer">
+          {user.managerAccess ? (
+            <div className="section teamStandUpList">
+              <h1>Team</h1>
+              <Team />
+              {/* <TeamForm type="Add" />
                             <TeamForm type="Delete" /> */}
-                        </div>
-                    ) : null}
-                    <div className="section">
-                        <h1>Jira</h1>
-                        <JiraDashboard />
-                    </div>
-                    <div className="section">
-                        <h1>Gitlab</h1>
-                        <GitlabDashboard user={user} />
-                    </div>
-                </div>
             </div>
-        </>
-    );
+          ) : null}
+          <div className="section">
+            <h1>Jira</h1>
+            <JiraDashboard />
+          </div>
+          <div className="section">
+            <h1>Gitlab</h1>
+            <GitlabDashboard user={user} />
+          </div>
+        </div>
+      </div>
+      <NotificationContainer />
+    </>
+  );
 }
