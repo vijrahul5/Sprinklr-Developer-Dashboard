@@ -5,8 +5,15 @@
 }
 
 :root {
-  --color-primary: black;
+  --color-primary: rgb(12, 102, 194);
+  --color-secondary: #eeeeee;
+  --color-nav: rgb(12, 102, 194);
+  --color-widget: white;
   --font-primary: system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --border: 4px solid var(--color-primary);
+  --border-radius: 7px;
+  --shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  --padding: 1rem;
 }
 html {
   font-size: 100%;
@@ -76,11 +83,15 @@ body,
 }
 
 .sidebar {
-  background-color: var(--color-primary);
+  background-color: var(--color-nav);
+  width: 100%;
   height: 3.5rem;
   display: flex;
   justify-content: start;
   align-items: center;
+  position: fixed;
+  top: 0;
+  z-index: 10;
 }
 .sidebar h1 {
   all: unset;
@@ -91,86 +102,24 @@ body,
   margin: 0px !important;
 }
 
-.menu-bars {
-  margin-left: 2rem;
-  font-size: 2rem;
-  background: none;
-}
-
-.sidebar-menu {
-  background-color: var(--color-primary);
-  width: 250px;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  position: fixed;
-  top: 0;
-  left: -100%;
-  transition: 850ms;
-}
-
-.sidebar-menu.active {
-  left: 0;
-  transition: 350ms;
-}
-
-.sidebar-text {
-  display: flex;
-  justify-content: ce;
-  align-items: center;
-  padding: 8px 0px 8px 16px;
-  list-style: none;
-  height: 60px;
-}
-
-.sidebar-text a {
-  text-decoration: none;
-  color: #f5f5f5;
-  font-size: 18px;
-  width: 95%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  padding: 0 16px;
-  border-radius: 4px;
-}
-
-.sidebar-text a:hover {
-  background-color: white;
-  color: var(--color-primary);
-}
-
-.sidebar-menu-items {
-  width: 100%;
-}
-
-.sidebar-toggle {
-  background-color: var(--color-primary);
-  width: 100%;
-  height: 80px;
-  display: flex;
-  justify-content: start;
-  align-items: center;
-}
-
-span {
-  margin-left: 16px;
-}
 .teamStandUpList {
   width: 100%;
   min-height: 40rem;
   overflow: scroll;
   margin: 0rem auto;
-  padding: 1rem;
-  border-top: 4px solid black;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 2rem;
+  border-top: var(--border);
+  box-shadow: var(--shadow);
   grid-area: teamList;
+  background-color: var(--color-widget);
+  border-radius: var(--border-radius);
 }
 .teamStandUpList ul {
   list-style: none;
   padding: 1rem;
   margin-bottom: 1rem;
-  background-color: #eeeeee;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
 }
 .teamStandUpList ul li {
   display: flex;
@@ -181,20 +130,26 @@ span {
 .teamStandUpList ul .param {
   width: 40%;
   font-weight: 500;
+  text-decoration: underline;
 }
 .teamStandUpList ul .value {
   width: 60%;
   /* word-break: break-all; */
-  background-color: white;
+  background-color: var(--color-secondary);
   padding: 0.5rem;
+  border-radius: var(--border-radius);
+}
+.teamFormModal {
 }
 .teamForm {
   width: 100%;
-  height: auto;
   margin: 0rem auto;
-  border-top: 4px solid black;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-top: var(--border);
+  box-shadow: var(--shadow);
   padding: 1rem;
+  background-color: var(--color-widget);
+  border-radius: var(--border-radius);
+  max-height: 8rem;
 }
 .teamForm div {
   width: 100%;
@@ -206,9 +161,7 @@ span {
   display: block;
   width: 100%;
 }
-.teamForm .submit {
-  margin-left: 1rem;
-}
+
 #teamFormAdd {
   grid-area: teamForm1;
 }
@@ -216,14 +169,16 @@ span {
   grid-area: teamForm2;
 }
 .standUpForm {
-  border-top: 4px solid black;
+  border-radius: var(--border-radius);
   width: 100%;
-  height: 100%;
+  height: fit-content;
   padding: 1rem;
   margin: auto;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  box-shadow: var(--shadow);
   font-size: 0.8rem;
   grid-area: standup;
+  background-color: var(--color-widget);
+  border-top: var(--border);
 }
 .standUpForm input {
   display: block;
@@ -236,40 +191,40 @@ span {
 }
 .profile {
   width: 100%;
-  height: 100%;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-top: 4px solid black;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  box-shadow: var(--shadow);
   margin: auto;
   grid-area: profile;
-  padding: 0.5rem 0px;
+  padding: 1rem 1rem;
+  background-color: var(--color-widget);
+  border-radius: var(--border-radius);
+  margin-bottom: 1.5rem;
+  border-top: var(--border);
 }
-hr {
-  border: 0;
-  clear: both;
-  display: block;
-  width: 96%;
-  background-color: blue;
-  height: 1px;
-}
+
 .profile .img-holder {
   width: 7rem;
   height: 7rem;
-  border: 0.1rem solid black;
   object-fit: cover;
+  border-radius: 70px;
+  margin: 0px auto;
+  margin-bottom: 0.5rem;
+  border: 2px solid white;
 }
 .profile img {
   height: 100%;
   width: 100%;
+  border-radius: 70px;
 }
 .profile ul {
   width: 100%;
-  height: 40%;
   list-style: none;
-  margin-top: 1rem;
+  padding: 0.5rem 0px;
+  border-radius: var(--border-radius);
 }
 .profile li {
   color: black;
@@ -278,16 +233,24 @@ hr {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin-bottom: 0.1rem;
+  padding: 0px 1rem;
+  margin-bottom: 0.5rem;
 }
 .profile .param {
-  width: 20%;
+  width: 25%;
   margin-right: 3px;
   font-weight: 500;
   float: left;
+  text-decoration: underline;
 }
 .profile .value {
-  width: 60%;
+  width: 75%;
+  word-break: break-all;
+  background-color: var(--color-widget);
+  padding: 0.5rem;
+  border-radius: var(--border-radius);
+  margin-left: 1rem;
+  background-color: var(--color-secondary);
 }
 .loader {
   width: 100%;
@@ -298,44 +261,105 @@ hr {
   align-items: center;
 }
 #jiraAuth {
-  width: 60%;
-  height: fit-content;
+  width: 80%;
+  height: 80%;
   margin: 0px auto;
   padding: 1rem;
-  box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
-  border-top: 4px solid black;
+  box-shadow: var(--shadow);
+  border-top: var(--border);
+  border-radius: var(--border-radius);
   grid-area: jira;
 }
-#jiraTableView {
+#basicInfo {
+  width: 25%;
+  position: fixed;
+  margin-right: 2rem;
+  margin-top: 3rem;
   padding: 1rem;
-  /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
-  /* border-top: 4px solid black; */
+  height: 90vh;
+}
+#teamContainer h1 {
+  color: var(--color-primary);
+  grid-area: teamHeading;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--color-primary);
+  margin-bottom: 2rem;
+  font-weight: 300;
+}
+#jiraContainer h1 {
+  color: var(--color-primary);
+  grid-area: jiraHeading;
+  padding-bottom: 0.5rem;
+  margin-bottom: 4rem;
+  border-bottom: 2px solid var(--color-primary);
+  font-weight: 300;
+}
+#gitlabContainer h1 {
+  color: var(--color-primary);
+  grid-area: gitlabHeading;
+  padding-bottom: 0.5rem;
+  margin-bottom: 4rem;
+  border-bottom: 2px solid var(--color-primary);
+  font-weight: 300;
+}
+
+#teamContainer {
+  display: grid;
+  width: 100%;
+  height: 85vh;
+  min-height: fit-content;
+  grid-template-columns: 1fr 0.6fr;
+  grid-template-rows: 1fr 2fr 2fr 20fr;
+  grid-template-areas:
+    "teamHeading teamHeading"
+    "teamList teamForm1"
+    "teamList teamForm2"
+    "teamList blank";
+  grid-gap: 2rem;
+  margin-bottom: 5rem;
+}
+#jiraContainer {
+  width: 100%;
+  min-height: 85vh;
+  margin-bottom: 5rem;
+}
+#gitlabContainer {
+  width: 100%;
+  min-height: 85vh;
+  margin-bottom: 5rem;
+}
+#sectionContainer {
+  margin-top: 3rem;
+  margin-left: 28%;
+  width: 75%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
 }
 .dashboardContainer {
-  display: grid;
-  width: 100vw;
-  height: 100vh;
-  grid-template-columns: 0.4fr 1fr 0.6fr;
-  grid-template-areas:
-    "profile jira teamList"
-    "standup jira teamList"
-    "standup gitlab teamList"
-    "standup gitlab teamList"
-    "teamForm1 gitlab links"
-    "teamForm2 gitlab links"
-    "k k k";
-  grid-gap: 1.5rem;
-  padding: 1.5rem;
+  display: flex;
+  padding: 2rem;
+  padding-left: 1rem;
 }
 #jiraTable {
   grid-area: jira;
   width: 100%;
-  min-height: 40rem;
-  overflow: scroll;
-  margin: 0rem auto;
   padding: 1rem;
-  border-top: 4px solid black;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-top: var(--border);
+  box-shadow: var(--shadow);
+  background-color: var(--color-widget);
+  border-radius: var(--border-radius);
+}
+#gitlabTable {
+  grid-area: gitlab;
+  width: 100%;
+
+  padding: 1rem;
+  border-top: var(--border);
+  box-shadow: var(--shadow);
+  background-color: var(--color-widget);
+  border-radius: var(--border-radius);
+  table-layout: auto;
 }
 #table {
   width: 100%;
@@ -354,29 +378,19 @@ hr {
 .mb12 {
   margin-bottom: 0.5rem;
 }
-.ml1 {
-  margin-left: 1rem;
-}
+
 .jp {
   width: 25px;
   height: 25px;
-  display: flex;
-  margin: auto 1rem;
-}
-.jp__description {
-  display: none;
-}
-.jp:hover + .jp__description {
-  display: block;
-  position: absolute;
 }
 .jiraauthHeading {
-  margin-bottom: 2rem;
+  margin-bottom: 10rem;
   text-align: center;
   font-size: 2rem;
   font-weight: 250;
 }
 .authbtn {
+  margin-top: 10rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -389,95 +403,120 @@ hr {
   color: blue;
   text-decoration: underline;
 }
-.gitlab {
-  grid-area: gitlab;
-}
-
-#start-div {
-  display: block;
-}
-.gitlab button {
-  margin: 2rem 0;
-  padding: 1rem 2rem;
-  width: 120px;
-  cursor: pointer;
-  background-color: black;
+.btnCustom {
+  background-color: var(--color-primary) !important;
   color: white;
-  margin: 60px;
+  border-radius: var(--border-radius) !important;
+}
+.inputCustom {
+  border-radius: var(--border-radius) !important;
+  color: black;
 }
 
-.gitlab img {
-  width: 120px;
-}
-.gitlab .App {
-  text-align: center;
-}
-
-.gitlab .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.gitlab .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.requestForm {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  width: 100%;
+  margin: 0rem auto;
+  border-top: var(--border);
+  box-shadow: var(--shadow);
+  padding: 1rem;
+  background-color: var(--color-widget);
+  border-radius: var(--border-radius);
+  max-height: 8rem;
+  margin-bottom: 1.5rem;
 }
 
-.gitlab .App-link {
-  color: #61dafb;
+.ml1 {
+  margin-left: 1rem !important;
 }
+
 @media only screen and (max-width: 1350px) {
   html {
     font-size: 90%;
   }
   .dashboardContainer {
-    grid-template-columns: 0.6fr 1fr 1fr;
-    grid-template-areas:
-      "profile standup teamList"
-      "links standup teamList"
-      "links teamForm1 teamList"
-      "links teamForm2 teamList"
-      "jira jira jira"
-      "gitlab gitlab gitlab";
+    display: block;
+    padding: 3rem;
+  }
+  #basicInfo {
+    margin: 0px;
+    position: unset;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+    width: 100%;
+    background-color: var(--color-widget);
+    padding: 0rem;
+    height: fit-content;
+  }
+  #sectionContainer {
+    width: 100%;
+    height: 100vh;
+    margin-left: 0px;
+  }
+  .profile {
+    margin: 0px;
+    margin-right: 2rem;
+    width: 50%;
+    height: 50%;
+    border-top: var(--border);
+  }
+  .standUpForm {
+    border-top: var(--border);
   }
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 950px) {
   html {
-    font-size: 85%;
+    font-size: 90%;
   }
   .dashboardContainer {
-    grid-template-columns: 0.8fr 1fr;
+    padding: 2rem;
+  }
+  #teamContainer {
+    grid-template-columns: 1fr 1fr;
     grid-template-areas:
-      "profile teamList"
-      "standup teamList"
-      "teamForm1 links"
-      "teamForm2 links"
-      " jira jira"
-      " gitlab gitlab";
+      "teamHeading teamHeading"
+      "teamList teamList"
+      "teamForm1 teamForm2";
+    grid-gap: 2rem;
+    margin-bottom: 5rem;
+  }
+  #basicInfo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .profile {
+    margin: 0px;
+    margin-bottom: 2rem;
+    width: 60%;
   }
 }
 
 @media only screen and (max-width: 650px) {
   html {
-    font-size: 90%;
+    font-size: 85%;
   }
   .dashboardContainer {
-    grid-template-columns: 1fr 1fr;
+    padding: 1rem;
+  }
+  #teamContainer {
+    height: 95vh;
+    grid-template-columns: 1fr;
     grid-template-areas:
-      "profile teamForm1"
-      "profile teamForm2"
+      "teamHeading teamHeading"
       "teamList teamList"
-      "standup standup"
-      "links links"
-      " jira jira"
-      " gitlab gitlab";
+      "teamForm1 teamForm1"
+      "teamForm2 teamForm2";
+    grid-gap: 2rem;
+    margin-bottom: 5rem;
+  }
+  .profile {
+    width: 80%;
   }
 }

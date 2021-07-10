@@ -12,7 +12,9 @@ const {
     postStandUp,
     updateStandUp,
     deleteStandUp,
+    getManagerAccess,
 } = require("../controller/employeeController");
+const employeeModel = require("../model/employeeModel");
 
 employeeRouter
     .route("/profile")
@@ -27,5 +29,7 @@ employeeRouter
     .delete(deleteStandUp);
 
 employeeRouter.route("/team").get(getTeam).post(postTeam).delete(deleteTeam);
+
+employeeRouter.route("/manageraccess").get(getManagerAccess);
 
 module.exports = employeeRouter;

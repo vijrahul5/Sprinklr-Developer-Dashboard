@@ -18,7 +18,8 @@ async function configureConnection() {
   } else {
     NotificationManager.error(
       "Server Error",
-      "Can't bind to notification channel"
+      "Can't bind to notification channel",
+      notificationDisplayTime
     );
   }
 

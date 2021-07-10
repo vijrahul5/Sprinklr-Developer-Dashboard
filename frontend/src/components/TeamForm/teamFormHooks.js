@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import axios from "axios";
 
 export const useUpdateEmployeeTeam = function () {
@@ -6,12 +6,11 @@ export const useUpdateEmployeeTeam = function () {
     const [addError, setAddError] = useState(false);
     const [deleteError, setDeleteError] = useState(false);
 
-    const addTeamMember = async function (data) {
+    const addTeamMember = useCallback(async function (data) {
         try {
             const res = await axios.post("/api/employee/team", data);
             if (res.data.status === "Success") {
                 alert("Team Member Added");
-                window.location.reload();
             } else {
                 throw new Error(res.data.status);
             }
@@ -19,16 +18,15 @@ export const useUpdateEmployeeTeam = function () {
             setAddError(err.message);
             alert(err.message);
         }
-    };
+    }, [setAddError]);
 
-    const deleteTeamMember = async function (data) {
+    const deleteTeamMember = useCallback(async function (data) {
         try {
             const res = await axios.delete("/api/employee/team", {
                 data: data,
             });
             if (res.data.status === "Success") {
                 alert("Team Member Deleted");
-                window.location.reload();
             } else {
                 throw new Error(res.data.status);
             }
@@ -36,7 +34,7 @@ export const useUpdateEmployeeTeam = function () {
             setDeleteError(err.message);
             alert(err.message);
         }
-    };
+    }, [setDeleteError]);
 
     return [addError, deleteError, addTeamMember, deleteTeamMember];
 };
