@@ -15,8 +15,7 @@ export const useFetchEmployeeTeamData = function () {
                 setData(res.data.teamStandUp);
                 setLoading(false);
             } else {
-                setLoading(false);
-                setError("Employee Team Not Found");
+                throw new Error("Employee Team Not Found");
             }
         } catch (err) {
             setLoading(false);

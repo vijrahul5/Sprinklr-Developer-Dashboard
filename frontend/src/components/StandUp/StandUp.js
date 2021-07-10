@@ -1,5 +1,5 @@
 import React from "react";
-import Loader from "../../globalComponents/Loader/Loader";
+import Loader from "../../globalComponents/Loader/Tombstone";
 import { useState, useEffect, useCallback } from "react";
 import {
     useFetchEmployeeStandUp,

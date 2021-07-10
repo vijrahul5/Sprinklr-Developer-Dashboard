@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { Table as Tablebody, DIVIDER } from "baseui/table-semantic";
 import { Pagination as TableFooter } from "baseui/pagination";
-import Loader from "../../globalComponents/Loader/Loader";
+import Loader from "../../globalComponents/Loader/Tombstone";
 import PropTypes from "prop-types";
 const Table = ({
   data,

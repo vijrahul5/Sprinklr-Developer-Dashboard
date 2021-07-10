@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TeamMember from "./TeamMember";
-import Loader from "../../globalComponents/Loader/Loader";
+import Loader from "../../globalComponents/Loader/Tombstone";
 import { useFetchEmployeeTeamData } from "./teamHooks";
 import { Heading, HeadingLevel } from "baseui/heading";
 import { BiAddToQueue } from "react-icons/bi";

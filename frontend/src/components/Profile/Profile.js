@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Loader from "../../globalComponents/Loader/Loader";
+import Loader from "../../globalComponents/Loader/Tombstone";
 import { useFetchEmployeeData, useRequestManagerAccess } from "./profileHooks";
 import { Button, SIZE } from "baseui/button";
 import NotificationManager from "react-notifications/lib/NotificationManager";

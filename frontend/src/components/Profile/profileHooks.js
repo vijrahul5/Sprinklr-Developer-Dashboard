@@ -17,8 +17,7 @@ export const useFetchEmployeeData = function () {
                     setData(res.data.employee);
                     setLoading(false);
                 } else {
-                    setLoading(false);
-                    setError("Sign In First");
+                    throw new Error("Sign In First");
                 }
             } catch (err) {
                 setLoading(false);
@@ -52,7 +51,7 @@ export const useRequestManagerAccess = function () {
                     );
                     window.location.reload();
                 } else {
-                    setRequestError("Request Rejected!");
+                    throw new Error("Request Rejected !");
                 }
             } catch (err) {
                 setRequestError(err.message);
