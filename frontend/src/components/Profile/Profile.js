@@ -1,18 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Loader from "../../globalComponents/Loader/Loader";
 import { useFetchEmployeeData, useRequestManagerAccess } from "./profileHooks";
 import { Button, SIZE } from "baseui/button";
+import NotificationManager from "react-notifications/lib/NotificationManager";
 
 function Profile() {
     const [loading, data, error] = useFetchEmployeeData(); // Fetches employee data using a custom hook
     const [requestError, requestManagerAccess] = useRequestManagerAccess();
 
-    if (error) {
-        alert(error);
-    }
-    if (requestError) {
-        alert(requestError);
-    }
+    useEffect(() => {
+        if (error) NotificationManager.error("Error!", error, 5000);
+    }, [error]);
+
+    useEffect(() => {
+        if (requestError)
+            NotificationManager.error("Error!", requestError, 5000);
+    }, [requestError]);
 
     if (loading) {
         return (

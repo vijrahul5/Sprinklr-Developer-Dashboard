@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-
 export const useVerifyRoute = function (type) {
     // Used to verify with the backend server if the employee has access to this public route or not
     const [loading, setLoading] = useState(true);
@@ -9,6 +8,7 @@ export const useVerifyRoute = function (type) {
 
     useEffect(() => {
         (async function () {
+            setError(false);
             try {
                 const res = await axios.get("/api/auth/verify");
                 if (type === "Public") {
@@ -21,7 +21,7 @@ export const useVerifyRoute = function (type) {
                     if (res.data.status === "Success") {
                         setLoading(false);
                     } else {
-                        window.location.replace("/signin");
+                        window.location.replace("/");
                     }
                 }
             } catch (err) {

@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
+import NotificationManager from "react-notifications/lib/NotificationManager";
 
 export const useFetchEmployeeData = function () {
     // Fetches Employee Data from the backend server
@@ -9,6 +10,7 @@ export const useFetchEmployeeData = function () {
 
     const apiCall = useCallback(
         async function () {
+            setError(false);
             try {
                 const res = await axios.get("/api/employee/profile");
                 if (res.data.status === "Success") {
@@ -39,13 +41,18 @@ export const useRequestManagerAccess = function () {
 
     const requestManagerAccess = useCallback(
         async function () {
+            setRequestError(false);
             try {
                 const res = await axios.get("/api/employee/manageraccess");
                 if (res.data.status === "Success") {
-                    alert("Request Granted !");
+                    NotificationManager.success(
+                        "Success!",
+                        "Request Granted!",
+                        5000
+                    );
                     window.location.reload();
                 } else {
-                    setRequestError(res.data.status);
+                    setRequestError("Request Rejected!");
                 }
             } catch (err) {
                 setRequestError(err.message);

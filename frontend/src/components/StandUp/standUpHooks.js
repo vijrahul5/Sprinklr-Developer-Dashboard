@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import NotificationManager from "react-notifications/lib/NotificationManager";
 import axios from "axios";
 
 export const useFetchEmployeeStandUp = function () {
@@ -10,6 +11,7 @@ export const useFetchEmployeeStandUp = function () {
     const apiCall = useCallback(
         async function () {
             try {
+                setError(false);
                 const res = await axios.get("/api/employee/standup");
                 if (res.data.status === "Success") {
                     setLoading(false);
@@ -19,6 +21,7 @@ export const useFetchEmployeeStandUp = function () {
                 }
             } catch (err) {
                 setError(err.message);
+                setLoading(false);
             }
         },
         [setLoading, setData, setError]
@@ -28,7 +31,7 @@ export const useFetchEmployeeStandUp = function () {
         apiCall();
     }, [loading]);
 
-    return [loading, data, error,setLoading];
+    return [loading, data, error, setLoading];
 };
 
 export const useUpdateEmployeeStandUp = function () {
@@ -38,10 +41,15 @@ export const useUpdateEmployeeStandUp = function () {
 
     const addStandUp = useCallback(
         async function (data) {
+            setAddError(false);
             try {
                 const res = await axios.post("/api/employee/standup", data);
                 if (res.data.status === "Success") {
-                    alert("Stand Up Submitted Successfully");
+                    NotificationManager.success(
+                        "Success!",
+                        "Stand Up Submitted Successfully",
+                        5000
+                    );
                 } else {
                     throw new Error(res.data.status);
                 }
@@ -54,10 +62,15 @@ export const useUpdateEmployeeStandUp = function () {
 
     const editStandUp = useCallback(
         async function (data) {
+            setEditError(false);
             try {
                 const res = await axios.patch("/api/employee/standup", data);
                 if (res.data.status === "Success") {
-                    alert("Stand Up Edited Successfully");
+                    NotificationManager.success(
+                        "Success!",
+                        "Stand Up Edited Successfully !",
+                        5000
+                    );
                 } else {
                     throw new Error(res.data.status);
                 }

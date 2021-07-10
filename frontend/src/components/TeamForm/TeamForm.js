@@ -6,6 +6,7 @@ import { FormControl } from "baseui/form-control";
 import { Input } from "baseui/input";
 import { Button, SIZE } from "baseui/button";
 import { RiCloseCircleLine } from "react-icons/ri";
+import NotificationManager from "react-notifications/lib/NotificationManager";
 
 function TeamForm({
     type,
@@ -15,6 +16,7 @@ function TeamForm({
     setLoading,
 }) {
     const [value, setValue] = useState({ employeeEmail: "" });
+    const [didUpdate, setDidUpdate] = useState(false);
     const [addError, deleteError, addTeamMember, deleteTeamMember] =
         useUpdateEmployeeTeam(); // Provides functions for adding or deleting a team member
 
@@ -22,34 +24,39 @@ function TeamForm({
         if (email) setValue({ employeeEmail: email });
     }, [email]);
 
-    if (deleteError) {
-        alert(deleteError);
-    }
-    if (addError) {
-        alert(addError);
-    }
+    useEffect(() => {
+        if (deleteError) NotificationManager.error("Error!", deleteError, 5000);
+    }, [deleteError]);
 
+    useEffect(() => {
+        if (addError) NotificationManager.error("Error!", addError, 5000);
+    }, [addError]);
+
+    function checkFieldEmpty() {
+        for (let key in value) {
+            if (value[key] === "") {
+                NotificationManager.error(
+                    "Error",
+                    "Fields Cannot Be Empty !",
+                    5000
+                );
+                return true;
+            }
+        }
+        return false;
+    }
     async function handleSubmit(e) {
         // Event listener for adding a team member
         e.preventDefault();
-        for (let key in value) {
-            if (value[key] === "") {
-                alert("Please Fill In All The Fields");
-                return;
-            }
-        }
+        if (checkFieldEmpty()) return;
+        setValue({ employeeEmail: "" });
         if (type === "Add") addTeamMember(value);
         else if (type === "Delete") deleteTeamMember(value);
-        setValue({ employeeEmail: "" });
-        setLoading(true);
-        if (type === "Add") {
-            setAddTeamMember(false);
-        } else {
-            setDeleteTeamMember(false);
-        }
+        setDidUpdate(true);
     }
 
     function handleClose() {
+        if (didUpdate) setLoading(true);
         if (type === "Add") {
             setAddTeamMember(false);
         } else {

@@ -4,7 +4,7 @@ import GetIssuesApi from "../components/GetIssuesApi";
 import JiraTableBuilder from "../components/JiraTableBuilder";
 
 const { getIssues } = GetIssuesApi();
-const EntryPerPage = 5;
+const EntryPerPage = 9;
 
 const useGetJiraData = (jql) => {
   const [pageNumber, setPageNumber] = useState(1);

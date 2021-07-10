@@ -8,6 +8,7 @@ export const useFetchEmployeeTeamData = function () {
     const [error, setError] = useState(false);
 
     const apiCall = useCallback(async function () {
+        setError(false);
         try {
             const res = await axios.get("/api/employee/team");
             if (res.data.status === "Success") {
@@ -27,5 +28,5 @@ export const useFetchEmployeeTeamData = function () {
         apiCall();
     }, [loading]);
 
-    return [loading, data, error,setLoading];
+    return [loading, data, error, setLoading];
 };

@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TeamMember from "./TeamMember";
 import Loader from "../../globalComponents/Loader/Loader";
 import { useFetchEmployeeTeamData } from "./teamHooks";
 import { Heading, HeadingLevel } from "baseui/heading";
 import { BiAddToQueue } from "react-icons/bi";
 import TeamForm from "../TeamForm/TeamForm";
+import NotificationManager from "react-notifications/lib/NotificationManager";
 
 function Team() {
     // Component for accessing team data and their stand ups
@@ -17,10 +18,11 @@ function Team() {
         setDeleteTeamMemberEmail(email);
         setDeleteTeamMember(true);
     }
-
-    if (error) {
-        alert(error);
-    }
+    useEffect(() => {
+        if (error) {
+            NotificationManager.error("Error!", error, 5000);
+        }
+    }, [error]);
 
     if (loading) {
         return <Loader />;
@@ -34,7 +36,7 @@ function Team() {
                 />
             </div>
             <ul>
-                {data.length ? (
+                {data && data.length ? (
                     data.map((teamMember) => {
                         return (
                             <li key={teamMember.email}>

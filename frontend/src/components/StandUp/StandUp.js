@@ -10,6 +10,7 @@ import { Button } from "baseui/button";
 import { Textarea } from "baseui/textarea";
 import { SIZE } from "baseui/input";
 import { AiOutlineCheckCircle } from "react-icons/ai";
+import NotificationManager from "react-notifications/lib/NotificationManager";
 
 function StandUp() {
     // Component for Stand Up message submission or editing
@@ -19,7 +20,7 @@ function StandUp() {
         question3: "",
     });
 
-    const [loading, data, error,setLoading] = useFetchEmployeeStandUp(); // Fetches employee's stand up for the day
+    const [loading, data, error, setLoading] = useFetchEmployeeStandUp(); // Fetches employee's stand up for the day
     const [addError, editError, addStandUp, editStandUp] =
         useUpdateEmployeeStandUp(); // Provides functions for adding or deleting stand up
 
@@ -32,20 +33,26 @@ function StandUp() {
             });
     }, [data]);
 
-    if (error) {
-        alert(error);
-    }
-    if (addError) {
-        alert(addError);
-    }
-    if (editError) {
-        alert(editError);
-    }
+    useEffect(() => {
+        if (error) NotificationManager.error("Error", error, 5000);
+    }, [error]);
+
+    useEffect(() => {
+        if (addError) NotificationManager.error("Error", addError, 5000);
+    }, [addError]);
+
+    useEffect(() => {
+        if (editError) NotificationManager.error("Error", editError, 5000);
+    }, [editError]);
 
     function checkFieldEmpty() {
         for (let key in value) {
             if (value[key] === "") {
-                alert("Please Fill In All The Fields");
+                NotificationManager.error(
+                    "Error",
+                    "Fields Cannot Be Empty !",
+                    5000
+                );
                 return true;
             }
         }
@@ -92,7 +99,7 @@ function StandUp() {
             >
                 {data ? (
                     <div className="standUp__success">
-                        <AiOutlineCheckCircle className="standUp__success__icon"/>
+                        <AiOutlineCheckCircle className="standUp__success__icon" />
                         <h3>Submitted!</h3>
                     </div>
                 ) : null}
@@ -104,6 +111,13 @@ function StandUp() {
                         onChange={changeValue}
                         placeholder="Answer"
                         size={SIZE.mini}
+                        overrides={{
+                            Root: {
+                                style: ({ $theme }) => ({
+                                    borderRadius: "4px",
+                                }),
+                            },
+                        }}
                     />
                 </FormControl>
                 <FormControl label={() => "What is the agenda for today ?"}>
@@ -114,6 +128,13 @@ function StandUp() {
                         onChange={changeValue}
                         placeholder="Answer"
                         size={SIZE.mini}
+                        overrides={{
+                            Root: {
+                                style: ({ $theme }) => ({
+                                    borderRadius: "4px",
+                                }),
+                            },
+                        }}
                     />
                 </FormControl>
                 <FormControl label={() => "What work has been done today?"}>
@@ -124,6 +145,13 @@ function StandUp() {
                         onChange={changeValue}
                         placeholder="Answer"
                         size={SIZE.mini}
+                        overrides={{
+                            Root: {
+                                style: ({ $theme }) => ({
+                                    borderRadius: "4px",
+                                }),
+                            },
+                        }}
                     />
                 </FormControl>
                 <Button
