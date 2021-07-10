@@ -51,7 +51,7 @@ const Widgetjira = () => {
         [filterValue]
     );
     return (
-        <div id="jiraTable">
+        <div >
             <div id="jiraJqlContainer">
                 <Input
                     value={inputValue}

@@ -25,7 +25,7 @@ export const useFetchEmployeeTeamData = function () {
 
     useEffect(() => {
         apiCall();
-    }, []);
+    }, [loading]);
 
-    return [loading, data, error];
+    return [loading, data, error,setLoading];
 };

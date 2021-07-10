@@ -21,9 +21,7 @@ const GitlabProfile = (props) => {
         return <Button onClick={buttonClick}>Get Gitlab Data</Button>;
     }
     return (
-        <div id="gitlabTable">
-            <h1>Gitlab</h1>
-
+        <div >
             <Table
                 columns={[
                     "ProjectName",

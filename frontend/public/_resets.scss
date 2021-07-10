@@ -3,3 +3,14 @@
     margin: 0px;
     padding: 0px;
 }
+
+html {
+    font-size: 100%;
+    font-family: $font-primary;
+}
+
+html,
+body,
+#root {
+    height: 100%;
+}

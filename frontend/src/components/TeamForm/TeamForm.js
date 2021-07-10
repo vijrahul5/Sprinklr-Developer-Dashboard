@@ -5,18 +5,22 @@ import { useUpdateEmployeeTeam } from "./teamFormHooks";
 import { FormControl } from "baseui/form-control";
 import { Input } from "baseui/input";
 import { Button, SIZE } from "baseui/button";
+import { RiCloseCircleLine } from "react-icons/ri";
 
-function TeamForm({ type }) {
+function TeamForm({
+    type,
+    email,
+    setAddTeamMember,
+    setDeleteTeamMember,
+    setLoading,
+}) {
     const [value, setValue] = useState({ employeeEmail: "" });
-    const [loading, setLoading] = useState(true);
     const [addError, deleteError, addTeamMember, deleteTeamMember] =
         useUpdateEmployeeTeam(); // Provides functions for adding or deleting a team member
 
     useEffect(() => {
-        setTimeout(() => {
-            setLoading(false);
-        }, 1000);
-    }, []);
+        if (email) setValue({ employeeEmail: email });
+    }, [email]);
 
     if (deleteError) {
         alert(deleteError);
@@ -37,54 +41,61 @@ function TeamForm({ type }) {
         if (type === "Add") addTeamMember(value);
         else if (type === "Delete") deleteTeamMember(value);
         setValue({ employeeEmail: "" });
+        setLoading(true);
+        if (type === "Add") {
+            setAddTeamMember(false);
+        } else {
+            setDeleteTeamMember(false);
+        }
     }
 
-    if (loading) {
-        return (
-            <>
-                <form className="teamForm" id={`teamForm${type}`}>
-                    <Loader />
-                </form>
-            </>
-        );
+    function handleClose() {
+        if (type === "Add") {
+            setAddTeamMember(false);
+        } else {
+            setDeleteTeamMember(false);
+        }
     }
 
     return (
         <>
-            <form
-                className="teamForm"
-                onSubmit={handleSubmit}
-                id={`teamForm${type}`}
-            >
-                <FormControl
-                    label={() => `${type} Team Member`}
-                    className="form-control"
-                >
-                    <>
-                        <Input
-                            type="text"
-                            placeholder="Enter Email"
-                            name="employeeEmail"
-                            className="form-control"
-                            value={value.employeeEmail}
-                            onChange={(e) => {
-                                setValue({
-                                    ...value,
-                                    employeeEmail: e.currentTarget.value,
-                                });
-                            }}
-                            size={SIZE.compact}
+            <div className="teamForm">
+                <div className="teamForm__modal">
+                    <div className="teamForm__modal__close">
+                        <RiCloseCircleLine
+                            className="teamForm__modal__close__icon"
+                            onClick={handleClose}
                         />
-                        <Button
-                            type="submit"
-                            className="submit btnCustom ml1"
-                            size={SIZE.compact}
-                        >
-                            {type}
-                        </Button>
-                    </>
-                </FormControl>
-            </form>
+                    </div>
+                    <form onSubmit={handleSubmit}>
+                        <FormControl label={() => `${type} Team Member`}>
+                            <>
+                                <Input
+                                    type="text"
+                                    placeholder="Enter Email"
+                                    name="employeeEmail"
+                                    value={value.employeeEmail}
+                                    onChange={(e) => {
+                                        setValue({
+                                            ...value,
+                                            employeeEmail:
+                                                e.currentTarget.value,
+                                        });
+                                    }}
+                                    size={SIZE.compact}
+                                />
+                                <Button
+                                    type="submit"
+                                    className="submit btnCustom ml1"
+                                    size={SIZE.compact}
+                                >
+                                    {type}
+                                </Button>
+                            </>
+                        </FormControl>
+                    </form>
+                </div>
+            </div>
         </>
     );
 }

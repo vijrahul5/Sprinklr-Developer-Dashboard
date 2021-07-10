@@ -139,6 +139,9 @@ body,
     padding: 0.5rem;
     border-radius: var(--border-radius);
 }
+.teamFormModal{
+    
+}
 .teamForm {
     width: 100%;
     margin: 0rem auto;

@@ -1,35 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import TeamMember from "./TeamMember";
 import Loader from "../../globalComponents/Loader/Loader";
 import { useFetchEmployeeTeamData } from "./teamHooks";
 import { Heading, HeadingLevel } from "baseui/heading";
+import { BiAddToQueue } from "react-icons/bi";
+import TeamForm from "../TeamForm/TeamForm";
 
 function Team() {
     // Component for accessing team data and their stand ups
-    const [loading, data, error] = useFetchEmployeeTeamData(); // Fetches the logged in employee's team data and their stand ups
+    const [loading, data, error, setLoading] = useFetchEmployeeTeamData(); // Fetches the logged in employee's team data and their stand ups
+    const [addTeamMember, setAddTeamMember] = useState(false);
+    const [deleteTeamMember, setDeleteTeamMember] = useState(false);
+    const [deleteTeamMemberEmail, setDeleteTeamMemberEmail] = useState("");
+
+    function handleDeleteTeamMember(email) {
+        setDeleteTeamMemberEmail(email);
+        setDeleteTeamMember(true);
+    }
 
     if (error) {
         alert(error);
     }
 
     if (loading) {
-        return (
-            <ul className="teamStandUpList">
-                <Loader />
-            </ul>
-        );
+        return <Loader />;
     }
     return (
         <>
-            <h1>Team</h1>
+            <div className="teamStandUpList__add">
+                <BiAddToQueue
+                    className="teamStandUpList__add__icon"
+                    onClick={() => setAddTeamMember(true)}
+                />
+            </div>
             <ul>
                 {data.length ? (
                     data.map((teamMember) => {
                         return (
-                            <li>
+                            <li key={teamMember.email}>
                                 <TeamMember
-                                    key={teamMember.email}
                                     teamMember={teamMember}
+                                    handleDeleteTeamMember={
+                                        handleDeleteTeamMember
+                                    }
                                 />
                             </li>
                         );
@@ -49,6 +62,21 @@ function Team() {
                     </HeadingLevel>
                 )}
             </ul>
+            {addTeamMember ? (
+                <TeamForm
+                    type={"Add"}
+                    setAddTeamMember={setAddTeamMember}
+                    setLoading={setLoading}
+                />
+            ) : null}
+            {deleteTeamMember ? (
+                <TeamForm
+                    type={"Delete"}
+                    email={deleteTeamMemberEmail}
+                    setDeleteTeamMember={setDeleteTeamMember}
+                    setLoading={setLoading}
+                />
+            ) : null}
         </>
     );
 }

@@ -9,6 +9,7 @@ import { FormControl } from "baseui/form-control";
 import { Button } from "baseui/button";
 import { Textarea } from "baseui/textarea";
 import { SIZE } from "baseui/input";
+import { AiOutlineCheckCircle } from "react-icons/ai";
 
 function StandUp() {
     // Component for Stand Up message submission or editing
@@ -18,7 +19,7 @@ function StandUp() {
         question3: "",
     });
 
-    const [loading, data, error] = useFetchEmployeeStandUp(); // Fetches employee's stand up for the day
+    const [loading, data, error,setLoading] = useFetchEmployeeStandUp(); // Fetches employee's stand up for the day
     const [addError, editError, addStandUp, editStandUp] =
         useUpdateEmployeeStandUp(); // Provides functions for adding or deleting stand up
 
@@ -56,6 +57,7 @@ function StandUp() {
         if (checkFieldEmpty()) return;
         addStandUp(value);
         setValue({ question1: "", question2: "", question3: "" });
+        setLoading(true);
     }
 
     function handleEdit(e) {
@@ -63,8 +65,9 @@ function StandUp() {
         e.preventDefault();
         if (checkFieldEmpty()) return;
         editStandUp(value);
+        setLoading(true);
     }
-    
+
     const changeValue = useCallback(
         (e) => {
             let valueName = e.currentTarget.name;
@@ -87,6 +90,12 @@ function StandUp() {
                 className="standUp"
                 onSubmit={data ? handleEdit : handleSubmit}
             >
+                {data ? (
+                    <div className="standUp__success">
+                        <AiOutlineCheckCircle className="standUp__success__icon"/>
+                        <h3>Submitted!</h3>
+                    </div>
+                ) : null}
                 <FormControl label={() => "What work was done yesterday ?"}>
                     <Textarea
                         value={value.question1}

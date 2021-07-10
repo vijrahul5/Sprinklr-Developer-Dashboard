@@ -26,9 +26,9 @@ export const useFetchEmployeeStandUp = function () {
 
     useEffect(() => {
         apiCall();
-    }, []);
+    }, [loading]);
 
-    return [loading, data, error];
+    return [loading, data, error,setLoading];
 };
 
 export const useUpdateEmployeeStandUp = function () {

@@ -1,14 +1,14 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { AppNavBar } from "baseui/app-nav-bar";
 import { TriangleRight } from "baseui/icon";
 
-export default function Navbar() {
-    const [mainItems, setMainItems] = React.useState([
-        { icon: TriangleRight, label: "Home", link: "/" },
-        { icon: TriangleRight, label: "SignIn", link: "/signin" },
+export default function Navbar({ setSignIn }) {
+    console.log(setSignIn);
+    const [mainItems, setMainItems] = useState([
+        { icon: TriangleRight, label: "SignIn" },
     ]);
     function handleMainItemSelect(item) {
-        window.location.replace(item.link);
+        setSignIn(true);
     }
     return (
         <AppNavBar
