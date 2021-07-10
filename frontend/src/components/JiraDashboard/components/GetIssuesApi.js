@@ -9,9 +9,13 @@ const GetIssuesApi = () => {
     };
     let response = await axios.post("/api/jira/getDataByJql", data);
     if (response.data.status === "Failed") {
-      return null;
+      return {
+        status: "Failed",
+        error: response.data.error,
+      };
     }
     return {
+      status: "Success",
       details: response.data.data,
       jiraBaseUrl: response.data.jiraBaseUrl,
     };

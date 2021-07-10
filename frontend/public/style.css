@@ -360,6 +360,15 @@ hr {
 .jp {
   width: 25px;
   height: 25px;
+  display: flex;
+  margin: auto 1rem;
+}
+.jp__description {
+  display: none;
+}
+.jp:hover + .jp__description {
+  display: block;
+  position: absolute;
 }
 .jiraauthHeading {
   margin-bottom: 2rem;

@@ -1,13 +1,12 @@
 const employeeModel = require("../model/employeeModel");
-const url_refresh_token = "https://auth.atlassian.com/oauth/token";
-const url_cloud_id =
-  "https://api.atlassian.com/oauth/token/accessible-resources";
-const url_access_token = "https://auth.atlassian.com/oauth/token";
+const urlRefreshToken = "https://auth.atlassian.com/oauth/token";
+const urlCloudId = "https://api.atlassian.com/oauth/token/accessible-resources";
+const urlAccessToken = "https://auth.atlassian.com/oauth/token";
 const fetch = require("node-fetch");
 require("dotenv").config();
 
 async function setupJira(req, res) {
-  const auth_code = req.body.auth_code;
+  const authCode = req.body.authCode;
   const email = req.email;
 
   try {
@@ -17,13 +16,13 @@ async function setupJira(req, res) {
     if (!employee) {
       throw new Error("can't get employee");
     }
-    if (auth_code && email) {
-      let data = await fetch(url_refresh_token, {
+    if (authCode && email) {
+      let data = await fetch(urlRefreshToken, {
         body: JSON.stringify({
           grant_type: "authorization_code",
           client_id: process.env.JIRA_CLIENT_ID,
           client_secret: process.env.JIRA_CLIENT_SECRET,
-          code: auth_code,
+          code: authCode,
           redirect_uri: process.env.JIRA_REDIRECT_URL,
         }),
         headers: {
@@ -35,27 +34,26 @@ async function setupJira(req, res) {
       if (data.status >= 400) {
         throw new Error("Can't get refresh token");
       }
-      let dataJSON = await data.json();
-      let REFRESH_TOKEN = dataJSON.refresh_token;
-      let ACCESS_TOKEN = dataJSON.access_token;
+      let dataJson = await data.json();
+      let refreshToken = dataJson.refresh_token;
+      let accessToken = dataJson.access_token;
 
-      let cloudData = await fetch(url_cloud_id, {
+      let cloudData = await fetch(urlCloudId, {
         headers: {
           Accept: "application/json",
-          Authorization: `Bearer ${ACCESS_TOKEN}`,
+          Authorization: `Bearer ${accessToken}`,
         },
         method: "GET",
       });
       if (cloudData.status >= 400) {
         throw new Error("can't get cloud id");
       }
-      let cloudDataJSON = await cloudData.json();
-      let CLOUD_ID = cloudDataJSON[0].id;
-      await getBaseUrl(CLOUD_ID, email);
-      // await registerWebhoook(CLOUD_ID, ACCESS_TOKEN, email);
+      let cloudDataJson = await cloudData.json();
+      let cloudId = cloudDataJson[0].id;
+      await getBaseUrl(cloudId, email);
 
-      employee.refreshToken = REFRESH_TOKEN;
-      employee.cloudId = CLOUD_ID;
+      employee.refreshToken = refreshToken;
+      employee.cloudId = cloudId;
       employee.doneJiraAuth = true;
 
       await employee.save();
@@ -72,15 +70,14 @@ async function setupJira(req, res) {
     });
   }
 }
-
-async function getAccessToken(REFRESH_TOKEN) {
+async function getAccessToken(refreshToken) {
   try {
-    let data = await fetch(url_access_token, {
+    let data = await fetch(urlAccessToken, {
       body: JSON.stringify({
         grant_type: "refresh_token",
         client_id: process.env.JIRA_CLIENT_ID,
         client_secret: process.env.JIRA_CLIENT_SECRET,
-        refresh_token: REFRESH_TOKEN,
+        refresh_token: refreshToken,
       }),
       headers: {
         Accept: "application/json",
@@ -91,18 +88,18 @@ async function getAccessToken(REFRESH_TOKEN) {
     if (data.status >= 400) {
       throw new Error();
     }
-    let dataJSON = await data.json();
-    let ACCESS_TOKEN = dataJSON.access_token;
-    return ACCESS_TOKEN;
+    let dataJson = await data.json();
+    let accessToken = dataJson.access_token;
+    return accessToken;
   } catch {
     return -1;
   }
 }
-async function registerWebhoook(CLOUD_ID, ACCESS_TOKEN, email) {
-  const URL = `https://api.atlassian.com/ex/jira/${CLOUD_ID}/rest/api/2/webhook`;
+async function registerWebhoook(cloudId, accessToken, email) {
+  const url = `https://api.atlassian.com/ex/jira/${cloudId}/rest/api/2/webhook`;
 
   try {
-    let data = await fetch(URL, {
+    let data = await fetch(url, {
       body: JSON.stringify({
         webhooks: [
           {
@@ -110,18 +107,18 @@ async function registerWebhoook(CLOUD_ID, ACCESS_TOKEN, email) {
             events: ["jira:issue_created", "jira:issue_updated"],
           },
         ],
-        url: `${process.env.JIRA_WEBHOOK_URL}?cid=${CLOUD_ID}`,
+        url: `${process.env.JIRA_WEBHOOK_URL}?cid=${cloudId}`,
       }),
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: `Bearer ${ACCESS_TOKEN}`,
+        Authorization: `Bearer ${accessToken}`,
       },
       method: "POST",
     });
-    let dataJSON = await data.json();
-    let webhookId = dataJSON.webhookRegistrationResult[0].createdWebhookId;
-    let webhookToken = `${CLOUD_ID}${webhookId}`;
+    let dataJson = await data.json();
+    let webhookId = dataJson.webhookRegistrationResult[0].createdWebhookId;
+    let webhookToken = `${cloudId}${webhookId}`;
     const employee = await employeeModel.findOne({
       email: email,
     });
@@ -168,20 +165,20 @@ async function getDataByJql(req, res) {
     });
     const jiraBaseUrl = employee.jiraBaseUrl;
     if (!employee) {
-      throw new Error("Can't get Employee");
+      throw new Error("Server Error : Please Try again");
     }
-    const REFRESH_TOKEN = employee.refreshToken;
-    const CLOUD_ID = employee.cloudId;
-    const ACCESS_TOKEN = await getAccessToken(REFRESH_TOKEN);
-    if (ACCESS_TOKEN === -1) {
-      throw new Error("Can't get Access token");
+    const refreshToken = employee.refreshToken;
+    const cloudId = employee.cloudId;
+    const accessToken = await getAccessToken(refreshToken);
+    if (accessToken === -1) {
+      throw new Error("Server Error : Please Try again");
     }
-    const url_data_jql = `https://api.atlassian.com/ex/jira/${CLOUD_ID}/rest/api/3/search`;
-    let data = await fetch(url_data_jql, {
+    const urlDataJql = `https://api.atlassian.com/ex/jira/${cloudId}/rest/api/3/search`;
+    let data = await fetch(urlDataJql, {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: `Bearer ${ACCESS_TOKEN}`,
+        Authorization: `Bearer ${accessToken}`,
       },
       method: "POST",
       body: JSON.stringify({
@@ -191,17 +188,18 @@ async function getDataByJql(req, res) {
         jql: jql,
       }),
     });
-    if (data.status >= 400) {
-      throw new Error("Can't Get Data From Jira");
+    if (data.status === 400) {
+      throw new Error("Enter Valid Jql Query");
+    } else if (data.status >= 400) {
+      throw new Error("Server Error : Please Try again");
     }
-    let dataJSON = await data.json();
+    let dataJson = await data.json();
     res.json({
       status: "Success",
-      data: dataJSON,
+      data: dataJson,
       jiraBaseUrl: jiraBaseUrl,
     });
   } catch (err) {
-    // console.log(err.message);
     res.json({
       status: "Failed",
       error: err.message,
@@ -220,10 +218,9 @@ async function authenticated(req, res) {
       throw new Error("Error in verify Authentication");
     }
     const doneJiraAuth = employee.doneJiraAuth;
-    // console.log("chk", done_jira_authentication);
     res.json({
       status: "Success",
-      done_jira_authentication: doneJiraAuth,
+      doneJiraAuthentication: doneJiraAuth,
     });
   } catch (err) {
     res.json({
@@ -242,28 +239,28 @@ async function getFilters(req, res) {
     if (!employee) {
       throw new Error("Can't get Employee");
     }
-    const REFRESH_TOKEN = employee.refreshToken;
-    const CLOUD_ID = employee.cloudId;
-    const ACCESS_TOKEN = await getAccessToken(REFRESH_TOKEN);
-    if (ACCESS_TOKEN === -1) {
+    const refreshToken = employee.refreshToken;
+    const cloudId = employee.cloudId;
+    const accessToken = await getAccessToken(refreshToken);
+    if (accessToken === -1) {
       throw new Error("Can't get Access token");
     }
-    const url_data_filter = `https://api.atlassian.com/ex/jira/${CLOUD_ID}/rest/api/3/filter/my`;
-    let data = await fetch(url_data_filter, {
+    const urlDataFilter = `https://api.atlassian.com/ex/jira/${cloudId}/rest/api/3/filter/my`;
+    let data = await fetch(urlDataFilter, {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: `Bearer ${ACCESS_TOKEN}`,
+        Authorization: `Bearer ${accessToken}`,
       },
       method: "GET",
     });
     if (data.status >= 400) {
       throw new Error("Can't Get Data From Jira");
     }
-    let dataJSON = await data.json();
+    let dataJson = await data.json();
     res.json({
       status: "Success",
-      data: dataJSON,
+      data: dataJson,
     });
   } catch (err) {
     res.json({
@@ -272,8 +269,8 @@ async function getFilters(req, res) {
     });
   }
 }
-async function getBaseUrl(CLOUD_ID, email) {
-  const URL = `https://api.atlassian.com/ex/jira/${CLOUD_ID}/rest/api/3/serverInfo`;
+async function getBaseUrl(cloudId, email) {
+  const url = `https://api.atlassian.com/ex/jira/${cloudId}/rest/api/3/serverInfo`;
 
   const employee = await employeeModel.findOne({
     email: email,
@@ -281,20 +278,20 @@ async function getBaseUrl(CLOUD_ID, email) {
   if (!employee) {
     throw new Error("Error in verify Authentication");
   }
-  let data = await fetch(URL, {
+  let data = await fetch(url, {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
     method: "GET",
   });
-  let dataJSON = await data.json();
+  let dataJson = await data.json();
 
   if (data.status >= 400) {
     throw new Error();
   }
 
-  employee.jiraBaseUrl = dataJSON.baseUrl;
+  employee.jiraBaseUrl = dataJson.baseUrl;
   await employee.save();
 }
 

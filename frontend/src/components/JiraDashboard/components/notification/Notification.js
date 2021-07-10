@@ -4,7 +4,7 @@ import { NotificationManager } from "react-notifications";
 import axios from "axios";
 
 const channelid = process.env.REACT_APP_CHANNEL_ID_JIRA;
-const notificationDisplayTime = 100000000000;
+const notificationDisplayTime = 0; // 0 represents, it will not hide until we refresh
 let cid = "";
 let channel = "";
 const pusher = new Pusher(channelid, {
@@ -16,8 +16,12 @@ async function configureConnection() {
   if (response.data.status === "Success") {
     cid = response.data.webhookId;
   } else {
-    throw new Error("Can't bind to notification channel");
+    NotificationManager.error(
+      "Server Error",
+      "Can't bind to notification channel"
+    );
   }
+
   channel = pusher.subscribe("my-channel");
   channel.bind(cid, function (data) {
     NotificationManager.success(

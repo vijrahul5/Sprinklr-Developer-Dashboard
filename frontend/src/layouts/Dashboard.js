@@ -4,19 +4,17 @@ import TeamForm from "./TeamForm/TeamForm";
 import Profile from "./Profile/Profile";
 import StandUp from "./StandUp/StandUp";
 import React from "react";
-import JiraDashboard from "./JiraDashboard/JIRA/Jira";
-
+import Jira from "../components/JiraDashboard/components/jira/Jira";
 export default function Dashboard() {
   return (
     <>
       <SidebarMenu />
-      <div className="dashboardContainer">
+
+      <div className="sectionContainer">
         <Profile />
-        <StandUp />
-        <Team />
-        <TeamForm type="Add" />
-        <TeamForm type="Delete" />
-        <JiraDashboard />
+        <div>
+          <Jira />
+        </div>
       </div>
     </>
   );
