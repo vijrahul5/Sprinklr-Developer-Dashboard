@@ -1,6 +1,5 @@
 import React from "react";
 import { Button, SIZE } from "baseui/button";
-import { Heading, HeadingLevel } from "baseui/heading";
 
 import useAuthorize from "./useAuthorize";
 
@@ -13,21 +12,41 @@ const JiraAuth = () => {
   const { showAuthPage } = useAuthorize();
 
   return (
-    <div id="jiraAuth">
-      <HeadingLevel>
-        <Heading className="jiraauthHeading">Jira Authorization</Heading>
-      </HeadingLevel>
-      <div className="authbtn">
+    <>
+      <ul className="instruction">
+        <li className="instruction__item">
+          1. Click on Authorize for Jira Authorization.
+        </li>
+        <li className="instruction__item">
+          2. It will Redirect to jira permission page.
+        </li>
+        <li className="instruction__item">
+          3. Select account/domain and click allow.
+        </li>
+
+        <li className="instruction__item">
+          4. Now you can get Issues based on filter and JQL.
+        </li>
+      </ul>
+      <div className="btnContainer">
         <Button
+          className="authbtn"
           onClick={() => {
             showAuthPage(URL);
           }}
-          className="btnCustom"
+          size={SIZE.compact}
+          overrides={{
+            Root: {
+              style: ({ $theme }) => ({
+                borderRadius: "4px",
+              }),
+            },
+          }}
         >
           Authorize
         </Button>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -4,7 +4,7 @@ import TeamForm from "./TeamForm/index";
 import Profile from "./Profile/index";
 import StandUp from "./StandUp/index";
 import React from "react";
-import JiraDashboard from "./JiraDashboard/JIRA/Jira";
+import JiraDashboard from "./JiraDashboard/components/jira/Jira";
 import GitlabDashboard from "./GitlabDashboard/GitlabDashboard";
 import { useFetchEmployeeData } from "./Profile/profileHooks";
 import Loader from "../globalComponents/Loader/Loader";
