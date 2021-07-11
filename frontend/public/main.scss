@@ -22,8 +22,6 @@
 .signin {
     height: 100%;
     width: 100%;
-    position: absolute;
-    top: 0;
     @include flexCenter(column);
     background: rgba(0, 0, 0, 0.6);
 
@@ -98,7 +96,7 @@
         margin: auto;
         text-align: center;
     }
-    #{&}__icon {
+    &__icon {
         position: fixed;
         right: 0;
         font-size: map-get($font-sizes, "medium");
@@ -128,7 +126,7 @@
     margin-bottom: map-get($margins, "medium");
     border-top: $border;
 
-    #{&}__imgHolder {
+    &__imgHolder {
         width: 8rem;
         height: 8rem;
         object-fit: cover;
@@ -136,13 +134,13 @@
         margin-bottom: 0.5rem;
     }
 
-    #{&}__param {
+    &__param {
         width: 25%;
         font-weight: map-get($font-weights, "medium");
         text-decoration: underline;
     }
 
-    #{&}__value {
+    &__value {
         width: 75%;
         word-break: break-all;
         background-color: $color-widget;
@@ -184,12 +182,12 @@
     background-color: $color-widget;
     border-top: $border;
 
-    #{&}__input {
+    &__input {
         margin-bottom: map-get($margins, "small");
         overflow: auto;
         font-size: map-get($font-sizes, "small");
     }
-    #{&}__success {
+    &__success {
         display: flex;
         justify-content: start;
         align-items: center;
@@ -360,7 +358,6 @@
 }
 // ===============================HARSH===============================
 
-
 #table {
     width: 100%;
 }
@@ -457,72 +454,47 @@
     color: blue;
     text-decoration: underline;
 }
-.ml1{
+.ml1 {
     margin-left: 1rem !important;
 }
 @media only screen and (max-width: 1350px) {
-    html {
-        font-size: 90%;
-    }
-    .dashboardContainer {
-        display: block;
-        padding: 3rem;
-    }
     .basicInfo {
-        margin: 0px;
-        position: unset;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 3rem;
         width: 100%;
-        background-color: var(--color-widget);
-        padding: 0rem;
-        height: fit-content;
+        position: unset;
+        @include flexCenter(row);
+        margin-bottom: map-get($margins, "medium");
     }
     .sectionContainer {
-        width: 100%;
-        height: 100vh;
-        margin-left: 0px;
+        margin-left: 0;
     }
     .profile {
-        margin: 0px;
-        margin-right: 2rem;
-        width: 50%;
-        height: 50%;
-        border-top: var(--border);
-    }
-    .standUp {
-        border-top: var(--border);
+        margin: 0;
+        margin-right: map-get($margins, "medium");
+        width: 70%;
+
+        #{&}__imgHolder {
+            width: 9rem;
+            height: 9rem;
+            margin-bottom: map-get($margins, "small");
+        }
     }
 }
 
 @media only screen and (max-width: 950px) {
-    html {
-        font-size: 90%;
-    }
     .dashboardContainer {
-        padding: 2rem;
+        padding: map-get($paddings, "small");
     }
-    .teamContainer {
-        grid-template-columns: 1fr 1fr;
-        grid-template-areas:
-            "teamHeading teamHeading"
-            "teamList teamList"
-            "teamForm1 teamForm2";
-        grid-gap: 2rem;
-        margin-bottom: 5rem;
-    }
+
     .basicInfo {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
+        @include flexCenter(column);
     }
     .profile {
         margin: 0px;
-        margin-bottom: 2rem;
-        width: 60%;
+        margin-bottom: map-get($margins, "medium");
+        width: 100%;
+    }
+    .section {
+        padding: map-get($paddings, "small");
     }
 }
 
@@ -530,21 +502,55 @@
     html {
         font-size: 85%;
     }
+    .teamStandUpList ul {
+        ul {
+            padding: map-get($paddings, "small");
+            margin-bottom: map-get($margins, "small");
+
+            li {
+                display: flex;
+                justify-content: start;
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        .teamStandUpList__param {
+            width: 100%;
+            margin-bottom: 0.5rem;
+        }
+        .teamStandUpList__value {
+            width: 100%;
+        }
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    html {
+        font-size: 85%;
+    }
+    .section {
+        padding: map-get($paddings, "extraSmall");
+    }
     .dashboardContainer {
-        padding: 1rem;
+        padding: map-get($paddings, "extraSmall");
     }
-    .teamContainer {
-        height: 95vh;
-        grid-template-columns: 1fr;
-        grid-template-areas:
-            "teamHeading teamHeading"
-            "teamList teamList"
-            "teamForm1 teamForm1"
-            "teamForm2 teamForm2";
-        grid-gap: 2rem;
-        margin-bottom: 5rem;
+
+    .dashboardNavbar {
+        width: 100%;
+        height: 3.5rem;
+        h1 {
+            font-size: 1.5rem;
+        }
+        #{&}__icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
     }
-    .profile {
-        width: 80%;
+
+    .teamStandUpList ul {
+        ul {
+            padding: map-get($paddings, "extraSmall");
+            margin-bottom: map-get($margins, "small");
+        }
     }
 }

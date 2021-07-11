@@ -7,6 +7,7 @@ import { Input } from "baseui/input";
 import { Button, SIZE } from "baseui/button";
 import { RiCloseCircleLine } from "react-icons/ri";
 import NotificationManager from "react-notifications/lib/NotificationManager";
+import OutsideClick from "../../globalComponents/OutsideClick";
 
 function TeamForm({
     type,
@@ -67,41 +68,43 @@ function TeamForm({
     return (
         <>
             <div className="teamForm">
-                <div className="teamForm__modal">
-                    <div className="teamForm__modal__close">
-                        <RiCloseCircleLine
-                            className="teamForm__modal__close__icon"
-                            onClick={handleClose}
-                        />
+                <OutsideClick handleClose={handleClose}>
+                    <div className="teamForm__modal">
+                        <div className="teamForm__modal__close">
+                            <RiCloseCircleLine
+                                className="teamForm__modal__close__icon"
+                                onClick={handleClose}
+                            />
+                        </div>
+                        <form onSubmit={handleSubmit}>
+                            <FormControl label={() => `${type} Team Member`}>
+                                <>
+                                    <Input
+                                        type="text"
+                                        placeholder="Enter Email"
+                                        name="employeeEmail"
+                                        value={value.employeeEmail}
+                                        onChange={(e) => {
+                                            setValue({
+                                                ...value,
+                                                employeeEmail:
+                                                    e.currentTarget.value,
+                                            });
+                                        }}
+                                        size={SIZE.compact}
+                                    />
+                                    <Button
+                                        type="submit"
+                                        className="submit btnCustom ml1"
+                                        size={SIZE.compact}
+                                    >
+                                        {type}
+                                    </Button>
+                                </>
+                            </FormControl>
+                        </form>
                     </div>
-                    <form onSubmit={handleSubmit}>
-                        <FormControl label={() => `${type} Team Member`}>
-                            <>
-                                <Input
-                                    type="text"
-                                    placeholder="Enter Email"
-                                    name="employeeEmail"
-                                    value={value.employeeEmail}
-                                    onChange={(e) => {
-                                        setValue({
-                                            ...value,
-                                            employeeEmail:
-                                                e.currentTarget.value,
-                                        });
-                                    }}
-                                    size={SIZE.compact}
-                                />
-                                <Button
-                                    type="submit"
-                                    className="submit btnCustom ml1"
-                                    size={SIZE.compact}
-                                >
-                                    {type}
-                                </Button>
-                            </>
-                        </FormControl>
-                    </form>
-                </div>
+                </OutsideClick>
             </div>
         </>
     );

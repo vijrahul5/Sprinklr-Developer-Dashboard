@@ -7,8 +7,9 @@ export default function LandingPage() {
     return (
         <>
             <Navbar setSignIn={setSignIn} />
-            <div className="landingPage"></div>
-            {signIn ? <SignIn setSignIn={setSignIn} /> : null}
+            <div className="landingPage">
+                {signIn ? <SignIn setSignIn={setSignIn} /> : null}
+            </div>
         </>
     );
 }
