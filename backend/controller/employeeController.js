@@ -277,7 +277,6 @@ async function deleteTeam(req, res) {
 }
 
 async function getManagerAccess(req, res) {
-    // Deletes a team member from the employee's team
     try {
         const email = req.email;
         const employee = await employeeModel.findOne({ email: email });
