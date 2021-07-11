@@ -87,7 +87,7 @@ async function getStandUp(req, res) {
             if (standUp) {
                 return res.json({
                     status: "Success",
-                    standUp,
+                    questions: standUp.questions,
                 });
             } else {
                 throw new Error("Could not get stand up");
@@ -108,9 +108,7 @@ async function postStandUp(req, res) {
         const employee = await employeeModel.findOne({ email });
         if (employee) {
             const standUp = await standUpModel.create({
-                question1: req.body.question1,
-                question2: req.body.question2,
-                question3: req.body.question3,
+                questions: req.body.data,
                 author: employee,
             });
             if (standUp) {
@@ -143,9 +141,7 @@ async function updateStandUp(req, res) {
                 },
             });
             if (standUp) {
-                for (let key in req.body) {
-                    standUp[key] = req.body[key];
-                }
+                standUp.questions = req.body.data;
                 await standUp.save();
                 return res.json({
                     status: "Success",
