@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect,useCallback } from "react";
 import axios from "axios";
 
 export const useVerifyRoute = function (type) {
@@ -6,8 +6,8 @@ export const useVerifyRoute = function (type) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
-    useEffect(() => {
-        (async function () {
+    const apiCall = useCallback(
+        async function () {
             setError(false);
             try {
                 const res = await axios.get("/api/auth/verify");
@@ -27,7 +27,11 @@ export const useVerifyRoute = function (type) {
             } catch (err) {
                 setError(err.message);
             }
-        })();
+        },
+        [setLoading, setError]
+    );
+    useEffect(() => {
+        apiCall();
     }, []);
 
     return [loading, error];
