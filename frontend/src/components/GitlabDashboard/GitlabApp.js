@@ -6,7 +6,7 @@ const axios = require("axios");
 function GitlabApp({ user }) {
     console.log("user", user);
     const [currentPage, setCurrentPage] = useState(1);
-    const postsPerPage = 10;
+    const postsPerPage = 8;
     const [posts, setPosts] = useState([]);
     const accessToken = user.gitlabAccessToken;
     //pipelinBuilder Implemented

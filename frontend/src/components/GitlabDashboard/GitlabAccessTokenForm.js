@@ -1,8 +1,7 @@
-import { React, useEffect, useState, useCallback } from "react";
-import { Input } from "baseui/input";
+import { React, useState, useCallback } from "react";
+import { Input, SIZE } from "baseui/input";
 import { Button } from "baseui/button";
 
-const axios = require("axios");
 const GitlabAccessTokenForm = (props) => {
     const [accessToken, setAccessToken] = useState("");
     const setToken = (e) => {
@@ -10,7 +9,7 @@ const GitlabAccessTokenForm = (props) => {
     };
     const submitToken = useCallback(() => {
         props.submitToken(accessToken);
-    }, [accessToken, setAccessToken]);
+    }, [accessToken, props]);
     return (
         <>
             <ul className="instruction">
@@ -36,12 +35,24 @@ const GitlabAccessTokenForm = (props) => {
             <Input
                 type="text"
                 value={accessToken}
-                placeholder="pleaseEnterAccesToken"
+                placeholder="Please Enter Access Token"
                 onChange={setToken}
+                overrides={{
+                    Root: {
+                        style: ({ $theme }) => ({
+                            borderRadius: "4px",
+                            marginTop:"1.5rem"
+                        }),
+                    },
+                }}
             />
             <div className="btn__container">
-                <Button onClick={submitToken} className="btn--auth">
-                    SubmitToken
+                <Button
+                    onClick={submitToken}
+                    className="btn--auth btnCustom"
+                    size={SIZE.compact}
+                >
+                    Submit Token
                 </Button>
             </div>
         </>

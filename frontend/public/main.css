@@ -108,8 +108,8 @@ body,
 }
 
 .landingPage {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.1)), to(rgba(0, 0, 0, 0.5))), url("./assets/main.png");
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5)), url("./assets/main.png");
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.1)), to(rgba(0, 0, 0, 0.3))), url("./assets/Sprinklr_Logo.png");
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3)), url("./assets/Sprinklr_Logo.png");
   background-blend-mode: luminosity;
   background-size: cover;
   background-position: center;
@@ -667,6 +667,29 @@ body,
 
 .ml1 {
   margin-left: 1rem !important;
+}
+
+@media screen and (max-width: 1450px) {
+  .jiraWid__search {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .jiraWid__jqlFilter {
+    width: 100%;
+    margin-right: 0rem;
+  }
+  .jiraWid__filter {
+    margin-right: 0rem;
+    width: 100%;
+  }
+  .btn--blue {
+    margin-left: 0rem !important;
+  }
+  .btn--white {
+    margin-left: 0rem !important;
+  }
 }
 
 @media only screen and (max-width: 1350px) {

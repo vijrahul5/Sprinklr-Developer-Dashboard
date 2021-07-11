@@ -5,7 +5,8 @@ import { Button } from "baseui/button";
 import Table from "../../components/Table/Table";
 //import { Pagination } from "baseui/pagination";
 import GitlabAccessTokenForm from "./GitlabAccessTokenForm";
-import { Select } from "baseui/select";
+import { Select, SIZE } from "baseui/select";
+import Loader from "../../globalComponents/Loader/Tombstone";
 const axios = require("axios");
 
 const GitlabProfile = (props) => {
@@ -40,6 +41,7 @@ const GitlabProfile = (props) => {
             const res = await axios.post("/api/gitlab", {
                 gitlabAccessToken: token,
             });
+            window.location.reload();
             console.log(res);
             console.log(res.data.status);
         } catch (err) {}
@@ -102,10 +104,10 @@ const GitlabProfile = (props) => {
     }
 
     if (loading) {
-        return <h1>loading...</h1>;
+        return <Loader />;
     }
     return (
-        <div id="gitlabTable">
+        <div>
             {/* <Select
                 options={selectProject}
                 value={value}
@@ -117,7 +119,7 @@ const GitlabProfile = (props) => {
             <Select
                 options={selectMerge}
                 value={mergeRequest}
-                placeholder="Select MergeReqest"
+                placeholder="Select Merge Request"
                 onChange={(params) => {
                     setMergeRequest(params.value);
 
@@ -130,6 +132,14 @@ const GitlabProfile = (props) => {
                         console.log(pageToSet);
                         setCurrentPage(pageToSet);
                     }
+                }}
+                size={SIZE.compact}
+                overrides={{
+                    ControlContainer: {
+                        style: ({ $theme }) => ({
+                            borderRadius: "4px",
+                        }),
+                    },
                 }}
             />
             <br></br>
@@ -149,6 +159,14 @@ const GitlabProfile = (props) => {
                         console.log(pageToSet);
                         setCurrentPage(pageToSet);
                     }
+                }}
+                size={SIZE.compact}
+                overrides={{
+                    ControlContainer: {
+                        style: ({ $theme }) => ({
+                            borderRadius: "4px",
+                        }),
+                    },
                 }}
             />
             <br></br>
