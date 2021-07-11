@@ -1,0 +1,102 @@
+.teamStandUpList ul {
+    overflow: auto;
+    max-height: 45rem;
+    padding: 0.1rem;
+    list-style: none;
+    ul {
+        list-style: none;
+        padding: map-get($paddings, "small");
+        margin-bottom: map-get($margins, "small");
+        border-radius: $border-radius;
+        box-shadow: $shadow;
+        li {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            font-size: map-get($font-sizes, "small");
+            margin-bottom: 0.5rem;
+        }
+    }
+    .teamStandUpList__param {
+        width: 30%;
+        font-weight: map-get($font-weights, "medium");
+        text-decoration: underline;
+    }
+    .teamStandUpList__value {
+        width: 70%;
+        background-color: $color-secondary;
+        padding: map-get($paddings, "extraSmall");
+        border-radius: $border-radius;
+    }
+}
+
+.teamStandUpList__add {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    &__icon {
+        font-size: 1.5rem;
+        font-weight: map-get($font-weights, "large");
+        color: $color-primary;
+        margin-right: 2.5rem;
+        cursor: pointer;
+    }
+}
+
+.teamStandUpList__delete {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    &__icon {
+        font-size: 1.5rem;
+        font-weight: map-get($font-weights, "large");
+        color: $color-primary;
+        cursor: pointer;
+    }
+}
+
+.teamForm {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 10;
+    top: 3.5rem;
+    left: 0;
+    @include flexCenter(column);
+    background: rgba(0, 0, 0, 0.6);
+
+    &__modal {
+        height: 30rem;
+        width: 40rem;
+        background-color: $color-primary;
+        border-radius: $border-radius;
+        padding: map-get($paddings, "small");
+        @include flexCenter(column);
+        &__close {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            position: sticky;
+            &__icon {
+                color: $color-widget;
+                font-size: map-get($font-sizes, "medium");
+                cursor: pointer;
+            }
+        }
+        form {
+            width: 80%;
+            margin: auto;
+            box-shadow: $shadow;
+            padding: map-get($paddings, "small");
+            background-color: $color-widget;
+            border-radius: $border-radius;
+            div {
+                width: 100%;
+                @include flexCenter(row);
+            }
+        }
+    }
+}

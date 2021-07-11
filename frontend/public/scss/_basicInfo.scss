@@ -1,0 +1,106 @@
+.basicInfo {
+    width: 25rem;
+    position: fixed;
+}
+
+.profile {
+    width: 100%;
+    height: fit-content;
+    @include flexCenter(column);
+    box-shadow: $shadow;
+    padding: map-get($paddings, "small");
+    border-radius: $border-radius;
+    margin-bottom: map-get($margins, "medium");
+    border-top: $border;
+
+    &__imgHolder {
+        width: 8rem;
+        height: 8rem;
+        object-fit: cover;
+        margin: 0px auto;
+        margin-bottom: 0.5rem;
+    }
+
+    &__param {
+        width: 25%;
+        font-weight: map-get($font-weights, "medium");
+        text-decoration: underline;
+    }
+
+    &__value {
+        width: 75%;
+        word-break: break-all;
+        background-color: $color-widget;
+        padding: map-get($paddings, "extraSmall");
+        border-radius: $border-radius;
+        margin-left: map-get($margins, "small");
+        background-color: $color-secondary;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        border-radius: 70px;
+    }
+
+    ul {
+        width: 100%;
+        list-style: none;
+        padding: map-get($paddings, "small") 0px;
+        border-radius: $border-radius;
+    }
+
+    li {
+        font-size: map-get($font-sizes, "small");
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-bottom: 0.5rem;
+    }
+}
+
+.standUp {
+    width: 100%;
+    border-radius: $border-radius;
+    height: fit-content;
+    box-shadow: $shadow;
+    padding: map-get($paddings, "small");
+    font-size: map-get($font-sizes, "small");
+    background-color: $color-widget;
+    border-top: $border;
+
+    &__input {
+        margin-bottom: map-get($margins, "small");
+        overflow: auto;
+        font-size: map-get($font-sizes, "small");
+    }
+    &__success {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        color: $color-primary;
+        margin-bottom: map-get($margins, "small");
+        h3 {
+            margin-left: 0.5rem;
+            font-weight: map-get($font-weights, "medium");
+            font-size: 1rem;
+            text-decoration: underline;
+        }
+        &__icon {
+            font-size: 1.2rem;
+            font-weight: map-get($font-weights, "medium");
+        }
+    }
+}
+
+.requestForm {
+    @include flexCenter(row);
+    width: 100%;
+    border-top: $border;
+    box-shadow: $shadow;
+    height: fit-content;
+    padding: map-get($paddings, "small");
+    border-radius: $border-radius;
+    margin-bottom: map-get($margins, "medium");
+}
+

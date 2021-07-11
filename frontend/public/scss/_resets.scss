@@ -14,3 +14,10 @@ body,
 #root {
     height: 100%;
 }
+
+@mixin flexCenter($dir) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: $dir;
+}

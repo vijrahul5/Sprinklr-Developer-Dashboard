@@ -1,0 +1,87 @@
+
+.jiraWid {
+    &__search {
+        display: flex;
+        margin-bottom: 0.5rem;
+    }
+    &__jqlFilter {
+        width: 41rem;
+        margin-right: 1rem;
+    }
+    &__filter {
+        margin-right: 1rem;
+        width: 20rem;
+    }
+}
+
+.table {
+    width: 100%;
+    &__footer {
+        display: flex;
+    }
+    &__footerLeft {
+        flex-grow: 1;
+    }
+}
+.btn {
+    &--blue {
+        background-color: $color-primary !important;
+        color: white !important;
+        height: 2.2rem;
+        width: fit-content;
+        margin-left: 0.5rem !important;
+    }
+    &--white {
+        background-color: white !important;
+        color: $color-primary !important;
+        height: 2.2rem;
+        width: fit-content;
+        margin-left: 0.5rem !important;
+    }
+    &__container {
+        margin-top: 2rem;
+    }
+    &--auth {
+        background-color: $color-primary !important;
+        color: white !important;
+        height: 2.2rem;
+        width: fit-content;
+    }
+}
+.instruction {
+    &__item {
+        list-style: none;
+        margin: 0.8rem auto;
+        font-size: 1.2rem;
+        font-weight: map-get($font-weights, "small");
+    }
+}
+
+.jp {
+    width: 25px;
+    height: 25px;
+    margin-left: 1rem;
+
+    &__description {
+        display: none;
+    }
+    &:hover + &__description {
+        display: block;
+        width: fit-content;
+        padding: 4px;
+        background-color: $color-primary;
+        color: $color-secondary;
+        border-radius: $border-radius;
+        position: absolute;
+        z-index: 1;
+    }
+}
+
+.jiraIssueUrl {
+    color: black;
+    font-weight: map-get($font-weights, "medium");
+    &:hover {
+        color: $color-primary;
+        text-decoration: underline;
+    }
+}

@@ -1,0 +1,60 @@
+.dashboardNavbar {
+    background-color: $color-nav;
+    width: 100%;
+    height: 3.5rem;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    @include flexCenter(row);
+    h1 {
+        all: unset;
+        font-size: map-get($font-sizes, "medium");
+        font-weight: map-get($font-weights, "small");
+        color: $color-widget;
+        margin: auto;
+        text-align: center;
+    }
+    &__icon {
+        position: fixed;
+        right: 0;
+        font-size: map-get($font-sizes, "medium");
+        margin-right: 2rem;
+        cursor: pointer;
+        color: $color-widget;
+    }
+}
+
+.dashboardContainer {
+    margin-top: 3.5rem;
+    padding: map-get($paddings, "medium");
+}
+
+
+
+.sectionContainer {
+    margin-left: 25rem + 2rem;
+    height: fit-content;
+    @include flexCenter(column);
+}
+.section {
+    width: 100%;
+    height: fit-content;
+    margin-bottom: map-get($margins, "large");
+    padding: map-get($paddings, "medium");
+    border-top: $border;
+    box-shadow: $shadow;
+    border-radius: $border-radius;
+
+    h1 {
+        color: $color-primary;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid $color-primary;
+        margin-bottom: map-get($margins, "medium");
+        font-weight: map-get($font-weights, "small");
+    }
+}
+.loader {
+    width: 100%;
+    height: 100%;
+    @include flexCenter(row);
+}
