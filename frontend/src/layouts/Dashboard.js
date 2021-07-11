@@ -41,7 +41,7 @@ export default function Dashboard() {
                     </div>
                     <div id="gitlabContainer">
                         <h1>Gitlab</h1>
-                        <GitlabDashboard user={user}/>
+                        <GitlabDashboard user={user} />
                     </div>
                 </div>
             </div>

@@ -411,7 +411,6 @@ body,
     color: black;
 }
 
-
 .requestForm {
     display: flex;
     justify-content: center;
@@ -431,6 +430,9 @@ body,
     margin-left: 1rem !important;
 }
 
+#pagination {
+    float: right;
+}
 
 @media only screen and (max-width: 1350px) {
     html {

@@ -23,7 +23,6 @@ app.use(protectRoute); // Middleware for protecting access to apis which require
 app.use("/api/employee", employeeRouter); // All routes with '/api/employee' will be redirected to employeehRouter
 app.use("/api/jira", jiraRouter);
 app.use("/api/gitlab", gitlabRouter);
-
 let port = process.env.PORT;
 if (port == null || port == "") {
     port = 5000;
