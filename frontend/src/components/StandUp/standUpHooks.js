@@ -15,7 +15,7 @@ export const useFetchEmployeeStandUp = function () {
                 const res = await axios.get("/api/employee/standup");
                 if (res.data.status === "Success") {
                     setLoading(false);
-                    setData(() => res.data.standUp);
+                    setData(() => res.data.questions);
                 } else {
                     setLoading(false);
                 }
@@ -43,7 +43,7 @@ export const useUpdateEmployeeStandUp = function () {
         async function (data) {
             setAddError(false);
             try {
-                const res = await axios.post("/api/employee/standup", data);
+                const res = await axios.post("/api/employee/standup", {data: data});
                 if (res.data.status === "Success") {
                     NotificationManager.success(
                         "Success!",
@@ -64,7 +64,7 @@ export const useUpdateEmployeeStandUp = function () {
         async function (data) {
             setEditError(false);
             try {
-                const res = await axios.patch("/api/employee/standup", data);
+                const res = await axios.patch("/api/employee/standup", {data:data});
                 if (res.data.status === "Success") {
                     NotificationManager.success(
                         "Success!",

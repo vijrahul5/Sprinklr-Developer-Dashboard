@@ -50,18 +50,7 @@ function Team() {
                         );
                     })
                 ) : (
-                    <HeadingLevel>
-                        <Heading
-                            style={{
-                                marginBottom: "2rem",
-                                textAlign: "center",
-                                fontSize: "1.5rem",
-                                fontWeight: "250",
-                            }}
-                        >
-                            No team members added...
-                        </Heading>
-                    </HeadingLevel>
+                    <h2> No team members added...</h2>
                 )}
             </ul>
             {addTeamMember ? (

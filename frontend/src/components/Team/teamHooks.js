@@ -7,21 +7,24 @@ export const useFetchEmployeeTeamData = function () {
     const [data, setData] = useState(null);
     const [error, setError] = useState(false);
 
-    const apiCall = useCallback(async function () {
-        setError(false);
-        try {
-            const res = await axios.get("/api/employee/team");
-            if (res.data.status === "Success") {
-                setData(res.data.teamStandUp);
+    const apiCall = useCallback(
+        async function () {
+            setError(false);
+            try {
+                const res = await axios.get("/api/employee/team");
+                if (res.data.status === "Success") {
+                    setData(res.data.teamStandUp);
+                    setLoading(false);
+                } else {
+                    throw new Error("Employee Team Not Found");
+                }
+            } catch (err) {
                 setLoading(false);
-            } else {
-                throw new Error("Employee Team Not Found");
+                setError(err.message);
             }
-        } catch (err) {
-            setLoading(false);
-            setError(err.message);
-        }
-    }, []);
+        },
+        [setLoading, setData, setError]
+    );
 
     useEffect(() => {
         apiCall();

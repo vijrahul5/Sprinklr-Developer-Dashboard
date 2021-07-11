@@ -11,26 +11,16 @@ import { Textarea } from "baseui/textarea";
 import { SIZE } from "baseui/input";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import NotificationManager from "react-notifications/lib/NotificationManager";
+import standUpQuestions from "./StandUpQuestions";
 
 function StandUp() {
-    // Component for Stand Up message submission or editing
-    const [value, setValue] = useState({
-        question1: "",
-        question2: "",
-        question3: "",
-    });
 
-    const [loading, data, error, setLoading] = useFetchEmployeeStandUp(); // Fetches employee's stand up for the day
-    const [addError, editError, addStandUp, editStandUp] =
-        useUpdateEmployeeStandUp(); // Provides functions for adding or deleting stand up
+    const [value, setValue] = useState(Array(standUpQuestions.length).fill(""));
+    const [loading, data, error, setLoading] = useFetchEmployeeStandUp();
+    const [addError, editError, addStandUp, editStandUp] = useUpdateEmployeeStandUp();
 
     useEffect(() => {
-        if (data)
-            setValue({
-                question1: data.question1,
-                question2: data.question2,
-                question3: data.question3,
-            });
+        if (data) setValue(data);
     }, [data]);
 
     useEffect(() => {
@@ -45,6 +35,7 @@ function StandUp() {
         if (editError) NotificationManager.error("Error", editError, 5000);
     }, [editError]);
 
+    
     function checkFieldEmpty() {
         for (let key in value) {
             if (value[key] === "") {
@@ -59,16 +50,14 @@ function StandUp() {
         return false;
     }
     function handleSubmit(e) {
-        // Event Listener for adding a standup
         e.preventDefault();
         if (checkFieldEmpty()) return;
         addStandUp(value);
-        setValue({ question1: "", question2: "", question3: "" });
+        setValue(Array(standUpQuestions.length).fill(""));
         setLoading(true);
     }
 
     function handleEdit(e) {
-        // Event Listener for editing a standup
         e.preventDefault();
         if (checkFieldEmpty()) return;
         editStandUp(value);
@@ -77,8 +66,12 @@ function StandUp() {
 
     const changeValue = useCallback(
         (e) => {
-            let valueName = e.currentTarget.name;
-            setValue({ ...value, [valueName]: e.currentTarget.value });
+            let questionNumber = parseInt(e.currentTarget.name, 10);
+            setValue([
+                ...value.slice(0, questionNumber),
+                e.currentTarget.value,
+                ...value.slice(questionNumber + 1),
+            ]);
         },
         [setValue, value]
     );
@@ -103,62 +96,31 @@ function StandUp() {
                         <h3>Submitted!</h3>
                     </div>
                 ) : null}
-                <FormControl label={() => "What work was done yesterday ?"}>
-                    <Textarea
-                        value={value.question1}
-                        name="question1"
-                        className="standUp__input "
-                        onChange={changeValue}
-                        placeholder="Answer"
-                        size={SIZE.mini}
-                        overrides={{
-                            Root: {
-                                style: ({ $theme }) => ({
-                                    borderRadius: "4px",
-                                }),
-                            },
-                        }}
-                    />
-                </FormControl>
-                <FormControl label={() => "What is the agenda for today ?"}>
-                    <Textarea
-                        value={value.question2}
-                        name="question2"
-                        className="standUp__input "
-                        onChange={changeValue}
-                        placeholder="Answer"
-                        size={SIZE.mini}
-                        overrides={{
-                            Root: {
-                                style: ({ $theme }) => ({
-                                    borderRadius: "4px",
-                                }),
-                            },
-                        }}
-                    />
-                </FormControl>
-                <FormControl label={() => "What work has been done today?"}>
-                    <Textarea
-                        value={value.question3}
-                        name="question3"
-                        className="standUp__input"
-                        onChange={changeValue}
-                        placeholder="Answer"
-                        size={SIZE.mini}
-                        overrides={{
-                            Root: {
-                                style: ({ $theme }) => ({
-                                    borderRadius: "4px",
-                                }),
-                            },
-                        }}
-                    />
-                </FormControl>
-                <Button
-                    type="submit"
-                    className="submit btnCustom"
-                    size={SIZE.compact}
-                >
+                {standUpQuestions.map(({ question, questionNumber }) => {
+                    return (
+                        <FormControl
+                            label={() => question}
+                            key={questionNumber}
+                        >
+                            <Textarea
+                                value={value ? value[questionNumber] : ""}
+                                name={questionNumber}
+                                className="standUp__input "
+                                onChange={changeValue}
+                                placeholder="Answer"
+                                size={SIZE.mini}
+                                overrides={{
+                                    Root: {
+                                        style: ({ $theme }) => ({
+                                            borderRadius: "4px",
+                                        }),
+                                    },
+                                }}
+                            />
+                        </FormControl>
+                    );
+                })}
+                <Button type="submit" className="btnCustom" size={SIZE.compact}>
                     {data ? "Edit" : "Submit"}
                 </Button>
             </form>
