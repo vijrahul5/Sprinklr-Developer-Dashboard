@@ -14,10 +14,10 @@ import NotificationManager from "react-notifications/lib/NotificationManager";
 import standUpQuestions from "./StandUpQuestions";
 
 function StandUp() {
-
     const [value, setValue] = useState(Array(standUpQuestions.length).fill(""));
     const [loading, data, error, setLoading] = useFetchEmployeeStandUp();
-    const [addError, editError, addStandUp, editStandUp] = useUpdateEmployeeStandUp();
+    const [addError, editError, addStandUp, editStandUp] =
+        useUpdateEmployeeStandUp();
 
     useEffect(() => {
         if (data) setValue(data);
@@ -35,13 +35,12 @@ function StandUp() {
         if (editError) NotificationManager.error("Error", editError, 5000);
     }, [editError]);
 
-    
     function checkFieldEmpty() {
         for (let key in value) {
             if (value[key] === "") {
                 NotificationManager.error(
-                    "Error",
-                    "Fields Cannot Be Empty !",
+                    "Error!",
+                    "Fields Cannot Be Empty",
                     5000
                 );
                 return true;

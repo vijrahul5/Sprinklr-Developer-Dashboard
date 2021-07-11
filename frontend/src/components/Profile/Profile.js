@@ -26,41 +26,43 @@ function Profile() {
     }
     return (
         <>
-            <div className="profile">
-                <div className="profile__imgHolder">
-                    <img src={data.picture} alt="" />
+            <div className="basicInfo__wrapper">
+                <div className="profile">
+                    <div className="profile__imgHolder">
+                        <img src={data.picture} alt="" />
+                    </div>
+                    <ul>
+                        <li>
+                            <p className="profile__param">Name:</p>
+                            <p className="profile__value">{data.name}</p>
+                        </li>
+                        <li>
+                            <p className="profile__param">Email:</p>
+                            <p className="profile__value">{data.email}</p>
+                        </li>
+                        <li>
+                            <p className="profile__param">Reports to:</p>
+                            <p className="profile__value">
+                                {data.manager ? data.manager.email : "None"}
+                            </p>
+                        </li>
+                    </ul>
                 </div>
-                <ul>
-                    <li>
-                        <p className="profile__param">Name:</p>
-                        <p className="profile__value">{data.name}</p>
-                    </li>
-                    <li>
-                        <p className="profile__param">Email:</p>
-                        <p className="profile__value">{data.email}</p>
-                    </li>
-                    <li>
-                        <p className="profile__param">Reports to:</p>
-                        <p className="profile__value">
-                            {data.manager ? data.manager.email : "None"}
-                        </p>
-                    </li>
-                </ul>
+                {data.managerAccess === false ? (
+                    <div className="requestForm">
+                        <Button
+                            type="submit"
+                            className="submit btnCustom"
+                            size={SIZE.compact}
+                            onClick={(e) => {
+                                requestManagerAccess();
+                            }}
+                        >
+                            Request Manager Access
+                        </Button>
+                    </div>
+                ) : null}
             </div>
-            {data.managerAccess === false ? (
-                <div className="requestForm">
-                    <Button
-                        type="submit"
-                        className="submit btnCustom"
-                        size={SIZE.compact}
-                        onClick={(e) => {
-                            requestManagerAccess();
-                        }}
-                    >
-                        Request Manager Access
-                    </Button>
-                </div>
-            ) : null}
         </>
     );
 }

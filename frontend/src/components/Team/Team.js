@@ -50,7 +50,12 @@ function Team() {
                         );
                     })
                 ) : (
-                    <h2> No team members added...</h2>
+                    <div className="instruction">
+                        <h2 className="instruction__item">1. This is the section where you can manage your team and review their progress.</h2>
+                        <h2 className="instruction__item">2. Click on the add icon to add team members.</h2>
+                        <h2 className="instruction__item">3. Once a team member is added, you will be able to see their daily stand ups.</h2>
+                        <h2 className="instruction__item">4. Click on the delete icon to delete a team member.</h2>
+                    </div>
                 )}
             </ul>
             {addTeamMember ? (
