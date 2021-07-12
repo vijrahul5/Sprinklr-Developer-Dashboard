@@ -39,7 +39,7 @@
 .section {
     width: 100%;
     height: fit-content;
-    margin-bottom: map-get($margins, "large");
+    margin-bottom: map-get($margins, "medium");
     padding: map-get($paddings, "medium");
     border-top: $border;
     box-shadow: $shadow;

@@ -6,10 +6,11 @@ import { Heading, HeadingLevel } from "baseui/heading";
 import { BiAddToQueue } from "react-icons/bi";
 import TeamForm from "../TeamForm/TeamForm";
 import NotificationManager from "react-notifications/lib/NotificationManager";
+import { Button, SIZE } from "baseui/button";
 
 function Team() {
     // Component for accessing team data and their stand ups
-    const [loading, data, error, setLoading] = useFetchEmployeeTeamData(); // Fetches the logged in employee's team data and their stand ups
+    const [loading, data, error, setFetch] = useFetchEmployeeTeamData(); // Fetches the logged in employee's team data and their stand ups
     const [addTeamMember, setAddTeamMember] = useState(false);
     const [deleteTeamMember, setDeleteTeamMember] = useState(false);
     const [deleteTeamMemberEmail, setDeleteTeamMemberEmail] = useState("");
@@ -18,61 +19,94 @@ function Team() {
         setDeleteTeamMemberEmail(email);
         setDeleteTeamMember(true);
     }
-    useEffect(() => {
-        if (error) {
-            NotificationManager.error("Error!", error, 5000);
-        }
-    }, [error]);
 
     if (loading) {
-        return <Loader />;
+        return (
+            <div className="teamStandUpList__loader">
+                <Loader />
+            </div>
+        );
     }
+
     return (
         <>
-            <div className="teamStandUpList__add">
-                <BiAddToQueue
-                    className="teamStandUpList__add__icon"
-                    onClick={() => setAddTeamMember(true)}
-                />
-            </div>
-            <ul>
-                {data && data.length ? (
-                    data.map((teamMember) => {
-                        return (
-                            <li key={teamMember.email}>
-                                <TeamMember
-                                    teamMember={teamMember}
-                                    handleDeleteTeamMember={
-                                        handleDeleteTeamMember
-                                    }
-                                />
-                            </li>
-                        );
-                    })
-                ) : (
-                    <div className="instruction">
-                        <h2 className="instruction__item">1. This is the section where you can manage your team and review their progress.</h2>
-                        <h2 className="instruction__item">2. Click on the add icon to add team members.</h2>
-                        <h2 className="instruction__item">3. Once a team member is added, you will be able to see their daily stand ups.</h2>
-                        <h2 className="instruction__item">4. Click on the delete icon to delete a team member.</h2>
+            {data && data.length ? (
+                <>
+                    <div className="teamStandUpList__add">
+                        <Button
+                            className="btnCustom"
+                            size={SIZE.compact}
+                            onClick={() => setAddTeamMember(true)}
+                        >
+                            Add Team Member
+                        </Button>
                     </div>
-                )}
-            </ul>
-            {addTeamMember ? (
-                <TeamForm
-                    type={"Add"}
-                    setAddTeamMember={setAddTeamMember}
-                    setLoading={setLoading}
-                />
-            ) : null}
-            {deleteTeamMember ? (
-                <TeamForm
-                    type={"Delete"}
-                    email={deleteTeamMemberEmail}
-                    setDeleteTeamMember={setDeleteTeamMember}
-                    setLoading={setLoading}
-                />
-            ) : null}
+                    <ul>
+                        {data.map((teamMember) => {
+                            return (
+                                <li key={teamMember.email}>
+                                    <TeamMember
+                                        teamMember={teamMember}
+                                        handleDeleteTeamMember={
+                                            handleDeleteTeamMember
+                                        }
+                                    />
+                                </li>
+                            );
+                        })}
+                    </ul>
+                    {addTeamMember ? (
+                        <TeamForm
+                            type={"Add"}
+                            setAddTeamMember={setAddTeamMember}
+                            setFetch={setFetch}
+                        />
+                    ) : null}
+                    {deleteTeamMember ? (
+                        <TeamForm
+                            type={"Delete"}
+                            email={deleteTeamMemberEmail}
+                            setDeleteTeamMember={setDeleteTeamMember}
+                            setFetch={setFetch}
+                        />
+                    ) : null}
+                </>
+            ) : (
+                <>
+                    <div className="instruction teamInstruction">
+                        <h2 className="instruction__item">
+                            1. This is the section where you can manage your
+                            team and review their progress.
+                        </h2>
+                        <h2 className="instruction__item">
+                            2. Click on the add icon to add team members.
+                        </h2>
+                        <h2 className="instruction__item">
+                            3. Once a team member is added, you will be able to
+                            see their daily stand ups.
+                        </h2>
+                        <h2 className="instruction__item">
+                            4. Click on the delete icon to delete a team member.
+                        </h2>
+                    </div>
+                    <div className="teamStandUpList__add teamInstruction__btn">
+                        <Button
+                            className="btnCustom"
+                            size={SIZE.compact}
+                            onClick={() => setAddTeamMember(true)}
+                        >
+                            Add Team Member
+                        </Button>
+                    </div>
+                    {addTeamMember ? (
+                        <TeamForm
+                            type={"Add"}
+                            setAddTeamMember={setAddTeamMember}
+                            setFetch={setFetch}
+                        />
+                    ) : null}
+                </>
+            )}
         </>
     );
 }

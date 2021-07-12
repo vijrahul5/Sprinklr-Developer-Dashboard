@@ -1,8 +1,23 @@
+.teamStandUpList {
+    padding: 0;
+    h1 {
+        margin: 2rem;
+    }
+    &__loader {
+        width: 100%;
+        height: 100%;
+        padding: 2rem;
+        padding-top: 0;
+    }
+}
 .teamStandUpList ul {
+    padding: 2rem;
+    padding-top: 0.1rem;
+    padding-bottom: 0;
+    margin-bottom: 2rem;
+    list-style: none;
     overflow: auto;
     max-height: 45rem;
-    padding: 0.1rem;
-    list-style: none;
     ul {
         list-style: none;
         padding: map-get($paddings, "small");
@@ -32,8 +47,10 @@
 
 .teamStandUpList__add {
     display: flex;
-    justify-content: flex-end;
+    justify-content: start;
     align-items: center;
+    margin: 0 2rem;
+    margin-bottom: map-get($margins, "small");
 
     &__icon {
         font-size: 1.5rem;
@@ -65,38 +82,40 @@
     top: 3.5rem;
     left: 0;
     @include flexCenter(column);
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.3);
 
-    &__modal {
-        height: 30rem;
-        width: 40rem;
-        background-color: $color-primary;
-        border-radius: $border-radius;
-        padding: map-get($paddings, "small");
-        @include flexCenter(column);
-        &__close {
-            width: 100%;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            position: sticky;
-            &__icon {
-                color: $color-widget;
-                font-size: map-get($font-sizes, "medium");
-                cursor: pointer;
-            }
-        }
-        form {
-            width: 80%;
-            margin: auto;
-            box-shadow: $shadow;
-            padding: map-get($paddings, "small");
-            background-color: $color-widget;
-            border-radius: $border-radius;
-            div {
-                width: 100%;
-                @include flexCenter(row);
-            }
+    .teamForm__modal__close {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        &__icon {
+            color: $color-primary;
+            font-size: 1.5rem;
+            cursor: pointer;
         }
     }
+
+    form {
+        width: 40rem;
+        margin: auto;
+        box-shadow: $shadow;
+        padding: map-get($paddings, "small");
+        padding-top: map-get($paddings, "extraSmall");
+        background-color: $color-widget;
+        border-radius: $border-radius;
+        border-top: $border;
+        div {
+            width: 100%;
+            @include flexCenter(row);
+        }
+    }
+}
+
+.teamInstruction {
+    margin: 0 2rem;
+    &__btn{
+        margin: 2rem;
+    }
+
 }

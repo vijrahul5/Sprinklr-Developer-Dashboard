@@ -1,6 +1,8 @@
 .basicInfo {
     width: 25rem;
     position: fixed;
+    height: 100%;
+
 }
 
 .profile {
@@ -14,11 +16,11 @@
     border-top: $border;
 
     &__imgHolder {
-        width: 8rem;
-        height: 8rem;
+        width: 6rem;
+        height: 6rem;
         object-fit: cover;
         margin: 0px auto;
-        margin-bottom: 0.5rem;
+        // margin-bottom: 0.5rem;
     }
 
     &__param {
@@ -68,6 +70,16 @@
     font-size: map-get($font-sizes, "small");
     background-color: $color-widget;
     border-top: $border;
+
+    &__heading{
+        color: $color-primary;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid $color-primary;
+        margin-bottom: map-get($margins, "small");
+        font-weight: map-get($font-weights, "small");
+        font-size: 1.5rem;
+
+    }
 
     &__input {
         margin-bottom: map-get($margins, "small");

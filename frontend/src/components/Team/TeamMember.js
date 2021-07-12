@@ -1,6 +1,6 @@
 import React from "react";
-import { RiDeleteBin6Line } from "react-icons/ri";
 import standUpQuestions from "../StandUp/StandUpQuestions";
+import { Button, SIZE, KIND } from "baseui/button";
 
 function TeamMember({ teamMember, handleDeleteTeamMember }) {
     return (
@@ -31,10 +31,14 @@ function TeamMember({ teamMember, handleDeleteTeamMember }) {
                 })}
 
                 <div className="teamStandUpList__delete">
-                    <RiDeleteBin6Line
-                        className="teamStandUpList__delete__icon"
+                    <Button
+                        className="btnCustom--tertiary"
+                        size={SIZE.mini}
+                        kind={KIND.tertiary}
                         onClick={() => handleDeleteTeamMember(teamMember.email)}
-                    />
+                    >
+                        Delete Team Member
+                    </Button>
                 </div>
             </ul>
         </>
