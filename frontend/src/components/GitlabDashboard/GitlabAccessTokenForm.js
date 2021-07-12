@@ -1,15 +1,27 @@
-import { React, useState, useCallback } from "react";
+import React from "react";
+import { useState, useCallback } from "react";
 import { Input, SIZE } from "baseui/input";
 import { Button } from "baseui/button";
 
 const GitlabAccessTokenForm = (props) => {
     const [accessToken, setAccessToken] = useState("");
-    const setToken = (e) => {
-        setAccessToken(e.target.value);
-    };
+    const setToken = useCallback(
+        (e) => {
+            setAccessToken(e.target.value);
+        },
+        [accessToken]
+    );
     const submitToken = useCallback(() => {
         props.submitToken(accessToken);
     }, [accessToken, props]);
+    const overRides = {
+        Root: {
+            style: () => ({
+                borderRadius: "4px",
+                marginTop: "1.5rem",
+            }),
+        },
+    };
     return (
         <>
             <ul className="instruction">
@@ -37,14 +49,7 @@ const GitlabAccessTokenForm = (props) => {
                 value={accessToken}
                 placeholder="Please Enter Access Token"
                 onChange={setToken}
-                overrides={{
-                    Root: {
-                        style: ({ $theme }) => ({
-                            borderRadius: "4px",
-                            marginTop:"1.5rem"
-                        }),
-                    },
-                }}
+                overrides={overRides}
             />
             <div className="btn__container">
                 <Button
