@@ -22,6 +22,7 @@ export const useUpdateEmployeeTeam = function () {
                 }
             } catch (err) {
                 setAddError(err.message);
+                NotificationManager.error("Error!", err.message, 5000);
             }
         },
         [setAddError]
@@ -45,6 +46,7 @@ export const useUpdateEmployeeTeam = function () {
                 }
             } catch (err) {
                 setDeleteError(err.message);
+                NotificationManager.error("Error!", err.message, 5000);
             }
         },
         [setDeleteError]

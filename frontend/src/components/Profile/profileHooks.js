@@ -22,6 +22,7 @@ export const useFetchEmployeeData = function () {
             } catch (err) {
                 setLoading(false);
                 setError(err.message);
+                NotificationManager.error("Error!", err.message, 5000);
             }
         },
         [setData, setLoading, setError]
@@ -29,7 +30,7 @@ export const useFetchEmployeeData = function () {
 
     useEffect(() => {
         apiCall();
-    }, []);
+    }, [apiCall]);
 
     return [loading, data, error];
 };
@@ -55,6 +56,7 @@ export const useRequestManagerAccess = function () {
                 }
             } catch (err) {
                 setRequestError(err.message);
+                NotificationManager.error("Error!",err.message, 5000);
             }
         },
         [setRequestError]

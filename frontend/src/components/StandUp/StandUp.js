@@ -15,25 +15,13 @@ import standUpQuestions from "./StandUpQuestions";
 
 function StandUp() {
     const [value, setValue] = useState(Array(standUpQuestions.length).fill(""));
-    const [loading, data, error, setLoading] = useFetchEmployeeStandUp();
+    const [loading, data, error, setFetch] = useFetchEmployeeStandUp();
     const [addError, editError, addStandUp, editStandUp] =
         useUpdateEmployeeStandUp();
 
     useEffect(() => {
         if (data) setValue(data);
     }, [data]);
-
-    useEffect(() => {
-        if (error) NotificationManager.error("Error", error, 5000);
-    }, [error]);
-
-    useEffect(() => {
-        if (addError) NotificationManager.error("Error", addError, 5000);
-    }, [addError]);
-
-    useEffect(() => {
-        if (editError) NotificationManager.error("Error", editError, 5000);
-    }, [editError]);
 
     function checkFieldEmpty() {
         for (let key in value) {
@@ -53,14 +41,13 @@ function StandUp() {
         if (checkFieldEmpty()) return;
         addStandUp(value);
         setValue(Array(standUpQuestions.length).fill(""));
-        setLoading(true);
+        setFetch(true);
     }
 
     function handleEdit(e) {
         e.preventDefault();
         if (checkFieldEmpty()) return;
         editStandUp(value);
-        setLoading(true);
     }
 
     const changeValue = useCallback(
@@ -78,6 +65,7 @@ function StandUp() {
     if (loading) {
         return (
             <form className="standUp">
+                <h1 className="standUp__heading">Daily Progress</h1>
                 <Loader />
             </form>
         );
@@ -89,6 +77,7 @@ function StandUp() {
                 className="standUp"
                 onSubmit={data ? handleEdit : handleSubmit}
             >
+                <h1 className="standUp__heading">Daily Progress</h1>
                 {data ? (
                     <div className="standUp__success">
                         <AiOutlineCheckCircle className="standUp__success__icon" />

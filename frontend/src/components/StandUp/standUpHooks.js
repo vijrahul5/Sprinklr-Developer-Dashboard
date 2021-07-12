@@ -7,11 +7,13 @@ export const useFetchEmployeeStandUp = function () {
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState(null);
     const [error, setError] = useState(false);
+    const [fetch,setFetch] = useState(false);
 
     const apiCall = useCallback(
         async function () {
             try {
                 setError(false);
+                setFetch(false);
                 const res = await axios.get("/api/employee/standup");
                 if (res.data.status === "Success") {
                     setLoading(false);
@@ -21,17 +23,18 @@ export const useFetchEmployeeStandUp = function () {
                 }
             } catch (err) {
                 setError(err.message);
+                NotificationManager.error("Error", error, 5000);
                 setLoading(false);
             }
         },
-        [setLoading, setData, setError]
+        [setLoading, setData, setError, error]
     );
 
     useEffect(() => {
         apiCall();
-    }, [loading]);
+    }, [fetch, apiCall]);
 
-    return [loading, data, error, setLoading];
+    return [loading, data, error, setFetch];
 };
 
 export const useUpdateEmployeeStandUp = function () {
@@ -43,7 +46,9 @@ export const useUpdateEmployeeStandUp = function () {
         async function (data) {
             setAddError(false);
             try {
-                const res = await axios.post("/api/employee/standup", {data: data});
+                const res = await axios.post("/api/employee/standup", {
+                    data: data,
+                });
                 if (res.data.status === "Success") {
                     NotificationManager.success(
                         "Success!",
@@ -55,6 +60,7 @@ export const useUpdateEmployeeStandUp = function () {
                 }
             } catch (err) {
                 setAddError(err.message);
+                NotificationManager.error("Error", err.message, 5000);
             }
         },
         [setAddError]
@@ -64,7 +70,9 @@ export const useUpdateEmployeeStandUp = function () {
         async function (data) {
             setEditError(false);
             try {
-                const res = await axios.patch("/api/employee/standup", {data:data});
+                const res = await axios.patch("/api/employee/standup", {
+                    data: data,
+                });
                 if (res.data.status === "Success") {
                     NotificationManager.success(
                         "Success!",
@@ -76,6 +84,7 @@ export const useUpdateEmployeeStandUp = function () {
                 }
             } catch (err) {
                 setEditError(err.message);
+                NotificationManager.error("Error", err.message, 5000);
             }
         },
         [setEditError]

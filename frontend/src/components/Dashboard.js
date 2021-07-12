@@ -7,15 +7,10 @@ import JiraDashboard from "./JiraDashboard/components/jira/Jira";
 import GitlabDashboard from "./GitlabDashboard/GitlabDashboard";
 import { useFetchEmployeeData } from "./Profile/profileHooks";
 import Loader from "../globalComponents/Loader/Loader";
-import NotificationManager from "react-notifications/lib/NotificationManager";
 
 export default function Dashboard() {
     const [loading, user, error] = useFetchEmployeeData();
 
-    if (error) {
-        NotificationManager.err("Error!", error, 5000);
-    }
-    
     if (loading) {
         return <Loader />;
     }
