@@ -1,20 +1,20 @@
 .teamStandUpList {
     padding: 0;
     h1 {
-        margin: 2rem;
+        margin: map-get($margins, "medium");
     }
     &__loader {
         width: 100%;
         height: 100%;
-        padding: 2rem;
+        padding: map-get($paddings, "medium");
         padding-top: 0;
     }
 }
 .teamStandUpList ul {
-    padding: 2rem;
+    padding: map-get($paddings, "medium");
     padding-top: 0.1rem;
     padding-bottom: 0;
-    margin-bottom: 2rem;
+    margin-bottom: map-get($margins, "medium");
     list-style: none;
     overflow: auto;
     max-height: 45rem;
@@ -49,29 +49,14 @@
     display: flex;
     justify-content: start;
     align-items: center;
-    margin: 0 2rem;
+    margin: 0 map-get($margins, "medium");
     margin-bottom: map-get($margins, "small");
-
-    &__icon {
-        font-size: 1.5rem;
-        font-weight: map-get($font-weights, "large");
-        color: $color-primary;
-        margin-right: 2.5rem;
-        cursor: pointer;
-    }
 }
 
 .teamStandUpList__delete {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-
-    &__icon {
-        font-size: 1.5rem;
-        font-weight: map-get($font-weights, "large");
-        color: $color-primary;
-        cursor: pointer;
-    }
 }
 
 .teamForm {
@@ -113,9 +98,8 @@
 }
 
 .teamInstruction {
-    margin: 0 2rem;
-    &__btn{
-        margin: 2rem;
+    margin: 0 map-get($margins, "medium");
+    &__btn {
+        margin: map-get($margins, "medium");
     }
-
 }

@@ -21,6 +21,24 @@
         margin-right: 2rem;
         cursor: pointer;
         color: $color-widget;
+
+        &__description{
+            display: none;
+        }
+
+        &:hover + &__description {
+            display: block;
+            width: fit-content;
+            padding: 4px;
+            background-color: $color-primary;
+            color: $color-widget;
+            border-radius: $border-radius;
+            position: fixed;
+            // border: 1px solid black;
+            top: 3.6rem;
+            right: 1rem;
+            z-index: 2;
+        }
     }
 }
 
@@ -28,8 +46,6 @@
     margin-top: 3.5rem;
     padding: map-get($paddings, "medium");
 }
-
-
 
 .sectionContainer {
     margin-left: 25rem + 2rem;

@@ -158,6 +158,25 @@ body,
   color: white;
 }
 
+.dashboardNavbar__icon__description {
+  display: none;
+}
+
+.dashboardNavbar__icon:hover + .dashboardNavbar__icon__description {
+  display: block;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 4px;
+  background-color: #0c66c2;
+  color: white;
+  border-radius: 4px;
+  position: fixed;
+  top: 3.6rem;
+  right: 1rem;
+  z-index: 2;
+}
+
 .dashboardContainer {
   margin-top: 3.5rem;
   padding: 2rem;
@@ -287,7 +306,7 @@ body,
 .profile ul {
   width: 100%;
   list-style: none;
-  padding: 1rem 0px;
+  margin-top: 1rem;
   border-radius: 4px;
 }
 
@@ -459,14 +478,6 @@ body,
   margin-bottom: 1rem;
 }
 
-.teamStandUpList__add__icon {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #0c66c2;
-  margin-right: 2.5rem;
-  cursor: pointer;
-}
-
 .teamStandUpList__delete {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -477,13 +488,6 @@ body,
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-}
-
-.teamStandUpList__delete__icon {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #0c66c2;
-  cursor: pointer;
 }
 
 .teamForm {

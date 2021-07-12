@@ -20,7 +20,7 @@ function GitlabApp({ user }) {
         if (allpipelineStatus.data.length == 0) {
             arrToPass.push([
                 ProjectName,
-                <a href={mergeRequests.web_url}>{mergeRequests.title}</a>,
+                <a href={mergeRequests.web_url} className="jiraIssueUrl">{mergeRequests.title}</a>,
                 mergeRequests.merge_status,
                 mergeRequests.merged_by === null
                     ? null
@@ -42,7 +42,7 @@ function GitlabApp({ user }) {
 
             arrToPass.push([
                 ProjectName,
-                <a href={mergeRequests.web_url}>{mergeRequests.title}</a>,
+                <a href={mergeRequests.web_url} className="jiraIssueUrl">{mergeRequests.title}</a>,
                 mergeRequests.merge_status,
                 mergeRequests.merged_by === null
                     ? null
@@ -90,7 +90,7 @@ function GitlabApp({ user }) {
                 if (mergeIdsResponse.data.length === 0) {
                     finalArray.push([
                         element[1],
-                        "NO_mergeRequestsuest",
+                        "no_merge_request",
                         null,
                         null,
                         null,

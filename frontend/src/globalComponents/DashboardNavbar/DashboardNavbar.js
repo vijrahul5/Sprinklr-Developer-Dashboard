@@ -6,7 +6,7 @@ import Auth from "../../Auth";
 function DashboardNavbar() {
     return (
         <>
-            <div className="dashboardNavbar">
+            <nav className="dashboardNavbar">
                 <h1>Sprinklr Developer Dashboard</h1>
                 <FaSignOutAlt
                     onClick={() => Auth.logout()}
@@ -14,7 +14,8 @@ function DashboardNavbar() {
                 >
                     <Link to="/" />
                 </FaSignOutAlt>
-            </div>
+                <p className="dashboardNavbar__icon__description">Sign Out</p>
+            </nav>
         </>
     );
 }

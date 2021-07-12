@@ -48,7 +48,7 @@
     ul {
         width: 100%;
         list-style: none;
-        padding: map-get($paddings, "small") 0px;
+        margin-top: map-get($paddings, "small");
         border-radius: $border-radius;
     }
 

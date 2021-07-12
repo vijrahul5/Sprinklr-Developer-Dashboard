@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 
 import { FormControl } from "baseui/form-control";
 import { Input } from "baseui/input";
@@ -14,185 +14,189 @@ const columnTitles = ["Type", "Key", "Summary", "Status", "Priority"];
 const title = "All Issues";
 
 const Widgetjira = () => {
-    const [jqlQuery, setJqlQuery] = useState(""); //jqlQuery that we pass as prop to table
-    const [inputValue, setInputValue] = useState(""); //change in Input JQL query
-    const [filterValue, setFilterValue] = useState([]); //change in Filter dropdown
-    const [employeeFilterValue, setEmployeeFilterValue] = useState([]); //change in Employee Filter dropdown
-    const [basicMode, setBasicMode] = useState(false);
+  const [jqlQuery, setJqlQuery] = useState(""); //jqlQuery that we pass as prop to table
+  const [inputValue, setInputValue] = useState(""); //change in Input JQL query
+  const [filterValue, setFilterValue] = useState([]); //change in Filter dropdown
+  const [employeeFilterValue, setEmployeeFilterValue] = useState([]); //change in Employee Filter dropdown
+  const [basicMode, setBasicMode] = useState(false);
+  const { filters } = useFilters();
+  const { employeeDetails } = useEmployeeFilter();
+  const { data, pageNumber, totalPages, setPageNumber, loading, errMessage } =
+    useGetJiraData(jqlQuery);
+  const [error, setError] = useState(false);
+  useEffect(() => {
+    setError(errMessage.length > 0 ? true : false);
+  }, [errMessage]);
+  const handleInputChange = useCallback(
+    (event) => {
+      setError(false);
+      setInputValue(event.target.value);
+    },
+    [inputValue, errMessage]
+  );
 
-    const { filters } = useFilters();
-    const { employeeDetails } = useEmployeeFilter();
-    const { data, pageNumber, totalPages, setPageNumber, loading, errMessage } =
-        useGetJiraData(jqlQuery);
+  const handleClick = useCallback(() => {
+    setJqlQuery(inputValue);
+  }, [inputValue]);
 
-    const handleInputChange = useCallback(
-        (event) => {
-            setInputValue(event.target.value);
-        },
-        [inputValue]
-    );
+  const handleFilter = useCallback(
+    (params) => {
+      setFilterValue(params.value);
+      if (params.value.length > 0 && employeeFilterValue.length > 0) {
+        setJqlQuery(
+          `filter=${params.value[0].id} AND assignee in ("${employeeFilterValue[0].id}")`
+        );
+      } else if (params.value.length > 0) {
+        setJqlQuery(`filter=${params.value[0].id}`);
+      } else if (employeeFilterValue.length > 0) {
+        setJqlQuery(`assignee in ("${employeeFilterValue[0].id}`);
+      } else {
+        setJqlQuery("");
+      }
+    },
+    [employeeFilterValue]
+  );
 
-    const handleClick = useCallback(() => {
-        setJqlQuery(inputValue);
-    }, [inputValue]);
+  const handleEmployeeFilter = useCallback(
+    (params) => {
+      setEmployeeFilterValue(params.value);
+      if (params.value.length > 0 && filterValue.length > 0) {
+        setJqlQuery(
+          `filter=${filterValue[0].id} AND assignee in ("${params.value[0].id}")`
+        );
+      } else if (params.value.length > 0) {
+        setJqlQuery(`assignee in ("${params.value[0].id}")`);
+      } else if (filterValue.length > 0) {
+        setJqlQuery(`filter=${filterValue[0].id}`);
+      } else {
+        setJqlQuery("");
+      }
+    },
+    [filterValue]
+  );
 
-    const handleFilter = useCallback(
-        (params) => {
-            setFilterValue(params.value);
-            if (params.value.length > 0 && employeeFilterValue.length > 0) {
-                setJqlQuery(
-                    `filter=${params.value[0].id} AND assignee in ("${employeeFilterValue[0].id}")`
-                );
-            } else if (params.value.length > 0) {
-                setJqlQuery(`filter=${params.value[0].id}`);
-            } else if (employeeFilterValue.length > 0) {
-                setJqlQuery(`assignee in ("${employeeFilterValue[0].id}`);
-            } else {
-                setJqlQuery("");
-            }
-        },
-        [employeeFilterValue]
-    );
-
-    const handleEmployeeFilter = useCallback(
-        (params) => {
-            setEmployeeFilterValue(params.value);
-            if (params.value.length > 0 && filterValue.length > 0) {
-                setJqlQuery(
-                    `filter=${filterValue[0].id} AND assignee in ("${params.value[0].id}")`
-                );
-            } else if (params.value.length > 0) {
-                setJqlQuery(`assignee in ("${params.value[0].id}")`);
-            } else if (filterValue.length > 0) {
-                setJqlQuery(`filter=${filterValue[0].id}`);
-            } else {
-                setJqlQuery("");
-            }
-        },
-        [filterValue]
-    );
-
-    const handleSwitch = useCallback(() => {
-        setBasicMode((prevMode) => !prevMode);
-    }, [basicMode]);
-    return (
-        <>
-            <div className="jiraWid">
-                <div className="jiraWid__search">
-                    {basicMode === false ? (
-                        <>
-                            <div className="jiraWid__jqlFilter">
-                                <FormControl caption={() => errMessage}>
-                                    <Input
-                                        value={inputValue}
-                                        onChange={handleInputChange}
-                                        placeholder="Enter JQL to search issues"
-                                        clearOnEscape
-                                        size={SIZE.compact}
-                                        overrides={{
-                                            Root: {
-                                                style: ({ $theme }) => ({
-                                                    borderRadius: "4px",
-                                                }),
-                                            },
-                                        }}
-                                        error={
-                                            errMessage.length > 0 ? true : false
-                                        }
-                                    />
-                                </FormControl>
-                            </div>
-                        </>
-                    ) : (
-                        <>
-                            <div className="jiraWid__filter">
-                                <FormControl>
-                                    <Select
-                                        size={SIZE.compact}
-                                        options={filters}
-                                        value={filterValue}
-                                        placeholder="Select Filter"
-                                        onChange={handleFilter}
-                                        overrides={{
-                                            ControlContainer: {
-                                                style: ({ $theme }) => ({
-                                                    borderRadius: "4px",
-                                                }),
-                                            },
-                                        }}
-                                    />
-                                </FormControl>
-                            </div>
-
-                            <div className="jiraWid__filter">
-                                <FormControl>
-                                    <Select
-                                        size={SIZE.compact}
-                                        options={employeeDetails}
-                                        value={employeeFilterValue}
-                                        placeholder="Select Assignee"
-                                        onChange={handleEmployeeFilter}
-                                        overrides={{
-                                            ControlContainer: {
-                                                style: ({ $theme }) => ({
-                                                    borderRadius: "4px",
-                                                }),
-                                            },
-                                        }}
-                                    />
-                                </FormControl>
-                            </div>
-                        </>
-                    )}
-                    {basicMode === false ? (
-                        <Button
-                            onClick={handleClick}
-                            className="btn--blue"
-                            size={SIZE.compact}
-                            overrides={{
-                                Root: {
-                                    style: ({ $theme }) => ({
-                                        borderRadius: "4px",
-                                    }),
-                                },
-                            }}
-                        >
-                            search
-                        </Button>
-                    ) : (
-                        <></>
-                    )}
-
-                    <Button
-                        onClick={handleSwitch}
-                        className="btn--white"
-                        size={SIZE.compact}
-                        overrides={{
-                            Root: {
-                                style: ({ $theme }) => ({
-                                    borderRadius: "4px",
-                                }),
-                            },
-                        }}
-                    >
-                        {basicMode === true
-                            ? "Switch to JQL"
-                            : "Switch to basic"}
-                    </Button>
+  const handleSwitch = useCallback(() => {
+    setBasicMode((prevMode) => !prevMode);
+  }, [basicMode]);
+  return (
+    <>
+      <div className="jiraWid">
+        <div className="jiraWid__search">
+          {basicMode === false ? (
+            <>
+              <div className="jiraWid__jqlFilter">
+                <FormControl caption={() => (error === true ? errMessage : "")}>
+                  <Input
+                    value={inputValue}
+                    onChange={handleInputChange}
+                    placeholder="Enter JQL to search issues"
+                    clearOnEscape
+                    size={SIZE.compact}
+                    overrides={{
+                      Root: {
+                        style: ({ $theme }) => ({
+                          borderRadius: "4px",
+                        }),
+                      },
+                    }}
+                    error={error}
+                  />
+                </FormControl>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="jiraWid__filter">
+                <FormControl>
+                  <Select
+                    size={SIZE.compact}
+                    options={filters}
+                    value={filterValue}
+                    placeholder="Select Filter"
+                    onChange={handleFilter}
+                    overrides={{
+                      ControlContainer: {
+                        style: ({ $theme }) => ({
+                          borderRadius: "4px",
+                        }),
+                      },
+                    }}
+                  />
+                </FormControl>
+              </div>
+              {/* {employeeFilterValue.length > 0 ? ( */}
+                <div className="jiraWid__filter">
+                  <FormControl>
+                    <Select
+                      size={SIZE.compact}
+                      options={employeeDetails}
+                      value={employeeFilterValue}
+                      placeholder="Select Assignee"
+                      onChange={handleEmployeeFilter}
+                      overrides={{
+                        ControlContainer: {
+                          style: ({ $theme }) => ({
+                            borderRadius: "4px",
+                          }),
+                        },
+                      }}
+                    />
+                  </FormControl>
                 </div>
+              {/* ) : ( */}
+                {/* <></> */}
+              {/* )} */}
+            </>
+          )}
+          <div className="jiraBtn__container">
+            {basicMode === false ? (
+              <Button
+                onClick={handleClick}
+                className="btn--blue"
+                size={SIZE.compact}
+                overrides={{
+                  Root: {
+                    style: ({ $theme }) => ({
+                      borderRadius: "4px",
+                    }),
+                  },
+                }}
+              >
+                search
+              </Button>
+            ) : (
+              <></>
+            )}
 
-                <Table
-                    columnTitles={columnTitles}
-                    title={title}
-                    data={data}
-                    pageNumber={pageNumber}
-                    totalPages={totalPages}
-                    setPageNumber={setPageNumber}
-                    loading={loading}
-                />
-            </div>
-        </>
-    );
+            <Button
+              onClick={handleSwitch}
+              className="btn--white"
+              size={SIZE.compact}
+              overrides={{
+                Root: {
+                  style: ({ $theme }) => ({
+                    borderRadius: "4px",
+                  }),
+                },
+              }}
+            >
+              {basicMode === true ? "Switch to JQL" : "Switch to basic"}
+            </Button>
+          </div>
+        </div>
+
+        <Table
+          columnTitles={columnTitles}
+          title={title}
+          data={data}
+          pageNumber={pageNumber}
+          totalPages={totalPages}
+          setPageNumber={setPageNumber}
+          loading={loading}
+        />
+      </div>
+    </>
+  );
 };
 
 export default Widgetjira;
