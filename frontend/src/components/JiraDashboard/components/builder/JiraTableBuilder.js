@@ -1,9 +1,9 @@
 import React from "react";
-import highest_jira from "../assets/images/highest_jira.svg";
-import high_jira from "../assets/images/high_jira.svg";
-import medium_jira from "../assets/images/medium_jira.svg";
-import low_jira from "../assets/images/low_jira.svg";
-import lowest_jira from "../assets/images/lowest_jira.svg";
+import highest_jira from "../../assets/images/highest_jira.svg";
+import high_jira from "../../assets/images/high_jira.svg";
+import medium_jira from "../../assets/images/medium_jira.svg";
+import low_jira from "../../assets/images/low_jira.svg";
+import lowest_jira from "../../assets/images/lowest_jira.svg";
 
 const JiraTableBuilder = () => {
   return {

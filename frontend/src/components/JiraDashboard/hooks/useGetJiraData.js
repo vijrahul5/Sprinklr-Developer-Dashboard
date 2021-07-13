@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import GetIssuesApi from "../components/GetIssuesApi";
-import JiraTableBuilder from "../components/JiraTableBuilder";
+import GetIssuesApi from "../apis/GetIssuesApi";
+import JiraTableBuilder from "../components/builder/JiraTableBuilder";
 
 const { getIssues } = GetIssuesApi();
 const EntryPerPage = 5;
 
-const useGetJiraData = (jql) => {
+const useGetJiraData = (jql = "") => {
   const [pageNumber, setPageNumber] = useState(1);
   const [data, setData] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
   const [errMessage, setErrMessage] = useState("");
   async function fetchData() {
+    setErrMessage("");
     let data = await getIssues(
       (pageNumber - 1) * EntryPerPage,
       EntryPerPage,
@@ -20,7 +21,6 @@ const useGetJiraData = (jql) => {
     );
     if (data) {
       if (data.status === "Success") {
-        setErrMessage("");
         let details = data.details;
         let jiraBaseUrl = data.jiraBaseUrl;
         let arr = details.issues.map((detail) => {
@@ -57,9 +57,7 @@ const useGetJiraData = (jql) => {
     errMessage,
   };
 };
-useGetJiraData.defaultProps = {
-  jql: "",
-};
+
 useGetJiraData.propTypes = {
   jql: PropTypes.string,
 };

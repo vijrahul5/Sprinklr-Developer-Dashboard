@@ -1,552 +1,205 @@
-@import "./variables";
-@import "./resets";
-
-@mixin flexCenter($dir) {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: $dir;
-}
-:root {
-  --color-primary: rgb(12, 102, 194);
-  --color-secondary: #eeeeee;
-  --color-nav: rgb(12, 102, 194);
-  --color-widget: white;
-  --font-primary: system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --border: 4px solid var(--color-primary);
-  --border-radius: 7px;
-  --shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  --padding: 1rem;
-}
-
-.signin {
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  @include flexCenter(column);
-  background: rgba(0, 0, 0, 0.6);
-
-  &__modal {
-    width: fit-content;
-    background: #ffffff;
-    box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
-    padding: 1rem;
-    border-radius: 1rem;
-    transition: all 0.3s;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-
-    &__close {
-      width: 100%;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-
-      &__icon {
-        font-size: map-get($font-sizes, "medium");
-        color: black;
-        cursor: pointer;
-      }
-    }
-    &__content {
-      @include flexCenter(column);
-      padding: 4rem 6rem;
-      padding-top: 2rem;
-      h3 {
-        all: unset;
-        font-size: map-get($font-sizes, "medium");
-        font-weight: map-get($font-weights, "medium");
-        text-align: center;
-        margin: 0;
-        line-height: 1;
-        margin-bottom: 4rem;
-      }
-    }
-  }
-}
-
-.landingPage {
-  background-image: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.1),
-      rgba(0, 0, 0, 0.5)
-    ),
-    url("./assets/main.png");
-  background-blend-mode: luminosity;
-  background-size: cover;
-  background-position: center;
-  width: 100%;
-  height: 100%;
-}
-
-.dashboardNavbar {
-  background-color: $color-nav;
-  width: 100%;
-  height: 3.5rem;
-  position: fixed;
-  top: 0;
-  z-index: 10;
-  @include flexCenter(row);
-  h1 {
-    all: unset;
-    font-size: map-get($font-sizes, "medium");
-    font-weight: map-get($font-weights, "small");
-    color: $color-widget;
-    margin: auto;
-    text-align: center;
-  }
-  #{&}__icon {
-    position: fixed;
-    right: 0;
-    font-size: map-get($font-sizes, "medium");
-    margin-right: 2rem;
-    cursor: pointer;
-    color: $color-widget;
-  }
-}
-
-.dashboardContainer {
-  margin-top: 3.5rem;
-  padding: map-get($paddings, "medium");
-}
-
-.basicInfo {
-  width: 25rem;
-  position: fixed;
-}
-
-.profile {
-  width: 100%;
-  height: fit-content;
-  @include flexCenter(column);
-  box-shadow: $shadow;
-  padding: map-get($paddings, "small");
-  border-radius: $border-radius;
-  margin-bottom: map-get($margins, "medium");
-  border-top: $border;
-
-  #{&}__imgHolder {
-    width: 8rem;
-    height: 8rem;
-    object-fit: cover;
-    margin: 0px auto;
-    margin-bottom: 0.5rem;
-  }
-
-  #{&}__param {
-    width: 25%;
-    font-weight: map-get($font-weights, "medium");
-    text-decoration: underline;
-  }
-
-  #{&}__value {
-    width: 75%;
-    word-break: break-all;
-    background-color: $color-widget;
-    padding: map-get($paddings, "extraSmall");
-    border-radius: $border-radius;
-    margin-left: map-get($margins, "small");
-    background-color: $color-secondary;
-  }
-
-  img {
-    width: 100%;
-    height: 100%;
-    border-radius: 70px;
-  }
-
-  ul {
-    width: 100%;
-    list-style: none;
-    padding: map-get($paddings, "small") 0px;
-    border-radius: $border-radius;
-  }
-
-  li {
-    font-size: map-get($font-sizes, "small");
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-bottom: 0.5rem;
-  }
-}
-
-.standUp {
-  width: 100%;
-  border-radius: $border-radius;
-  height: fit-content;
-  box-shadow: $shadow;
-  padding: map-get($paddings, "small");
-  font-size: map-get($font-sizes, "small");
-  background-color: $color-widget;
-  border-top: $border;
-
-  #{&}__input {
-    margin-bottom: map-get($margins, "small");
-    overflow: auto;
-    font-size: map-get($font-sizes, "small");
-  }
-  #{&}__success {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    color: $color-primary;
-    margin-bottom: map-get($margins, "small");
-    h3 {
-      margin-left: 0.5rem;
-      font-weight: map-get($font-weights, "medium");
-      font-size: 1rem;
-      text-decoration: underline;
-    }
-    &__icon {
-      font-size: 1.2rem;
-      font-weight: map-get($font-weights, "medium");
-    }
-  }
-}
-
-.requestForm {
-  @include flexCenter(row);
-  width: 100%;
-  border-top: $border;
-  box-shadow: $shadow;
-  height: fit-content;
-  padding: map-get($paddings, "small");
-  border-radius: $border-radius;
-  margin-bottom: map-get($margins, "medium");
-}
-
-.sectionContainer {
-  margin-left: 25rem + 2rem;
-  height: fit-content;
-  @include flexCenter(column);
-}
-.section {
-  width: 100%;
-  height: fit-content;
-  margin-bottom: map-get($margins, "large");
-  padding: map-get($paddings, "medium");
-  border-top: $border;
-  box-shadow: $shadow;
-  border-radius: $border-radius;
-
-  h1 {
-    color: $color-primary;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid $color-primary;
-    margin-bottom: map-get($margins, "medium");
-    font-weight: map-get($font-weights, "small");
-  }
-}
-
-.teamStandUpList ul {
-  overflow: auto;
-  max-height: 45rem;
-  padding: map-get($paddings, "extraSmall");
-  list-style: none;
-  ul {
-    list-style: none;
-    padding: map-get($paddings, "small");
-    margin-bottom: map-get($margins, "small");
-    border-radius: $border-radius;
-    box-shadow: $shadow;
-    li {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      font-size: map-get($font-sizes, "small");
-      margin-bottom: 0.5rem;
-    }
-  }
-  .teamStandUpList__param {
-    width: 30%;
-    font-weight: map-get($font-weights, "medium");
-    text-decoration: underline;
-  }
-  .teamStandUpList__value {
-    width: 70%;
-    background-color: $color-secondary;
-    padding: map-get($paddings, "extraSmall");
-    border-radius: $border-radius;
-  }
-}
-
-.teamStandUpList__add {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-
-  &__icon {
-    font-size: 1.5rem;
-    font-weight: map-get($font-weights, "large");
-    color: $color-primary;
-    margin-right: 2.5rem;
-    cursor: pointer;
-  }
-}
-
-.teamStandUpList__delete {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-
-  &__icon {
-    font-size: 1.5rem;
-    font-weight: map-get($font-weights, "large");
-    color: $color-primary;
-    cursor: pointer;
-  }
-}
-.loader {
-  width: 100%;
-  height: 100%;
-  @include flexCenter(row);
-}
-.teamForm {
-  height: 100%;
-  width: 100%;
-  position: fixed;
-  z-index: 10;
-  top: 3.5rem;
-  left: 0;
-  @include flexCenter(column);
-  background: rgba(0, 0, 0, 0.6);
-
-  &__modal {
-    height: 30rem;
-    width: 40rem;
-    background-color: $color-primary;
-    border-radius: $border-radius;
-    padding: map-get($paddings, "small");
-    @include flexCenter(column);
-    &__close {
-      width: 100%;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      position: sticky;
-      &__icon {
-        color: $color-widget;
-        font-size: map-get($font-sizes, "medium");
-        cursor: pointer;
-      }
-    }
-    form {
-      width: 80%;
-      margin: auto;
-      box-shadow: $shadow;
-      padding: map-get($paddings, "small");
-      background-color: $color-widget;
-      border-radius: $border-radius;
-      div {
-        width: 100%;
-        @include flexCenter(row);
-      }
-    }
-  }
-}
+@import "./scss/variables";
+@import "./scss/resets";
+@import "./scss/landingPage";
+@import "./scss/dashboard";
+@import "./scss/basicInfo";
+@import "./scss/team";
+@import "./scss/jira";
 
 .btnCustom {
-  background-color: var(--color-primary) !important;
+  background-color: $color-primary !important;
   color: white;
-  border-radius: var(--border-radius) !important;
+  border-radius: $border-radius !important;
+}
+.btnCustom--tertiary {
+  color: $color-primary !important;
+  border-radius: $border-radius !important;
 }
 .inputCustom {
-  border-radius: var(--border-radius) !important;
+  border-radius: $border-radius !important;
   color: black;
 }
 
-.jiraTable {
-  //   margin: 2rem;
-  //   padding: 1rem;
-  //   margin-bottom: 0;
-  //   padding-bottom: 3rem;
+.ml1 {
+  margin-left: 1rem !important;
 }
 
-#table {
-  width: 100%;
-}
-#footer {
-  display: flex;
-}
-#footerleft {
-  flex-grow: 1;
-}
-#jiraJqlContainer {
-  width: 100%;
-  margin-bottom: 0.5rem;
-}
-.btn--blue {
-  background-color: $color-primary !important;
-  color: white !important;
-  //   border-radius: $border-radius !important;
-  height: 2.2rem;
-  width: fit-content;
-  margin-left: 0.5rem !important;
-}
-.btn--white {
-  background-color: white !important;
-  color: $color-primary !important;
-  //   border-radius: $border-radius !important;
-  height: 2.2rem;
-  width: fit-content;
-  margin-left: 0.5rem !important;
-}
-.btnContainer {
-  margin-top: 2rem;
-}
-.instruction {
-}
-.instruction__item {
-  list-style: none;
-  margin: 0.8rem auto;
-  font-size: x-large;
-  font-weight: 250;
-}
-.mb12 {
-  margin-bottom: 0.5rem;
-}
-.filterContainer {
-  display: flex;
-}
-.jqlFilter {
-  width: 41rem;
-  margin-right: 1rem;
-}
-.filter {
-  margin-right: 1rem;
-  width: 20rem;
-}
-.search {
-  display: flex;
-}
-.flexGrow {
-  flex-grow: 1;
-}
-.jp {
-  width: 25px;
-  height: 25px;
-  margin-left: 1rem;
-}
-.jp__description {
-  display: none;
-}
-
-.jp:hover + .jp__description {
-  display: block;
-  position: relative;
-  z-index: 1;
-  margin-left: 0.5rem;
-}
-.jiraauthHeading {
-  margin-bottom: 10rem;
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 250;
-}
-.authbtn {
-  background-color: $color-primary !important;
-  color: white !important;
-  height: 2.2rem;
-  width: fit-content;
-}
-.jiraIssueUrl {
-  color: black;
-  font-weight: 500;
-}
-.jiraIssueUrl:hover {
-  color: blue;
-  text-decoration: underline;
-}
-
-@media only screen and (max-width: 1350px) {
-  html {
-    font-size: 90%;
+@media screen and (max-width: 1450px) {
+  .jiraWid {
+    &__search {
+      flex-direction: column;
+    }
+    &__jqlFilter {
+      width: 100%;
+      margin-right: 0rem;
+    }
+    &__filter {
+      margin-right: 0rem;
+      width: 100%;
+    }
   }
-  .dashboardContainer {
-    display: block;
-    padding: 3rem;
+
+  .btn {
+    &--blue {
+      margin-left: 0rem !important;
+    }
+    &--white {
+      margin-left: 0rem !important;
+    }
   }
+}
+
+@media only screen and (max-width: 1350px), (max-height: 950px) {
   .basicInfo {
-    margin: 0px;
-    position: unset;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 3rem;
     width: 100%;
-    background-color: var(--color-widget);
-    padding: 0rem;
-    height: fit-content;
+    position: unset;
+    @include flexCenter(row);
+    margin-bottom: map-get($margins, "medium");
+    &__wrapper {
+      width: fit-content;
+    }
   }
   .sectionContainer {
-    width: 100%;
-    height: 100vh;
-    margin-left: 0px;
+    margin-left: 0;
+  }
+  .basicInfo__wrapper {
+    margin-right: map-get($margins, "medium");
+    @include flexCenter(column);
+    width: 70%;
   }
   .profile {
-    margin: 0px;
-    margin-right: 2rem;
-    width: 50%;
-    height: 50%;
-    border-top: var(--border);
+    margin: 0;
+    margin-bottom: map-get($margins, "medium");
+    width: 100%;
+
+    #{&}__imgHolder {
+      width: 9rem;
+      height: 9rem;
+      margin-bottom: map-get($margins, "small");
+    }
   }
-  .standUp {
-    border-top: var(--border);
+  .requestForm {
+    margin-bottom: 0;
   }
 }
 
 @media only screen and (max-width: 950px) {
-  html {
-    font-size: 90%;
+  .basicInfo__wrapper {
+    margin-right: 0;
+    @include flexCenter(column);
+    width: 100%;
   }
   .dashboardContainer {
-    padding: 2rem;
+    padding: map-get($paddings, "small");
   }
-  .teamContainer {
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas:
-      "teamHeading teamHeading"
-      "teamList teamList"
-      "teamForm1 teamForm2";
-    grid-gap: 2rem;
-    margin-bottom: 5rem;
-  }
+
   .basicInfo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    @include flexCenter(column);
+    &__wrapper {
+      margin-right: 0;
+    }
   }
   .profile {
     margin: 0px;
-    margin-bottom: 2rem;
-    width: 60%;
+    margin-bottom: map-get($margins, "medium");
+    width: 100%;
+  }
+  .section {
+    padding: map-get($paddings, "small");
+  }
+  .teamStandUpList {
+    padding: 0;
+    h1 {
+      margin: 1rem;
+      margin-bottom: 2rem;
+    }
+    ul {
+      padding: 1rem;
+      ul {
+        padding: 1;
+      }
+    }
+  }
+
+  .requestForm {
+    margin-bottom: map-get($margins, "medium");
+  }
+  .teamForm {
+    form {
+      width: 30rem;
+    }
   }
 }
 
 @media only screen and (max-width: 650px) {
   html {
-    font-size: 85%;
+    font-size: 100%;
+  }
+  .teamStandUpList ul {
+    ul {
+      padding: map-get($paddings, "small");
+      margin-bottom: map-get($margins, "small");
+
+      li {
+        display: flex;
+        justify-content: start;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+    .teamStandUpList__param {
+      width: 100%;
+      margin-bottom: 0.5rem;
+    }
+    .teamStandUpList__value {
+      width: 100%;
+    }
+  }
+  .dashboardNavbar {
+    width: 100%;
+    height: 3.5rem;
+    h1 {
+      font-size: 1.5rem;
+    }
+    #{&}__icon {
+      font-size: 1.5rem;
+      margin-right: 1rem;
+    }
+  }
+  .teamForm {
+    form {
+      width: 25rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  html {
+    font-size: 100%;
+  }
+  .section {
+    padding: map-get($paddings, "extraSmall");
   }
   .dashboardContainer {
-    padding: 1rem;
+    padding: map-get($paddings, "extraSmall");
   }
-  .teamContainer {
-    height: 95vh;
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "teamHeading teamHeading"
-      "teamList teamList"
-      "teamForm1 teamForm1"
-      "teamForm2 teamForm2";
-    grid-gap: 2rem;
-    margin-bottom: 5rem;
+
+  .dashboardNavbar {
+    width: 100%;
+    height: 3.5rem;
+    h1 {
+      font-size: 1.5rem;
+    }
+    #{&}__icon {
+      font-size: 1.5rem;
+      margin-right: 1rem;
+    }
   }
-  .profile {
-    width: 80%;
+
+  .teamStandUpList ul {
+    ul {
+      padding: map-get($paddings, "extraSmall");
+      margin-bottom: map-get($margins, "small");
+    }
   }
 }

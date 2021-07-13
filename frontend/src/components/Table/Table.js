@@ -3,10 +3,18 @@ import { Table as Tablebody, DIVIDER } from "baseui/table-semantic";
 import { Pagination as TableFooter } from "baseui/pagination";
 import Loader from "../../globalComponents/Loader/Loader";
 import PropTypes from "prop-types";
+
+const btnOverride = {
+  Root: {
+    style: () => ({
+      borderRadius: "4px",
+    }),
+  },
+};
 const Table = ({
   data,
-  pageNumber,
-  totalPages,
+  pageNumber = 1,
+  totalPages = 0,
   setPageNumber,
   loading,
   columnTitles,
@@ -19,12 +27,11 @@ const Table = ({
   );
   return (
     <>
-      {}
       {loading === true ? (
         <Loader />
       ) : totalPages > 0 ? (
         <>
-          <div id="table">
+          <div className="table">
             <Tablebody
               columns={columnTitles}
               data={data}
@@ -37,19 +44,13 @@ const Table = ({
                 },
               }}
             />
-            <div id="footer">
-              <div id="footerleft"></div>
+            <div className="table__footer">
+              <div className="table__footerLeft"></div>
               <TableFooter
                 numPages={totalPages}
                 currentPage={pageNumber}
                 onPageChange={changePage}
-                overrides={{
-                  Root: {
-                    style: ({ $theme }) => ({
-                      borderRadius: "4px",
-                    }),
-                  },
-                }}
+                overrides={btnOverride}
               />
             </div>
           </div>
@@ -61,10 +62,6 @@ const Table = ({
   );
 };
 
-Table.defaultProps = {
-  pageNumber: 1,
-  totalPages: 0,
-};
 Table.propTypes = {
   data: PropTypes.array,
   pageNumber: PropTypes.number,

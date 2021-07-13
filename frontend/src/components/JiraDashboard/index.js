@@ -1,5 +1,7 @@
 import React from "react";
 import Jira from "./JIRA/Jira";
-const index = () => {};
+const index = () => {
+  <Jira />;
+};
 
-export default Jira;
+export default index;

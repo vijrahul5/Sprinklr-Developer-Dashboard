@@ -165,13 +165,13 @@ async function getDataByJql(req, res) {
     });
     const jiraBaseUrl = employee.jiraBaseUrl;
     if (!employee) {
-      throw new Error("Server Error : Please Try again");
+      throw new Error();
     }
     const refreshToken = employee.refreshToken;
     const cloudId = employee.cloudId;
     const accessToken = await getAccessToken(refreshToken);
     if (accessToken === -1) {
-      throw new Error("Server Error : Please Try again");
+      throw new Error();
     }
     const urlDataJql = `https://api.atlassian.com/ex/jira/${cloudId}/rest/api/3/search`;
     let data = await fetch(urlDataJql, {
@@ -191,7 +191,7 @@ async function getDataByJql(req, res) {
     if (data.status === 400) {
       throw new Error("Enter Valid Jql Query");
     } else if (data.status >= 400) {
-      throw new Error("Server Error : Please Try again");
+      throw new Error();
     }
     let dataJson = await data.json();
     res.json({
@@ -200,6 +200,9 @@ async function getDataByJql(req, res) {
       jiraBaseUrl: jiraBaseUrl,
     });
   } catch (err) {
+    if (err.message !== "Enter Valid Jql Query") {
+      err.message = "Server Error";
+    }
     res.json({
       status: "Failed",
       error: err.message,

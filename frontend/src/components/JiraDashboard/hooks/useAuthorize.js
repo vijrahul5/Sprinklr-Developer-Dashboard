@@ -66,11 +66,13 @@ const useAuthorize = () => {
       setDoneAuthentication(true);
     } catch (err) {
       setLoading(false);
-      NotificationManager.error(
-        "Server Error",
-        "Please try again",
-        notificationDisplayTime
-      );
+      if (!doneAuthentication) {
+        NotificationManager.error(
+          "Server Error",
+          "Please try again",
+          notificationDisplayTime
+        );
+      }
     }
   }
   return { showAuthPage, doneAuthentication, loading };

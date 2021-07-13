@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.1",
     "baseui": "^9.116.2",
+    "node-notifier": "^10.0.0",
     "pusher-js": "^7.0.3",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
