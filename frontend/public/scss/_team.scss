@@ -3,13 +3,20 @@
     h1 {
         margin: map-get($margins, "medium");
     }
-    &__loader {
-        width: 100%;
-        height: 100%;
-        padding: map-get($paddings, "medium");
-        padding-top: 0;
-    }
+    // &__loader {
+    //     width: 100%;
+    //     height: 100%;
+    //     padding: map-get($paddings, "medium");
+    //     padding-top: 0;
+    // }
 }
+.teamStandUpList__loader {
+    width: 100%;
+    height: 100%;
+    padding: map-get($paddings, "medium");
+    padding-top: 0;
+}
+
 .teamStandUpList__OuterUl {
     padding: map-get($paddings, "medium");
     padding-top: 0.1rem;
@@ -32,17 +39,17 @@
             margin-bottom: 0.5rem;
         }
     }
-    .teamStandUpList__param {
-        width: 30%;
-        font-weight: map-get($font-weights, "medium");
-        text-decoration: underline;
-    }
-    .teamStandUpList__value {
-        width: 70%;
-        background-color: $color-secondary;
-        padding: map-get($paddings, "extraSmall");
-        border-radius: $border-radius;
-    }
+}
+.teamStandUpList__param {
+    width: 30%;
+    font-weight: map-get($font-weights, "medium");
+    text-decoration: underline;
+}
+.teamStandUpList__value {
+    width: 70%;
+    background-color: $color-secondary;
+    padding: map-get($paddings, "extraSmall");
+    border-radius: $border-radius;
 }
 
 .teamStandUpList__add {
@@ -69,23 +76,11 @@
     @include flexCenter(column);
     background: rgba(0, 0, 0, 0.3);
 
-    .teamForm__modal__close {
-        width: 100%;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        &__icon {
-            color: $color-primary;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-    }
-
-    &__btnHolder {
-        @include flexCenter(row);
-        justify-content: flex-end;
-        margin-top: 0.5rem;
-    }
+    // &__btnHolder {
+    //     @include flexCenter(row);
+    //     justify-content: flex-end;
+    //     margin-top: 0.5rem;
+    // }
     form {
         width: 40rem;
         margin: auto;
@@ -109,11 +104,36 @@
         }
     }
 }
-
+.teamForm__btnHolder {
+    @include flexCenter(row);
+    justify-content: flex-end;
+    margin-top: 3rem;
+}
+.teamForm__modal__close {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    // &__icon {
+    //     color: $color-primary;
+    //     font-size: 1.5rem;
+    //     cursor: pointer;
+    // }
+}
+.teamForm__modal__close__icon {
+    color: $color-primary;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
 .teamInstruction {
     margin: 0 map-get($margins, "medium");
-    &__btn {
-        margin: map-get($margins, "medium");
-        margin-top: 0;
-    }
+    // &__btn {
+    //     margin: map-get($margins, "medium");
+    //     margin-top: 0;
+    // }
+}
+
+.teamInstruction__btn {
+    margin: map-get($margins, "medium");
+    margin-top: 0;
 }

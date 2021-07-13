@@ -158,10 +158,6 @@ body,
   color: white;
 }
 
-.dashboardNavbar__icon__description {
-  display: none;
-}
-
 .dashboardNavbar__icon:hover + .dashboardNavbar__icon__description {
   display: block;
   width: -webkit-fit-content;
@@ -175,6 +171,10 @@ body,
   top: 3.6rem;
   right: 1rem;
   z-index: 2;
+}
+
+.dashboardNavbar__icon__description {
+  display: none;
 }
 
 .dashboardContainer {
@@ -273,30 +273,6 @@ body,
   border-top: 4px solid #0c66c2;
 }
 
-.profile__imgHolder {
-  width: 6rem;
-  height: 6rem;
-  -o-object-fit: cover;
-     object-fit: cover;
-  margin: 0px auto;
-}
-
-.profile__param {
-  width: 25%;
-  font-weight: 500;
-  text-decoration: underline;
-}
-
-.profile__value {
-  width: 75%;
-  word-break: break-all;
-  background-color: white;
-  padding: 0.5rem;
-  border-radius: 4px;
-  margin-left: 1rem;
-  background-color: #eeeeee;
-}
-
 .profile img {
   width: 100%;
   height: 100%;
@@ -321,6 +297,30 @@ body,
       -ms-flex-align: center;
           align-items: center;
   margin-bottom: 0.5rem;
+}
+
+.profile__imgHolder {
+  width: 6rem;
+  height: 6rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin: 0px auto;
+}
+
+.profile__param {
+  width: 25%;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+.profile__value {
+  width: 75%;
+  word-break: break-all;
+  background-color: white;
+  padding: 0.5rem;
+  border-radius: 4px;
+  margin-left: 1rem;
+  background-color: #eeeeee;
 }
 
 .standUp {
@@ -373,11 +373,6 @@ body,
   text-decoration: underline;
 }
 
-.standUp__success__icon {
-  font-size: 1.2rem;
-  font-weight: 500;
-}
-
 .standUp__success div {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -389,6 +384,11 @@ body,
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
+}
+
+.standUp__success__icon {
+  font-size: 1.2rem;
+  font-weight: 500;
 }
 
 .requestForm {
@@ -464,13 +464,13 @@ body,
   margin-bottom: 0.5rem;
 }
 
-.teamStandUpList__OuterUl .teamStandUpList__param {
+.teamStandUpList__param {
   width: 30%;
   font-weight: 500;
   text-decoration: underline;
 }
 
-.teamStandUpList__OuterUl .teamStandUpList__value {
+.teamStandUpList__value {
   width: 70%;
   background-color: #eeeeee;
   padding: 0.5rem;
@@ -526,45 +526,6 @@ body,
   background: rgba(0, 0, 0, 0.3);
 }
 
-.teamForm .teamForm__modal__close {
-  width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.teamForm .teamForm__modal__close__icon {
-  color: #0c66c2;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
-.teamForm__btnHolder {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-  margin-top: 0.5rem;
-}
-
 .teamForm form {
   width: 40rem;
   margin: auto;
@@ -589,6 +550,45 @@ body,
 .teamForm form h2 span {
   color: black;
   text-decoration: underline;
+}
+
+.teamForm__btnHolder {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  margin-top: 3rem;
+}
+
+.teamForm__modal__close {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.teamForm__modal__close__icon {
+  color: #0c66c2;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 
 .teamInstruction {
@@ -672,8 +672,7 @@ body,
 }
 
 .btn--white:hover {
-  background-color: #0c66c2 !important;
-  color: white !important;
+  background-color: #eeeeee !important;
 }
 
 .btn__container {
@@ -724,12 +723,12 @@ body,
 }
 
 .jiraIssueUrl {
-  color: black;
+  color: #0c66c2;
   font-weight: 500;
 }
 
 .jiraIssueUrl:hover {
-  color: #0c66c2;
+  color: blue;
   text-decoration: underline;
 }
 
@@ -750,8 +749,7 @@ body,
 }
 
 .btnCustom--tertiary:hover {
-  background-color: #0c66c2 !important;
-  color: white !important;
+  background-color: #eeeeee !important;
 }
 
 .inputCustom {
@@ -769,29 +767,6 @@ body,
 
 .mt1 {
   margin-top: 0.8rem !important;
-}
-
-@media screen and (max-width: 1450px) {
-  .jiraWid__search {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-  }
-  .jiraWid__jqlFilter {
-    width: 100%;
-    margin-right: 0rem;
-  }
-  .jiraWid__filter {
-    margin-right: 0rem;
-    width: 100%;
-  }
-  .btn--blue {
-    margin-left: 0rem !important;
-  }
-  .btn--white {
-    margin-left: 0rem !important;
-  }
 }
 
 @media only screen and (max-width: 1350px), (max-height: 950px) {
@@ -815,11 +790,6 @@ body,
         -ms-flex-align: start;
             align-items: flex-start;
     margin-bottom: 2rem;
-  }
-  .basicInfo__wrapper {
-    width: -webkit-fit-content;
-    width: -moz-fit-content;
-    width: fit-content;
   }
   .sectionContainer {
     margin-left: 0;
@@ -845,7 +815,7 @@ body,
     margin: 0;
     width: 100%;
   }
-  .profile .profile__imgHolder {
+  .profile__imgHolder {
     width: 9rem;
     height: 9rem;
     margin-bottom: 1rem;
@@ -853,6 +823,26 @@ body,
   .requestForm {
     margin-bottom: 0;
     margin-top: 2rem;
+  }
+  .jiraWid__search {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .jiraWid__jqlFilter {
+    width: 100%;
+    margin-right: 0rem;
+  }
+  .jiraWidfilter {
+    margin-right: 0rem;
+    width: 100%;
+  }
+  .btn--blue {
+    margin-left: 0rem !important;
+  }
+  .btn--white {
+    margin-left: 0rem !important;
   }
 }
 
@@ -919,6 +909,9 @@ body,
   .standUp {
     margin-top: 2rem;
   }
+  .teamInstruction {
+    margin: 0;
+  }
 }
 
 @media only screen and (max-width: 650px) {
@@ -944,11 +937,11 @@ body,
         -ms-flex-align: center;
             align-items: center;
   }
-  .teamStandUpList ul .teamStandUpList__param {
+  .teamStandUpList__param {
     width: 100%;
     margin-bottom: 0.5rem;
   }
-  .teamStandUpList ul .teamStandUpList__value {
+  .teamStandUpList__value {
     width: 100%;
   }
   .dashboardNavbar {
@@ -958,7 +951,7 @@ body,
   .dashboardNavbar h1 {
     font-size: 1.5rem;
   }
-  .dashboardNavbar .dashboardNavbar__icon {
+  .dashboardNavbar__icon {
     font-size: 1.5rem;
     margin-right: 1rem;
   }
@@ -997,7 +990,7 @@ body,
   .dashboardNavbar h1 {
     font-size: 1.3rem;
   }
-  .dashboardNavbar .dashboardNavbar__icon {
+  .dashboardNavbar__icon {
     font-size: 1.3rem;
     margin-right: 0.5rem;
   }
