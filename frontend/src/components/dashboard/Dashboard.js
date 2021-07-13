@@ -1,4 +1,4 @@
-import DashboardNavbar from "../dashboardNavbar/DashboardNavbar";
+import DashboardNavbar from "../dashboardNavbar/index";
 import Profile from "../profile/index";
 import StandUp from "../standUp/index";
 import React, { lazy, Suspense } from "react";

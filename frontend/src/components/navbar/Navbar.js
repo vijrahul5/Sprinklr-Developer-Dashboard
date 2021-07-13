@@ -3,7 +3,6 @@ import { AppNavBar } from "baseui/app-nav-bar";
 import { TriangleRight } from "baseui/icon";
 
 export default function Navbar({ setSignIn }) {
-    console.log(setSignIn);
     const [mainItems, setMainItems] = useState([
         { icon: TriangleRight, label: "SignIn" },
     ]);

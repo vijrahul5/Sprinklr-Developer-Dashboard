@@ -5,10 +5,10 @@ import { Client as Styletron } from "styletron-engine-atomic";
 import { Provider as StyletronProvider } from "styletron-react";
 import { PublicRoute, ProtectedRoute } from "./routes/Routes";
 import Loader from "./components/loaders/Loader";
-import LandingPage from "./components/LandingPage";
+import LandingPage from "./components/landingPage/index";
 
 const engine = new Styletron();
-const Dashboard = lazy(() => import("./components/dashboard/Dashboard"));
+const Dashboard = lazy(() => import("./components/dashboard/index"));
 
 function App() {
     return (
@@ -23,10 +23,10 @@ function App() {
                             }}
                         >
                             <>
-                            <ProtectedRoute
-                                path="/dashboard"
-                                component={Dashboard}
-                            />
+                                <ProtectedRoute
+                                    path="/dashboard"
+                                    component={Dashboard}
+                                />
                             </>
                         </Suspense>
                         <Redirect path="*" to="/" />
