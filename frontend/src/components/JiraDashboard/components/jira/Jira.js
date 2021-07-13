@@ -5,7 +5,7 @@ import useAuthorize from "../../hooks/useAuthorize";
 import JiraAuth from "../jiraAuthorization/JiraAuth";
 import Notification from "../notification/Notification";
 import Widgetjira from "../widgetJira/WidgetJira";
-import Loader from "../../../../globalComponents/Loader/Loader";
+import Loader from "../../../loaders/Tombstone";
 
 const Jira = () => {
   const { doneAuthentication, loading } = useAuthorize();

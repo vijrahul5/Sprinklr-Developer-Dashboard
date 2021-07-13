@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { Table as Tablebody, DIVIDER } from "baseui/table-semantic";
 import { Pagination as TableFooter } from "baseui/pagination";
-import Loader from "../../globalComponents/Loader/Loader";
+import Loader from "../loaders/Tombstone";
 import PropTypes from "prop-types";
 
 const btnOverride = {
@@ -13,8 +13,8 @@ const btnOverride = {
 };
 const Table = ({
   data,
-  pageNumber = 1,
-  totalPages = 0,
+  pageNumber,
+  totalPages,
   setPageNumber,
   loading,
   columnTitles,
@@ -50,7 +50,13 @@ const Table = ({
                 numPages={totalPages}
                 currentPage={pageNumber}
                 onPageChange={changePage}
-                overrides={btnOverride}
+                overrides={{
+                  Root: {
+                    style: ({ $theme }) => ({
+                      borderRadius: "4px",
+                    }),
+                  },
+                }}
               />
             </div>
           </div>
@@ -62,6 +68,10 @@ const Table = ({
   );
 };
 
+Table.defaultProps = {
+  pageNumber: 1,
+  totalPages: 0,
+};
 Table.propTypes = {
   data: PropTypes.array,
   pageNumber: PropTypes.number,

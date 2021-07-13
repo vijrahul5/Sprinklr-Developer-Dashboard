@@ -35,6 +35,9 @@
     height: 2.2rem;
     width: fit-content;
     margin-left: 0.5rem !important;
+    &:hover {
+      opacity: 0.9;
+    }
   }
   &--white {
     background-color: white !important;
@@ -42,6 +45,10 @@
     height: 2.2rem;
     width: fit-content;
     margin-left: 0.5rem !important;
+    &:hover {
+      background-color: $color-primary !important;
+      color: white !important;
+    }
   }
   &__container {
     margin-top: 2rem;

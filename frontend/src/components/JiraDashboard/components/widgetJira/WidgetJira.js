@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import JqlFilter from "../filters/JqlFilter";
 import BasicFilter from "../filters/BasicFilter";
-import Table from "../../../Table/Table";
+import Table from "../../../table/Table";
 import useGetJiraData from "../../hooks/useGetJiraData";
 
 const columnTitles = ["Type", "Key", "Summary", "Status", "Priority"];

@@ -7,7 +7,7 @@ const Instruction = ({ instructions }) => {
       <ul className="instruction">
         {instructions.map((instruction, index) => {
           return (
-            <li className="instruction__item">
+            <li className="instruction__item" key={index}>
               {index + 1}. {instruction}
             </li>
           );

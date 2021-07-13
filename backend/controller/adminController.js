@@ -19,6 +19,9 @@ async function giveManagerAccess(req, res) {
                 await managerModel.create({
                     email: accessEmail,
                 });
+                return res.json({
+                    status: "Success",
+                });
             }
         } else {
             throw new Error("Error Occurred");

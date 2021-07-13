@@ -1,110 +1,128 @@
-import { React, useEffect, useState } from "react";
+import React from "react";
+import { useState, useEffect } from "react";
+import { FcApproval, FcCancel } from "react-icons/fc";
 import Profile from "./GitlabProfile";
-import { FcApproval, FcHighPriority, FcOk, FcCancel } from "react-icons/fc";
+
 const axios = require("axios");
 
 function GitlabApp({ user }) {
-    // user.doneGitlabAuth === true -> Table Render else Access Token submission
-    // For access token submission -> Post request with exact key 'gitlabAccessToken' on '/api/gitlab'   {gitlabAccessData : ""}; await axios.post("/api/gtilab",{gitlabAccessToken : ""})
-    // For get table data -> Get request on '/api/gitlab'
+    const postsPerPage = 8;
+    const [gitlabDetails, setgitlabDetails] = useState([]);
+    const accessToken = user.gitlabAccessToken;
 
-    const [currentPage, setCurrentPage] = useState(1);
-    const postsPerPage = 10;
-    const [posts, setPosts] = useState([]);
-    const [eleminatelength, seteleminatelength] = useState(0);
-    const accessToken =
-        "a47babe4ca273839ce99dc4e4a568ec343a17b3ca830128699c32b0f4e1c5555";
-    const fetchProjectids = async () => {
-        const url =
-            "https://gitlab.com/api/v4/user?access_token=" + accessToken;
-        const userdata = await axios.get(url);
+    const pipelineBuilder = async (projectId, mergeRequests, ProjectName) => {
+        let arrToPass = [];
 
-        const username = userdata.data.username;
-
-        const res = await axios.get(
-            `https://gitlab.com/api/v4/users?username=${username}`
+        const allpipelineStatus = await axios.get(
+            `https://gitlab.com/api/v4/projects/${projectId}/merge_requests/${mergeRequests.iid}/pipelines`
         );
 
-        const projects = await axios.get(
-            `https://gitlab.com/api/v4/users/${res.data[0].id}/projects`
-        );
+        if (allpipelineStatus.data.length == 0) {
+            arrToPass.push([
+                ProjectName,
+                <a href={mergeRequests.web_url} className="jiraIssueUrl">{mergeRequests.title}</a>,
+                mergeRequests.merge_status,
+                mergeRequests.merged_by === null
+                    ? null
+                    : mergeRequests.merged_by.name,
+                mergeRequests.target_branch,
+                null,
+                null,
+            ]);
+        } else {
+            let pipelineStatus = allpipelineStatus.data[0].status;
+            let GitlabApproval;
+            if (pipelineStatus == "success") {
+                GitlabApproval = <FcApproval size={30} />;
+                pipelineStatus = <FcApproval size={30} />;
+            } else {
+                GitlabApproval = <FcCancel size={30} />;
+                pipelineStatus = <FcCancel size={30} />;
+            }
 
-        let arr = [];
-        arr.push([36528, "Bitcoin"]);
-        projects.data.map((obj) => {
-            arr.push([obj.id, obj.name]);
-        });
-        seteleminatelength(arr.length);
-        await arr.forEach(async (element) => {
-            const merge_ids_response = await axios.get(
-                `https://gitlab.com/api/v4/projects/${element[0]}/merge_requests`
+            arrToPass.push([
+                ProjectName,
+                <a href={mergeRequests.web_url} className="jiraIssueUrl">{mergeRequests.title}</a>,
+                mergeRequests.merge_status,
+                mergeRequests.merged_by === null
+                    ? null
+                    : mergeRequests.merged_by.name,
+                mergeRequests.target_branch,
+                GitlabApproval,
+                pipelineStatus,
+            ]);
+        }
+        return arrToPass;
+    };
+
+    const fetchProject = async () => {
+        try {
+            const url =
+                "https://gitlab.com/api/v4/user?access_token=" + accessToken;
+            const userData = await axios.get(url);
+            if (!userData) throw new Error("Failed");
+            const userName = userData.data.username;
+
+            const res = await axios.get(
+                `https://gitlab.com/api/v4/users?username=${userName}`
             );
 
-            if (merge_ids_response.data.length === 0) {
-                arr.push([
-                    element[1],
-                    "NO_Merge_Request",
-                    null,
-                    null,
-                    null,
-                    null,
-                ]);
-            } else {
-                await merge_ids_response.data.forEach(async (merge_req) => {
-                    const Pipeline_status = await axios.get(
-                        `https://gitlab.com/api/v4/projects/${element[0]}/merge_requests/${merge_req.iid}/pipelines`
-                    );
-                    //console.log(Pipeline_status);
-                    if (Pipeline_status.data.length == 0) {
-                        arr.push([
-                            element[1],
-                            merge_req.title,
-                            merge_req.merged_by === null
-                                ? null
-                                : merge_req.merged_by.name,
-                            merge_req.target_branch,
-                            null,
-                            null,
-                        ]);
-                    } else {
-                        let Pipeline_stat = Pipeline_status.data[0].status;
-                        let GitlabApproval;
-                        if (Pipeline_stat == "success") {
-                            GitlabApproval = <FcApproval size={30} />;
-                            Pipeline_stat = <FcApproval size={30} />;
-                        } else {
-                            GitlabApproval = <FcCancel size={30} />;
-                            Pipeline_stat = <FcCancel size={30} />;
-                        }
+            const projects = await axios.get(
+                "https://gitlab.com/api/v4/users/" +
+                    res.data[0].id +
+                    "/projects"
+            );
 
-                        arr.push([
-                            element[1],
-                            merge_req.title,
-                            merge_req.merged_by === null
-                                ? null
-                                : merge_req.merged_by.name,
-                            merge_req.target_branch,
-                            GitlabApproval,
-                            Pipeline_stat,
-                        ]);
+            let arr = [];
+            let arrToPass = [];
+            let finalArray = [];
+            const id = 36528;
+            const ProjectName = "Bitcoin";
+            arr.push([id, ProjectName]);
+            projects.data.map((obj) => {
+                arr.push([obj.id, obj.name]);
+            });
+            for (let i = 0; i < arr.length; i++) {
+                let element = arr[i];
+                const mergeIdsResponse = await axios.get(
+                    `https://gitlab.com/api/v4/projects/${element[0]}/merge_requests`
+                );
+                if (mergeIdsResponse.data.length === 0) {
+                    finalArray.push([
+                        element[1],
+                        "no_merge_request",
+                        null,
+                        null,
+                        null,
+                        null,
+                    ]);
+                } else {
+                    for (let i = 0; i < mergeIdsResponse.data.length; i++) {
+                        let mergeRequests = mergeIdsResponse.data[i];
+                        arrToPass = await pipelineBuilder(
+                            element[0],
+                            mergeRequests,
+                            element[1]
+                        );
+                        arrToPass.map((data) => {
+                            finalArray.push(data);
+                        });
                     }
-                });
+                }
             }
-        });
 
-        setPosts(arr);
+            setgitlabDetails(finalArray);
+        } catch (err) {}
     };
     useEffect(() => {
-        fetchProjectids();
+        fetchProject();
     }, []);
-
     return (
         <>
             <Profile
                 postsPerPage={postsPerPage}
-                currentPage={currentPage}
-                post={posts}
-                eleminatelength={eleminatelength}
+                gitlabDetails={gitlabDetails}
+                user={user}
             />
         </>
     );

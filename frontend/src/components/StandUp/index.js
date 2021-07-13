@@ -1,5 +1,5 @@
 import React from "react";
-import StandUp from "./StandUp";
+import StandUp from "./components/StandUp";
 function index() {
     return <StandUp />;
 }
