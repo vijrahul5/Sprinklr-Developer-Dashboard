@@ -30,7 +30,6 @@ function App() {
                             </>
                         </Suspense>
                         <Redirect path="*" to="/" />
-                        {/* {Routes beginning with '/dashboard' are private and have to undergo authentication by the backend on refresh } */}
                     </Switch>
                 </Router>
             </StyletronProvider>
