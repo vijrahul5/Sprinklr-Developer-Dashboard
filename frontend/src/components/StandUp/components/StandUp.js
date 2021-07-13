@@ -25,16 +25,30 @@ function StandUp() {
         useUpdateEmployeeStandUp();
     const [view, setView] = useState(true);
 
-    function handleSubmit(data) {
-        if (checkFieldEmpty(data)) return;
-        addStandUp(data);
-        fetchStandUp();
-    }
+    const handleSubmit = useCallback(
+        (data) => {
+            if (checkFieldEmpty(data)) return;
+            addStandUp(data);
+            fetchStandUp();
+        },
+        [fetchStandUp, addStandUp]
+    );
 
-    function handleEdit(data) {
-        if (checkFieldEmpty(data)) return;
-        editStandUp(data);
-    }
+    const handleEdit = useCallback(
+        (data) => {
+            if (checkFieldEmpty(data)) return;
+            editStandUp(data);
+        },
+        [editStandUp]
+    );
+
+    const handleViewChange = useCallback(
+        (e) => {
+            e.preventDefault();
+            setView((oldView) => !oldView);
+        },
+        [setView]
+    );
 
     if (loading) {
         return (
@@ -61,10 +75,7 @@ function StandUp() {
                                         : "btnCustom ml1"
                                 }
                                 size={SIZE.mini}
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    setView((oldView) => !oldView);
-                                }}
+                                onClick={handleViewChange}
                             >
                                 {view ? "Close" : "View Response"}
                             </Button>

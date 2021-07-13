@@ -1,102 +1,92 @@
-.jiraWid {
-    &__search {
-        display: flex;
-        flex-direction: row;
-        margin-bottom: 0.5rem;
-    }
-    &__jqlFilter {
-        margin-right: 1rem;
-        flex-grow: 1;
-    }
-    &__filter {
-        margin-right: 1rem;
-        flex-grow: 1;
-        flex-grow: 1;
-    }
-    &__mb {
-        margin-bottom: 1rem;
-    }
+.jiraWid__search {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 0.5rem;
 }
-
+.jiraWid__jqlFilter {
+    margin-right: 1rem;
+    flex-grow: 1;
+}
+.jiraWid__filter {
+    margin-right: 1rem;
+    flex-grow: 1;
+    flex-grow: 1;
+}
+.jiraWid__mb {
+    margin-bottom: 1rem;
+}
 .table {
     width: 100%;
-    &__footer {
-        display: flex;
-        margin-top: 1rem;
-    }
-    &__footerLeft {
-        flex-grow: 1;
-    }
 }
-.btn {
-    &--blue {
-        background-color: $color-primary !important;
-        color: white !important;
-        height: 2.2rem;
-        width: fit-content;
-        margin-left: 0.5rem !important;
-        &:hover {
-            opacity: 0.9;
-        }
-    }
-    &--white {
-        background-color: white !important;
-        color: $color-primary !important;
-        height: 2.2rem;
-        width: fit-content;
-        margin-left: 0.5rem !important;
-        &:hover {
-            background-color: $color-primary !important;
-            color: white !important;
-        }
-    }
-    &__container {
-        margin-top: 2rem;
-    }
-    &--auth {
-        background-color: $color-primary !important;
-        color: white !important;
-        height: 2.2rem;
-        width: fit-content;
-    }
-    &--mb {
-        margin-bottom: 1rem !important;
-    }
+.table__footer {
+    display: flex;
+    margin-top: 1rem;
 }
-.instruction {
-    &__item {
-        list-style: none;
-        margin: 0.8rem auto;
-        font-size: 1.2rem;
-        font-weight: map-get($font-weights, "small");
-    }
+.table__footerLeft {
+    flex-grow: 1;
+}
+.btn--blue {
+    background-color: $color-primary !important;
+    color: white !important;
+    height: 2.2rem;
+    width: fit-content;
+    margin-left: 0.5rem !important;
+}
+.btn--blue:hover {
+    opacity: 0.9;
+}
+.btn--white {
+    background-color: white !important;
+    color: $color-primary !important;
+    height: 2.2rem;
+    width: fit-content;
+    margin-left: 0.5rem !important;
+}
+.btn--white:hover {
+    background-color: $color-secondary !important;
+}
+.btn__container {
+    margin-top: 2rem;
+}
+.btn--auth {
+    background-color: $color-primary !important;
+    color: white !important;
+    height: 2.2rem;
+    width: fit-content;
+}
+.btn--mb {
+    margin-bottom: 1rem !important;
 }
 
+.instruction__item {
+    list-style: none;
+    margin: 0.8rem auto;
+    font-size: 1.2rem;
+    font-weight: map-get($font-weights, "small");
+}
 .jp {
     width: 25px;
     height: 25px;
     margin-left: 1rem;
-
-    &__description {
-        display: none;
-    }
-    &:hover + &__description {
-        display: block;
-        width: fit-content;
-        padding: 4px;
-        background-color: $color-primary;
-        color: $color-secondary;
-        border-radius: $border-radius;
-        position: absolute;
-        z-index: 1;
-    }
 }
-
+.jp__description {
+    display: none;
+}
+.jp:hover + .jp__description {
+    display: block;
+    width: fit-content;
+    padding: 4px;
+    background-color: $color-primary;
+    color: $color-secondary;
+    border-radius: $border-radius;
+    position: absolute;
+    z-index: 1;
+}
 .jiraIssueUrl {
-    color: black;
+    color: $color-primary;
     font-weight: map-get($font-weights, "medium");
-    &:hover {
-        color: $color-primary;
-        text-decoration: underline;
-    }
+}
+.jiraIssueUrl:hover {
+    color: blue;
+    text-decoration: underline;
 }

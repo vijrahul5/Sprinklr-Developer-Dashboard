@@ -5,6 +5,7 @@ import { FormControl } from "baseui/form-control";
 import { Button } from "baseui/button";
 import { Textarea } from "baseui/textarea";
 import { SIZE } from "baseui/input";
+import { rootOverride } from "../constants/overrides";
 
 function StandUpForm({ data, handleEdit, handleSubmit, view }) {
     const [value, setValue] = useState(Array(standUpQuestions.length).fill(""));
@@ -24,7 +25,22 @@ function StandUpForm({ data, handleEdit, handleSubmit, view }) {
         },
         [setValue, value]
     );
+    const editStandUp = useCallback(
+        (e) => {
+            e.preventDefault();
+            handleEdit(value);
+        },
+        [handleEdit, value]
+    );
 
+    const submitStandUp = useCallback(
+        (e) => {
+            e.preventDefault();
+            handleSubmit(value);
+        },
+        [handleSubmit, value]
+    );
+    
     return (
         <>
             {(data && view) || !data ? (
@@ -42,13 +58,7 @@ function StandUpForm({ data, handleEdit, handleSubmit, view }) {
                                     onChange={changeValue}
                                     placeholder="Answer"
                                     size={SIZE.mini}
-                                    overrides={{
-                                        Root: {
-                                            style: () => ({
-                                                borderRadius: "4px",
-                                            }),
-                                        },
-                                    }}
+                                    overrides={rootOverride}
                                 />
                             </FormControl>
                         );
@@ -56,17 +66,7 @@ function StandUpForm({ data, handleEdit, handleSubmit, view }) {
                     <Button
                         className="btnCustom"
                         size={SIZE.compact}
-                        onClick={
-                            data
-                                ? (e) => {
-                                      e.preventDefault();
-                                      handleEdit(value);
-                                  }
-                                : (e) => {
-                                      e.preventDefault();
-                                      handleSubmit(value);
-                                  }
-                        }
+                        onClick={data ? editStandUp : submitStandUp}
                     >
                         {data ? "Edit" : "Submit"}
                     </Button>
