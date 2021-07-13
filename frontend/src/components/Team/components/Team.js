@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
 import TeamMember from "./TeamMember";
-import Loader from "../../globalComponents/Loader/Tombstone";
-import { useFetchEmployeeTeamData } from "./teamHooks";
-import { Heading, HeadingLevel } from "baseui/heading";
-import { BiAddToQueue } from "react-icons/bi";
-import TeamForm from "../TeamForm/TeamForm";
-import NotificationManager from "react-notifications/lib/NotificationManager";
+import Loader from "../../loaders/Tombstone";
+import useFetchEmployeeTeamData from "../../../hooks/useFetchEmployeeTeamData";
+import TeamForm from "../../teamForm.js/components/TeamForm";
 import { Button, SIZE } from "baseui/button";
+import Instruction from "../../instruction/Instruction";
 
 function Team() {
     // Component for accessing team data and their stand ups
-    const [loading, data, error, setFetch] = useFetchEmployeeTeamData(); // Fetches the logged in employee's team data and their stand ups
+    const [loading, data, error, fetchTeamData] = useFetchEmployeeTeamData(); // Fetches the logged in employee's team data and their stand ups
     const [addTeamMember, setAddTeamMember] = useState(false);
     const [deleteTeamMember, setDeleteTeamMember] = useState(false);
     const [deleteTeamMemberEmail, setDeleteTeamMemberEmail] = useState("");
@@ -41,7 +39,7 @@ function Team() {
                             Add Team Member
                         </Button>
                     </div>
-                    <ul>
+                    <ul className="teamStandUpList__OuterUl">
                         {data.map((teamMember) => {
                             return (
                                 <li key={teamMember.email}>
@@ -59,7 +57,7 @@ function Team() {
                         <TeamForm
                             type={"Add"}
                             setAddTeamMember={setAddTeamMember}
-                            setFetch={setFetch}
+                            fetchTeamData={fetchTeamData}
                         />
                     ) : null}
                     {deleteTeamMember ? (
@@ -67,27 +65,21 @@ function Team() {
                             type={"Delete"}
                             email={deleteTeamMemberEmail}
                             setDeleteTeamMember={setDeleteTeamMember}
-                            setFetch={setFetch}
+                            fetchTeamData={fetchTeamData}
                         />
                     ) : null}
                 </>
             ) : (
                 <>
-                    <div className="instruction teamInstruction">
-                        <h2 className="instruction__item">
-                            1. This is the section where you can manage your
-                            team and review their progress.
-                        </h2>
-                        <h2 className="instruction__item">
-                            2. Click on the add icon to add team members.
-                        </h2>
-                        <h2 className="instruction__item">
-                            3. Once a team member is added, you will be able to
-                            see their daily stand ups.
-                        </h2>
-                        <h2 className="instruction__item">
-                            4. Click on the delete icon to delete a team member.
-                        </h2>
+                    <div className="teamInstruction">
+                        <Instruction
+                            instructions={[
+                                "This is the section where you can manage your team and review their progress.",
+                                "Click on the add icon to add team members.",
+                                "Once a team member is added, you will be able to see their daily stand ups.",
+                                "Click on the delete icon to delete a team member.",
+                            ]}
+                        />
                     </div>
                     <div className="teamStandUpList__add teamInstruction__btn">
                         <Button
@@ -102,7 +94,7 @@ function Team() {
                         <TeamForm
                             type={"Add"}
                             setAddTeamMember={setAddTeamMember}
-                            setFetch={setFetch}
+                            fetchTeamData={fetchTeamData}
                         />
                     ) : null}
                 </>

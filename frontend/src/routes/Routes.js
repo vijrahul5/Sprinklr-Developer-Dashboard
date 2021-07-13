@@ -1,7 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import Loader from "../globalComponents/Loader/Loader";
-import { useVerifyRoute } from "./customRoutesHooks";
+import Loader from "../components/loaders/Loader";
+import { useVerifyRoute } from "./useVerifyRoute";
 //Functions for providing protected frontend routing
 
 export const PublicRoute = ({ component: Component, ...rest }) => {

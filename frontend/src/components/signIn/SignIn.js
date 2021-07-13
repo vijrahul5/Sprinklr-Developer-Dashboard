@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Loader from "../Loader/Loader";
+import Loader from "../loaders/Loader";
 import Auth from "../../Auth";
 import GoogleLogin from "react-google-login";
 import { RiCloseCircleLine } from "react-icons/ri";
 import NotificationManager from "react-notifications/lib/NotificationManager";
-import OutsideClick from "../OutsideClick";
+import OutsideClick from "../../utils/OutsideClick";
 import dotenv from "dotenv";
 dotenv.config();
 

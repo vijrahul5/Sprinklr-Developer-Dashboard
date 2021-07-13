@@ -1,7 +1,8 @@
 import { useState, useCallback } from "react";
 import axios from "axios";
 import NotificationManager from "react-notifications/lib/NotificationManager";
-export const useUpdateEmployeeTeam = function () {
+
+export default function useUpdateEmployeeTeam() {
     // Adds or Deletes a team member by sending a post/delete request to the backend server
     const [addError, setAddError] = useState(false);
     const [deleteError, setDeleteError] = useState(false);
@@ -53,4 +54,4 @@ export const useUpdateEmployeeTeam = function () {
     );
 
     return [addError, deleteError, addTeamMember, deleteTeamMember];
-};
+}

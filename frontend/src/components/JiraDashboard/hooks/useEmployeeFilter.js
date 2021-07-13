@@ -1,21 +1,24 @@
 import { useState, useEffect } from "react";
-import { useFetchEmployeeTeamData } from "../../Team/teamHooks";
-
+import useFetchEmployeeTeamData from "../../../hooks/useFetchEmployeeTeamData";
+let employeeDetails = [];
 const useEmployeeFilter = () => {
   const [loading, data, error] = useFetchEmployeeTeamData();
-  const [employeeDetails, setEmployeeDetails] = useState([]);
-
+  const selfDetail = {
+    label: "Assigned to me",
+    id: "harshrajani460@gmail.com",
+  };
   useEffect(() => {
     if (data) {
-      let information = data.map((employee) => {
+      employeeDetails = data.map((employee) => {
         return {
           label: employee.name,
           id: employee.email,
         };
       });
-      setEmployeeDetails(information);
     }
+    employeeDetails = [selfDetail, ...employeeDetails];
   }, [data]);
+
   return { employeeDetails };
 };
 

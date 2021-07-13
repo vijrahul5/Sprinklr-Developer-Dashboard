@@ -1,45 +1,37 @@
 import React, { useEffect } from "react";
-import Loader from "../../globalComponents/Loader/Tombstone";
-import { useFetchEmployeeData, useRequestManagerAccess } from "./profileHooks";
+import Loader from "../../loaders/Tombstone";
+import useFetchEmployeeData from "../../../hooks/useFetchEmployeeData";
+import useRequestManagerAccess from "../hooks/useRequestManagerAccess";
 import { Button, SIZE } from "baseui/button";
 
-function Profile() {
-    const [loading, data, error] = useFetchEmployeeData(); // Fetches employee data using a custom hook
+function Profile({user}) {
     const [requestError, requestManagerAccess] = useRequestManagerAccess();
-
-   
-    if (loading) {
-        return (
-            <div className="profile">
-                <Loader />
-            </div>
-        );
-    }
+    
     return (
         <>
             <div className="basicInfo__wrapper">
                 <div className="profile">
                     <div className="profile__imgHolder">
-                        <img src={data.picture} alt="" />
+                        <img src={user.picture} alt="" />
                     </div>
                     <ul>
                         <li>
                             <p className="profile__param">Name:</p>
-                            <p className="profile__value">{data.name}</p>
+                            <p className="profile__value">{user.name}</p>
                         </li>
                         <li>
                             <p className="profile__param">Email:</p>
-                            <p className="profile__value">{data.email}</p>
+                            <p className="profile__value">{user.email}</p>
                         </li>
                         <li>
                             <p className="profile__param">Reports to:</p>
                             <p className="profile__value">
-                                {data.manager ? data.manager.email : "None"}
+                                {user.manager ? user.manager.email : "None"}
                             </p>
                         </li>
                     </ul>
                 </div>
-                {data.managerAccess === false ? (
+                {user.managerAccess === false ? (
                     <div className="requestForm">
                         <Button
                             type="submit"

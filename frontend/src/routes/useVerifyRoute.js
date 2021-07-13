@@ -25,14 +25,14 @@ export const useVerifyRoute = function (type) {
                     }
                 }
             } catch (err) {
-                setError(err.message);
+                setError(err);
             }
         },
-        [setLoading, setError]
+        [setLoading, setError,type]
     );
     useEffect(() => {
         apiCall();
-    }, []);
+    }, [apiCall]);
 
     return [loading, error];
 };

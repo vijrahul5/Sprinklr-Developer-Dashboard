@@ -1,5 +1,5 @@
 import React from "react";
-import standUpQuestions from "../StandUp/StandUpQuestions";
+import standUpQuestions from "../../../constants/standUpQuestions";
 import { Button, SIZE, KIND } from "baseui/button";
 
 function TeamMember({ teamMember, handleDeleteTeamMember }) {

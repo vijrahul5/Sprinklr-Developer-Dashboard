@@ -102,6 +102,12 @@
             font-size: 1.2rem;
             font-weight: map-get($font-weights, "medium");
         }
+        div{
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            width: 100%;
+        }
     }
 }
 

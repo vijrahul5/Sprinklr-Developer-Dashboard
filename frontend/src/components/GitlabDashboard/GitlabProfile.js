@@ -1,10 +1,10 @@
 import React, { useCallback } from "react";
 import { useState, useEffect } from "react";
-import Table from "../../components/Table/Table";
+import Table from "../table/Table";
 
 import GitlabAccessTokenForm from "./GitlabAccessTokenForm";
 import { Select, SIZE } from "baseui/select";
-import Loader from "../../globalComponents/Loader/Tombstone";
+import Loader from "../loaders/Tombstone";
 const axios = require("axios");
 
 const GitlabProfile = (props) => {

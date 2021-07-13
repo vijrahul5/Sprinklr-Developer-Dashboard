@@ -1,6 +1,6 @@
 import React from "react";
-import Navbar from "../globalComponents/Navbar/Navbar";
-import SignIn from "../globalComponents/SignIn/SignIn";
+import Navbar from "./navbar/Navbar";
+import SignIn from "./signIn/SignIn";
 import { useState } from "react";
 export default function LandingPage() {
     const [signIn, setSignIn] = useState(false);
