@@ -1,4 +1,7 @@
+//libraries
 import React from "react";
+
+//utils
 import highest_jira from "../../assets/images/highest_jira.svg";
 import high_jira from "../../assets/images/high_jira.svg";
 import medium_jira from "../../assets/images/medium_jira.svg";

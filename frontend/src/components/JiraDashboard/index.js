@@ -1,5 +1,9 @@
+//libraries
 import React from "react";
-import Jira from "./JIRA/Jira";
+
+//components
+import Jira from "./jira/Jira";
+
 const index = () => {
   <Jira />;
 };

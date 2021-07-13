@@ -1,12 +1,19 @@
-import React, { useState, useCallback } from "react";
+//libraries
+import React from "react";
+import PropTypes from "prop-types";
 
+//hooks
+import { useState, useCallback } from "react";
+import useFilters from "../../hooks/useFilters";
+import useEmployeeFilter from "../../hooks/useEmployeeFilter";
+
+//componets
 import { FormControl } from "baseui/form-control";
 import { Button, SIZE } from "baseui/button";
 import { Select } from "baseui/select";
-import useFilters from "../../hooks/useFilters";
-import useEmployeeFilter from "../../hooks/useEmployeeFilter";
+
+//constant
 import { controlContainerOverride, rootOverride } from "./overrideConstants";
-import PropTypes from "prop-types";
 
 const BasicFilter = ({ handleSwitch, setJqlQuery }) => {
   const { filters } = useFilters();

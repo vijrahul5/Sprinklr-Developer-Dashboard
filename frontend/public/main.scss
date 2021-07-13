@@ -38,28 +38,23 @@
   margin-top: 0.8rem !important;
 }
 
-@media screen and (max-width: 1450px) {
-  .jiraWid {
-    &__search {
-      flex-direction: column;
-    }
-    &__jqlFilter {
-      width: 100%;
-      margin-right: 0rem;
-    }
-    &__filter {
-      margin-right: 0rem;
-      width: 100%;
-    }
+@media screen and (max-width: 1350px) {
+  .jiraWid__search {
+    flex-direction: column;
   }
-
-  .btn {
-    &--blue {
-      margin-left: 0rem !important;
-    }
-    &--white {
-      margin-left: 0rem !important;
-    }
+  .jiraWid__jqlFilter {
+    width: 100%;
+    margin-right: 0rem;
+  }
+  .jiraWidfilter {
+    margin-right: 0rem;
+    width: 100%;
+  }
+  .btn--blue {
+    margin-left: 0rem !important;
+  }
+  .btn--white {
+    margin-left: 0rem !important;
   }
 }
 

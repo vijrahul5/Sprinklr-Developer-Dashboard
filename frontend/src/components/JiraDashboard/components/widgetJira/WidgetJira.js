@@ -1,9 +1,16 @@
-import React, { useState, useCallback } from "react";
-import JqlFilter from "../filters/JqlFilter";
-import BasicFilter from "../filters/BasicFilter";
-import Table from "../../../table/Table";
+//libraries
+import React from "react";
+import { useState, useCallback } from "react";
+
+//hooks
 import useGetJiraData from "../../hooks/useGetJiraData";
 
+//components
+import JqlFilter from "../filters/JqlFilter";
+import BasicFilter from "../filters/BasicFilter";
+import Table from "../../../Table/Table";
+
+//constants
 const columnTitles = ["Type", "Key", "Summary", "Status", "Priority"];
 const title = "All Issues";
 

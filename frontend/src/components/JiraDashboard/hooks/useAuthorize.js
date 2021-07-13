@@ -1,7 +1,12 @@
+//library
+import axios from "axios";
+
+//hooks
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+
+//components
 import NotificationManager from "react-notifications/lib/NotificationManager";
-import axios from "axios";
 
 const startLenghtUrlForAuthCode = 37;
 const endLenghtUrlForAuthCode = 12;

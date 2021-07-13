@@ -1,24 +1,29 @@
-import React from "react";
+//libraries
+import React, { lazy, Suspense } from "react";
 import "react-notifications/lib/notifications.css";
 
+//hooks
 import useAuthorize from "../../hooks/useAuthorize";
-import JiraAuth from "../jiraAuthorization/JiraAuth";
+
+//components
 import Notification from "../notification/Notification";
-import Widgetjira from "../widgetJira/WidgetJira";
 import Loader from "../../../loaders/Tombstone";
 
 const Jira = () => {
   const { doneAuthentication, loading } = useAuthorize();
+  const Widgetjira = lazy(() => import("../widgetJira/WidgetJira"));
+  const JiraAuth = lazy(() => import("../jiraAuthorization/JiraAuth"));
   return (
     <>
-      {loading === true ? (
-        <Loader />
-      ) : doneAuthentication === false ? (
-        <JiraAuth />
-      ) : (
-        <Widgetjira />
-      )}
-
+      {loading ? <Loader /> : <></>}
+      <Suspense
+        fallback={() => {
+          return <Loader />;
+        }}
+      >
+        {!loading && !doneAuthentication ? <JiraAuth /> : <></>}
+        {!loading && doneAuthentication ? <Widgetjira /> : <></>}
+      </Suspense>
       <Notification />
     </>
   );

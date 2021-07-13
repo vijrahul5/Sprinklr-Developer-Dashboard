@@ -1,5 +1,9 @@
-import { useState, useEffect } from "react";
+//hooks
+import { useEffect } from "react";
+
+//hooks
 import useFetchEmployeeTeamData from "../../../hooks/useFetchEmployeeTeamData";
+
 let employeeDetails = [];
 const useEmployeeFilter = () => {
   const [loading, data, error] = useFetchEmployeeTeamData();
