@@ -22,6 +22,9 @@ async function signIn(req, res) {
                 picture,
                 given_name,
                 family_name,
+                managerAccess: false,
+                doneJiraAuth: false,
+                doneGitlabAuth: false,
             });
         }
         res.cookie("session-token", token);

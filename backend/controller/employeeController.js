@@ -1,5 +1,6 @@
 const employeeModel = require("../model/employeeModel");
 const standUpModel = require("../model/standUpModel");
+const managerModel = require("../model/managerModel");
 const moment = require("moment");
 
 async function getProfile(req, res) {
@@ -86,7 +87,7 @@ async function getStandUp(req, res) {
             if (standUp) {
                 return res.json({
                     status: "Success",
-                    standUp,
+                    questions: standUp.questions,
                 });
             } else {
                 throw new Error("Could not get stand up");
@@ -107,9 +108,7 @@ async function postStandUp(req, res) {
         const employee = await employeeModel.findOne({ email });
         if (employee) {
             const standUp = await standUpModel.create({
-                question1: req.body.question1,
-                question2: req.body.question2,
-                question3: req.body.question3,
+                questions: req.body.data,
                 author: employee,
             });
             if (standUp) {
@@ -142,9 +141,7 @@ async function updateStandUp(req, res) {
                 },
             });
             if (standUp) {
-                for (let key in req.body) {
-                    standUp[key] = req.body[key];
-                }
+                standUp.questions = req.body.data;
                 await standUp.save();
                 return res.json({
                     status: "Success",
@@ -279,6 +276,28 @@ async function deleteTeam(req, res) {
     }
 }
 
+async function getManagerAccess(req, res) {
+    try {
+        const email = req.email;
+        const employee = await employeeModel.findOne({ email: email });
+        const checkManager = await managerModel.findOne({ email: email });
+        if (!checkManager || !employee) {
+            throw new Error("Request Denied !");
+        } else {
+            employee.managerAccess = true;
+            await employee.save();
+            return res.json({
+                status: "Success",
+            });
+        }
+    } catch (err) {
+        res.json({
+            status: "Failed",
+            error: err.message,
+        });
+    }
+}
+
 module.exports.getProfile = getProfile;
 module.exports.updateProfile = updateProfile;
 module.exports.deleteProfile = deleteProfile;
@@ -289,3 +308,4 @@ module.exports.getStandUp = getStandUp;
 module.exports.postStandUp = postStandUp;
 module.exports.updateStandUp = updateStandUp;
 module.exports.deleteStandUp = deleteStandUp;
+module.exports.getManagerAccess = getManagerAccess;
