@@ -21,12 +21,7 @@ async function getProfile(req, res) {
         } else {
             throw new Error("Could not get profile");
         }
-    } catch (err) {
-        res.json({
-            status: "Failed",
-            error: err.message,
-        });
-    }
+    
   } catch (err) {
     res.json({
       status: "Failed",
@@ -53,12 +48,7 @@ async function updateProfile(req, res) {
         } else {
             throw new Error("Could not update profile");
         }
-    } catch (err) {
-        res.json({
-            status: "Failed",
-            error: err.message,
-        });
-    }
+    
   } catch (err) {
     res.json({
       status: "Failed",
@@ -125,16 +115,7 @@ async function getStandUp(req, res) {
             }
         }
         throw new Error("Could not get stand up");
-    } catch (err) {
-        res.json({
-            status: "Failed",
-            error: err.message,
-        });
-      } else {
-        throw new Error("Could not get stand up");
-      }
-    }
-    throw new Error("Could not get stand up");
+    
   } catch (err) {
     res.json({
       status: "Failed",
@@ -164,14 +145,7 @@ async function postStandUp(req, res) {
             }
         }
         throw new Error("Could not post standup");
-    } catch (err) {
-        res.json({
-            status: "Failed",
-            error: err.message,
-        });
-      }
-    }
-    throw new Error("Could not post standup");
+    
   } catch (err) {
     res.json({
       status: "Failed",
@@ -216,14 +190,7 @@ async function updateStandUp(req, res) {
             }
         }
         throw new Error("Could not update standup");
-    } catch (err) {
-        res.json({
-            status: "Failed",
-            error: err.message,
-        });
-      }
-    }
-    throw new Error("Could not update standup");
+    
   } catch (err) {
     res.json({
       status: "Failed",
@@ -373,13 +340,7 @@ async function deleteTeam(req, res) {
             });
         }
         throw new Error("Could not delete team member");
-    } catch (err) {
-        res.json({
-            status: "Failed",
-            error: err.message,
-        });
-    }
-    throw new Error("Could not delete team member");
+    
   } catch (err) {
     res.json({
       status: "Failed",
@@ -413,12 +374,7 @@ async function getManagerAccess(req, res) {
                 status: "Success",
             });
         }
-    } catch (err) {
-        res.json({
-            status: "Failed",
-            error: err.message,
-        });
-    }
+    
   } catch (err) {
     res.json({
       status: "Failed",

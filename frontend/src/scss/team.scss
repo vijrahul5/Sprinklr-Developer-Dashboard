@@ -1,13 +1,6 @@
 @import "base";
 
 .teamStandUpList {
-<<<<<<< HEAD:frontend/public/scss/_team.scss
-  padding: 0;
-  h1 {
-    margin: map-get($margins, "medium");
-  }
-  &__loader {
-=======
     padding: 0;
     h1 {
         margin: map-get($margins, "medium");
@@ -20,15 +13,10 @@
     // }
 }
 .teamStandUpList__loader {
->>>>>>> rahul-vij:frontend/src/scss/team.scss
     width: 100%;
     height: 100%;
     padding: map-get($paddings, "medium");
     padding-top: 0;
-<<<<<<< HEAD:frontend/public/scss/_team.scss
-  }
-=======
->>>>>>> rahul-vij:frontend/src/scss/team.scss
 }
 
 .teamStandUpList__OuterUl {
@@ -41,26 +29,6 @@
   max-height: 45rem;
   ul {
     list-style: none;
-<<<<<<< HEAD:frontend/public/scss/_team.scss
-    padding: map-get($paddings, "small");
-    margin-bottom: map-get($margins, "small");
-    border-radius: $border-radius;
-    box-shadow: $shadow;
-    li {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      font-size: map-get($font-sizes, "small");
-      margin-bottom: 0.5rem;
-    }
-  }
-  .teamStandUpList__param {
-    width: 30%;
-    font-weight: map-get($font-weights, "medium");
-    text-decoration: underline;
-  }
-  .teamStandUpList__value {
-=======
     overflow: auto;
     max-height: 45rem;
     ul {
@@ -84,15 +52,10 @@
     text-decoration: underline;
 }
 .teamStandUpList__value {
->>>>>>> rahul-vij:frontend/src/scss/team.scss
     width: 70%;
     background-color: $color-secondary;
     padding: map-get($paddings, "extraSmall");
     border-radius: $border-radius;
-<<<<<<< HEAD:frontend/public/scss/_team.scss
-  }
-=======
->>>>>>> rahul-vij:frontend/src/scss/team.scss
 }
 
 .teamStandUpList__add {
