@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useCallback } from "react";
 import { Input, SIZE } from "baseui/input";
 import { Button } from "baseui/button";
-import Instruction from "../instruction/Instruction";
+import Instruction from "../../instruction/index";
 
 const GitlabAccessTokenForm = (props) => {
     const [accessToken, setAccessToken] = useState("");

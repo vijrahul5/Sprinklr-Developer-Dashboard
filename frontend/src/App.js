@@ -6,33 +6,37 @@ import { Provider as StyletronProvider } from "styletron-react";
 import { PublicRoute, ProtectedRoute } from "./routes/Routes";
 import Loader from "./components/loaders/Loader";
 import LandingPage from "./components/landingPage/index";
+import "./scss/loader.scss";
+
 
 const engine = new Styletron();
 const Dashboard = lazy(() => import("./components/dashboard/index"));
 
 function App() {
-  return (
-    <BrowserRouter>
-      <StyletronProvider value={engine}>
-        <Router>
-          <Switch>
-            <PublicRoute exact path="/" component={LandingPage} />
-            <Suspense
-              fallback={() => {
-                return <Loader />;
-              }}
-            >
-              <>
-                <ProtectedRoute path="/dashboard" component={Dashboard} />
-              </>
-            </Suspense>
-            <Redirect path="*" to="/" />
-            {/* {Routes beginning with '/dashboard' are private and have to undergo authentication by the backend on refresh } */}
-          </Switch>
-        </Router>
-      </StyletronProvider>
-    </BrowserRouter>
-  );
+    return (
+        <BrowserRouter>
+            <StyletronProvider value={engine}>
+                <Router>
+                    <Switch>
+                        <PublicRoute exact path="/" component={LandingPage} />
+                        <Suspense
+                            fallback={() => {
+                                return <Loader />;
+                            }}
+                        >
+                            <>
+                                <ProtectedRoute
+                                    path="/dashboard"
+                                    component={Dashboard}
+                                />
+                            </>
+                        </Suspense>
+                        <Redirect path="*" to="/" />
+                    </Switch>
+                </Router>
+            </StyletronProvider>
+        </BrowserRouter>
+    );
 }
 
 export default App;

@@ -8,7 +8,7 @@ import OutsideClick from "../../utils/OutsideClick";
 import dotenv from "dotenv";
 dotenv.config();
 
-function SignIn({ setSignIn }) {
+function SignIn() {
     const [loading, setLoading] = useState(false);
 
     async function handleGoogleLoginSuccess({ tokenId }) {
@@ -17,9 +17,7 @@ function SignIn({ setSignIn }) {
     async function handleGoogleLoginFailiure(res) {
         NotificationManager.error("Error!", "Login Failed!", 5000);
     }
-    function handleClose() {
-        setSignIn(false);
-    }
+
     if (loading) {
         return (
             <>
@@ -30,26 +28,18 @@ function SignIn({ setSignIn }) {
     return (
         <>
             <div className="signin">
-                <OutsideClick handleClose={handleClose}>
-                    <div className="signin__modal">
-                        <div className="signin__modal__close">
-                            <RiCloseCircleLine
-                                className="signin__modal__close__icon"
-                                onClick={handleClose}
-                            />
-                        </div>
-                        <div className="signin__modal__content">
-                            <h3>Sign In</h3>
-                            <GoogleLogin
-                                clientId={process.env.REACT_APP_CLIENT_ID}
-                                buttonText="Continue With Google"
-                                onSuccess={handleGoogleLoginSuccess}
-                                onFailure={handleGoogleLoginFailiure}
-                                cookiePolicy="single_host_origin"
-                            />
-                        </div>
+                <div className="signin__modal">
+                    <div className="signin__modal__content">
+                        <h3>Sign In</h3>
+                        <GoogleLogin
+                            clientId={process.env.REACT_APP_CLIENT_ID}
+                            buttonText="Continue With Google"
+                            onSuccess={handleGoogleLoginSuccess}
+                            onFailure={handleGoogleLoginFailiure}
+                            cookiePolicy="single_host_origin"
+                        />
                     </div>
-                </OutsideClick>
+                </div>
             </div>
         </>
     );

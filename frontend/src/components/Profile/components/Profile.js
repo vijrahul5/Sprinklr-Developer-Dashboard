@@ -1,12 +1,16 @@
-import React, { useEffect } from "react";
-import Loader from "../../loaders/Tombstone";
-import useFetchEmployeeData from "../../../hooks/useFetchEmployeeData";
+import React, { useCallback, useEffect } from "react";
 import useRequestManagerAccess from "../hooks/useRequestManagerAccess";
 import { Button, SIZE } from "baseui/button";
 
-function Profile({user}) {
+function Profile({ user }) {
     const [requestError, requestManagerAccess] = useRequestManagerAccess();
     
+    const handleClick = useCallback(
+        (e) => {
+            requestManagerAccess();
+        },
+        [requestManagerAccess]
+    );
     return (
         <>
             <div className="basicInfo__wrapper">
@@ -37,9 +41,7 @@ function Profile({user}) {
                             type="submit"
                             className="submit btnCustom"
                             size={SIZE.compact}
-                            onClick={(e) => {
-                                requestManagerAccess();
-                            }}
+                            onClick={handleClick}
                         >
                             Request Manager Access
                         </Button>
