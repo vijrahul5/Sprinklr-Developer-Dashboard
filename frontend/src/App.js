@@ -6,6 +6,8 @@ import { Provider as StyletronProvider } from "styletron-react";
 import { PublicRoute, ProtectedRoute } from "./routes/Routes";
 import Loader from "./components/loaders/Loader";
 import LandingPage from "./components/landingPage/index";
+import "./scss/loader.scss";
+
 
 const engine = new Styletron();
 const Dashboard = lazy(() => import("./components/dashboard/index"));

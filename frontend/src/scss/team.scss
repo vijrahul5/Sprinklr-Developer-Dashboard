@@ -1,3 +1,5 @@
+@import "base";
+
 .teamStandUpList {
     padding: 0;
     h1 {
@@ -137,3 +139,5 @@
     margin: map-get($margins, "medium");
     margin-top: 0;
 }
+
+@import "media";
