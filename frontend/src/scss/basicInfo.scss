@@ -1,3 +1,4 @@
+@import "base";
 .basicInfo {
     width: 25rem;
     position: fixed;
@@ -188,3 +189,4 @@
     margin-bottom: map-get($margins, "medium");
 }
 
+@import "media";

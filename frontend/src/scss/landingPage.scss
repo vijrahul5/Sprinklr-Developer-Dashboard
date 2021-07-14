@@ -1,8 +1,9 @@
+
+@import "base";
 .signin {
     height: 100%;
     width: 100%;
     @include flexCenter(column);
-    background: rgba(0, 0, 0, 0.6);
 
     // &__modal {
     //     width: fit-content;
@@ -46,6 +47,7 @@
 }
 .signin__modal {
     width: fit-content;
+    height: 25rem;
     background: #ffffff;
     box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
     padding: 1rem;
@@ -71,7 +73,6 @@
 .signin__modal__content {
     @include flexCenter(column);
     padding: 4rem 6rem;
-    padding-top: 2rem;
     h3 {
         all: unset;
         font-size: map-get($font-sizes, "medium");
@@ -82,9 +83,18 @@
         margin-bottom: 4rem;
     }
 }
-
+.landingPage__wrapper{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+.signInSection{
+    width: 50rem;
+    // background-color: black;
+    background-color: $color-secondary;
+}
 .landingPage {
-    background-image: url("./assets/Sprinklr_Logo.png");
+    background-image: url("../assets/Sprinklr_Logo.png");
     background-blend-mode: luminosity;
     background-size: contain;
     background-position: center;
@@ -93,3 +103,5 @@
     width: 100%;
     height: 100%;
 }
+
+@import "media";

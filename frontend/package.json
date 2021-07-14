@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.1",
     "baseui": "^9.116.2",
+    "node-sass": "^6.0.1",
     "pusher-js": "^7.0.3",
     "react": "^16.8.0",
     "react-content-loader": "^6.0.3",
@@ -48,6 +49,7 @@
     ]
   },
   "devDependencies": {
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "isomorphic-style-loader": "^5.1.0"
   }
 }

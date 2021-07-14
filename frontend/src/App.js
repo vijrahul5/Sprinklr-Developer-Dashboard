@@ -6,6 +6,8 @@ import { Provider as StyletronProvider } from "styletron-react";
 import { PublicRoute, ProtectedRoute } from "./routes/Routes";
 import Loader from "./components/loaders/Loader";
 import LandingPage from "./components/landingPage/index";
+import "./scss/loader.scss";
+
 
 const engine = new Styletron();
 const Dashboard = lazy(() => import("./components/dashboard/index"));
@@ -30,7 +32,6 @@ function App() {
                             </>
                         </Suspense>
                         <Redirect path="*" to="/" />
-                        {/* {Routes beginning with '/dashboard' are private and have to undergo authentication by the backend on refresh } */}
                     </Switch>
                 </Router>
             </StyletronProvider>

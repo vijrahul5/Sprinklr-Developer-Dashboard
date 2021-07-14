@@ -8,6 +8,8 @@ import useFetchEmployeeData from "../../hooks/useFetchEmployeeData";
 import Loader from "../loaders/Loader";
 import { NotificationContainer } from "react-notifications";
 
+
+
 const Team = lazy(() => import("../team/index"));
 
 export default function Dashboard() {
@@ -29,7 +31,7 @@ export default function Dashboard() {
                             fallback={() => {
                                 return (
                                     <div className="section teamStandUpList">
-                                        <h1>Team</h1>
+                                        <h1 className="teamStandUpList__heading">Team</h1>
                                         <Loader />
                                     </div>
                                 );

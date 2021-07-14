@@ -2,6 +2,8 @@ const employeeModel = require("../model/employeeModel");
 const standUpModel = require("../model/standUpModel");
 const managerModel = require("../model/managerModel");
 const moment = require("moment");
+const Mediator = require("../model/Mediator");
+const mediator = new Mediator();
 
 async function getProfile(req, res) {
     // Gets Employee profile from the employee model
@@ -10,6 +12,7 @@ async function getProfile(req, res) {
         const employee = await employeeModel
             .findOne({ email })
             .populate("manager", "email");
+        // const employee = await mediator.get(employeeModel,{email}).populate("manager", "email");
         if (employee) {
             res.json({
                 status: "Success",
@@ -30,11 +33,13 @@ async function updateProfile(req, res) {
     // Updates Employee profile in the employee model
     try {
         const email = req.email;
-        const employee = await employeeModel.findOne({ email });
-        for (let key in req.body) {
-            employee[key] = req.body[key];
-        }
-        await employee.save();
+        const employee = await mediator.get(employeeModel,{email},"one");
+        // const employee = await employeeModel.findOne({ email });
+        await mediator.set(employee,req.body);
+        // for (let key in req.body) {
+        //     employee[key] = req.body[key];
+        // }
+        // await employee.save();
         if (employee) {
             res.json({
                 status: "Success",
@@ -53,8 +58,10 @@ async function deleteProfile(req, res) {
     // Deletes Employee Profile from the employee model
     try {
         const email = req.email;
-        const employee = await employeeModel.findOne({ email });
-        const team = await employeeModel.find({ manager: employee });
+        const employee = await mediator.get(employeeModel,{ email },"one");
+        // const employee = await employeeModel.findOne({ email });
+        const team = await mediator.get(employeeModel,{ manager: employee },"all");
+        // const team = await employeeModel.find({ manager: employee });
         team.forEach(async (teamMember) => {
             teamMember.manager = undefined;
             await teamMember.save();
@@ -74,16 +81,28 @@ async function getStandUp(req, res) {
     // Gets the employee's stand up from the stand up model
     try {
         const email = req.email;
-        const employee = await employeeModel.findOne({ email });
+        const employee = await mediator.get(employeeModel, { email }, "one");
+        // const employee = await employeeModel.findOne({ email });
         if (employee) {
             const today = moment().startOf("day");
-            const standUp = await standUpModel.findOne({
-                author: employee,
-                createdAt: {
-                    $gte: today.toDate(),
-                    $lte: moment(today).endOf("day").toDate(),
+            const standUp = await mediator.get(
+                standUpModel,
+                {
+                    author: employee,
+                    createdAt: {
+                        $gte: today.toDate(),
+                        $lte: moment(today).endOf("day").toDate(),
+                    },
                 },
-            });
+                "one"
+            );
+            // const standUp = await standUpModel.findOne({
+            //     author: employee,
+            //     createdAt: {
+            //         $gte: today.toDate(),
+            //         $lte: moment(today).endOf("day").toDate(),
+            //     },
+            // });
             if (standUp) {
                 return res.json({
                     status: "Success",
@@ -105,12 +124,17 @@ async function postStandUp(req, res) {
     // Posts an employee's stand up to the stand up model
     try {
         const email = req.email;
-        const employee = await employeeModel.findOne({ email });
+        // const employee = await employeeModel.findOne({ email });
+        const employee = await mediator.get(employeeModel, { email }, "one");
         if (employee) {
-            const standUp = await standUpModel.create({
+            const standUp = await mediator.create(standUpModel, {
                 questions: req.body.data,
                 author: employee,
             });
+            // const standUp = await standUpModel.create({
+            //     questions: req.body.data,
+            //     author: employee,
+            // });
             if (standUp) {
                 return res.json({
                     status: "Success",
@@ -130,19 +154,32 @@ async function updateStandUp(req, res) {
     // Updates an employee's stand up for the day if it exists in the database
     try {
         const email = req.email;
-        const employee = await employeeModel.findOne({ email });
+        // const employee = await employeeModel.findOne({ email });
+        const employee = await mediator.get(employeeModel, { email }, "one");
         if (employee) {
             const today = moment().startOf("day");
-            const standUp = await standUpModel.findOne({
-                author: employee,
-                createdAt: {
-                    $gte: today.toDate(),
-                    $lte: moment(today).endOf("day").toDate(),
+            const standUp = await mediator.get(
+                standUpModel,
+                {
+                    author: employee,
+                    createdAt: {
+                        $gte: today.toDate(),
+                        $lte: moment(today).endOf("day").toDate(),
+                    },
                 },
-            });
+                "one"
+            );
+            // const standUp = await standUpModel.findOne({
+            //     author: employee,
+            //     createdAt: {
+            //         $gte: today.toDate(),
+            //         $lte: moment(today).endOf("day").toDate(),
+            //     },
+            // });
             if (standUp) {
-                standUp.questions = req.body.data;
-                await standUp.save();
+                await mediator.set(standUpModel, { questions: req.body.data });
+                // standUp.questions = req.body.data;
+                // await standUp.save();
                 return res.json({
                     status: "Success",
                 });
@@ -161,7 +198,8 @@ async function deleteStandUp(req, res) {
     // Deletes an employee's stand up for the day
     try {
         const email = req.email;
-        const employee = await employeeModel.findOne({ email });
+        const employee = await mediator.get(employeeModel, { email }, "one");
+        // const employee = await employeeModel.findOne({ email });
         if (employee) {
             const today = moment().startOf("day");
             const standUp = await standUpModel.deleteOne({
@@ -189,21 +227,37 @@ async function getTeam(req, res) {
     // Gets an Employee's team's data and the stand ups of the team members for the day
     try {
         const email = req.email;
-        const employee = await employeeModel.findOne({ email });
-        const team = await employeeModel.find({ manager: employee });
+        // const employee = await employeeModel.findOne({ email });
+        const employee = await mediator.get(employeeModel, { email }, "one");
+        const team = await mediator.get(
+            employeeModel,
+            { manager: employee },
+            "all"
+        );
+        // const team = await employeeModel.find({ manager: employee });
         if (employee) {
             const teamStandUp = [];
             for (let i = 0; i < team.length; i++) {
                 const today = moment().startOf("day");
-                const standUp = await standUpModel
-                    .findOne({
+                const standUp = await mediator.get(
+                    standUpModel,
+                    {
                         author: team[i],
                         createdAt: {
                             $gte: today.toDate(),
                             $lte: moment(today).endOf("day").toDate(),
                         },
-                    })
-                    .populate("author", "name email");
+                    },
+                    "one"
+                );
+                // const standUp = await standUpModel.findOne({
+                //     author: team[i],
+                //     createdAt: {
+                //         $gte: today.toDate(),
+                //         $lte: moment(today).endOf("day").toDate(),
+                //     },
+                // });
+                // .populate("author", "name email");
 
                 teamStandUp.push({
                     name: team[i].name,
@@ -230,14 +284,20 @@ async function postTeam(req, res) {
     try {
         const email = req.email;
         const employeeEmail = req.body.employeeEmail;
-        const manager = await employeeModel.findOne({ email });
-        const employee = await employeeModel.findOne({ email: employeeEmail });
+        const manager = await mediator.get(employeeModel, { email }, "one");
+        // const manager = await employeeModel.findOne({ email });
+        const employee = await mediator.get(
+            employeeModel,
+            { email: employeeEmail },
+            "one"
+        );
+        // const employee = await employeeModel.findOne({ email: employeeEmail });
 
         if (employee && manager) {
-            employee.manager = manager;
-
-            await manager.save();
-            await employee.save();
+            mediator.set(employee, { manager: manager });
+            // employee.manager = manager;
+            // await manager.save();
+            // await employee.save();
 
             return res.json({
                 status: "Success",
@@ -256,13 +316,20 @@ async function deleteTeam(req, res) {
     try {
         const email = req.email;
         const employeeEmail = req.body.employeeEmail;
-        const manager = await employeeModel.findOne({ email });
-        const employee = await employeeModel.findOne({ email: employeeEmail });
+        const manager = await mediator.get(employeeModel, { email }, "one");
+        // const manager = await employeeModel.findOne({ email });
+        const employee = await mediator.get(
+            employeeModel,
+            { email: employeeEmail },
+            "one"
+        );
+        // const employee = await employeeModel.findOne({ email: employeeEmail });
 
         if (employee && manager) {
-            employee.manager = undefined;
-            await manager.save();
-            await employee.save();
+            await mediator.set(employee, { manager: undefined });
+            // employee.manager = undefined;
+            // await manager.save();
+            // await employee.save();
             return res.json({
                 status: "Success",
             });
@@ -279,13 +346,24 @@ async function deleteTeam(req, res) {
 async function getManagerAccess(req, res) {
     try {
         const email = req.email;
+        // const employee = await mediator.get(
+        //     employeeModel,
+        //     { email: email },
+        //     "one"
+        // );
         const employee = await employeeModel.findOne({ email: email });
-        const checkManager = await managerModel.findOne({ email: email });
+        const checkManager = await mediator.get(
+            managerModel,
+            { email: email },
+            "one"
+        );
+        // const checkManager = await managerModel.findOne({ email: email });
         if (!checkManager || !employee) {
             throw new Error("Request Denied !");
         } else {
-            employee.managerAccess = true;
-            await employee.save();
+            await mediator.set(employee, { managerAccess: true });
+            // employee.managerAccess = true;
+            // await employee.save();
             return res.json({
                 status: "Success",
             });

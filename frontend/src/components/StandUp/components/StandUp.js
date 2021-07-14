@@ -8,16 +8,7 @@ import { SIZE } from "baseui/input";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import NotificationManager from "react-notifications/lib/NotificationManager";
 import StandUpForm from "./StandUpForm";
-
-function checkFieldEmpty(value) {
-    for (let key in value) {
-        if (value[key] === "") {
-            NotificationManager.error("Error!", "Fields Cannot Be Empty", 5000);
-            return true;
-        }
-    }
-    return false;
-}
+import checkFieldEmpty from "../../../utils/checkFieldEmpty";
 
 function StandUp() {
     const [loading, data, error, fetchStandUp] = useFetchEmployeeStandUp();

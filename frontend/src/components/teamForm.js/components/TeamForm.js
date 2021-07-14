@@ -7,20 +7,8 @@ import { Button, SIZE } from "baseui/button";
 import NotificationManager from "react-notifications/lib/NotificationManager";
 import OutsideClick from "../../../utils/OutsideClick";
 import { rootOverride } from "../constants/overrides";
+import checkFieldEmpty from "../../../utils/checkFieldEmpty";
 
-function checkFieldEmpty(value) {
-    for (let key in value) {
-        if (value[key] === "") {
-            NotificationManager.error(
-                "Error",
-                "Fields Cannot Be Empty !",
-                5000
-            );
-            return true;
-        }
-    }
-    return false;
-}
 function TeamForm({
     type,
     email,
