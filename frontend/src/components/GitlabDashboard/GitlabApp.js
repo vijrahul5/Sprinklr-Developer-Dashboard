@@ -90,7 +90,7 @@ function GitlabApp({ user }) {
                 if (mergeIdsResponse.data.length === 0) {
                     finalArray.push([
                         element[1],
-                        "NO_mergeRequestsuest",
+                        "no_merge_request",
                         null,
                         null,
                         null,
