@@ -9,7 +9,7 @@ import GetIssuesApi from "../apis/GetIssuesApi";
 import JiraTableBuilder from "../components/builder/JiraTableBuilder";
 
 //constants
-const EntryPerPage = 5;
+const EntryPerPage = 8;
 const { getIssues } = GetIssuesApi();
 
 const useGetJiraData = (jql = "") => {
@@ -44,7 +44,9 @@ const useGetJiraData = (jql = "") => {
         setData(arr);
         let totalPages = Math.ceil(details.total / EntryPerPage);
         setTotalPages(totalPages);
+        setLoading(false);
       } else {
+        setLoading(false);
         setErrMessage(data.error);
       }
     }
@@ -60,6 +62,7 @@ const useGetJiraData = (jql = "") => {
     totalPages,
     setPageNumber,
     loading,
+    setLoading,
     errMessage,
   };
 };

@@ -14,8 +14,8 @@ import Table from "../../../Table/Table";
 const columnTitles = ["Type", "Key", "Summary", "Status", "Priority"];
 const title = "All Issues";
 
-const Widgetjira = () => {
-  const [jqlQuery, setJqlQuery] = useState("");
+const Widgetjira = ({ user }) => {
+  const [jqlQuery, setJqlQuery] = useState(`assignee in ("${user.email}")`);
   const [basicMode, setBasicMode] = useState(true);
   const { data, pageNumber, totalPages, setPageNumber, loading, errMessage } =
     useGetJiraData(jqlQuery);
@@ -30,7 +30,11 @@ const Widgetjira = () => {
   return (
     <div className="jiraWid">
       {basicMode ? (
-        <BasicFilter handleSwitch={handleSwitch} setJqlQuery={setJqlQuery} />
+        <BasicFilter
+          handleSwitch={handleSwitch}
+          setJqlQuery={setJqlQuery}
+          user={user}
+        />
       ) : (
         <JqlFilter
           errMessage={errMessage}

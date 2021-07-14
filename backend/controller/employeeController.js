@@ -71,7 +71,6 @@ async function deleteProfile(req, res) {
   }
 }
 async function getStandUp(req, res) {
-<<<<<<< HEAD
   // Gets the employee's stand up from the stand up model
   try {
     const email = req.email;
@@ -88,36 +87,7 @@ async function getStandUp(req, res) {
       if (standUp) {
         return res.json({
           status: "Success",
-          standUp,
-=======
-    // Gets the employee's stand up from the stand up model
-    try {
-        const email = req.email;
-        const employee = await employeeModel.findOne({ email });
-        if (employee) {
-            const today = moment().startOf("day");
-            const standUp = await standUpModel.findOne({
-                author: employee,
-                createdAt: {
-                    $gte: today.toDate(),
-                    $lte: moment(today).endOf("day").toDate(),
-                },
-            });
-            if (standUp) {
-                return res.json({
-                    status: "Success",
-                    questions: standUp.questions,
-                });
-            } else {
-                throw new Error("Could not get stand up");
-            }
-        }
-        throw new Error("Could not get stand up");
-    } catch (err) {
-        res.json({
-            status: "Failed",
-            error: err.message,
->>>>>>> 5493d4a05eb958d551f479d115c0cb81ab24111b
+          questions: standUp.questions,
         });
       } else {
         throw new Error("Could not get stand up");
@@ -132,43 +102,18 @@ async function getStandUp(req, res) {
   }
 }
 async function postStandUp(req, res) {
-<<<<<<< HEAD
   // Posts an employee's stand up to the stand up model
   try {
     const email = req.email;
     const employee = await employeeModel.findOne({ email });
     if (employee) {
       const standUp = await standUpModel.create({
-        question1: req.body.question1,
-        question2: req.body.question2,
-        question3: req.body.question3,
+        questions: req.body.data,
         author: employee,
       });
       if (standUp) {
         return res.json({
           status: "Success",
-=======
-    // Posts an employee's stand up to the stand up model
-    try {
-        const email = req.email;
-        const employee = await employeeModel.findOne({ email });
-        if (employee) {
-            const standUp = await standUpModel.create({
-                questions: req.body.data,
-                author: employee,
-            });
-            if (standUp) {
-                return res.json({
-                    status: "Success",
-                });
-            }
-        }
-        throw new Error("Could not post standup");
-    } catch (err) {
-        res.json({
-            status: "Failed",
-            error: err.message,
->>>>>>> 5493d4a05eb958d551f479d115c0cb81ab24111b
         });
       }
     }
@@ -182,7 +127,6 @@ async function postStandUp(req, res) {
 }
 
 async function updateStandUp(req, res) {
-<<<<<<< HEAD
   // Updates an employee's stand up for the day if it exists in the database
   try {
     const email = req.email;
@@ -197,31 +141,7 @@ async function updateStandUp(req, res) {
         },
       });
       if (standUp) {
-        for (let key in req.body) {
-          standUp[key] = req.body[key];
-=======
-    // Updates an employee's stand up for the day if it exists in the database
-    try {
-        const email = req.email;
-        const employee = await employeeModel.findOne({ email });
-        if (employee) {
-            const today = moment().startOf("day");
-            const standUp = await standUpModel.findOne({
-                author: employee,
-                createdAt: {
-                    $gte: today.toDate(),
-                    $lte: moment(today).endOf("day").toDate(),
-                },
-            });
-            if (standUp) {
-                standUp.questions = req.body.data;
-                await standUp.save();
-                return res.json({
-                    status: "Success",
-                });
-            }
->>>>>>> 5493d4a05eb958d551f479d115c0cb81ab24111b
-        }
+        standUp.questions = req.body.data;
         await standUp.save();
         return res.json({
           status: "Success",
@@ -357,8 +277,6 @@ async function deleteTeam(req, res) {
 }
 
 async function getManagerAccess(req, res) {
-<<<<<<< HEAD
-  // Deletes a team member from the employee's team
   try {
     const email = req.email;
     const employee = await employeeModel.findOne({ email: email });
@@ -371,26 +289,6 @@ async function getManagerAccess(req, res) {
       return res.json({
         status: "Success",
       });
-=======
-    try {
-        const email = req.email;
-        const employee = await employeeModel.findOne({ email: email });
-        const checkManager = await managerModel.findOne({ email: email });
-        if (!checkManager || !employee) {
-            throw new Error("Request Denied !");
-        } else {
-            employee.managerAccess = true;
-            await employee.save();
-            return res.json({
-                status: "Success",
-            });
-        }
-    } catch (err) {
-        res.json({
-            status: "Failed",
-            error: err.message,
-        });
->>>>>>> 5493d4a05eb958d551f479d115c0cb81ab24111b
     }
   } catch (err) {
     res.json({

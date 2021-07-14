@@ -1,5 +1,6 @@
 //libraries
 import React, { lazy, Suspense } from "react";
+import PropTypes from "prop-types";
 import "react-notifications/lib/notifications.css";
 
 //hooks
@@ -9,7 +10,7 @@ import useAuthorize from "../../hooks/useAuthorize";
 import Notification from "../notification/Notification";
 import Loader from "../../../loaders/Tombstone";
 
-const Jira = () => {
+const Jira = ({ user }) => {
   const { doneAuthentication, loading } = useAuthorize();
   const Widgetjira = lazy(() => import("../widgetJira/WidgetJira"));
   const JiraAuth = lazy(() => import("../jiraAuthorization/JiraAuth"));
@@ -22,11 +23,14 @@ const Jira = () => {
         }}
       >
         {!loading && !doneAuthentication ? <JiraAuth /> : <></>}
-        {!loading && doneAuthentication ? <Widgetjira /> : <></>}
+        {!loading && doneAuthentication ? <Widgetjira user={user} /> : <></>}
       </Suspense>
       <Notification />
     </>
   );
+};
+Jira.propTypes = {
+  user: PropTypes.object,
 };
 
 export default Jira;

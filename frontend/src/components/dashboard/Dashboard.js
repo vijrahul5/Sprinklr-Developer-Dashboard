@@ -43,7 +43,7 @@ export default function Dashboard() {
           ) : null}
           <div className="section">
             <h1>Jira</h1>
-            <JiraDashboard />
+            <JiraDashboard user={user} />
           </div>
           <div className="section">
             <h1>Gitlab</h1>
