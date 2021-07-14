@@ -12,6 +12,8 @@ import Loader from "../../../loaders/Tombstone";
 
 const Jira = ({ user }) => {
   const { doneAuthentication, loading } = useAuthorize();
+
+  //lazy loading
   const Widgetjira = lazy(() => import("../widgetJira/WidgetJira"));
   const JiraAuth = lazy(() => import("../jiraAuthorization/JiraAuth"));
   return (

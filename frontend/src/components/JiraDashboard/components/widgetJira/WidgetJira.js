@@ -25,8 +25,10 @@ const Widgetjira = ({ user }) => {
   }, []);
 
   const handleSwitch = useCallback(() => {
+    if (!basicMode) setJqlQuery(`assignee in ("${user.email}")`);
     setBasicMode((prevMode) => !prevMode);
-  }, []);
+  }, [basicMode]);
+
   return (
     <div className="jiraWid">
       {basicMode ? (
@@ -51,6 +53,7 @@ const Widgetjira = ({ user }) => {
         totalPages={totalPages}
         setPageNumber={setPageNumber}
         loading={loading}
+        errMessage={errMessage}
       />
     </div>
   );

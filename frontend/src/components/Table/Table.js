@@ -1,16 +1,24 @@
-import React, { useCallback } from "react";
+//libraries
+import React from "react";
+import PropTypes from "prop-types";
+
+//hooks
+import { useCallback } from "react";
+
+//components
 import { Table as Tablebody, DIVIDER } from "baseui/table-semantic";
 import { Pagination as TableFooter } from "baseui/pagination";
 import Loader from "../loaders/Tombstone";
-import PropTypes from "prop-types";
 
-const btnOverride = {
+//constants
+const rootBorderOverride = {
   Root: {
     style: () => ({
       borderRadius: "4px",
     }),
   },
 };
+
 const Table = ({
   data,
   pageNumber,
@@ -36,13 +44,7 @@ const Table = ({
               columns={columnTitles}
               data={data}
               divider={DIVIDER.grid}
-              overrides={{
-                Root: {
-                  style: ({ $theme }) => ({
-                    borderRadius: "4px",
-                  }),
-                },
-              }}
+              overrides={rootBorderOverride}
             />
             <div className="table__footer">
               <div className="table__footerLeft"></div>
@@ -50,13 +52,7 @@ const Table = ({
                 numPages={totalPages}
                 currentPage={pageNumber}
                 onPageChange={changePage}
-                overrides={{
-                  Root: {
-                    style: ({ $theme }) => ({
-                      borderRadius: "4px",
-                    }),
-                  },
-                }}
+                overrides={rootBorderOverride}
               />
             </div>
           </div>

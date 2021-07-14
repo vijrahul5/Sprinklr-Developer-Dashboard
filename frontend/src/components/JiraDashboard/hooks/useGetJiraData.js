@@ -44,9 +44,7 @@ const useGetJiraData = (jql = "") => {
         setData(arr);
         let totalPages = Math.ceil(details.total / EntryPerPage);
         setTotalPages(totalPages);
-        setLoading(false);
       } else {
-        setLoading(false);
         setErrMessage(data.error);
       }
     }

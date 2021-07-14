@@ -7,7 +7,7 @@ const rootOverride = {
 };
 const controlContainerOverride = {
   ControlContainer: {
-    style: ({ $theme }) => ({
+    style: () => ({
       borderRadius: "4px",
     }),
   },
