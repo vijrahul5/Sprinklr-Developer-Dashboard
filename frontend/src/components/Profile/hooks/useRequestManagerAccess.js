@@ -1,4 +1,5 @@
-import { useState, useEffect, useCallback } from "react";
+// libraries
+import { useState, useCallback } from "react";
 import axios from "axios";
 import NotificationManager from "react-notifications/lib/NotificationManager";
 

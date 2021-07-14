@@ -1,6 +1,9 @@
+//libraries
 import React from "react";
 import { Link } from "react-router-dom";
 import { FaSignOutAlt } from "react-icons/fa";
+
+// utilities
 import Auth from "../../Auth";
 
 function DashboardNavbar() {

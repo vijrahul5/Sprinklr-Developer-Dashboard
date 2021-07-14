@@ -1,6 +1,8 @@
+// libraries
 import React from "react";
-import standUpQuestions from "../../../constants/standUpQuestions";
 import { Button, SIZE, KIND } from "baseui/button";
+// components
+import standUpQuestions from "../../../constants/standUpQuestions";
 
 function TeamMember({ teamMember, handleDeleteTeamMember }) {
     return (

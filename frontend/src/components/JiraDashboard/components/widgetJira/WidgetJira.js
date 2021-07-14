@@ -8,7 +8,7 @@ import useGetJiraData from "../../hooks/useGetJiraData";
 //components
 import JqlFilter from "../filters/JqlFilter";
 import BasicFilter from "../filters/BasicFilter";
-import Table from "../../../Table/Table";
+import Table from "../../../table/Table";
 
 //constants
 const columnTitles = ["Type", "Key", "Summary", "Status", "Priority"];

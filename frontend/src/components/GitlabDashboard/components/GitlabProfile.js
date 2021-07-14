@@ -111,11 +111,9 @@ const GitlabProfile = (props) => {
     if (!isUserAuthenticated) {
         return <GitlabAccessTokenForm submitToken={submitToken} />;
     }
-  }, []);
 
-  useEffect(() => {
-    if (props.gitlabDetails.length > 0) {
-      setLoading(false);
+    if (loading) {
+        return <Loader />;
     }
     return (
         <div>

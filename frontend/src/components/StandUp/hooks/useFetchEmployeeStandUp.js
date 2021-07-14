@@ -1,7 +1,7 @@
+// libraries
 import { useState, useEffect, useCallback } from "react";
 import NotificationManager from "react-notifications/lib/NotificationManager";
 import axios from "axios";
-// import { load } from "dotenv";
 
 export default function useFetchEmployeeStandUp() {
     // Fetches the logged in employee's stand up for the day
@@ -16,7 +16,6 @@ export default function useFetchEmployeeStandUp() {
 
     const apiCall = useCallback(
         async function () {
-            // if (data) setLoading(false);
             try {
                 setError(false);
                 setFetch(false);

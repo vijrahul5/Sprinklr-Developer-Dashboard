@@ -1,10 +1,13 @@
+// libraries
 import React, { useState, useEffect } from "react";
+import { Button, SIZE } from "baseui/button";
+// components
 import TeamMember from "./TeamMember";
 import Loader from "../../loaders/Tombstone";
-import useFetchEmployeeTeamData from "../../../hooks/useFetchEmployeeTeamData";
-import TeamForm from "../../teamForm.js/components/TeamForm";
-import { Button, SIZE } from "baseui/button";
+import TeamForm from "../../teamForm/components/TeamForm";
 import Instruction from "../../instruction/Instruction";
+// hooks
+import useFetchEmployeeTeamData from "../../../hooks/useFetchEmployeeTeamData";
 
 function Team() {
     // Component for accessing team data and their stand ups

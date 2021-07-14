@@ -20,14 +20,10 @@
 }
 
 .teamStandUpList__OuterUl {
-  padding: map-get($paddings, "medium");
-  padding-top: 0.1rem;
-  padding-bottom: 0;
-  margin-bottom: map-get($margins, "medium");
-  list-style: none;
-  overflow: auto;
-  max-height: 45rem;
-  ul {
+    padding: map-get($paddings, "medium");
+    padding-top: 0.1rem;
+    padding-bottom: 0;
+    margin-bottom: map-get($margins, "medium");
     list-style: none;
     overflow: auto;
     max-height: 45rem;
@@ -59,28 +55,28 @@
 }
 
 .teamStandUpList__add {
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  margin: 0 map-get($margins, "medium");
-  margin-bottom: map-get($margins, "small");
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin: 0 map-get($margins, "medium");
+    margin-bottom: map-get($margins, "small");
 }
 
 .teamStandUpList__delete {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 .teamForm {
-  height: 100%;
-  width: 100%;
-  position: fixed;
-  z-index: 10;
-  top: 3.5rem;
-  left: 0;
-  @include flexCenter(column);
-  background: rgba(0, 0, 0, 0.3);
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 10;
+    top: 3.5rem;
+    left: 0;
+    @include flexCenter(column);
+    background: rgba(0, 0, 0, 0.3);
 
     // &__btnHolder {
     //     @include flexCenter(row);
@@ -109,7 +105,6 @@
             }
         }
     }
-  }
 }
 .teamForm__btnHolder {
     @include flexCenter(row);
