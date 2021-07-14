@@ -1,16 +1,16 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { FcApproval, FcCancel } from "react-icons/fc";
-import Profile from "./GitlabProfile";
+import Profile from "./components/GitlabProfile";
 
 const axios = require("axios");
 
 function GitlabApp({ user }) {
-    const postsPerPage = 8;
+    const mergeRequestPerPage = 8;
     const [gitlabDetails, setgitlabDetails] = useState([]);
     const accessToken = user.gitlabAccessToken;
 
-    const pipelineBuilder = async (projectId, mergeRequests, ProjectName) => {
+    const pipelineBuilder = async (projectId, mergeRequests, projectName) => {
         let arrToPass = [];
 
         const allpipelineStatus = await axios.get(
@@ -19,9 +19,9 @@ function GitlabApp({ user }) {
 
         if (allpipelineStatus.data.length == 0) {
             arrToPass.push([
-                ProjectName,
-                <a href={mergeRequests.web_url} className="jiraIssueUrl">{mergeRequests.title}</a>,
-                mergeRequests.merge_status,
+                projectName,
+                <a href={mergeRequests.web_url}>{mergeRequests.title}</a>,
+                mergeRequests.author.name,
                 mergeRequests.merged_by === null
                     ? null
                     : mergeRequests.merged_by.name,
@@ -41,9 +41,9 @@ function GitlabApp({ user }) {
             }
 
             arrToPass.push([
-                ProjectName,
-                <a href={mergeRequests.web_url} className="jiraIssueUrl">{mergeRequests.title}</a>,
-                mergeRequests.merge_status,
+                projectName,
+                <a href={mergeRequests.web_url}>{mergeRequests.title}</a>,
+                mergeRequests.author.name,
                 mergeRequests.merged_by === null
                     ? null
                     : mergeRequests.merged_by.name,
@@ -120,7 +120,7 @@ function GitlabApp({ user }) {
     return (
         <>
             <Profile
-                postsPerPage={postsPerPage}
+                mergeRequestPerPage={mergeRequestPerPage}
                 gitlabDetails={gitlabDetails}
                 user={user}
             />
