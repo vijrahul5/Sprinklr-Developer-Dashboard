@@ -4,18 +4,24 @@ import PropTypes from "prop-types";
 
 //hooks
 import { useState, useCallback, useEffect } from "react";
+import useEmployeeFilter from "../../hooks/useEmployeeFilter";
 
 //components
 import { FormControl } from "baseui/form-control";
 import { Input } from "baseui/input";
 import { Button, SIZE } from "baseui/button";
+import { Select } from "baseui/select";
 
 //constants
-import { rootOverride } from "./overrideConstants";
+import { controlContainerOverride, rootOverride } from "./overrideConstants";
 
-const JqlFilter = ({ errMessage, handleSwitch, handleClick }) => {
+const JqlFilter = ({ errMessage, handleSwitch, handleClick, user }) => {
   const [inputValue, setInputValue] = useState(""); //change in Input JQL query
   const [error, setError] = useState(false);
+  const { employeeDetails } = useEmployeeFilter(user);
+  const [employeeFilterValue, setEmployeeFilterValue] = useState([
+    { label: "Assigned to me", id: user.email },
+  ]);
   useEffect(() => {
     setError(errMessage.length > 0 ? true : false);
   }, [errMessage]);
@@ -25,14 +31,36 @@ const JqlFilter = ({ errMessage, handleSwitch, handleClick }) => {
     setInputValue(event.target.value);
   }, []);
 
+  const handleEmployeeFilter = useCallback((params) => {
+    setEmployeeFilterValue(params.value);
+  }, []);
+
   const handleClickJql = useCallback(() => {
-    handleClick(inputValue);
-  }, [inputValue]);
+    let jqlQuery;
+    let left = `assignee in ("${employeeFilterValue[0].id}")`;
+    let right = "";
+    if (inputValue) {
+      right = inputValue;
+    }
+    if (employeeFilterValue[0].id === "myteam") {
+      let team = `"${user.email}"`;
+      employeeDetails.map((employee) => {
+        team += `,"${employee.id}"`;
+      });
+      left = `assignee in (${team})`;
+    }
+    if (inputValue) {
+      jqlQuery = `${left} AND ${right}`;
+    } else {
+      jqlQuery = `${left}`;
+    }
+    handleClick(jqlQuery);
+  }, [inputValue, employeeFilterValue]);
 
   return (
     <>
       <div className="jiraWid__search">
-        <div className="jiraWid__jqlFilter">
+        <div className="jiraWid__filter">
           <FormControl caption={() => (error === true ? errMessage : "")}>
             <Input
               value={inputValue}
@@ -45,6 +73,23 @@ const JqlFilter = ({ errMessage, handleSwitch, handleClick }) => {
             />
           </FormControl>
         </div>
+        {user.managerAccess ? (
+          <div className="jiraWid__filter">
+            <FormControl>
+              <Select
+                clearable={false}
+                size={SIZE.compact}
+                options={employeeDetails}
+                value={employeeFilterValue}
+                placeholder="Select Assignee"
+                onChange={handleEmployeeFilter}
+                overrides={controlContainerOverride}
+              />
+            </FormControl>
+          </div>
+        ) : (
+          <></>
+        )}
 
         <div className="jiraBtn__container">
           <Button

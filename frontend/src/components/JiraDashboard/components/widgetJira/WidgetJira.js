@@ -42,6 +42,7 @@ const Widgetjira = ({ user }) => {
           errMessage={errMessage}
           handleSwitch={handleSwitch}
           handleClick={handleClick}
+          user={user}
         />
       )}
 
