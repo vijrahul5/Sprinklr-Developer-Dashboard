@@ -80,6 +80,7 @@ function Team() {
                                                 parent={parent}
                                                 columnIndex={0}
                                                 rowIndex={index}
+                                                style={style}
                                             >
                                                 <TeamMember
                                                     index={index}
@@ -91,7 +92,7 @@ function Team() {
                                             </CellMeasurer>
                                         );
                                     }}
-                                    className="virtaul"
+                                    className="virtual"
                                 />
                             )}
                         </AutoSizer>

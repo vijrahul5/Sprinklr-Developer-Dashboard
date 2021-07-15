@@ -105,10 +105,13 @@
         margin-bottom: map-get($margins, "small");
     }
     .ReactVirtualized__Grid__innerScrollContainer[style] {
-        margin-bottom: 8rem;
+        margin-bottom: 5rem;
         padding: 1rem;
         // padding-bottom: 2rem;
         overflow: visible !important;
+    }
+    .landingPage__wrapper{
+        width: 95%;
     }
 }
 
@@ -216,7 +219,7 @@
         }
     }
     .ReactVirtualized__Grid__innerScrollContainer[style] {
-        margin-bottom: 10rem;
+        margin-bottom: 5rem;
         padding: 0.5rem;
         // padding-bottom: 2rem;
         overflow: visible !important;

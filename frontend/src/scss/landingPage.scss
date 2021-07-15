@@ -71,7 +71,6 @@
 }
 .signin__modal__content {
     @include flexCenter(column);
-    padding: 4rem 6rem;
     h3 {
         all: unset;
         font-size: map-get($font-sizes, "medium");
