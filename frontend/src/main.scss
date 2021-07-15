@@ -1,0 +1,279 @@
+@import "./scss/variables";
+@import "./scss/resets";
+@import "./scss/landingPage";
+@import "./scss/dashboard";
+@import "./scss/basicInfo";
+@import "./scss/team";
+@import "./scss/jira";
+
+.btnCustom {
+    background-color: $color-primary !important;
+    color: $color-widget;
+    border-radius: $border-radius !important;
+    &:hover {
+        opacity: 0.9;
+    }
+}
+.btnCustom--tertiary {
+    color: $color-primary !important;
+    border-radius: $border-radius !important;
+    background-color: $color-widget !important;
+    &:hover {
+        background-color: $color-secondary !important;
+    }
+}
+.inputCustom {
+    border-radius: $border-radius !important;
+    color: black;
+}
+
+.ml1 {
+    margin-left: 1rem !important;
+}
+.ml12 {
+    margin-left: 0.5rem !important;
+}
+.mt1 {
+    margin-top: 0.8rem !important;
+}
+
+// @media screen and (max-width: 1450px) {
+//     .jiraWid {
+//         &__search {
+//             flex-direction: column;
+//         }
+//         &__jqlFilter {
+//             width: 100%;
+//             margin-right: 0rem;
+//         }
+//         &__filter {
+//             margin-right: 0rem;
+//             width: 100%;
+//         }
+//     }
+
+//     .btn {
+//         &--blue {
+//             margin-left: 0rem !important;
+//         }
+//         &--white {
+//             margin-left: 0rem !important;
+//         }
+//     }
+// }
+
+@media only screen and (max-width: 1350px), (max-height: 950px) {
+    .basicInfo {
+        width: 100%;
+        position: unset;
+        @include flexCenter(row);
+        align-items: flex-start;
+        margin-bottom: map-get($margins, "medium");
+    }
+
+    .sectionContainer {
+        margin-left: 0;
+    }
+    .basicInfo__wrapper {
+        margin-right: map-get($margins, "medium");
+        @include flexCenter(column);
+        width: 70%;
+    }
+    .profile {
+        margin: 0;
+        width: 100%;
+
+        // .profile__imgHolder {
+        //     width: 9rem;
+        //     height: 9rem;
+        //     margin-bottom: map-get($margins, "small");
+        // }
+    }
+    .profile__imgHolder {
+        width: 9rem;
+        height: 9rem;
+        margin-bottom: map-get($margins, "small");
+    }
+    .requestForm {
+        margin-bottom: 0;
+        margin-top: 2rem;
+    }
+    .jiraWid__search {
+        flex-direction: column;
+    }
+    .jiraWid__jqlFilter {
+        width: 100%;
+        margin-right: 0rem;
+    }
+    .jiraWidfilter {
+        margin-right: 0rem;
+        width: 100%;
+    }
+    .btn--blue {
+        margin-left: 0rem !important;
+    }
+    .btn--white {
+        margin-left: 0rem !important;
+    }
+}
+
+@media only screen and (max-width: 950px) {
+    .basicInfo__wrapper {
+        margin-right: 0;
+        @include flexCenter(column);
+        width: 100%;
+    }
+    .dashboardContainer {
+        padding: map-get($paddings, "small");
+    }
+
+    .basicInfo {
+        @include flexCenter(column);
+        // &__wrapper {
+        //     margin-right: 0;
+        // }
+    }
+    .basicInfo__wrapper {
+        margin-right: 0;
+    }
+    .profile {
+        margin: 0px;
+        width: 100%;
+    }
+    .section {
+        padding: map-get($paddings, "small");
+    }
+    .teamStandUpList {
+        padding: 0;
+        h1 {
+            margin: 1rem;
+            margin-bottom: 2rem;
+        }
+        ul {
+            padding: 1rem;
+            padding-top: 0.2rem;
+        }
+    }
+
+    .teamForm {
+        form {
+            width: 30rem;
+        }
+    }
+    .standUp {
+        margin-top: 2rem;
+    }
+    .teamInstruction {
+        margin: 0 ;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    html {
+        font-size: 100%;
+    }
+    .teamStandUpList ul {
+        ul {
+            padding: map-get($paddings, "small");
+            margin-bottom: map-get($margins, "small");
+
+            li {
+                display: flex;
+                justify-content: start;
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    }
+    .teamStandUpList__param {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    .teamStandUpList__value {
+        width: 100%;
+    }
+    .dashboardNavbar {
+        width: 100%;
+        height: 3.5rem;
+        h1 {
+            font-size: 1.5rem;
+        }
+        // #{&}__icon {
+        //     font-size: 1.5rem;
+        //     margin-right: 1rem;
+        // }
+    }
+    .dashboardNavbar__icon {
+        font-size: 1.5rem;
+        margin-right: 1rem;
+    }
+    .teamForm {
+        form {
+            width: 25rem;
+        }
+    }
+    .instruction__item {
+        font-size: 1rem;
+    }
+    .teamStandUpList__add {
+        margin: 0 1rem;
+        margin-bottom: map-get($margins, "small");
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    html {
+        font-size: 100%;
+    }
+    .section {
+        padding: map-get($paddings, "extraSmall");
+    }
+    .dashboardContainer {
+        padding: map-get($paddings, "extraSmall");
+    }
+    .profile {
+        padding: map-get($paddings, "extraSmall");
+    }
+    .standUp {
+        padding: map-get($paddings, "extraSmall");
+    }
+
+    .dashboardNavbar {
+        width: 100%;
+        height: 3.5rem;
+        h1 {
+            font-size: 1.3rem;
+        }
+        // #{&}__icon {
+        //     font-size: 1.3rem;
+        //     margin-right: 0.5rem;
+        // }
+    }
+    .dashboardNavbar__icon {
+        font-size: 1.3rem;
+        margin-right: 0.5rem;
+    }
+    .teamStandUpList {
+        padding: 0;
+        h1 {
+            margin: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        ul {
+            padding: 0.5rem;
+            padding-top: 0.2rem;
+        }
+    }
+
+    .teamStandUpList__add {
+        margin: 0 0.5rem;
+        margin-bottom: map-get($margins, "small");
+    }
+
+    .teamStandUpList ul {
+        ul {
+            padding: map-get($paddings, "extraSmall");
+            margin-bottom: map-get($margins, "small");
+        }
+    }
+}

@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useCallback } from "react";
 import { Input, SIZE } from "baseui/input";
 import { Button } from "baseui/button";
+import Instruction from "../../instruction/index";
 
 const GitlabAccessTokenForm = (props) => {
     const [accessToken, setAccessToken] = useState("");
@@ -18,32 +19,22 @@ const GitlabAccessTokenForm = (props) => {
         Root: {
             style: () => ({
                 borderRadius: "4px",
-                marginTop: "1.5rem",
+                marginTop: "0.8rem",
             }),
         },
     };
     return (
         <>
-            <ul className="instruction">
-                <h2 className="instruction__item">
-                    1. Login to your gitlab Account
-                </h2>
-                <h2 className="instruction__item">
-                    2. Select your gitlab icon and open preferences
-                </h2>
-                <h2 className="instruction__item">
-                    3. Select Access Token in User Settings
-                </h2>
-                <h2 className="instruction__item">
-                    4. Write token name in the input box
-                </h2>
-                <h2 className="instruction__item">
-                    5. Select scope as api and just click on create accessToken
-                </h2>
-                <h2 className="instruction__item">
-                    6. Now use this token to use our dashboard
-                </h2>
-            </ul>
+            <Instruction
+                instructions={[
+                    "Login to your gitlab account.",
+                    "Select your gitlab icon and open preferences.",
+                    "Select access token in user settings.",
+                    "Write token name in the input box.",
+                    "Select scope as API and just click on create access token.",
+                    "Now use this token to use our dashboard.",
+                ]}
+            />
             <Input
                 type="text"
                 value={accessToken}
@@ -51,15 +42,13 @@ const GitlabAccessTokenForm = (props) => {
                 onChange={setToken}
                 overrides={overRides}
             />
-            <div className="btn__container">
-                <Button
-                    onClick={submitToken}
-                    className="btn--auth btnCustom"
-                    size={SIZE.compact}
-                >
-                    Submit Token
-                </Button>
-            </div>
+            <Button
+                onClick={submitToken}
+                className="btn--auth btnCustom mt1"
+                size={SIZE.compact}
+            >
+                Submit Token
+            </Button>
         </>
     );
 };
