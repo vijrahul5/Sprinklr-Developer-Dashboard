@@ -1,15 +1,17 @@
+// libraries
+import React, { lazy, Suspense } from "react";
+import { NotificationContainer } from "react-notifications";
+// components
+import Loader from "../loaders/Loader";
 import DashboardNavbar from "../dashboardNavbar/index";
 import Profile from "../profile/index";
 import StandUp from "../standUp/index";
-import React, { lazy, Suspense } from "react";
 import JiraDashboard from "../jiraDashboard/components/jira/Jira";
 import GitlabDashboard from "../gitlabDashboard/GitlabDashboard";
+// hooks
 import useFetchEmployeeData from "../../hooks/useFetchEmployeeData";
-import Loader from "../loaders/Loader";
-import { NotificationContainer } from "react-notifications";
 
-
-
+// lazy loading
 const Team = lazy(() => import("../team/index"));
 
 export default function Dashboard() {
@@ -31,7 +33,9 @@ export default function Dashboard() {
                             fallback={() => {
                                 return (
                                     <div className="section teamStandUpList">
-                                        <h1 className="teamStandUpList__heading">Team</h1>
+                                        <h1 className="teamStandUpList__heading">
+                                            Team
+                                        </h1>
                                         <Loader />
                                     </div>
                                 );
@@ -45,7 +49,7 @@ export default function Dashboard() {
                     ) : null}
                     <div className="section">
                         <h1>Jira</h1>
-                        <JiraDashboard />
+                        <JiraDashboard user={user} />
                     </div>
                     <div className="section">
                         <h1>Gitlab</h1>

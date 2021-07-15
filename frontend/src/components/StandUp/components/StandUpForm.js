@@ -1,10 +1,13 @@
+// libraries
 import React from "react";
-import standUpQuestions from "../../../constants/standUpQuestions";
 import { useState, useEffect, useCallback } from "react";
 import { FormControl } from "baseui/form-control";
 import { Button } from "baseui/button";
 import { Textarea } from "baseui/textarea";
 import { SIZE } from "baseui/input";
+// components
+import standUpQuestions from "../../../constants/standUpQuestions";
+// constants
 import { rootOverride } from "../constants/overrides";
 
 function StandUpForm({ data, handleEdit, handleSubmit, view }) {
@@ -40,7 +43,7 @@ function StandUpForm({ data, handleEdit, handleSubmit, view }) {
         },
         [handleSubmit, value]
     );
-    
+
     return (
         <>
             {(data && view) || !data ? (

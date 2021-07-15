@@ -1,10 +1,16 @@
-import { useEffect, useState } from "react";
+//libraries
 import PropTypes from "prop-types";
+
+//hooks
+import { useEffect, useState } from "react";
+
+//components
 import GetIssuesApi from "../apis/GetIssuesApi";
 import JiraTableBuilder from "../components/builder/JiraTableBuilder";
 
-const { getIssues } = GetIssuesApi();
+//constants
 const EntryPerPage = 9;
+const { getIssues } = GetIssuesApi();
 
 const useGetJiraData = (jql = "") => {
   const [pageNumber, setPageNumber] = useState(1);
@@ -54,6 +60,7 @@ const useGetJiraData = (jql = "") => {
     totalPages,
     setPageNumber,
     loading,
+    setLoading,
     errMessage,
   };
 };

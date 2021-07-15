@@ -1,14 +1,21 @@
-import React, { useState, useCallback } from "react";
+//libraries
+import React from "react";
+import { useState, useCallback } from "react";
+
+//hooks
+import useGetJiraData from "../../hooks/useGetJiraData";
+
+//components
 import JqlFilter from "../filters/JqlFilter";
 import BasicFilter from "../filters/BasicFilter";
 import Table from "../../../table/Table";
-import useGetJiraData from "../../hooks/useGetJiraData";
 
+//constants
 const columnTitles = ["Type", "Key", "Summary", "Status", "Priority"];
 const title = "All Issues";
 
-const Widgetjira = () => {
-  const [jqlQuery, setJqlQuery] = useState("");
+const Widgetjira = ({ user }) => {
+  const [jqlQuery, setJqlQuery] = useState(`assignee in ("${user.email}")`);
   const [basicMode, setBasicMode] = useState(true);
   const { data, pageNumber, totalPages, setPageNumber, loading, errMessage } =
     useGetJiraData(jqlQuery);
@@ -18,12 +25,18 @@ const Widgetjira = () => {
   }, []);
 
   const handleSwitch = useCallback(() => {
+    if (!basicMode) setJqlQuery(`assignee in ("${user.email}")`);
     setBasicMode((prevMode) => !prevMode);
-  }, []);
+  }, [basicMode]);
+
   return (
     <div className="jiraWid">
       {basicMode ? (
-        <BasicFilter handleSwitch={handleSwitch} setJqlQuery={setJqlQuery} />
+        <BasicFilter
+          handleSwitch={handleSwitch}
+          setJqlQuery={setJqlQuery}
+          user={user}
+        />
       ) : (
         <JqlFilter
           errMessage={errMessage}
@@ -40,6 +53,7 @@ const Widgetjira = () => {
         totalPages={totalPages}
         setPageNumber={setPageNumber}
         loading={loading}
+        errMessage={errMessage}
       />
     </div>
   );

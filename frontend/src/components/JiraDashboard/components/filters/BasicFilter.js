@@ -1,22 +1,32 @@
-import React, { useState, useCallback } from "react";
+//libraries
+import React from "react";
+import PropTypes from "prop-types";
 
+//hooks
+import { useState, useCallback } from "react";
+import useFilters from "../../hooks/useFilters";
+import useEmployeeFilter from "../../hooks/useEmployeeFilter";
+
+//components
 import { FormControl } from "baseui/form-control";
 import { Button, SIZE } from "baseui/button";
 import { Select } from "baseui/select";
-import useFilters from "../../hooks/useFilters";
-import useEmployeeFilter from "../../hooks/useEmployeeFilter";
-import { controlContainerOverride, rootOverride } from "./overrideConstants";
-import PropTypes from "prop-types";
 
-const BasicFilter = ({ handleSwitch, setJqlQuery }) => {
+//constant
+import { controlContainerOverride, rootOverride } from "./overrideConstants";
+
+const BasicFilter = ({ handleSwitch, setJqlQuery, user }) => {
   const { filters } = useFilters();
-  const { employeeDetails } = useEmployeeFilter();
-  const [filterValue, setFilterValue] = useState([]); //change in Filter dropdown
-  const [employeeFilterValue, setEmployeeFilterValue] = useState([]); //change in Employee Filter dropdown
+  const { employeeDetails } = useEmployeeFilter(user);
+  const [filterValue, setFilterValue] = useState([]);
+  const [employeeFilterValue, setEmployeeFilterValue] = useState([
+    { label: "Assigned to me", id: user.email },
+  ]);
 
   const handleFilter = useCallback(
     (params) => {
       setFilterValue(params.value);
+
       if (params.value.length > 0 && employeeFilterValue.length > 0) {
         setJqlQuery(
           `filter=${params.value[0].id} AND assignee in ("${employeeFilterValue[0].id}")`
@@ -92,5 +102,6 @@ const BasicFilter = ({ handleSwitch, setJqlQuery }) => {
 BasicFilter.propTypes = {
   handleSwitch: PropTypes.func,
   setJqlQuery: PropTypes.func,
+  user: PropTypes.object,
 };
 export default BasicFilter;

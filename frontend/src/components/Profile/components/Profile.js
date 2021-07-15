@@ -1,6 +1,8 @@
-import React, { useCallback, useEffect } from "react";
-import useRequestManagerAccess from "../hooks/useRequestManagerAccess";
+// libraries
+import React, { useCallback } from "react";
 import { Button, SIZE } from "baseui/button";
+// hooks
+import useRequestManagerAccess from "../hooks/useRequestManagerAccess";
 
 function Profile({ user }) {
     const [requestError, requestManagerAccess] = useRequestManagerAccess();

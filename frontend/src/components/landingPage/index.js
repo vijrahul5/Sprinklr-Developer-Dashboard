@@ -1,6 +1,10 @@
+// libraries
 import React from "react";
+// components
 import LandingPage from "./LandingPage";
-// import "../../scss/landingPage.scss";
+// styles
+import "../../scss/landingPage.scss";
+
 function index() {
     return <LandingPage />;
 }

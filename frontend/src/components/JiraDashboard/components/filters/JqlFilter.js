@@ -1,10 +1,17 @@
-import React, { useState, useCallback, useEffect } from "react";
+//libraries
+import React from "react";
+import PropTypes from "prop-types";
 
+//hooks
+import { useState, useCallback, useEffect } from "react";
+
+//components
 import { FormControl } from "baseui/form-control";
 import { Input } from "baseui/input";
 import { Button, SIZE } from "baseui/button";
+
+//constants
 import { rootOverride } from "./overrideConstants";
-import PropTypes from "prop-types";
 
 const JqlFilter = ({ errMessage, handleSwitch, handleClick }) => {
   const [inputValue, setInputValue] = useState(""); //change in Input JQL query

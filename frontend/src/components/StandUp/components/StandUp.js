@@ -1,13 +1,16 @@
+// libraries
 import React from "react";
-import Loader from "../../loaders/Tombstone";
 import { useState, useEffect, useCallback } from "react";
-import useUpdateEmployeeStandUp from "../hooks/useUpdateEmployeeStandUp";
-import useFetchEmployeeStandUp from "../hooks/useFetchEmployeeStandUp";
 import { Button } from "baseui/button";
 import { SIZE } from "baseui/input";
 import { AiOutlineCheckCircle } from "react-icons/ai";
-import NotificationManager from "react-notifications/lib/NotificationManager";
+// components
+import Loader from "../../loaders/Tombstone";
 import StandUpForm from "./StandUpForm";
+// hooks
+import useUpdateEmployeeStandUp from "../hooks/useUpdateEmployeeStandUp";
+import useFetchEmployeeStandUp from "../hooks/useFetchEmployeeStandUp";
+// utilities
 import checkFieldEmpty from "../../../utils/checkFieldEmpty";
 
 function StandUp() {

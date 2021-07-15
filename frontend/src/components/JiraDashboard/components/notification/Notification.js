@@ -1,15 +1,23 @@
-import React, { useEffect } from "react";
+//libraries
+import React from "react";
 import Pusher from "pusher-js";
-import { NotificationManager } from "react-notifications";
 import axios from "axios";
 
+//hooks
+import { useEffect } from "react";
+
+//components
+import { NotificationManager } from "react-notifications";
+
+//constants
 const channelid = process.env.REACT_APP_CHANNEL_ID_JIRA;
 const notificationDisplayTime = 0; // 0 represents, it will not hide until we refresh
-let cid = "";
-let channel = "";
 const pusher = new Pusher(channelid, {
   cluster: "ap2",
 });
+
+let cid = "";
+let channel = "";
 
 async function configureConnection() {
   let response = await axios.get("/api/jira/webhookToken");
