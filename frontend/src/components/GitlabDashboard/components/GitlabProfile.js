@@ -10,6 +10,8 @@ const axios = require("axios");
 const GitlabProfile = (props) => {
     const [isUserAuthenticated, setUserAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [currentMergeRequest, setcurrentMergeRequest] = useState([]);
+    const [mergeRequestToShow, setmergeRequestToShow] = useState([]);
     useEffect(() => {
         if (props.user.doneGitlabAuth === true) {
             setUserAuthenticated(true);
@@ -20,6 +22,11 @@ const GitlabProfile = (props) => {
 
     useEffect(() => {
         if (props.gitlabDetails.length > 0) {
+            setcurrentMergeRequest(props.gitlabDetails);
+            const initial = props.gitlabDetails.filter((element) => {
+                return element[2] === "Ashutosh Gangwar";
+            });
+            setmergeRequestToShow(initial);
             setLoading(false);
         }
     }, [props]);
@@ -40,13 +47,17 @@ const GitlabProfile = (props) => {
     mergeRequestarray.sort(function (a, b) {
         return a[2] - b[2];
     });
-    const [currentPage, setCurrentPage] = useState(1);
 
-    const indexOfLastMergeRequest = currentPage * props.mergeRequestPerPage;
+    console.log("currentMergeRequest", currentMergeRequest);
+
+    const [currentMergeRequestPage, setcurrentMergeRequestPage] = useState(1);
+
+    const indexOfLastMergeRequest =
+        currentMergeRequestPage * props.mergeRequestPerPage;
     const indexOfFirstMergeRequest =
         indexOfLastMergeRequest - props.mergeRequestPerPage;
 
-    const currentMergeRequest = mergeRequestarray.slice(
+    const currentMergeRequestMergeRequest = mergeRequestToShow.slice(
         indexOfFirstMergeRequest,
         indexOfLastMergeRequest
     );
@@ -64,49 +75,25 @@ const GitlabProfile = (props) => {
         (params) => {
             console.log("before", params.value);
 
-            // setauthor(params.value);
-            // console.log("after", params.value[0].label);
             if (params.value.length !== 0) {
                 let idx = parseInt(params.value[0].id);
 
-                let pageToSet = Math.ceil(
-                    (idx + 1) / props.mergeRequestPerPage
-                );
+                let temp = currentMergeRequest.filter((element) => {
+                    return element[2] == params.value[0].label;
+                });
 
-                setCurrentPage(pageToSet);
+                setmergeRequestToShow(temp);
             }
             setauthor(params.value);
         },
-        [setCurrentPage, setauthor, author]
+        [setcurrentMergeRequestPage, setauthor, author]
     );
-
-    const projectSelect = useCallback(
-        (params) => {
-            setProject(params.value);
-
-            if (project.length !== 0) {
-                let idx = parseInt(project[0].id);
-
-                let pageToSet = Math.ceil(
-                    (idx + 1) / props.mergeRequestPerPage
-                );
-
-                setCurrentPage(pageToSet);
-            }
-        },
-        [setCurrentPage, setProject, project]
-    );
-    const selectProject = mergeRequestarray.map((element, idx) => {
-        return { label: element[0], id: idx.toString() };
-    });
 
     const authorList = mergeRequestarray.map((element, idx) => {
         return { label: element[2], id: idx.toString() };
     });
-    // const selectMerge = mergeRequestarray
-    //.map((element, idx) => {
-    //     return { label: element[1], id: idx.toString() };
-    // });
+    const uniqueSelect = [...new Set(authorList)];
+    console.log(uniqueSelect);
 
     if (!isUserAuthenticated) {
         return <GitlabAccessTokenForm submitToken={submitToken} />;
@@ -125,24 +112,16 @@ const GitlabProfile = (props) => {
                 size={SIZE.compact}
                 overrides={overRides}
             />
-            <br></br>
-            {/* <Select
-                options={selectProject}
-                value={project}
-                placeholder="Select Project"
-                onChange={projectSelect}
-                size={SIZE.compact}
-                overrides={overRides}
-            /> */}
+
             <br></br>
 
             <Table
-                data={currentMergeRequest}
-                pageNumber={currentPage}
+                data={mergeRequestToShow}
+                pageNumber={currentMergeRequestPage}
                 totalPages={Math.ceil(
-                    props.gitlabDetails.length / props.mergeRequestPerPage
+                    mergeRequestToShow.length / props.mergeRequestPerPage
                 )}
-                setPageNumber={setCurrentPage}
+                setPageNumber={setcurrentMergeRequestPage}
                 loading={false}
                 columnTitles={[
                     "Project Name",
