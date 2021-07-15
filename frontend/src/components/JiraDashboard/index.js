@@ -1,8 +1,15 @@
+//libraries
 import React from "react";
-import Jira from "./JIRA/Jira";
+import PropTypes from "prop-types";
 
-const index = () => {
-  <Jira />;
+//components
+import Jira from "./jira/Jira";
+
+const index = ({ user }) => {
+  <Jira user={user} />;
 };
 
+index.propTypes = {
+  user: PropTypes.object,
+};
 export default index;

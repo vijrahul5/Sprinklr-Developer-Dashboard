@@ -1,5 +1,9 @@
-import { useState, useEffect } from "react";
+//libraries
 import axios from "axios";
+
+//hooks
+import { useState, useEffect } from "react";
+
 const useFilters = () => {
   const [filters, setFilters] = useState([]);
 

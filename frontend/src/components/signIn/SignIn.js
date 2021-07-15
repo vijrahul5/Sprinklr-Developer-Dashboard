@@ -1,9 +1,11 @@
+// libraries
 import React, { useState } from "react";
+import NotificationManager from "react-notifications/lib/NotificationManager";
+import GoogleLogin from "react-google-login";
+// components
 import Loader from "../loaders/Loader";
 import Auth from "../../Auth";
-import GoogleLogin from "react-google-login";
-import { RiCloseCircleLine } from "react-icons/ri";
-import NotificationManager from "react-notifications/lib/NotificationManager";
+// utilities
 import OutsideClick from "../../utils/OutsideClick";
 import dotenv from "dotenv";
 dotenv.config();

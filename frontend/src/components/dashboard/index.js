@@ -1,6 +1,8 @@
+// libraries
 import React from "react";
+// components
 import Dashboard from "./Dashboard";
-import "../../scss/jira.scss";
+// styles
 import "../../scss/dashboard.scss";
 
 function index() {

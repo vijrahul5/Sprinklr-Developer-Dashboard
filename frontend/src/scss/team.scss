@@ -20,9 +20,10 @@
 }
 
 .teamStandUpList__OuterUl {
-    padding: map-get($paddings, "medium");
-    padding-top: 0.1rem;
-    padding-bottom: 0;
+    width: 100%;
+    // padding: map-get($paddings, "medium");
+    // padding-top: 0.1rem;
+    // padding-bottom: 0;
     margin-bottom: map-get($margins, "medium");
     list-style: none;
     overflow: auto;
@@ -30,6 +31,7 @@
     ul {
         list-style: none;
         padding: map-get($paddings, "small");
+        margin: 0.1rem;
         margin-bottom: map-get($margins, "small");
         border-radius: $border-radius;
         box-shadow: $shadow;
@@ -139,5 +141,11 @@
     margin: map-get($margins, "medium");
     margin-top: 0;
 }
-
+.ReactVirtualized__Grid__innerScrollContainer[style] {
+    margin-bottom: 3rem;
+    padding: 2rem;
+    padding-top: 0;
+    // padding-bottom: 2rem;
+    overflow: visible !important;
+}
 @import "media";

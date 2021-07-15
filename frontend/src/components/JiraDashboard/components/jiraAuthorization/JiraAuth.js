@@ -1,10 +1,16 @@
+//libraries
 import React from "react";
-import { Button, SIZE } from "baseui/button";
 
-import useAuthorize from "../../hooks/useAuthorize";
+//components
+import { Button, SIZE } from "baseui/button";
 import Instruction from "../../../instruction/Instruction";
+
+//hooks
+import useAuthorize from "../../hooks/useAuthorize";
+
 require("dotenv").config();
 
+//constants
 const clientId = process.env.REACT_APP_CLIENT_ID_JIRA;
 const URL = `https://auth.atlassian.com/authorize?audience=api.atlassian.com&client_id=${clientId}&scope=offline_access%20read%3Ajira-user%20read%3Ajira-work%20manage%3Ajira-project%20manage%3Ajira-configuration%20write%3Ajira-work%20manage%3Ajira-webhook%20manage%3Ajira-data-provider&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fdashboard&state=jiiaa&response_type=code&prompt=consent`;
 const btnOverride = {
@@ -20,6 +26,7 @@ const instructions = [
   "Select account/domain and click allow",
   "Now you can get Issues based on filter and JQL",
 ];
+
 const JiraAuth = () => {
   const { showAuthPage } = useAuthorize();
 

@@ -1,4 +1,6 @@
+//libraries
 import React from "react";
+// components
 import Instruction from "./Instruction";
 
 function index({ instructions }) {

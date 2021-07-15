@@ -1,12 +1,16 @@
+// libraries
 import React, { useCallback } from "react";
 import { useState, useEffect } from "react";
-import useUpdateEmployeeTeam from "../hooks/useUpdateEmployeeTeam";
 import { FormControl } from "baseui/form-control";
 import { Input } from "baseui/input";
 import { Button, SIZE } from "baseui/button";
 import NotificationManager from "react-notifications/lib/NotificationManager";
-import OutsideClick from "../../../utils/OutsideClick";
+// hooks
+import useUpdateEmployeeTeam from "../hooks/useUpdateEmployeeTeam";
+// constants
 import { rootOverride } from "../constants/overrides";
+//utilities
+import OutsideClick from "../../../utils/OutsideClick";
 import checkFieldEmpty from "../../../utils/checkFieldEmpty";
 
 function TeamForm({

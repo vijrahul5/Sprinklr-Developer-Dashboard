@@ -1,7 +1,7 @@
 const employeeModel = require("../model/employeeModel");
 const { OAuth2Client } = require("google-auth-library");
-const Mediator = require("../model/Mediator");
-const mediator = new Mediator();
+// const Mediator = require("../model/Mediator");
+// const mediator = new Mediator();
 require("dotenv").config();
 const client = new OAuth2Client(`${process.env.CLIENT_ID}`);
 
@@ -16,20 +16,10 @@ async function signIn(req, res) {
         });
         const { name, email, picture, given_name, family_name } =
             ticket.getPayload();
-        const employee = await mediator.get(employeeModel, { email }, "one");
-        // const employee = await employeeModel.findOne({ email });
+        // const employee = await mediator.get(employeeModel, { email }, "one");
+        const employee = await employeeModel.findOne({ email });
         if (!employee) {
-            await mediator.create(employeeModel, {
-                name,
-                email,
-                picture,
-                given_name,
-                family_name,
-                managerAccess: false,
-                doneJiraAuth: false,
-                doneGitlabAuth: false,
-            });
-            // await employeeModel.create({
+            // await mediator.create(employeeModel, {
             //     name,
             //     email,
             //     picture,
@@ -39,6 +29,16 @@ async function signIn(req, res) {
             //     doneJiraAuth: false,
             //     doneGitlabAuth: false,
             // });
+            await employeeModel.create({
+                name,
+                email,
+                picture,
+                given_name,
+                family_name,
+                managerAccess: false,
+                doneJiraAuth: false,
+                doneGitlabAuth: false,
+            });
         }
         res.cookie("session-token", token);
         res.json({
