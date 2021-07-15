@@ -1,4 +1,3 @@
-
 @import "base";
 .signin {
     height: 100%;
@@ -83,7 +82,7 @@
         margin-bottom: 4rem;
     }
 }
-.landingPage__wrapper{
+.landingPage__wrapper {
     width: 70%;
     height: 50%;
     margin: auto;
@@ -92,12 +91,11 @@
     border-radius: 1rem;
     background-color: white;
 }
-.signInSection{
+.signInSection {
     width: 50rem;
     // background-color: black;
-    background-color: #FAFAFA;
+    background-color: #fafafa;
     border-radius: 1rem;
-    
 }
 .landingPage__image {
     background-image: url("https://mms.businesswire.com/media/20200909005490/en/819520/23/Sprinklr_Brand_Logo_-_PNG_RGB_logo_horiz_col.jpg");
@@ -110,7 +108,7 @@
     height: 100%;
     border-radius: 1rem;
 }
-.landingPage{
+.landingPage {
     width: 100%;
     height: 100%;
     display: flex;
@@ -119,6 +117,18 @@
     background-image: url("../assets/cool-background.png");
     background-size: cover;
     // background-color: rgb(60, 131, 176);
-
 }
+.landingPage__navbar {
+    width: 100%;
+    background-color: white;
+    height: 5rem;
+    @include flexCenter(row);
+}
+.landingPage__navbar__heading {
+    width: fit-content;
+    color: black;
+    font-family: $font-primary;
+    font-weight: map-get($font-weights, "medium");
+}
+
 @import "media";

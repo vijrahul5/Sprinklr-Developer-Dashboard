@@ -1,5 +1,12 @@
 // libraries
 import React, { useState, useEffect } from "react";
+import {
+    List,
+    AutoSizer,
+    CellMeasurer,
+    CellMeasurerCache,
+} from "react-virtualized";
+
 import { Button, SIZE } from "baseui/button";
 // components
 import TeamMember from "./TeamMember";
@@ -15,6 +22,12 @@ function Team() {
     const [addTeamMember, setAddTeamMember] = useState(false);
     const [deleteTeamMember, setDeleteTeamMember] = useState(false);
     const [deleteTeamMemberEmail, setDeleteTeamMemberEmail] = useState("");
+    const cache = React.useRef(
+        new CellMeasurerCache({
+            fixedWidth: true,
+            defaultHeight: 500,
+        })
+    );
 
     function handleDeleteTeamMember(email) {
         setDeleteTeamMemberEmail(email);
@@ -28,7 +41,6 @@ function Team() {
             </div>
         );
     }
-
     return (
         <>
             {data && data.length ? (
@@ -42,20 +54,49 @@ function Team() {
                             Add Team Member
                         </Button>
                     </div>
-                    <ul className="teamStandUpList__OuterUl">
-                        {data.map((teamMember) => {
-                            return (
-                                <li key={teamMember.email}>
-                                    <TeamMember
-                                        teamMember={teamMember}
-                                        handleDeleteTeamMember={
-                                            handleDeleteTeamMember
-                                        }
-                                    />
-                                </li>
-                            );
-                        })}
-                    </ul>
+                    <div
+                        className="teamStandUpList__OuterUl"
+                        style={{ width: "100%", height: "45rem" }}
+                    >
+                        <AutoSizer>
+                            {({ width, height }) => (
+                                <List
+                                    width={width}
+                                    height={height}
+                                    rowHeight={cache.current.rowHeight}
+                                    deferredMeasurementCache={cache.current}
+                                    rowCount={data.length}
+                                    rowRenderer={({
+                                        key,
+                                        index,
+                                        style,
+                                        parent,
+                                    }) => {
+                                        const teamMember = data[index];
+                                        return (
+                                            <CellMeasurer
+                                                key={key}
+                                                cache={cache.current}
+                                                parent={parent}
+                                                columnIndex={0}
+                                                rowIndex={index}
+                                            >
+                                                <TeamMember
+                                                    index={index}
+                                                    teamMember={teamMember}
+                                                    handleDeleteTeamMember={
+                                                        handleDeleteTeamMember
+                                                    }
+                                                />
+                                            </CellMeasurer>
+                                        );
+                                    }}
+                                    className="virtaul"
+                                />
+                            )}
+                        </AutoSizer>
+                    </div>
+
                     {addTeamMember ? (
                         <TeamForm
                             type={"Add"}
@@ -78,9 +119,9 @@ function Team() {
                         <Instruction
                             instructions={[
                                 "This is the section where you can manage your team and review their progress.",
-                                "Click on the add icon to add team members.",
+                                "Click on the 'Add Team Member' button to add team members.",
                                 "Once a team member is added, you will be able to see their daily stand ups.",
-                                "Click on the delete icon to delete a team member.",
+                                "Click on the 'Delete Team Member' button to delete a team member.",
                             ]}
                         />
                     </div>

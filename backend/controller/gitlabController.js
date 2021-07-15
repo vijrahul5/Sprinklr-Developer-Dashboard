@@ -1,8 +1,6 @@
 const employeeModel = require("../model/employeeModel");
 const axios = require("axios");
 const gitlabRouter = require("../router/gitlabRouter");
-const Mediator = require("../model/Mediator");
-const mediator = new Mediator();
 
 async function submitGitlabAccessToken(req, res) {
     const email = req.email;
