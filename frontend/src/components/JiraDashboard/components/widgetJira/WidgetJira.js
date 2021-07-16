@@ -9,7 +9,7 @@ import useGetJiraData from "../../hooks/useGetJiraData";
 import JqlFilter from "../filters/JqlFilter";
 import BasicFilter from "../filters/BasicFilter";
 import Table from "../../../Table/Table";
-
+import Expe from "../../../Table/Expe";
 //constants
 const columnTitles = ["Type", "Key", "Summary", "Status", "Priority"];
 const title = "All Issues";
@@ -45,8 +45,8 @@ const Widgetjira = ({ user }) => {
           user={user}
         />
       )}
-
-      <Table
+      <Expe jql={jqlQuery} />
+      {/* <Table
         columnTitles={columnTitles}
         title={title}
         data={data}
@@ -55,7 +55,7 @@ const Widgetjira = ({ user }) => {
         setPageNumber={setPageNumber}
         loading={loading}
         errMessage={errMessage}
-      />
+      /> */}
     </div>
   );
 };
