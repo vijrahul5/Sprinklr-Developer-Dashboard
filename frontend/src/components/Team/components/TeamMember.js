@@ -8,18 +8,18 @@ function TeamMember({ teamMember, handleDeleteTeamMember }) {
     return (
         <>
             <ul>
-                <li>
+                <li className="teamMember__list__item">
                     <p className="teamStandUpList__param">Name:</p>
                     <p className="teamStandUpList__value">{teamMember.name}</p>
                 </li>
-                <li>
+                <li className="teamMember__list__item">
                     <p className="teamStandUpList__param">Email:</p>
                     <p className="teamStandUpList__value">{teamMember.email}</p>
                 </li>
 
                 {standUpQuestions.map(({ question, questionNumber }) => {
                     return (
-                        <li key={questionNumber}>
+                        <li key={questionNumber} className="teamMember__list__item">
                             <p className="teamStandUpList__param">{question}</p>
                             <p className="teamStandUpList__value">
                                 {teamMember.standUp

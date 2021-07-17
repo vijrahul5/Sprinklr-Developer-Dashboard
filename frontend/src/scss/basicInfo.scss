@@ -2,6 +2,7 @@
 .basicInfo {
     width: 25rem;
     position: fixed;
+    z-index: 1;
     height: 100%;
 
 }
@@ -136,11 +137,11 @@
 }
 .standUp__heading{
     color: $color-primary;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.2rem;
     border-bottom: 2px solid $color-primary;
     margin-bottom: map-get($margins, "small");
     font-weight: map-get($font-weights, "small");
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 
 }
 

@@ -4,7 +4,7 @@
     .basicInfo {
         width: 100%;
         position: unset;
-        @include flexCenter(row);
+        @include flexCenter(column);
         align-items: flex-start;
         margin-bottom: map-get($margins, "medium");
     }
@@ -13,13 +13,25 @@
         margin-left: 0;
     }
     .basicInfo__wrapper {
-        margin-right: map-get($margins, "medium");
-        @include flexCenter(column);
-        width: 70%;
+        @include flexCenter(row);
+        width: 100%;
+        align-items: flex-start;
+    }
+    .learning__heading {
+        padding-bottom: 0.5rem;
+        font-size: 2rem;
+        margin: 2rem;
+        
+    }
+    .add__icon{
+        font-size: 1.5rem;
+    }
+    .resourceList__container {
+        height: 20rem;
     }
     .profile {
-        margin: 0;
-        width: 100%;
+        margin-right: 2rem;
+        width: 85%;
 
         // .profile__imgHolder {
         //     width: 9rem;
@@ -56,15 +68,28 @@
 }
 
 @media only screen and (max-width: 950px) {
+    .profile {
+        width: 100%;
+    }
     .basicInfo__wrapper {
-        margin-right: 0;
+        margin: 0;
         @include flexCenter(column);
         width: 100%;
+    }
+    .learning__heading {
+        margin: 1rem;
+        
+    }
+    .standUp__heading {
+        padding-bottom: 0.5rem;
+        font-size: 2rem;
     }
     .dashboardContainer {
         padding: map-get($paddings, "small");
     }
-
+    .resourceList__wrapper{
+        padding-left: 0;
+    }
     .basicInfo {
         @include flexCenter(column);
         // &__wrapper {
@@ -98,7 +123,7 @@
         margin-top: 2rem;
     }
     .teamInstruction {
-        margin: 0;
+        margin: 1rem;
     }
     .teamStandUpList__add {
         margin: 0 1rem;
@@ -110,22 +135,23 @@
         // padding-bottom: 2rem;
         overflow: visible !important;
     }
-    .landingPage__wrapper{
+    .landingPage__wrapper {
         width: 95%;
     }
+    
 }
 
 @media only screen and (max-width: 650px) {
     html {
         font-size: 100%;
     }
-    .teamStandUpList {
-        li {
-            display: flex;
-            justify-content: start;
-            flex-direction: column;
-            align-items: center;
-        }
+    // .teamStandUpList {
+    // }
+    .teamMember__list__item {
+        display: flex;
+        justify-content: start;
+        flex-direction: column;
+        align-items: center;
     }
     .teamStandUpList__param {
         width: 100%;
@@ -161,6 +187,20 @@
         margin: 0 1rem;
         margin-bottom: map-get($margins, "small");
     }
+    .learning__heading {
+        padding-bottom: 0.2rem;
+        font-size: 1.5rem;
+    }
+    .standUp__heading {
+        padding-bottom: 0.2rem;
+        font-size: 1.5rem;
+    }
+    .section {
+        h1 {
+            padding-bottom: 0.2rem;
+            font-size: 1.5rem;
+        }
+    }
 }
 
 @media only screen and (max-width: 400px) {
@@ -179,7 +219,9 @@
     .standUp {
         padding: map-get($paddings, "extraSmall");
     }
-
+    .learning__heading {
+        margin: 0.5rem;
+    }
     .dashboardNavbar {
         width: 100%;
         height: 3.5rem;
@@ -201,10 +243,6 @@
             margin: 0.5rem;
             margin-bottom: 2rem;
         }
-        ul {
-            padding: 0.5rem;
-            padding-top: 0.2rem;
-        }
     }
 
     .teamStandUpList__add {
@@ -223,5 +261,8 @@
         padding: 0.5rem;
         // padding-bottom: 2rem;
         overflow: visible !important;
+    }
+    .teamInstruction {
+        margin: 0.5rem;
     }
 }

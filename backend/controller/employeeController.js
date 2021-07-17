@@ -1,6 +1,7 @@
 const employeeModel = require("../model/employeeModel");
 const standUpModel = require("../model/standUpModel");
 const managerModel = require("../model/managerModel");
+const learningModel = require("../model/learningModel");
 const moment = require("moment");
 // const Mediator = require("../model/Mediator");
 // const mediator = new Mediator();
@@ -21,13 +22,12 @@ async function getProfile(req, res) {
         } else {
             throw new Error("Could not get profile");
         }
-    
-  } catch (err) {
-    res.json({
-      status: "Failed",
-      error: err.message,
-    });
-  }
+    } catch (err) {
+        res.json({
+            status: "Failed",
+            error: err.message,
+        });
+    }
 }
 
 async function updateProfile(req, res) {
@@ -48,13 +48,12 @@ async function updateProfile(req, res) {
         } else {
             throw new Error("Could not update profile");
         }
-    
-  } catch (err) {
-    res.json({
-      status: "Failed",
-      error: err.message,
-    });
-  }
+    } catch (err) {
+        res.json({
+            status: "Failed",
+            error: err.message,
+        });
+    }
 }
 async function deleteProfile(req, res) {
     // Deletes Employee Profile from the employee model
@@ -115,13 +114,12 @@ async function getStandUp(req, res) {
             }
         }
         throw new Error("Could not get stand up");
-    
-  } catch (err) {
-    res.json({
-      status: "Failed",
-      error: err.message,
-    });
-  }
+    } catch (err) {
+        res.json({
+            status: "Failed",
+            error: err.message,
+        });
+    }
 }
 async function postStandUp(req, res) {
     // Posts an employee's stand up to the stand up model
@@ -145,13 +143,12 @@ async function postStandUp(req, res) {
             }
         }
         throw new Error("Could not post standup");
-    
-  } catch (err) {
-    res.json({
-      status: "Failed",
-      error: err.message,
-    });
-  }
+    } catch (err) {
+        res.json({
+            status: "Failed",
+            error: err.message,
+        });
+    }
 }
 
 async function updateStandUp(req, res) {
@@ -190,13 +187,12 @@ async function updateStandUp(req, res) {
             }
         }
         throw new Error("Could not update standup");
-    
-  } catch (err) {
-    res.json({
-      status: "Failed",
-      error: err.message,
-    });
-  }
+    } catch (err) {
+        res.json({
+            status: "Failed",
+            error: err.message,
+        });
+    }
 }
 
 async function deleteStandUp(req, res) {
@@ -215,17 +211,17 @@ async function deleteStandUp(req, res) {
                 },
             });
 
-      return res.json({
-        status: "Success",
-      });
+            return res.json({
+                status: "Success",
+            });
+        }
+        throw new Error("Could not delete stand up");
+    } catch (err) {
+        res.json({
+            status: "Failed",
+            error: err.message,
+        });
     }
-    throw new Error("Could not delete stand up");
-  } catch (err) {
-    res.json({
-      status: "Failed",
-      error: err.message,
-    });
-  }
 }
 
 async function getTeam(req, res) {
@@ -263,24 +259,24 @@ async function getTeam(req, res) {
                     },
                 });
 
-        teamStandUp.push({
-          name: team[i].name,
-          email: team[i].email,
-          standUp: standUp,
+                teamStandUp.push({
+                    name: team[i].name,
+                    email: team[i].email,
+                    standUp: standUp,
+                });
+            }
+            return res.json({
+                status: "Success",
+                teamStandUp,
+            });
+        }
+        throw new Error("Could not get team");
+    } catch (err) {
+        res.json({
+            status: "Failed",
+            error: err.message,
         });
-      }
-      return res.json({
-        status: "Success",
-        teamStandUp,
-      });
     }
-    throw new Error("Could not get team");
-  } catch (err) {
-    res.json({
-      status: "Failed",
-      error: err.message,
-    });
-  }
 }
 
 async function postTeam(req, res) {
@@ -303,17 +299,17 @@ async function postTeam(req, res) {
             await manager.save();
             await employee.save();
 
-      return res.json({
-        status: "Success",
-      });
+            return res.json({
+                status: "Success",
+            });
+        }
+        throw new Error("Could not add team member");
+    } catch (err) {
+        res.json({
+            status: "Failed",
+            error: err.message,
+        });
     }
-    throw new Error("Could not add team member");
-  } catch (err) {
-    res.json({
-      status: "Failed",
-      error: err.message,
-    });
-  }
 }
 async function deleteTeam(req, res) {
     // Deletes a team member from the employee's team
@@ -339,13 +335,12 @@ async function deleteTeam(req, res) {
             });
         }
         throw new Error("Could not delete team member");
-    
-  } catch (err) {
-    res.json({
-      status: "Failed",
-      error: err.message,
-    });
-  }
+    } catch (err) {
+        res.json({
+            status: "Failed",
+            error: err.message,
+        });
+    }
 }
 
 async function getManagerAccess(req, res) {
@@ -373,13 +368,112 @@ async function getManagerAccess(req, res) {
                 status: "Success",
             });
         }
-    
-  } catch (err) {
-    res.json({
-      status: "Failed",
-      error: err.message,
-    });
-  }
+    } catch (err) {
+        res.json({
+            status: "Failed",
+            error: err.message,
+        });
+    }
+}
+
+async function getLearningResources(req, res) {
+    const email = req.email;
+    try {
+        const employee = await employeeModel.findOne({ email: email });
+        if (!employee) throw new Error("Failed");
+        const manager = employee.managerAccess ? employee : employee.manager;
+        const learningResources = await learningModel
+            .find({
+                teamManager: manager,
+            })
+            .sort({ createdAt: "desc" })
+            .populate("author")
+            .populate("teamManager")
+            .populate("markedBy");
+
+        if (!learningResources) throw new Error("Failed");
+        res.json({
+            status: "Success",
+            learningResources,
+        });
+    } catch (err) {
+        res.json({
+            status: "Failed",
+            error: err.message,
+        });
+    }
+}
+async function postLearningResources(req, res) {
+    const email = req.email;
+    try {
+        const employee = await employeeModel.findOne({ email: email });
+        if (!employee) throw new Error("Failed");
+        const manager = employee.managerAccess ? employee : employee.manager;
+        await learningModel.create({
+            title: req.body.title,
+            link: req.body.link,
+            author: employee,
+            teamManager: manager,
+        });
+        res.json({
+            status: "Success",
+        });
+    } catch (err) {
+        res.json({
+            status: "Failed",
+            error: err.message,
+        });
+    }
+}
+async function updateLearningResources(req, res) {
+    const email = req.email;
+    try {
+        const employee = await employeeModel.findOne({ email: email });
+        if (!employee) throw new Error("Failed");
+        const manager = employee.managerAccess ? employee : employee.manager;
+        const learningResource = await learningModel
+            .findOne({
+                _id: req.body.resourceId,
+            })
+            .populate("markedBy");
+        if (!learningResource) throw new Error("Failed");
+        let markArray = learningResource.markedBy;
+        markArray = markArray.filter(
+            (markedEmployee) => markedEmployee.email !== employee.email
+        );
+        if (req.body.marked) {
+            markArray.push(employee);
+        }
+        learningResource.markedBy = markArray;
+        await learningResource.save();
+        res.json({
+            status: "Success",
+        });
+    } catch (err) {
+        res.json({
+            status: "Failed",
+            error: err.message,
+        });
+    }
+}
+async function deleteLearningResources(req, res) {
+    const email = req.email;
+    try {
+        const employee = await employeeModel.findOne({ email: email });
+        if (!employee) throw new Error("Failed");
+        const manager = employee.managerAccess ? employee : employee.manager;
+        await learningModel.deleteOne({
+            _id: req.body.resourceId,
+        });
+        res.json({
+            status: "Success",
+        });
+    } catch (err) {
+        res.json({
+            status: "Failed",
+            error: err.message,
+        });
+    }
 }
 
 module.exports.getProfile = getProfile;
@@ -393,3 +487,7 @@ module.exports.postStandUp = postStandUp;
 module.exports.updateStandUp = updateStandUp;
 module.exports.deleteStandUp = deleteStandUp;
 module.exports.getManagerAccess = getManagerAccess;
+module.exports.getLearningResources = getLearningResources;
+module.exports.postLearningResources = postLearningResources;
+module.exports.updateLearningResources = updateLearningResources;
+module.exports.deleteLearningResources = deleteLearningResources;

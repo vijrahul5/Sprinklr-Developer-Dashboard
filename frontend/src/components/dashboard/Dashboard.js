@@ -8,6 +8,7 @@ import Profile from "../profile/index";
 import StandUp from "../standUp/index";
 import JiraDashboard from "../jiraDashboard/components/jira/Jira";
 import GitlabDashboard from "../gitlabDashboard/GitlabDashboard";
+import Learning from "../learning/index";
 // hooks
 import useFetchEmployeeData from "../../hooks/useFetchEmployeeData";
 
@@ -24,8 +25,11 @@ export default function Dashboard() {
             <DashboardNavbar />
             <div className="dashboardContainer">
                 <div className="basicInfo">
-                    <Profile user={user} />
-                    <StandUp />
+                    <div className="basicInfo__wrapper">
+                        <Profile user={user} />
+                        <StandUp />
+                    </div>
+                    <Learning user={user} />
                 </div>
                 <div className="sectionContainer">
                     {user.managerAccess ? (
@@ -47,6 +51,7 @@ export default function Dashboard() {
                             </div>
                         </Suspense>
                     ) : null}
+
                     <div className="section">
                         <h1>Jira</h1>
                         <JiraDashboard user={user} />
