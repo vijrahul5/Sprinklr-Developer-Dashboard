@@ -1,52 +1,57 @@
 @import "base";
 
-@media only screen and (max-width: 1350px), (max-height: 950px) {
+@media only screen and (max-width: 1350px) {
     .basicInfo {
+        margin-bottom: 0;
+    }
+    .basicInfo__OuterWrapper {
+        margin-top: 3.5rem;
         width: 100%;
+        height: fit-content;
         position: unset;
         @include flexCenter(column);
         align-items: flex-start;
-        margin-bottom: map-get($margins, "medium");
-    }
-
-    .sectionContainer {
-        margin-left: 0;
+        padding-bottom: 1rem;
     }
     .basicInfo__wrapper {
         @include flexCenter(row);
         width: 100%;
         align-items: flex-start;
     }
+    .sectionContainer {
+        margin-top: 0;
+        margin-left: 0;
+        padding-top: 1rem;
+    }
+
+    .learning {
+        margin-bottom: 0;
+        padding-bottom: 2rem;
+    }
     .learning__heading {
         padding-bottom: 0.5rem;
         font-size: 2rem;
         margin: 2rem;
-        
     }
-    .add__icon{
+    .add__icon {
         font-size: 1.5rem;
     }
     .resourceList__container {
-        height: 20rem;
+        height: fit-content;
+        max-height: 20rem;
+    }
+    .resourceList__wrapper {
+        padding: 0 2rem;
     }
     .profile {
         margin-right: 2rem;
+        margin-bottom: 0;
         width: 85%;
-
-        // .profile__imgHolder {
-        //     width: 9rem;
-        //     height: 9rem;
-        //     margin-bottom: map-get($margins, "small");
-        // }
     }
     .profile__imgHolder {
-        width: 9rem;
-        height: 9rem;
+        width: 8rem;
+        height: 8rem;
         margin-bottom: map-get($margins, "small");
-    }
-    .requestForm {
-        margin-bottom: 0;
-        margin-top: 2rem;
     }
     .jiraWid__search {
         flex-direction: column;
@@ -65,6 +70,20 @@
     .btn--white {
         margin-left: 0rem !important;
     }
+    .learning__heading {
+        padding-bottom: 0.2rem;
+        font-size: 1.5rem;
+    }
+    .standUp__heading {
+        padding-bottom: 0.2rem;
+        font-size: 1.5rem;
+    }
+    .section {
+        h1 {
+            padding-bottom: 0.2rem;
+            font-size: 1.5rem;
+        }
+    }
 }
 
 @media only screen and (max-width: 950px) {
@@ -76,31 +95,25 @@
         @include flexCenter(column);
         width: 100%;
     }
+    .basicInfo__OuterWrapper {
+        @include flexCenter(column);
+        padding: 1rem;
+        padding-top: 2rem;
+    }
+    .learning {
+        padding-bottom: 1rem;
+    }
     .learning__heading {
         margin: 1rem;
-        
     }
-    .standUp__heading {
-        padding-bottom: 0.5rem;
-        font-size: 2rem;
+    .resourceList__wrapper {
+        padding: 0 1rem;
     }
-    .dashboardContainer {
-        padding: map-get($paddings, "small");
-    }
-    .resourceList__wrapper{
-        padding-left: 0;
-    }
-    .basicInfo {
-        @include flexCenter(column);
-        // &__wrapper {
-        //     margin-right: 0;
-        // }
-    }
-    .basicInfo__wrapper {
-        margin-right: 0;
+    .sectionContainer {
+        padding: 1rem;
     }
     .profile {
-        margin: 0px;
+        margin: 0;
         width: 100%;
     }
     .section {
@@ -138,7 +151,6 @@
     .landingPage__wrapper {
         width: 95%;
     }
-    
 }
 
 @media only screen and (max-width: 650px) {
@@ -186,20 +198,6 @@
     .teamStandUpList__add {
         margin: 0 1rem;
         margin-bottom: map-get($margins, "small");
-    }
-    .learning__heading {
-        padding-bottom: 0.2rem;
-        font-size: 1.5rem;
-    }
-    .standUp__heading {
-        padding-bottom: 0.2rem;
-        font-size: 1.5rem;
-    }
-    .section {
-        h1 {
-            padding-bottom: 0.2rem;
-            font-size: 1.5rem;
-        }
     }
 }
 

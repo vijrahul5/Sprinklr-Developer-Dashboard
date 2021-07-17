@@ -81,9 +81,11 @@
 }
 
 .sectionContainer {
-    margin-left: 25rem + 2rem;
+    margin-left: 25 + 2rem;
     height: fit-content;
     @include flexCenter(column);
+    padding: 2rem;
+    margin-top: 3.5rem;
 }
 .section {
     width: 100%;
@@ -102,6 +104,5 @@
         font-weight: map-get($font-weights, "small");
     }
 }
-
 
 @import "media";

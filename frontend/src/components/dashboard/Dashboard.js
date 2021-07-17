@@ -23,7 +23,8 @@ export default function Dashboard() {
     return (
         <>
             <DashboardNavbar />
-            <div className="dashboardContainer">
+            {/* <div className="dashboardContainer"> */}
+            <div className="basicInfo__OuterWrapper">
                 <div className="basicInfo">
                     <div className="basicInfo__wrapper">
                         <Profile user={user} />
@@ -31,37 +32,39 @@ export default function Dashboard() {
                     </div>
                     <Learning user={user} />
                 </div>
-                <div className="sectionContainer">
-                    {user.managerAccess ? (
-                        <Suspense
-                            fallback={() => {
-                                return (
-                                    <div className="section teamStandUpList">
-                                        <h1 className="teamStandUpList__heading">
-                                            Team
-                                        </h1>
-                                        <Loader />
-                                    </div>
-                                );
-                            }}
-                        >
-                            <div className="section teamStandUpList">
-                                <h1>Team</h1>
-                                <Team />
-                            </div>
-                        </Suspense>
-                    ) : null}
+            </div>
 
-                    <div className="section">
-                        <h1>Jira</h1>
-                        <JiraDashboard user={user} />
-                    </div>
-                    <div className="section">
-                        <h1>Gitlab</h1>
-                        <GitlabDashboard user={user} />
-                    </div>
+            <div className="sectionContainer">
+                {user.managerAccess ? (
+                    <Suspense
+                        fallback={() => {
+                            return (
+                                <div className="section teamStandUpList">
+                                    <h1 className="teamStandUpList__heading">
+                                        Team
+                                    </h1>
+                                    <Loader />
+                                </div>
+                            );
+                        }}
+                    >
+                        <div className="section teamStandUpList">
+                            <h1>Team</h1>
+                            <Team />
+                        </div>
+                    </Suspense>
+                ) : null}
+
+                <div className="section">
+                    <h1>Jira</h1>
+                    <JiraDashboard user={user} />
+                </div>
+                <div className="section">
+                    <h1>Gitlab</h1>
+                    <GitlabDashboard user={user} />
                 </div>
             </div>
+            {/* </div> */}
             <NotificationContainer />
         </>
     );

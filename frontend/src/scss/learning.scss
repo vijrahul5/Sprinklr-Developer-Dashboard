@@ -8,8 +8,6 @@
     margin-top: map-get($margins, "medium");
     position: relative;
     padding-bottom: 1rem;
-
-    
 }
 .learning__heading {
     color: $color-primary;
@@ -58,7 +56,8 @@
 }
 
 .resourceList__container {
-    height: 8rem;
+    height: fit-content;
+    max-height: 8rem;
     overflow-y: auto;
     @include flexCenter(column);
     list-style: none;
@@ -71,10 +70,10 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding:0.5rem;
+    padding:0 1rem;
 }
 .learningResource {
-    width: 96%;
+    width: 100%;
     height: fit-content;
     list-style: none;
     border-radius: $border-radius;
