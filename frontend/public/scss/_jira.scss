@@ -90,3 +90,18 @@
   color: blue;
   text-decoration: underline;
 }
+.table__headCell {
+  padding: 16px !important;
+  border-bottom: 1px solid rgb(200, 200, 200) !important;
+}
+.table__row {
+  border-bottom: 1px solid rgb(200, 200, 200) !important;
+}
+.table__cell {
+  font-weight: 350 !important;
+  padding: 16px !important;
+  overflow: auto !important;
+}
+.table__Container {
+  overflow: auto;
+}

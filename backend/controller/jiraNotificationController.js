@@ -18,6 +18,7 @@ function triggerChannel(obj, matchedWebhookIds) {
 }
 
 function handleNotification(req, res) {
+  console.log(req);
   res.sendStatus(200);
   let obj = {
     type: req.body.issue_event_type_name,

@@ -732,6 +732,25 @@ body,
   text-decoration: underline;
 }
 
+.table__headCell {
+  padding: 16px !important;
+  border-bottom: 1px solid #c8c8c8 !important;
+}
+
+.table__row {
+  border-bottom: 1px solid #c8c8c8 !important;
+}
+
+.table__cell {
+  font-weight: 350 !important;
+  padding: 16px !important;
+  overflow: auto !important;
+}
+
+.table__Container {
+  overflow: auto;
+}
+
 .btnCustom {
   background-color: #0c66c2 !important;
   color: white;

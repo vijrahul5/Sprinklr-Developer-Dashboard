@@ -29,7 +29,6 @@ const Jira = ({ user }) => {
         {!loading && doneAuthentication ? <Widgetjira user={user} /> : <></>}
       </Suspense>
       <Notification />
-      {/* <Expe /> */}
     </>
   );
 };
