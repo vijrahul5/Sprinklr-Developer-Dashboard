@@ -346,6 +346,7 @@ async function deleteTeam(req, res) {
 async function getManagerAccess(req, res) {
     try {
         const email = req.email;
+        console.log(email, req);
         // const employee = await mediator.get(
         //     employeeModel,
         //     { email: email },
@@ -357,7 +358,9 @@ async function getManagerAccess(req, res) {
         //     { email: email },
         //     "one"
         // );
+        console.log(employee);
         const checkManager = await managerModel.findOne({ email: email });
+        console.log(checkManager);
         if (!checkManager || !employee) {
             throw new Error("Request Denied !");
         } else {
@@ -369,6 +372,7 @@ async function getManagerAccess(req, res) {
             });
         }
     } catch (err) {
+
         res.json({
             status: "Failed",
             error: err.message,

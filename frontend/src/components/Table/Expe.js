@@ -6,6 +6,7 @@ import {
     StyledHeadCell,
     StyledCell,
 } from "baseui/table";
+
 import Loader from "../../components/loaders/Loader";
 import {
     InfiniteLoader,
@@ -17,14 +18,18 @@ import {
 
 const minimumBatchSize = 20;
 
-const Expe = ({ jql = "", columnTitles, loadMoreRows }) => {
+
+const Expe = ({ jql = "", columnTitles, loadMoreRows, author, minWidth }) => {
+
     const [css] = useStyletron();
     useEffect(() => {
         setList([]);
         setLoading(false);
         setRemoteCount(20);
         setLastLoadedIndex(-1);
-    }, [jql]);
+
+    }, [jql, author]);
+
     const [list, setList] = useState([]);
     const [remoteRowCount, setRemoteCount] = useState(20);
     const [loading, setLoading] = useState(false);
@@ -44,7 +49,9 @@ const Expe = ({ jql = "", columnTitles, loadMoreRows }) => {
                 className={css({
                     height: "600px",
                     width: "100%",
-                    minWidth: "750px",
+
+                    minWidth: minWidth,
+
                 })}
             >
                 <StyledTable
@@ -154,6 +161,7 @@ const Expe = ({ jql = "", columnTitles, loadMoreRows }) => {
                             )}
                         </InfiniteLoader>
                     </div>
+
                     {loading ? <Loader /> : <></>}
                 </StyledTable>
             </div>
