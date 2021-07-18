@@ -21,13 +21,12 @@ async function getProfile(req, res) {
         } else {
             throw new Error("Could not get profile");
         }
-    
-  } catch (err) {
-    res.json({
-      status: "Failed",
-      error: err.message,
-    });
-  }
+    } catch (err) {
+        res.json({
+            status: "Failed",
+            error: err.message,
+        });
+    }
 }
 
 async function updateProfile(req, res) {
@@ -48,13 +47,12 @@ async function updateProfile(req, res) {
         } else {
             throw new Error("Could not update profile");
         }
-    
-  } catch (err) {
-    res.json({
-      status: "Failed",
-      error: err.message,
-    });
-  }
+    } catch (err) {
+        res.json({
+            status: "Failed",
+            error: err.message,
+        });
+    }
 }
 async function deleteProfile(req, res) {
     // Deletes Employee Profile from the employee model
@@ -115,13 +113,12 @@ async function getStandUp(req, res) {
             }
         }
         throw new Error("Could not get stand up");
-    
-  } catch (err) {
-    res.json({
-      status: "Failed",
-      error: err.message,
-    });
-  }
+    } catch (err) {
+        res.json({
+            status: "Failed",
+            error: err.message,
+        });
+    }
 }
 async function postStandUp(req, res) {
     // Posts an employee's stand up to the stand up model
@@ -145,13 +142,12 @@ async function postStandUp(req, res) {
             }
         }
         throw new Error("Could not post standup");
-    
-  } catch (err) {
-    res.json({
-      status: "Failed",
-      error: err.message,
-    });
-  }
+    } catch (err) {
+        res.json({
+            status: "Failed",
+            error: err.message,
+        });
+    }
 }
 
 async function updateStandUp(req, res) {
@@ -190,13 +186,12 @@ async function updateStandUp(req, res) {
             }
         }
         throw new Error("Could not update standup");
-    
-  } catch (err) {
-    res.json({
-      status: "Failed",
-      error: err.message,
-    });
-  }
+    } catch (err) {
+        res.json({
+            status: "Failed",
+            error: err.message,
+        });
+    }
 }
 
 async function deleteStandUp(req, res) {
@@ -215,17 +210,17 @@ async function deleteStandUp(req, res) {
                 },
             });
 
-      return res.json({
-        status: "Success",
-      });
+            return res.json({
+                status: "Success",
+            });
+        }
+        throw new Error("Could not delete stand up");
+    } catch (err) {
+        res.json({
+            status: "Failed",
+            error: err.message,
+        });
     }
-    throw new Error("Could not delete stand up");
-  } catch (err) {
-    res.json({
-      status: "Failed",
-      error: err.message,
-    });
-  }
 }
 
 async function getTeam(req, res) {
@@ -263,24 +258,24 @@ async function getTeam(req, res) {
                     },
                 });
 
-        teamStandUp.push({
-          name: team[i].name,
-          email: team[i].email,
-          standUp: standUp,
+                teamStandUp.push({
+                    name: team[i].name,
+                    email: team[i].email,
+                    standUp: standUp,
+                });
+            }
+            return res.json({
+                status: "Success",
+                teamStandUp,
+            });
+        }
+        throw new Error("Could not get team");
+    } catch (err) {
+        res.json({
+            status: "Failed",
+            error: err.message,
         });
-      }
-      return res.json({
-        status: "Success",
-        teamStandUp,
-      });
     }
-    throw new Error("Could not get team");
-  } catch (err) {
-    res.json({
-      status: "Failed",
-      error: err.message,
-    });
-  }
 }
 
 async function postTeam(req, res) {
@@ -303,17 +298,17 @@ async function postTeam(req, res) {
             await manager.save();
             await employee.save();
 
-      return res.json({
-        status: "Success",
-      });
+            return res.json({
+                status: "Success",
+            });
+        }
+        throw new Error("Could not add team member");
+    } catch (err) {
+        res.json({
+            status: "Failed",
+            error: err.message,
+        });
     }
-    throw new Error("Could not add team member");
-  } catch (err) {
-    res.json({
-      status: "Failed",
-      error: err.message,
-    });
-  }
 }
 async function deleteTeam(req, res) {
     // Deletes a team member from the employee's team
@@ -339,18 +334,18 @@ async function deleteTeam(req, res) {
             });
         }
         throw new Error("Could not delete team member");
-    
-  } catch (err) {
-    res.json({
-      status: "Failed",
-      error: err.message,
-    });
-  }
+    } catch (err) {
+        res.json({
+            status: "Failed",
+            error: err.message,
+        });
+    }
 }
 
 async function getManagerAccess(req, res) {
     try {
         const email = req.email;
+        console.log(email, req);
         // const employee = await mediator.get(
         //     employeeModel,
         //     { email: email },
@@ -362,7 +357,9 @@ async function getManagerAccess(req, res) {
         //     { email: email },
         //     "one"
         // );
+        console.log(employee);
         const checkManager = await managerModel.findOne({ email: email });
+        console.log(checkManager);
         if (!checkManager || !employee) {
             throw new Error("Request Denied !");
         } else {
@@ -373,13 +370,13 @@ async function getManagerAccess(req, res) {
                 status: "Success",
             });
         }
-    
-  } catch (err) {
-    res.json({
-      status: "Failed",
-      error: err.message,
-    });
-  }
+    } catch (err) {
+        console.log(err.message);
+        res.json({
+            status: "Failed",
+            error: err.message,
+        });
+    }
 }
 
 module.exports.getProfile = getProfile;
