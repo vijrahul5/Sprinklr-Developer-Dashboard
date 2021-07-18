@@ -1,8 +1,9 @@
 const managerModel = require("../model/managerModel");
+// const Mediator = require("../model/Mediator");
+// const mediator = new Mediator();
 
 async function giveManagerAccess(req, res) {
     const { adminId, adminPassword, accessEmail } = req.body;
-    console.log(adminId,adminPassword,accessEmail);
 
     try {
         if (
@@ -10,12 +11,18 @@ async function giveManagerAccess(req, res) {
             adminPassword === "sprinklr123" &&
             accessEmail
         ) {
+            // const manager = await mediator.get(
+            //     managerModel,
+            //     { email: accessEmail },
+            //     "one"
+            // );
             const manager = await managerModel.findOne({ email: accessEmail });
             if (manager) {
                 return res.json({
                     status: "Success",
                 });
             } else {
+                // await mediator.create(managerModel, { email: accessEmail });
                 await managerModel.create({
                     email: accessEmail,
                 });

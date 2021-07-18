@@ -1,8 +1,10 @@
+// libraies
 import React from "react";
+// components
 import SignIn from "./SignIn";
 
-function index({ setSignIn }) {
-  return <SignIn setSignIn={setSignIn} />;
+function index() {
+    return <SignIn />;
 }
 
 export default index;

@@ -1,10 +1,14 @@
+// libraries
 import React from "react";
-import standUpQuestions from "../../../constants/standUpQuestions";
 import { useState, useEffect, useCallback } from "react";
 import { FormControl } from "baseui/form-control";
 import { Button } from "baseui/button";
 import { Textarea } from "baseui/textarea";
 import { SIZE } from "baseui/input";
+// components
+import standUpQuestions from "../../../constants/standUpQuestions";
+// constants
+import { rootOverride } from "../constants/overrides";
 
 function StandUpForm({ data, handleEdit, handleSubmit, view }) {
     const [value, setValue] = useState(Array(standUpQuestions.length).fill(""));
@@ -24,6 +28,21 @@ function StandUpForm({ data, handleEdit, handleSubmit, view }) {
         },
         [setValue, value]
     );
+    const editStandUp = useCallback(
+        (e) => {
+            e.preventDefault();
+            handleEdit(value);
+        },
+        [handleEdit, value]
+    );
+
+    const submitStandUp = useCallback(
+        (e) => {
+            e.preventDefault();
+            handleSubmit(value);
+        },
+        [handleSubmit, value]
+    );
 
     return (
         <>
@@ -42,31 +61,26 @@ function StandUpForm({ data, handleEdit, handleSubmit, view }) {
                                     onChange={changeValue}
                                     placeholder="Answer"
                                     size={SIZE.mini}
+                                    // overrides={rootOverride}
                                     overrides={{
                                         Root: {
-                                            style: () => ({
+                                            style: ({ $theme }) => ({
+                                                backgroundColor: "#eeeeee",
                                                 borderRadius: "4px",
+                                                width: "100%",
+                                                height: "3.2rem"
                                             }),
                                         },
                                     }}
                                 />
                             </FormControl>
+
                         );
                     })}
                     <Button
                         className="btnCustom"
-                        size={SIZE.compact}
-                        onClick={
-                            data
-                                ? (e) => {
-                                      e.preventDefault();
-                                      handleEdit(value);
-                                  }
-                                : (e) => {
-                                      e.preventDefault();
-                                      handleSubmit(value);
-                                  }
-                        }
+                        size={SIZE.mini}
+                        onClick={data ? editStandUp : submitStandUp}
                     >
                         {data ? "Edit" : "Submit"}
                     </Button>

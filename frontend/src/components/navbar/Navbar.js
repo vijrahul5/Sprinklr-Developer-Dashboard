@@ -1,19 +1,12 @@
-import React, { useState } from "react";
-import { AppNavBar } from "baseui/app-nav-bar";
-import { TriangleRight } from "baseui/icon";
+// libraries
+import React from "react";
 
-export default function Navbar({ setSignIn }) {
-    const [mainItems, setMainItems] = useState([
-        { icon: TriangleRight, label: "SignIn" },
-    ]);
-    function handleMainItemSelect(item) {
-        setSignIn(true);
-    }
+export default function Navbar() {
     return (
-        <AppNavBar
-            title="Sprinklr Developer Dashboard"
-            mainItems={mainItems}
-            onMainItemSelect={handleMainItemSelect}
-        />
+        <div className="landingPage__navbar">
+            <h1 className="landingPage__navbar__heading">
+                Sprinklr Developer Dashboard
+            </h1>
+        </div>
     );
 }

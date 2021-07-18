@@ -1,12 +1,18 @@
-import React, { useEffect, useState } from "react";
+//library
+import React from "react";
+
+//hooks
+import { useEffect, useState } from "react";
 import { useStyletron } from "baseui";
+
+//components
 import {
   StyledTable,
   StyledHead,
   StyledHeadCell,
   StyledCell,
 } from "baseui/table";
-import Loader from "../../components/loaders/Loader";
+import Loader from "../loaders/Loader";
 import {
   InfiniteLoader,
   List,
@@ -15,21 +21,22 @@ import {
   CellMeasurerCache,
 } from "react-virtualized";
 
+//constants
 const minimumBatchSize = 20;
 
-const Expe = ({ jql = "", columnTitles, loadMoreRows }) => {
-  const [css] = useStyletron();
+const Expe = ({ jql = "", columnTitles, loadMoreRows, minWidth, author }) => {
   useEffect(() => {
     setList([]);
-    setLoading(false);
     setRemoteCount(20);
     setLastLoadedIndex(-1);
-  }, [jql]);
+    setLoading(false);
+  }, [jql, author]);
+
   const [list, setList] = useState([]);
   const [remoteRowCount, setRemoteCount] = useState(20);
   const [loading, setLoading] = useState(false);
   const [lastLoadedIndex, setLastLoadedIndex] = useState(-1);
-
+  const [css] = useStyletron();
   function isRowLoaded({ index }) {
     return !!list[index];
   }
@@ -37,11 +44,14 @@ const Expe = ({ jql = "", columnTitles, loadMoreRows }) => {
     defaultHeight: 50,
     fixedWidth: true,
   });
-
   return (
     <div className="table__Container">
       <div
-        className={css({ height: "600px", width: "100%", minWidth: "750px" })}
+        className={css({
+          height: "600px",
+          width: "100%",
+          minWidth: minWidth,
+        })}
       >
         <StyledTable
           role="grid"
@@ -100,7 +110,9 @@ const Expe = ({ jql = "", columnTitles, loadMoreRows }) => {
                             rowIndex={index}
                           >
                             <div style={style}>
-                              {isRowLoaded({ index: index }) ? (
+                              {isRowLoaded({
+                                index: index,
+                              }) ? (
                                 <StyledHead
                                   role="row"
                                   key={key}

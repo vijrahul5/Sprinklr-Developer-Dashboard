@@ -1,8 +1,10 @@
+//libraries
 import React from "react";
+// components
 import Instruction from "./Instruction";
 
-function index() {
-    return <Instruction />;
+function index({ instructions }) {
+    return <Instruction instructions={instructions} />;
 }
 
 export default index;
