@@ -1,3 +1,4 @@
+// libraries
 import { useState, useCallback } from "react";
 import axios from "axios";
 import NotificationManager from "react-notifications/lib/NotificationManager";
@@ -17,7 +18,7 @@ export default function useUpdateLearningResource() {
                             "Learning Resource Marked",
                             5000
                         );
-                    }else{
+                    } else {
                         NotificationManager.success(
                             "Success!",
                             "Learning Resource Unmarked",

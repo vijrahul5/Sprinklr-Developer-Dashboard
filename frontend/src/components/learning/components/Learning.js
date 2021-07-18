@@ -1,18 +1,24 @@
+// libraries
 import React, { useState, useEffect } from "react";
 import { Button, SIZE } from "baseui/button";
+import { BiAddToQueue } from "react-icons/bi";
+// components
 import PostLearningResource from "./PostLearningResource";
 import Loader from "../../loaders/Tombstone";
-import useFetchLearningResources from "../hooks/useFetchLearningResources";
 import LearningResource from "./LearningResource";
-import { BiAddToQueue } from "react-icons/bi";
+// hooks
+import useFetchLearningResources from "../hooks/useFetchLearningResources";
 import useFetchEmployeeTeamData from "../../../hooks/useFetchEmployeeTeamData";
 
 function Learning({ user }) {
     const [postLearningResource, setPostLearningResource] = useState(false);
+
     const [loading, data, error, fetchLearningResources] =
         useFetchLearningResources();
+
     const [teamLoading, teamData, teamError, fetchTeamData] =
         useFetchEmployeeTeamData();
+
     if (loading || teamLoading) {
         return (
             <div className="learning" style={{ padding: "1rem" }}>
@@ -26,7 +32,6 @@ function Learning({ user }) {
             </div>
         );
     }
-    console.log(data);
 
     return (
         <>

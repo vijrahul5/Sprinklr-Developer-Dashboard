@@ -14,7 +14,6 @@ function GitlabApp({ user }) {
     const mergeRequestPerPage = 8;
     const [gitlabDetails, setgitlabDetails] = useState([]);
     const accessToken = user.gitlabAccessToken;
-    console.log(user);
 
     async function shouldExecuteNext(next, prev) {
         let tempResult = await next(prev);
@@ -36,8 +35,6 @@ function GitlabApp({ user }) {
         if (result.length === 0) {
             return ["error"];
         }
-        console.log(projectName);
-        console.log(result);
         const mergeRequestsResult = result[1];
         if (
             mergeRequestsResult === undefined ||
@@ -59,7 +56,7 @@ function GitlabApp({ user }) {
         for (let i = 0; i < mergeRequestsResult.length; i++) {
             if (mergeRequestsResult[i].length !== 0) {
                 for (let j = 0; j < mergeRequestsResult[i].length; j++) {
-                    if (pipelineResult[pi].length != 0) {
+                    if (pipelineResult[pi].length !== 0) {
                         arr.push([
                             projectName[i][1],
                             <a href={mergeRequestsResult[i][j].web_url}>
@@ -70,12 +67,12 @@ function GitlabApp({ user }) {
                                 ? null
                                 : mergeRequestsResult[i][j].merged_by.name,
                             mergeRequestsResult[i][j].target_branch,
-                            pipelineResult[pi][0].status == "success" ? (
+                            pipelineResult[pi][0].status === "success" ? (
                                 <FcApproval size={30} />
                             ) : (
                                 <FcCancel size={30} />
                             ),
-                            pipelineResult[pi][0].status == "success" ? (
+                            pipelineResult[pi][0].status === "success" ? (
                                 <FcApproval size={30} />
                             ) : (
                                 <FcCancel size={30} />

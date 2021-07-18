@@ -4,7 +4,6 @@ import NotificationManager from "react-notifications/lib/NotificationManager";
 import axios from "axios";
 
 export default function usePostLearningResource() {
-    // Fetches the logged in employee's stand up for the day
     const [error, setError] = useState(false);
 
     const postResource = useCallback(

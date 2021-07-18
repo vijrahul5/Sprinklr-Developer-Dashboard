@@ -94,7 +94,6 @@ const GitlabProfile = (props) => {
         return a[2] - b[2];
     });
 
-    console.log("team-data", teamData);
     const [currentMergeRequestPage, setcurrentMergeRequestPage] = useState(1);
 
     const indexOfLastMergeRequest =
@@ -124,11 +123,11 @@ const GitlabProfile = (props) => {
                 let temp;
                 if (params.value[0].label === "Assigned to me") {
                     temp = currentMergeRequest.filter((element) => {
-                        return element[2] == props.user.name;
+                        return element[2] === props.user.name;
                     });
                 } else {
                     temp = currentMergeRequest.filter((element) => {
-                        return element[2] == params.value[0].label;
+                        return element[2] === params.value[0].label;
                     });
                 }
 
@@ -142,7 +141,7 @@ const GitlabProfile = (props) => {
             }
             setauthor(params.value);
         },
-        [setcurrentMergeRequestPage, setauthor, author]
+        [setcurrentMergeRequestPage, setauthor, author,currentMergeRequest,props]
     );
 
     if (!isUserAuthenticated) {
