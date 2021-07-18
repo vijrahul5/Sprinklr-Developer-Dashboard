@@ -1,12 +1,18 @@
-import React, { useEffect, useState } from "react";
+//library
+import React from "react";
+
+//hooks
+import { useEffect, useState } from "react";
 import { useStyletron } from "baseui";
+
+//components
 import {
   StyledTable,
   StyledHead,
   StyledHeadCell,
   StyledCell,
 } from "baseui/table";
-import Loader from "../../components/loaders/Loader";
+import Loader from "../loaders/Loader";
 import {
   InfiniteLoader,
   List,
@@ -15,21 +21,22 @@ import {
   CellMeasurerCache,
 } from "react-virtualized";
 
+//constants
 const minimumBatchSize = 20;
 
 const Expe = ({ jql = "", columnTitles, loadMoreRows }) => {
-  const [css] = useStyletron();
   useEffect(() => {
     setList([]);
-    setLoading(false);
     setRemoteCount(20);
+    setLoading(false);
     setLastLoadedIndex(-1);
   }, [jql]);
+
   const [list, setList] = useState([]);
   const [remoteRowCount, setRemoteCount] = useState(20);
   const [loading, setLoading] = useState(false);
   const [lastLoadedIndex, setLastLoadedIndex] = useState(-1);
-
+  const [css] = useStyletron();
   function isRowLoaded({ index }) {
     return !!list[index];
   }
@@ -37,7 +44,6 @@ const Expe = ({ jql = "", columnTitles, loadMoreRows }) => {
     defaultHeight: 50,
     fixedWidth: true,
   });
-
   return (
     <div className="table__Container">
       <div
@@ -67,6 +73,7 @@ const Expe = ({ jql = "", columnTitles, loadMoreRows }) => {
             <InfiniteLoader
               isRowLoaded={isRowLoaded}
               loadMoreRows={({ stopIndex }) => {
+                console.log("jqqql", lastLoadedIndex, stopIndex);
                 if (!loading && stopIndex > lastLoadedIndex)
                   loadMoreRows({
                     startIndex: lastLoadedIndex + 1,

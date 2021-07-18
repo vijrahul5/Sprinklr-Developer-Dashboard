@@ -34,10 +34,13 @@ const loadMoreRows = function ({
 
         return newItem;
       });
+
       setList([...list, ...arr]);
       setLastLoadedIndex(stopIndex);
-      setLoading(false);
       setRemoteCount(Math.min(result.total, stopIndex + 20));
+      setLoading(false);
+    } else {
+      setLoading(false);
     }
   });
 };
