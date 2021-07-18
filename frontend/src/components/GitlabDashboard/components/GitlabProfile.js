@@ -6,7 +6,7 @@ import { Select, SIZE } from "baseui/select";
 import Expe from "../../table/Expe";
 
 //import loadMoreRows from "./LoadRows";
-const Table = lazy(() => import("../../table/Table"));
+
 const GitlabAccessTokenForm = lazy(() => import("./GitlabAccessTokenForm"));
 const Loader = lazy(() => import("../../loaders/Tombstone"));
 const axios = require("axios");
@@ -47,36 +47,6 @@ const GitlabProfile = (props) => {
         }
     }, [props, teamData]);
 
-    const loadMoreRows = function ({
-        startIndex,
-        stopIndex,
-        setLoading,
-
-        setList,
-        setLastLoadedIndex,
-        list,
-        setRemoteCount,
-    }) {
-        setLoading(true);
-
-        let myPromise = new Promise(function (myResolve, myReject) {
-            myResolve("OK");
-        });
-
-        return myPromise.then(() => {
-            let len = mergeRequestToShow.length;
-            let lastIndex = Math.min(len - 1, stopIndex);
-            if (startIndex <= lastIndex) {
-                let arr = mergeRequestToShow.slice(startIndex, lastIndex + 1);
-                setList([...list, ...arr]);
-            }
-
-            setLastLoadedIndex(lastIndex);
-            setLoading(false);
-            setRemoteCount(props.gitlabDetails.length);
-        });
-    };
-
     const submitToken = useCallback(
         async (token) => {
             try {
@@ -89,24 +59,6 @@ const GitlabProfile = (props) => {
         [props]
     );
 
-    let mergeRequestarray = props.gitlabDetails;
-    mergeRequestarray.sort(function (a, b) {
-        return a[2] - b[2];
-    });
-
-    const [currentMergeRequestPage, setcurrentMergeRequestPage] = useState(1);
-
-    const indexOfLastMergeRequest =
-        currentMergeRequestPage * props.mergeRequestPerPage;
-    const indexOfFirstMergeRequest =
-        indexOfLastMergeRequest - props.mergeRequestPerPage;
-
-    const currentMergeRequestMergeRequest = mergeRequestToShow.slice(
-        indexOfFirstMergeRequest,
-        indexOfLastMergeRequest
-    );
-
-    const [project, setProject] = useState([]);
     const [author, setauthor] = useState([
         { label: "Assigned to me", id: "99" },
     ]);
@@ -117,6 +69,42 @@ const GitlabProfile = (props) => {
             }),
         },
     };
+    const loadMoreRows = useCallback(
+        ({
+            startIndex,
+            stopIndex,
+            setLoading,
+
+            setList,
+            setLastLoadedIndex,
+            list,
+            setRemoteCount,
+        }) => {
+            setLoading(true);
+
+            let myPromise = new Promise(function (myResolve, myReject) {
+                myResolve("OK");
+            });
+
+            return myPromise.then(() => {
+                let len = mergeRequestToShow.length;
+                let lastIndex = Math.min(len - 1, stopIndex);
+                if (startIndex <= lastIndex) {
+                    let arr = mergeRequestToShow.slice(
+                        startIndex,
+                        lastIndex + 1
+                    );
+                    setList([...list, ...arr]);
+                }
+
+                setLastLoadedIndex(lastIndex);
+                setLoading(false);
+                setRemoteCount(props.gitlabDetails.length);
+            });
+        },
+        [props, mergeRequestToShow]
+    );
+
     const authorSelect = useCallback(
         (params) => {
             if (params.value.length !== 0) {
@@ -141,7 +129,7 @@ const GitlabProfile = (props) => {
             }
             setauthor(params.value);
         },
-        [setcurrentMergeRequestPage, setauthor, author,currentMergeRequest,props]
+        [setauthor, author, currentMergeRequest, props]
     );
 
     if (!isUserAuthenticated) {
