@@ -1,4 +1,4 @@
-@import "base";
+@import "../../../scss/base";
 
 .teamStandUpList {
     padding: 0;
@@ -61,53 +61,6 @@
     align-items: center;
 }
 
-.teamForm {
-    height: 100%;
-    width: 100%;
-    position: fixed;
-    z-index: 2;
-    top: 3.5rem;
-    left: 0;
-    @include flexCenter(column);
-    background: rgba(0, 0, 0, 0.3);
-    form {
-        width: 40rem;
-        margin: auto;
-        box-shadow: $shadow;
-        padding: map-get($paddings, "small");
-        background-color: $color-widget;
-        border-radius: $border-radius;
-        border-top: $border;
-        div {
-            width: 100%;
-        }
-        h2 {
-            color: $color-primary;
-            font-size: 1rem;
-            font-weight: 300;
-            span {
-                color: black;
-                text-decoration: underline;
-            }
-        }
-    }
-}
-.teamForm__btnHolder {
-    @include flexCenter(row);
-    justify-content: flex-end;
-    margin-top: 3rem;
-}
-.teamForm__modal__close {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
-.teamForm__modal__close__icon {
-    color: $color-primary;
-    font-size: 1.5rem;
-    cursor: pointer;
-}
 .teamInstruction {
     margin: 0 map-get($margins, "medium");
 }
@@ -123,4 +76,4 @@
     z-index: 0 !important;
     overflow: visible !important;
 }
-@import "media";
+@import "../../../scss/media";

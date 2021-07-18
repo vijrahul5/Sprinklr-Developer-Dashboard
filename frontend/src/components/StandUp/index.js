@@ -3,7 +3,7 @@ import React from "react";
 // components
 import StandUp from "./components/StandUp";
 // styles
-import "../../scss/basicInfo.scss";
+import "./styles/standUp.scss";
 
 function index() {
     return <StandUp />;

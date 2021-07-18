@@ -3,7 +3,7 @@ import React from "react";
 // components
 import Team from "./components/Team";
 // styles
-import "../../scss/team.scss";
+import "./styles/team.scss";
 
 function index() {
     return <Team />;

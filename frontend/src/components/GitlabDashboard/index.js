@@ -2,8 +2,10 @@
 import React from "react";
 //utils
 import GitlabApp from "./GitlabApp.js";
-import "../../scss/jira.scss";
-function GitlabDashboard({ user }) {
+//styles
+import "./styles/gitlab.scss";
+
+function index({ user }) {
     return (
         <>
             <GitlabApp user={user} />
@@ -11,4 +13,4 @@ function GitlabDashboard({ user }) {
     );
 }
 
-export default GitlabDashboard;
+export default index;
