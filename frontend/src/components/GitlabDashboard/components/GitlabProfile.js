@@ -34,13 +34,18 @@ const GitlabProfile = (props) => {
             });
             setmergeRequestToShow(initial);
             setLoading(false);
-            let list = teamData.map((element, idx) => {
-                return { label: element.name, id: idx.toString() };
-            });
-            list.push({ label: "Assigned to me", id: list.length.toString() });
-            setList(list);
+            if (teamData) {
+                let list = teamData.map((element, idx) => {
+                    return { label: element.name, id: idx.toString() };
+                });
+                list.push({
+                    label: "Assigned to me",
+                    id: list.length.toString(),
+                });
+                setList(list);
+            }
         }
-    }, [props]);
+    }, [props, teamData]);
 
     const loadMoreRows = function ({
         startIndex,
@@ -144,7 +149,7 @@ const GitlabProfile = (props) => {
         return <GitlabAccessTokenForm submitToken={submitToken} />;
     }
 
-    if (loading) {
+    if (loading || teamLoading) {
         return (
             <Suspense fallback={<div>Loading...</div>}>
                 <Loader />

@@ -33,18 +33,21 @@ function GitlabApp({ user }) {
         );
         const result = await gitlabmerge.processor();
         const projectName = result[2];
-        console.log(projectName);
-        console.log(result);
         if (result.length === 0) {
             return ["error"];
         }
+        console.log(projectName);
+        console.log(result);
         const mergeRequestsResult = result[1];
-        if (mergeRequestsResult.length == 0) {
+        if (
+            mergeRequestsResult === undefined ||
+            (mergeRequestsResult && mergeRequestsResult.length === 0)
+        ) {
             return ["error"];
         }
 
         const pipelineResult = result[0];
-        if (pipelineResult.length == 0) {
+        if (pipelineResult && pipelineResult.length === 0) {
             return mergeRequestsResult;
         }
 
