@@ -99,7 +99,7 @@ const Expe = ({ jql = "", columnTitles, loadMoreRows }) => {
                             parent={parent}
                             rowIndex={index}
                           >
-                            <div style={style}>
+                            <div style={style} className="row_wrapper">
                               {isRowLoaded({ index: index }) ? (
                                 <StyledHead
                                   role="row"

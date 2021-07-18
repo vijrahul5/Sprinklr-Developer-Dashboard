@@ -96,12 +96,16 @@
 }
 .table__row {
   border-bottom: 1px solid rgb(200, 200, 200) !important;
+  display: flex !important;
 }
 .table__cell {
   font-weight: 350 !important;
   padding: 16px !important;
-  overflow: auto !important;
+  overflow: scroll !important;
 }
 .table__Container {
   overflow: auto;
+}
+.row__wrapper {
+  display: block;
 }
