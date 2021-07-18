@@ -1,5 +1,7 @@
+//libraries
 import React from "react";
 import { useState, useCallback } from "react";
+//utils
 import { Input, SIZE } from "baseui/input";
 import { Button } from "baseui/button";
 import Instruction from "../../instruction/index";
