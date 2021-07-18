@@ -1,0 +1,39 @@
+@import "../../../scss/base";
+.signin {
+    height: 100%;
+    width: 100%;
+    @include flexCenter(column);
+}
+.signin__modal {
+    width: fit-content;
+    height: 25rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.signin__modal__close {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.signin__modal__content {
+    @include flexCenter(column);
+    h3 {
+        all: unset;
+        font-size: map-get($font-sizes, "medium");
+        font-weight: map-get($font-weights, "medium");
+        text-align: center;
+        margin: 0;
+        line-height: 1;
+        margin-bottom: 4rem;
+    }
+}
+
+
+@import "../../../scss/media";

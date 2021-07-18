@@ -50,6 +50,7 @@ const Widgetjira = ({ user }) => {
                 jql={jqlQuery}
                 columnTitles={columnTitles}
                 loadMoreRows={loadMoreRows}
+                minWidth="750px"
             />
             {/* <Table
         columnTitles={columnTitles}

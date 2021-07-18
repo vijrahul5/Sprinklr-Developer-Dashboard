@@ -1,4 +1,4 @@
-@import "base";
+@import "../../../scss/base";
 .jiraWid__search {
     display: flex;
     flex-direction: row;
@@ -106,4 +106,4 @@
 .table__Container {
     overflow: auto;
 }
-@import "media";
+@import "../../../scss/media";
