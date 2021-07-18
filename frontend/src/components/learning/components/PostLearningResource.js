@@ -1,9 +1,12 @@
-import React, { useState } from "react";
-import OutsideClick from "../../../utils/OutsideClick";
+// libraries
+import React, { useState, useCallback } from "react";
 import { FormControl } from "baseui/form-control";
 import { Input } from "baseui/input";
-import { Textarea } from "baseui/textarea";
 import { Button, SIZE } from "baseui/button";
+import { Textarea } from "baseui/textarea";
+// utilities
+import OutsideClick from "../../../utils/OutsideClick";
+// hooks
 import usePostLearningResource from "../hooks/usePostLearningResource";
 
 function PostLearningResource({
@@ -15,18 +18,31 @@ function PostLearningResource({
         title: "",
         link: "",
     });
-    function handleClose(e) {
-        setPostLearningResource(false);
-    }
-    function handleSubmit(e) {
-        e.preventDefault();
-        postResource(value);
-        fetchLearningResources();
-        handleClose();
-    }
-    function handleChange(e) {
-        setValue({ ...value, [e.currentTarget.name]: e.currentTarget.value });
-    }
+    const handleClose = useCallback(
+        (e) => {
+            setPostLearningResource(false);
+        },
+        [setPostLearningResource]
+    );
+
+    const handleSubmit = useCallback(
+        (e) => {
+            e.preventDefault();
+            postResource(value);
+            fetchLearningResources();
+            handleClose();
+        },
+        [postResource, fetchLearningResources, handleClose, value]
+    );
+    const handleChange = useCallback(
+        (e) => {
+            setValue({
+                ...value,
+                [e.currentTarget.name]: e.currentTarget.value,
+            });
+        },
+        [value, setValue]
+    );
     return (
         <div className="postResource">
             <OutsideClick handleClose={handleClose}>

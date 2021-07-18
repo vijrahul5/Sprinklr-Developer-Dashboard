@@ -37,8 +37,7 @@
         font-size: 1.5rem;
     }
     .resourceList__container {
-        height: fit-content;
-        max-height: 20rem;
+        height: 20rem;
     }
     .resourceList__wrapper {
         padding: 0 2rem;
@@ -132,6 +131,11 @@
             width: 30rem;
         }
     }
+    .postResource {
+        form {
+            width: 30rem;
+        }
+    }
     .standUp {
         margin-top: 2rem;
     }
@@ -145,7 +149,6 @@
     .ReactVirtualized__Grid__innerScrollContainer[style] {
         margin-bottom: 5rem;
         padding: 1rem;
-        // padding-bottom: 2rem;
         overflow: visible !important;
     }
     .landingPage__wrapper {
@@ -157,8 +160,31 @@
     html {
         font-size: 100%;
     }
-    // .teamStandUpList {
-    // }
+    .landingPage__wrapper {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        border-radius: 1rem;
+        background-color: white;
+    }
+    .signInSection {
+        width: 100%;
+        background-color: #fafafa;
+        border-radius: 1rem;
+    }
+    .signin__modal {
+        height: 15rem;
+        padding: 1rem;
+    }
+    .landingPage__navbar__heading {
+        font-size: 1.5rem;
+    }
+    .signin__modal__content {
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+    }
     .teamMember__list__item {
         display: flex;
         justify-content: start;
@@ -178,10 +204,6 @@
         h1 {
             font-size: 1.5rem;
         }
-        // #{&}__icon {
-        //     font-size: 1.5rem;
-        //     margin-right: 1rem;
-        // }
     }
     .dashboardNavbar__icon {
         font-size: 1.5rem;
@@ -189,7 +211,12 @@
     }
     .teamForm {
         form {
-            width: 25rem;
+            width: 23rem;
+        }
+    }
+    .postResource {
+        form {
+            width: 23rem;
         }
     }
     .instruction__item {
@@ -220,16 +247,15 @@
     .learning__heading {
         margin: 0.5rem;
     }
+    .resourceList__wrapper {
+        padding: 0 0.5rem;
+    }
     .dashboardNavbar {
         width: 100%;
         height: 3.5rem;
         h1 {
             font-size: 1.3rem;
         }
-        // #{&}__icon {
-        //     font-size: 1.3rem;
-        //     margin-right: 0.5rem;
-        // }
     }
     .dashboardNavbar__icon {
         font-size: 1.3rem;
@@ -257,7 +283,6 @@
     .ReactVirtualized__Grid__innerScrollContainer[style] {
         margin-bottom: 5rem;
         padding: 0.5rem;
-        // padding-bottom: 2rem;
         overflow: visible !important;
     }
     .teamInstruction {

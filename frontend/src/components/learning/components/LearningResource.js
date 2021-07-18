@@ -1,10 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
+// libraries
+import React, { useState, useEffect, useCallback } from "react";
 import { Button, SIZE } from "baseui/button";
-import useUpdateLearningResource from "../hooks/useUpdateLearningResource";
 import MaterialTooltip from "@material-ui/core/Tooltip";
 import { withStyles } from "@material-ui/core/styles";
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+// hooks
+import useUpdateLearningResource from "../hooks/useUpdateLearningResource";
 
 const Tooltip = withStyles((theme) => ({
     tooltip: {
@@ -32,7 +34,7 @@ function checkMarked(resource, email) {
 function LearningResource({ resource, user, team, fetchLearningResources }) {
     const [value, setValue] = useState(false);
     const [updateError, updateLearningResource] = useUpdateLearningResource();
-    
+
     const percentage = Math.ceil(
         (resource.markedBy.length / (team.length + 1)) * 100
     );
@@ -42,14 +44,23 @@ function LearningResource({ resource, user, team, fetchLearningResources }) {
         }
     }, [resource, user]);
 
-    function handleChange(e) {
-        setValue(() => !value);
-        updateLearningResource({
-            resourceId: resource["_id"],
-            marked: !value,
-        });
-        fetchLearningResources();
-    }
+    const handleChange = useCallback(
+        (e) => {
+            setValue(() => !value);
+            updateLearningResource({
+                resourceId: resource["_id"],
+                marked: !value,
+            });
+            fetchLearningResources();
+        },
+        [
+            setValue,
+            resource,
+            fetchLearningResources,
+            updateLearningResource,
+            value,
+        ]
+    );
     return (
         <>
             {resource.teamManager.email === user.email ? (

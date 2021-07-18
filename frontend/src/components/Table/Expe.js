@@ -12,7 +12,8 @@ import {
   StyledHeadCell,
   StyledCell,
 } from "baseui/table";
-import Loader from "../loaders/Loader";
+
+import Loader from "../../components/loaders/Loader";
 import {
   InfiniteLoader,
   List,
@@ -24,19 +25,20 @@ import {
 //constants
 const minimumBatchSize = 20;
 
-const Expe = ({ jql = "", columnTitles, loadMoreRows, minWidth, author }) => {
+const Expe = ({ jql = "", columnTitles, loadMoreRows, author, minWidth }) => {
+  const [css] = useStyletron();
   useEffect(() => {
     setList([]);
+    setLoading(false);
     setRemoteCount(20);
     setLastLoadedIndex(-1);
-    setLoading(false);
   }, [jql, author]);
 
   const [list, setList] = useState([]);
   const [remoteRowCount, setRemoteCount] = useState(20);
   const [loading, setLoading] = useState(false);
   const [lastLoadedIndex, setLastLoadedIndex] = useState(-1);
-  const [css] = useStyletron();
+
   function isRowLoaded({ index }) {
     return !!list[index];
   }
@@ -44,12 +46,14 @@ const Expe = ({ jql = "", columnTitles, loadMoreRows, minWidth, author }) => {
     defaultHeight: 50,
     fixedWidth: true,
   });
+
   return (
     <div className="table__Container">
       <div
         className={css({
           height: "600px",
           width: "100%",
+
           minWidth: minWidth,
         })}
       >
@@ -144,6 +148,7 @@ const Expe = ({ jql = "", columnTitles, loadMoreRows, minWidth, author }) => {
               )}
             </InfiniteLoader>
           </div>
+
           {loading ? <Loader /> : <></>}
         </StyledTable>
       </div>
