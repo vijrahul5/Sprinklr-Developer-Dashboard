@@ -2,7 +2,6 @@
 .basicInfo {
     width: 100%;
     height: 100%;
-    z-index: 1;
     margin-bottom: 100%;
 
 }
@@ -12,7 +11,8 @@
     position: fixed;
     overflow: auto;
     height: 95vh;
-    
+    z-index: 1;
+
 }
 .profile {
     width: 100%;
