@@ -1,14 +1,14 @@
 import DashboardNavbar from "../dashboardNavbar/index";
-import Profile from "../Profile/index";
-import StandUp from "../StandUp/index";
+import Profile from "../profile/index";
+import StandUp from "../standUp/index";
 import React, { lazy, Suspense } from "react";
-import JiraDashboard from "../JiraDashboard/components/jira/Jira";
-import GitlabDashboard from "../GitlabDashboard/GitlabDashboard";
+import JiraDashboard from "../jiraDashboard/components/jira/Jira";
+import GitlabDashboard from "../gitlabDashboard/GitlabDashboard";
 import useFetchEmployeeData from "../../hooks/useFetchEmployeeData";
 import Loader from "../loaders/Loader";
 import { NotificationContainer } from "react-notifications";
 
-const Team = lazy(() => import("../Team/index"));
+const Team = lazy(() => import("../team/index"));
 
 export default function Dashboard() {
   const [loading, user, error] = useFetchEmployeeData();

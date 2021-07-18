@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { useState, useEffect } from "react";
-import Table from "../Table/Table";
+import Table from "../table/Table";
 
 import GitlabAccessTokenForm from "./GitlabAccessTokenForm";
 import { Select, SIZE } from "baseui/select";
