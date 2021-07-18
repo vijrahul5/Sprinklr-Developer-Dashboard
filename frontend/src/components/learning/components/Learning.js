@@ -26,42 +26,44 @@ function Learning({ user }) {
             </div>
         );
     }
+    console.log(data);
+
     return (
         <>
             <div className="learning">
                 <h1 className="learning__heading">
-                    Learning Resources{" "}
-                    <div className="learning__wrapper">
-                        <BiAddToQueue
-                            className="add__icon"
-                            onClick={() => setPostLearningResource(true)}
-                        />
-                    </div>
+                    Learning Resources
+                    {user.managerAccess || user.manager ? (
+                        <div className="learning__wrapper">
+                            <BiAddToQueue
+                                className="add__icon"
+                                onClick={() => setPostLearningResource(true)}
+                            />
+                        </div>
+                    ) : null}
                 </h1>
-
-                <ul className="resourceList__container">
-                    <div className="resourceList__wrapper"style={{ width: "100%", height: "100%" }}>
-                        {data ? (
-                            <>
-                                {data.map((resource) => {
-                                    return (
-                                        <LearningResource
-                                            user={user}
-                                            key={resource["_id"]}
-                                            resource={resource}
-                                            team={teamData}
-                                            fetchLearningResources={
-                                                fetchLearningResources
-                                            }
-                                        />
-                                    );
-                                })}
-                            </>
-                        ) : (
-                            <h2>No Learning Resources Shared...</h2>
-                        )}
+                {data && data.length ? (
+                    <div className="resourceList__container">
+                        <ul
+                            className="resourceList__wrapper"
+                            style={{ width: "100%", height: "100%" }}
+                        >
+                            {data.map((resource) => {
+                                return (
+                                    <LearningResource
+                                        user={user}
+                                        key={resource["_id"]}
+                                        resource={resource}
+                                        team={teamData}
+                                        fetchLearningResources={
+                                            fetchLearningResources
+                                        }
+                                    />
+                                );
+                            })}
+                        </ul>
                     </div>
-                </ul>
+                ) : null}
             </div>
             {postLearningResource ? (
                 <PostLearningResource

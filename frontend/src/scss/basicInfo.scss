@@ -3,9 +3,8 @@
     width: 100%;
     height: 100%;
     margin-bottom: 100%;
-
 }
-.basicInfo__OuterWrapper{
+.basicInfo__OuterWrapper {
     padding: 2rem;
     width: 29rem;
     position: fixed;
@@ -142,14 +141,13 @@
     //     }
     // }
 }
-.standUp__heading{
+.standUp__heading {
     color: $color-primary;
     padding-bottom: 0.2rem;
     border-bottom: 2px solid $color-primary;
     margin-bottom: map-get($margins, "small");
     font-weight: map-get($font-weights, "small");
     font-size: 1.3rem;
-
 }
 
 .standUp__input {
@@ -174,7 +172,7 @@
     //     font-size: 1.2rem;
     //     font-weight: map-get($font-weights, "medium");
     // }
-    div{
+    div {
         display: flex;
         justify-content: flex-end;
         align-items: center;
