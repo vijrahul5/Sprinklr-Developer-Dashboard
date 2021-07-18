@@ -8,9 +8,9 @@ import useGetJiraData from "../../hooks/useGetJiraData";
 //components
 import JqlFilter from "../filters/JqlFilter";
 import BasicFilter from "../filters/BasicFilter";
-import Table from "../../../Table/Table";
+import Table from "../../../table/Table";
 import loadMoreRows from "../../apis/LoadRows";
-import Expe from "../../../Table/Expe";
+import Expe from "../../../table/Expe";
 //constants
 const columnTitles = ["Type", "Key", "Summary", "Status", "Priority"];
 const title = "All Issues";

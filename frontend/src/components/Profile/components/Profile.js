@@ -1,15 +1,20 @@
-import React, { useEffect } from "react";
-import Loader from "../../loaders/Tombstone";
-import useFetchEmployeeData from "../../../hooks/useFetchEmployeeData";
-import useRequestManagerAccess from "../hooks/useRequestManagerAccess";
+// libraries
+import React, { useCallback } from "react";
 import { Button, SIZE } from "baseui/button";
+// hooks
+import useRequestManagerAccess from "../hooks/useRequestManagerAccess";
 
-function Profile({user}) {
+function Profile({ user }) {
     const [requestError, requestManagerAccess] = useRequestManagerAccess();
-    
+
+    const handleClick = useCallback(
+        (e) => {
+            requestManagerAccess();
+        },
+        [requestManagerAccess]
+    );
     return (
         <>
-            <div className="basicInfo__wrapper">
                 <div className="profile">
                     <div className="profile__imgHolder">
                         <img src={user.picture} alt="" />
@@ -30,22 +35,17 @@ function Profile({user}) {
                             </p>
                         </li>
                     </ul>
+                    {user.managerAccess === false ? (
+                            <Button
+                                type="submit"
+                                className="submit btnCustom--tertiary"
+                                size={SIZE.mini}
+                                onClick={handleClick}
+                            >
+                                Request Manager Access
+                            </Button>
+                    ) : null}
                 </div>
-                {user.managerAccess === false ? (
-                    <div className="requestForm">
-                        <Button
-                            type="submit"
-                            className="submit btnCustom"
-                            size={SIZE.compact}
-                            onClick={(e) => {
-                                requestManagerAccess();
-                            }}
-                        >
-                            Request Manager Access
-                        </Button>
-                    </div>
-                ) : null}
-            </div>
         </>
     );
 }

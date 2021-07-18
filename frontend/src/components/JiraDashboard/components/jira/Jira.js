@@ -9,6 +9,7 @@ import useAuthorize from "../../hooks/useAuthorize";
 //components
 import Notification from "../notification/Notification";
 import Loader from "../../../loaders/Tombstone";
+import "../../../../scss/jira.scss";
 
 const Jira = ({ user }) => {
   const { doneAuthentication, loading } = useAuthorize();

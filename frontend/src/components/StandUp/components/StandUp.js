@@ -1,40 +1,48 @@
+// libraries
 import React from "react";
-import Loader from "../../loaders/Tombstone";
 import { useState, useEffect, useCallback } from "react";
-import useUpdateEmployeeStandUp from "../hooks/useUpdateEmployeeStandUp";
-import useFetchEmployeeStandUp from "../hooks/useFetchEmployeeStandUp";
 import { Button } from "baseui/button";
 import { SIZE } from "baseui/input";
 import { AiOutlineCheckCircle } from "react-icons/ai";
-import NotificationManager from "react-notifications/lib/NotificationManager";
+// components
+import Loader from "../../loaders/Tombstone";
 import StandUpForm from "./StandUpForm";
-
-function checkFieldEmpty(value) {
-    for (let key in value) {
-        if (value[key] === "") {
-            NotificationManager.error("Error!", "Fields Cannot Be Empty", 5000);
-            return true;
-        }
-    }
-    return false;
-}
+// hooks
+import useUpdateEmployeeStandUp from "../hooks/useUpdateEmployeeStandUp";
+import useFetchEmployeeStandUp from "../hooks/useFetchEmployeeStandUp";
+// utilities
+import checkFieldEmpty from "../../../utils/checkFieldEmpty";
 
 function StandUp() {
     const [loading, data, error, fetchStandUp] = useFetchEmployeeStandUp();
     const [addError, editError, addStandUp, editStandUp] =
         useUpdateEmployeeStandUp();
-    const [view, setView] = useState(true);
+    const [view, setView] = useState(false);
 
-    function handleSubmit(data) {
-        if (checkFieldEmpty(data)) return;
-        addStandUp(data);
-        fetchStandUp();
-    }
+    const handleSubmit = useCallback(
+        (data) => {
+            if (checkFieldEmpty(data)) return;
+            addStandUp(data);
+            fetchStandUp();
+        },
+        [fetchStandUp, addStandUp]
+    );
 
-    function handleEdit(data) {
-        if (checkFieldEmpty(data)) return;
-        editStandUp(data);
-    }
+    const handleEdit = useCallback(
+        (data) => {
+            if (checkFieldEmpty(data)) return;
+            editStandUp(data);
+        },
+        [editStandUp]
+    );
+
+    const handleViewChange = useCallback(
+        (e) => {
+            e.preventDefault();
+            setView((oldView) => !oldView);
+        },
+        [setView]
+    );
 
     if (loading) {
         return (
@@ -61,10 +69,7 @@ function StandUp() {
                                         : "btnCustom ml1"
                                 }
                                 size={SIZE.mini}
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    setView((oldView) => !oldView);
-                                }}
+                                onClick={handleViewChange}
                             >
                                 {view ? "Close" : "View Response"}
                             </Button>

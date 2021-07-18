@@ -1,12 +1,17 @@
-import React from "react";
+// libraries
+import React, { useCallback } from "react";
 import { useState, useEffect } from "react";
-import useUpdateEmployeeTeam from "../hooks/useUpdateEmployeeTeam";
 import { FormControl } from "baseui/form-control";
 import { Input } from "baseui/input";
 import { Button, SIZE } from "baseui/button";
-import { RiCloseCircleLine } from "react-icons/ri";
 import NotificationManager from "react-notifications/lib/NotificationManager";
+// hooks
+import useUpdateEmployeeTeam from "../hooks/useUpdateEmployeeTeam";
+// constants
+import { rootOverride } from "../constants/overrides";
+//utilities
 import OutsideClick from "../../../utils/OutsideClick";
+import checkFieldEmpty from "../../../utils/checkFieldEmpty";
 
 function TeamForm({
     type,
@@ -23,40 +28,42 @@ function TeamForm({
         if (email) setValue({ employeeEmail: email });
     }, [email]);
 
-    function checkFieldEmpty() {
-        for (let key in value) {
-            if (value[key] === "") {
-                NotificationManager.error(
-                    "Error",
-                    "Fields Cannot Be Empty !",
-                    5000
-                );
-                return true;
+    const handleClose = useCallback(
+        (e) => {
+            fetchTeamData();
+            if (type === "Add") {
+                setAddTeamMember(false);
+            } else {
+                setDeleteTeamMember(false);
             }
-        }
-        return false;
-    }
-    async function handleSubmit(e) {
-        // Event listener for adding a team member
-        e.preventDefault();
-        if (checkFieldEmpty()) return;
-        if (type === "Add") {
-            setValue({ employeeEmail: "" });
-            addTeamMember(value);
-        } else if (type === "Delete") {
-            deleteTeamMember(value);
-            handleClose();
-        }
-    }
+        },
+        [setAddTeamMember, setDeleteTeamMember, fetchTeamData, type]
+    );
 
-    function handleClose() {
-        fetchTeamData();
-        if (type === "Add") {
-            setAddTeamMember(false);
-        } else {
-            setDeleteTeamMember(false);
-        }
-    }
+    const handleSubmit = useCallback(
+        (e) => {
+            e.preventDefault();
+            if (checkFieldEmpty(value)) return;
+            if (type === "Add") {
+                setValue({ employeeEmail: "" });
+                addTeamMember(value);
+            } else if (type === "Delete") {
+                deleteTeamMember(value);
+                handleClose();
+            }
+        },
+        [addTeamMember, deleteTeamMember, handleClose, setValue, value, type]
+    );
+
+    const handleChange = useCallback(
+        (e) => {
+            setValue({
+                ...value,
+                employeeEmail: e.currentTarget.value,
+            });
+        },
+        [setValue, value]
+    );
 
     return (
         <>
@@ -80,21 +87,9 @@ function TeamForm({
                                         placeholder="Enter Email"
                                         name="employeeEmail"
                                         value={value.employeeEmail}
-                                        onChange={(e) => {
-                                            setValue({
-                                                ...value,
-                                                employeeEmail:
-                                                    e.currentTarget.value,
-                                            });
-                                        }}
+                                        onChange={handleChange}
                                         size={SIZE.compact}
-                                        overrides={{
-                                            Root: {
-                                                style: () => ({
-                                                    borderRadius: "4px",
-                                                }),
-                                            },
-                                        }}
+                                        overrides={rootOverride}
                                     />
                                 </FormControl>
                             ) : (

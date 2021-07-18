@@ -9,7 +9,7 @@ import GetIssuesApi from "../apis/GetIssuesApi";
 import JiraTableBuilder from "../components/builder/JiraTableBuilder";
 
 //constants
-const EntryPerPage = 8;
+const EntryPerPage = 9;
 const { getIssues } = GetIssuesApi();
 
 const useGetJiraData = (jql = "") => {

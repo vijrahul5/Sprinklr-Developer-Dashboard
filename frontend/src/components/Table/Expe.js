@@ -41,7 +41,11 @@ const Expe = ({ jql = "", columnTitles, loadMoreRows }) => {
   return (
     <div className="table__Container">
       <div
-        className={css({ height: "600px", width: "100%", minWidth: "750px" })}
+        className={css({
+          height: "600px",
+          width: "100%",
+          minWidth: "750px",
+        })}
       >
         <StyledTable
           role="grid"
@@ -99,8 +103,10 @@ const Expe = ({ jql = "", columnTitles, loadMoreRows }) => {
                             parent={parent}
                             rowIndex={index}
                           >
-                            <div style={style} className="row_wrapper">
-                              {isRowLoaded({ index: index }) ? (
+                            <div style={style}>
+                              {isRowLoaded({
+                                index: index,
+                              }) ? (
                                 <StyledHead
                                   role="row"
                                   key={key}
