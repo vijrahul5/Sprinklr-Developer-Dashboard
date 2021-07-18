@@ -24,13 +24,13 @@ import {
 //constants
 const minimumBatchSize = 20;
 
-const Expe = ({ jql = "", columnTitles, loadMoreRows }) => {
+const Expe = ({ jql = "", columnTitles, loadMoreRows, minWidth, author }) => {
   useEffect(() => {
     setList([]);
     setRemoteCount(20);
-    setLoading(false);
     setLastLoadedIndex(-1);
-  }, [jql]);
+    setLoading(false);
+  }, [jql, author]);
 
   const [list, setList] = useState([]);
   const [remoteRowCount, setRemoteCount] = useState(20);
@@ -50,7 +50,7 @@ const Expe = ({ jql = "", columnTitles, loadMoreRows }) => {
         className={css({
           height: "600px",
           width: "100%",
-          minWidth: "750px",
+          minWidth: minWidth,
         })}
       >
         <StyledTable
@@ -73,7 +73,6 @@ const Expe = ({ jql = "", columnTitles, loadMoreRows }) => {
             <InfiniteLoader
               isRowLoaded={isRowLoaded}
               loadMoreRows={({ stopIndex }) => {
-                console.log("jqqql", lastLoadedIndex, stopIndex);
                 if (!loading && stopIndex > lastLoadedIndex)
                   loadMoreRows({
                     startIndex: lastLoadedIndex + 1,
