@@ -1,0 +1,131 @@
+@import "base";
+
+.learning {
+    width: 100%;
+    border-top: $border;
+    border-radius: $border-radius;
+    box-shadow: $shadow;
+    margin-top: map-get($margins, "medium");
+    position: relative;
+    padding-bottom: 1rem;
+}
+.learning__heading {
+    color: $color-primary;
+    padding-bottom: 0.2rem;
+    border-bottom: 2px solid $color-primary;
+    margin: map-get($margins, "small");
+    font-weight: map-get($font-weights, "small");
+    font-size: 1.3rem;
+    display: flex;
+    justify-content: space-between;
+}
+.learning__wrapper {
+    width: 20%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    .add__icon {
+        font-size: 1.2rem;
+        cursor: pointer;
+    }
+}
+.postResource {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 10;
+    top: 3.5rem;
+    left: 0;
+    @include flexCenter(column);
+    background: rgba(0, 0, 0, 0.3);
+    form {
+        width: 40rem;
+        margin: auto;
+        box-shadow: $shadow;
+        padding: map-get($paddings, "small");
+        background-color: $color-widget;
+        border-radius: $border-radius;
+        border-top: $border;
+    }
+}
+.postResource__btnHolder {
+    @include flexCenter(row);
+    justify-content: flex-end;
+    margin-top: 1rem;
+}
+
+.resourceList__container {
+    height: fit-content;
+    max-height: 8rem;
+    overflow-y: auto;
+    @include flexCenter(column);
+    list-style: none;
+
+}
+.resourceList__wrapper{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding:0 1rem;
+}
+.learningResource {
+    width: 100%;
+    height: fit-content;
+    list-style: none;
+    border-radius: $border-radius;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: map-get($font-sizes, "small");
+    margin-bottom: 0.5rem;
+    padding: 1rem;
+}
+
+.learningResource__value {
+    width: 70%;
+    border-radius: $border-radius;
+    a {
+        text-decoration: none;
+        color: $color-primary;
+        text-decoration: underline;
+        &:hover {
+            color: blue;
+        }
+    }
+}
+.learningResource__mark {
+    border: 6px solid $color-primary !important;
+    cursor: pointer;
+}
+.learningResource__btnContainer {
+    @include flexCenter(row);
+    justify-content: space-between;
+    div {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+}
+.learningResource__toolTipHeading{
+    color: $color-primary;
+    padding-bottom: 0.2rem;
+    border-bottom: 2px solid $color-primary;
+    font-weight: map-get($font-weights, "small");
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.learningResource__toolTipEmail{
+    font-size: 0.8rem;
+    font-weight: map-get($font-weights, "small");
+
+}
+
+@import "media";

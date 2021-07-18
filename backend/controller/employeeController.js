@@ -1,6 +1,7 @@
 const employeeModel = require("../model/employeeModel");
 const standUpModel = require("../model/standUpModel");
 const managerModel = require("../model/managerModel");
+const learningModel = require("../model/learningModel");
 const moment = require("moment");
 // const Mediator = require("../model/Mediator");
 // const mediator = new Mediator();
@@ -371,7 +372,107 @@ async function getManagerAccess(req, res) {
             });
         }
     } catch (err) {
-        console.log(err.message);
+
+        res.json({
+            status: "Failed",
+            error: err.message,
+        });
+    }
+}
+
+async function getLearningResources(req, res) {
+    const email = req.email;
+    try {
+        const employee = await employeeModel.findOne({ email: email });
+        if (!employee) throw new Error("Failed");
+        const manager = employee.managerAccess ? employee : employee.manager;
+        const learningResources = await learningModel
+            .find({
+                teamManager: manager,
+            })
+            .sort({ createdAt: "desc" })
+            .populate("author")
+            .populate("teamManager")
+            .populate("markedBy");
+
+        if (!learningResources) throw new Error("Failed");
+        res.json({
+            status: "Success",
+            learningResources,
+        });
+    } catch (err) {
+        res.json({
+            status: "Failed",
+            error: err.message,
+        });
+    }
+}
+async function postLearningResources(req, res) {
+    const email = req.email;
+    try {
+        const employee = await employeeModel.findOne({ email: email });
+        if (!employee) throw new Error("Failed");
+        const manager = employee.managerAccess ? employee : employee.manager;
+        await learningModel.create({
+            title: req.body.title,
+            link: req.body.link,
+            author: employee,
+            teamManager: manager,
+        });
+        res.json({
+            status: "Success",
+        });
+    } catch (err) {
+        res.json({
+            status: "Failed",
+            error: err.message,
+        });
+    }
+}
+async function updateLearningResources(req, res) {
+    const email = req.email;
+    try {
+        const employee = await employeeModel.findOne({ email: email });
+        if (!employee) throw new Error("Failed");
+        const manager = employee.managerAccess ? employee : employee.manager;
+        const learningResource = await learningModel
+            .findOne({
+                _id: req.body.resourceId,
+            })
+            .populate("markedBy");
+        if (!learningResource) throw new Error("Failed");
+        let markArray = learningResource.markedBy;
+        markArray = markArray.filter(
+            (markedEmployee) => markedEmployee.email !== employee.email
+        );
+        if (req.body.marked) {
+            markArray.push(employee);
+        }
+        learningResource.markedBy = markArray;
+        await learningResource.save();
+        res.json({
+            status: "Success",
+        });
+    } catch (err) {
+        res.json({
+            status: "Failed",
+            error: err.message,
+        });
+    }
+}
+async function deleteLearningResources(req, res) {
+    const email = req.email;
+    try {
+        const employee = await employeeModel.findOne({ email: email });
+        if (!employee) throw new Error("Failed");
+        const manager = employee.managerAccess ? employee : employee.manager;
+        await learningModel.deleteOne({
+            _id: req.body.resourceId,
+        });
+        res.json({
+            status: "Success",
+        });
+    } catch (err) {
         res.json({
             status: "Failed",
             error: err.message,
@@ -390,3 +491,7 @@ module.exports.postStandUp = postStandUp;
 module.exports.updateStandUp = updateStandUp;
 module.exports.deleteStandUp = deleteStandUp;
 module.exports.getManagerAccess = getManagerAccess;
+module.exports.getLearningResources = getLearningResources;
+module.exports.postLearningResources = postLearningResources;
+module.exports.updateLearningResources = updateLearningResources;
+module.exports.deleteLearningResources = deleteLearningResources;

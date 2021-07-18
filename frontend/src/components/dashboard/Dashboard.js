@@ -8,6 +8,7 @@ import Profile from "../profile/index";
 import StandUp from "../standUp/index";
 import JiraDashboard from "../jiraDashboard/components/jira/Jira";
 import GitlabDashboard from "../gitlabDashboard/GitlabDashboard";
+import Learning from "../learning/index";
 // hooks
 import useFetchEmployeeData from "../../hooks/useFetchEmployeeData";
 
@@ -22,41 +23,48 @@ export default function Dashboard() {
     return (
         <>
             <DashboardNavbar />
-            <div className="dashboardContainer">
+            {/* <div className="dashboardContainer"> */}
+            <div className="basicInfo__OuterWrapper">
                 <div className="basicInfo">
-                    <Profile user={user} />
-                    <StandUp />
-                </div>
-                <div className="sectionContainer">
-                    {user.managerAccess ? (
-                        <Suspense
-                            fallback={() => {
-                                return (
-                                    <div className="section teamStandUpList">
-                                        <h1 className="teamStandUpList__heading">
-                                            Team
-                                        </h1>
-                                        <Loader />
-                                    </div>
-                                );
-                            }}
-                        >
-                            <div className="section teamStandUpList">
-                                <h1>Team</h1>
-                                <Team />
-                            </div>
-                        </Suspense>
-                    ) : null}
-                    <div className="section">
-                        <h1>Jira</h1>
-                        <JiraDashboard user={user} />
+                    <div className="basicInfo__wrapper">
+                        <Profile user={user} />
+                        <StandUp />
                     </div>
-                    <div className="section">
-                        <h1>Gitlab</h1>
-                        <GitlabDashboard user={user} />
-                    </div>
+                    <Learning user={user} />
                 </div>
             </div>
+
+            <div className="sectionContainer">
+                {user.managerAccess ? (
+                    <Suspense
+                        fallback={() => {
+                            return (
+                                <div className="section teamStandUpList">
+                                    <h1 className="teamStandUpList__heading">
+                                        Team
+                                    </h1>
+                                    <Loader />
+                                </div>
+                            );
+                        }}
+                    >
+                        <div className="section teamStandUpList">
+                            <h1>Team</h1>
+                            <Team />
+                        </div>
+                    </Suspense>
+                ) : null}
+
+                <div className="section">
+                    <h1>Jira</h1>
+                    <JiraDashboard user={user} />
+                </div>
+                <div className="section">
+                    <h1>Gitlab</h1>
+                    <GitlabDashboard user={user} />
+                </div>
+            </div>
+            {/* </div> */}
             <NotificationContainer />
         </>
     );
