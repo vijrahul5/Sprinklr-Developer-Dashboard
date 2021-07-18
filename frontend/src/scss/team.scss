@@ -5,12 +5,6 @@
     h1 {
         margin: map-get($margins, "medium");
     }
-    // &__loader {
-    //     width: 100%;
-    //     height: 100%;
-    //     padding: map-get($paddings, "medium");
-    //     padding-top: 0;
-    // }
 }
 .teamStandUpList__loader {
     width: 100%;
@@ -21,9 +15,6 @@
 
 .teamStandUpList__OuterUl {
     width: 100%;
-    // padding: map-get($paddings, "medium");
-    // padding-top: 0.1rem;
-    // padding-bottom: 0;
     margin-bottom: map-get($margins, "medium");
     list-style: none;
     overflow: auto;
@@ -74,17 +65,11 @@
     height: 100%;
     width: 100%;
     position: fixed;
-    z-index: 10;
+    z-index: 2;
     top: 3.5rem;
     left: 0;
     @include flexCenter(column);
     background: rgba(0, 0, 0, 0.3);
-
-    // &__btnHolder {
-    //     @include flexCenter(row);
-    //     justify-content: flex-end;
-    //     margin-top: 0.5rem;
-    // }
     form {
         width: 40rem;
         margin: auto;
@@ -95,7 +80,6 @@
         border-top: $border;
         div {
             width: 100%;
-            // @include flexCenter(row);
         }
         h2 {
             color: $color-primary;
@@ -118,11 +102,6 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    // &__icon {
-    //     color: $color-primary;
-    //     font-size: 1.5rem;
-    //     cursor: pointer;
-    // }
 }
 .teamForm__modal__close__icon {
     color: $color-primary;
@@ -131,10 +110,6 @@
 }
 .teamInstruction {
     margin: 0 map-get($margins, "medium");
-    // &__btn {
-    //     margin: map-get($margins, "medium");
-    //     margin-top: 0;
-    // }
 }
 
 .teamInstruction__btn {
@@ -145,7 +120,7 @@
     margin-bottom: 3rem;
     padding: 2rem;
     padding-top: 0;
-    // padding-bottom: 2rem;
+    z-index: 0 !important;
     overflow: visible !important;
 }
 @import "media";

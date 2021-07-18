@@ -61,14 +61,25 @@ function StandUpForm({ data, handleEdit, handleSubmit, view }) {
                                     onChange={changeValue}
                                     placeholder="Answer"
                                     size={SIZE.mini}
-                                    overrides={rootOverride}
+                                    // overrides={rootOverride}
+                                    overrides={{
+                                        Root: {
+                                            style: ({ $theme }) => ({
+                                                backgroundColor: "#eeeeee",
+                                                borderRadius: "4px",
+                                                width: "100%",
+                                                height: "3.2rem"
+                                            }),
+                                        },
+                                    }}
                                 />
                             </FormControl>
+
                         );
                     })}
                     <Button
                         className="btnCustom"
-                        size={SIZE.compact}
+                        size={SIZE.mini}
                         onClick={data ? editStandUp : submitStandUp}
                     >
                         {data ? "Edit" : "Submit"}

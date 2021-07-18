@@ -1,40 +1,56 @@
 @import "base";
 
-@media only screen and (max-width: 1350px), (max-height: 950px) {
+@media only screen and (max-width: 1350px) {
     .basicInfo {
-        width: 100%;
-        position: unset;
-        @include flexCenter(row);
-        align-items: flex-start;
-        margin-bottom: map-get($margins, "medium");
+        margin-bottom: 0;
     }
-
-    .sectionContainer {
-        margin-left: 0;
+    .basicInfo__OuterWrapper {
+        margin-top: 3.5rem;
+        width: 100%;
+        height: fit-content;
+        position: unset;
+        @include flexCenter(column);
+        align-items: flex-start;
+        padding-bottom: 1rem;
     }
     .basicInfo__wrapper {
-        margin-right: map-get($margins, "medium");
-        @include flexCenter(column);
-        width: 70%;
+        @include flexCenter(row);
+        width: 100%;
+        align-items: flex-start;
+    }
+    .sectionContainer {
+        margin-top: 0;
+        margin-left: 0;
+        padding-top: 1rem;
+    }
+
+    .learning {
+        margin-bottom: 0;
+        padding-bottom: 2rem;
+    }
+    .learning__heading {
+        padding-bottom: 0.5rem;
+        font-size: 2rem;
+        margin: 2rem;
+    }
+    .add__icon {
+        font-size: 1.5rem;
+    }
+    .resourceList__container {
+        height: 20rem;
+    }
+    .resourceList__wrapper {
+        padding: 0 2rem;
     }
     .profile {
-        margin: 0;
-        width: 100%;
-
-        // .profile__imgHolder {
-        //     width: 9rem;
-        //     height: 9rem;
-        //     margin-bottom: map-get($margins, "small");
-        // }
+        margin-right: 2rem;
+        margin-bottom: 0;
+        width: 85%;
     }
     .profile__imgHolder {
-        width: 9rem;
-        height: 9rem;
+        width: 8rem;
+        height: 8rem;
         margin-bottom: map-get($margins, "small");
-    }
-    .requestForm {
-        margin-bottom: 0;
-        margin-top: 2rem;
     }
     .jiraWid__search {
         flex-direction: column;
@@ -53,29 +69,50 @@
     .btn--white {
         margin-left: 0rem !important;
     }
+    .learning__heading {
+        padding-bottom: 0.2rem;
+        font-size: 1.5rem;
+    }
+    .standUp__heading {
+        padding-bottom: 0.2rem;
+        font-size: 1.5rem;
+    }
+    .section {
+        h1 {
+            padding-bottom: 0.2rem;
+            font-size: 1.5rem;
+        }
+    }
 }
 
 @media only screen and (max-width: 950px) {
+    .profile {
+        width: 100%;
+    }
     .basicInfo__wrapper {
-        margin-right: 0;
+        margin: 0;
         @include flexCenter(column);
         width: 100%;
     }
-    .dashboardContainer {
-        padding: map-get($paddings, "small");
-    }
-
-    .basicInfo {
+    .basicInfo__OuterWrapper {
         @include flexCenter(column);
-        // &__wrapper {
-        //     margin-right: 0;
-        // }
+        padding: 1rem;
+        padding-top: 2rem;
     }
-    .basicInfo__wrapper {
-        margin-right: 0;
+    .learning {
+        padding-bottom: 1rem;
+    }
+    .learning__heading {
+        margin: 1rem;
+    }
+    .resourceList__wrapper {
+        padding: 0 1rem;
+    }
+    .sectionContainer {
+        padding: 1rem;
     }
     .profile {
-        margin: 0px;
+        margin: 0;
         width: 100%;
     }
     .section {
@@ -94,11 +131,16 @@
             width: 30rem;
         }
     }
+    .postResource {
+        form {
+            width: 30rem;
+        }
+    }
     .standUp {
         margin-top: 2rem;
     }
     .teamInstruction {
-        margin: 0;
+        margin: 1rem;
     }
     .teamStandUpList__add {
         margin: 0 1rem;
@@ -107,10 +149,9 @@
     .ReactVirtualized__Grid__innerScrollContainer[style] {
         margin-bottom: 5rem;
         padding: 1rem;
-        // padding-bottom: 2rem;
         overflow: visible !important;
     }
-    .landingPage__wrapper{
+    .landingPage__wrapper {
         width: 95%;
     }
 }
@@ -119,13 +160,36 @@
     html {
         font-size: 100%;
     }
-    .teamStandUpList {
-        li {
-            display: flex;
-            justify-content: start;
-            flex-direction: column;
-            align-items: center;
+    .landingPage__wrapper {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        border-radius: 1rem;
+        background-color: white;
+    }
+    .signInSection {
+        width: 100%;
+        background-color: #fafafa;
+        border-radius: 1rem;
+    }
+    .signin__modal {
+        height: 15rem;
+        padding: 1rem;
+    }
+    .landingPage__navbar__heading {
+        font-size: 1.5rem;
+    }
+    .signin__modal__content {
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
         }
+    }
+    .teamMember__list__item {
+        display: flex;
+        justify-content: start;
+        flex-direction: column;
+        align-items: center;
     }
     .teamStandUpList__param {
         width: 100%;
@@ -140,10 +204,6 @@
         h1 {
             font-size: 1.5rem;
         }
-        // #{&}__icon {
-        //     font-size: 1.5rem;
-        //     margin-right: 1rem;
-        // }
     }
     .dashboardNavbar__icon {
         font-size: 1.5rem;
@@ -151,7 +211,12 @@
     }
     .teamForm {
         form {
-            width: 25rem;
+            width: 23rem;
+        }
+    }
+    .postResource {
+        form {
+            width: 23rem;
         }
     }
     .instruction__item {
@@ -179,17 +244,18 @@
     .standUp {
         padding: map-get($paddings, "extraSmall");
     }
-
+    .learning__heading {
+        margin: 0.5rem;
+    }
+    .resourceList__wrapper {
+        padding: 0 0.5rem;
+    }
     .dashboardNavbar {
         width: 100%;
         height: 3.5rem;
         h1 {
             font-size: 1.3rem;
         }
-        // #{&}__icon {
-        //     font-size: 1.3rem;
-        //     margin-right: 0.5rem;
-        // }
     }
     .dashboardNavbar__icon {
         font-size: 1.3rem;
@@ -200,10 +266,6 @@
         h1 {
             margin: 0.5rem;
             margin-bottom: 2rem;
-        }
-        ul {
-            padding: 0.5rem;
-            padding-top: 0.2rem;
         }
     }
 
@@ -221,7 +283,9 @@
     .ReactVirtualized__Grid__innerScrollContainer[style] {
         margin-bottom: 5rem;
         padding: 0.5rem;
-        // padding-bottom: 2rem;
         overflow: visible !important;
+    }
+    .teamInstruction {
+        margin: 0.5rem;
     }
 }

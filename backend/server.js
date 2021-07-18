@@ -18,8 +18,9 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use("/api/auth", authRouter);
 app.use("/api/jiranotification", jiraNotificationRouter);
+app.use("/api/admin", adminRouter);
 app.use(protectRoute);
-app.use("/api/employee", employeeRouter); 
+app.use("/api/employee", employeeRouter);
 app.use("/api/jira", jiraRouter);
 app.use("/api/gitlab", gitlabRouter);
 let port = process.env.PORT;
@@ -29,5 +30,3 @@ if (port == null || port == "") {
 app.listen(port, function () {
     console.log("Server started successfully at port: " + port);
 });
-
-// app.use("/api/admin", adminRouter);

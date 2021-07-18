@@ -1,10 +1,14 @@
-import React, { useCallback } from "react";
-import { useState, useEffect } from "react";
-import Table from "../../table/Table";
-
-import GitlabAccessTokenForm from "./GitlabAccessTokenForm";
+//libraries
+import React, { useCallback, useState, useEffect, lazy, Suspense } from "react";
+//utils
+import useFetchEmployeeTeamData from "../../../../src/hooks/useFetchEmployeeTeamData";
 import { Select, SIZE } from "baseui/select";
-import Loader from "../../loaders/Tombstone";
+import Expe from "../../table/Expe";
+
+//import loadMoreRows from "./LoadRows";
+const Table = lazy(() => import("../../table/Table"));
+const GitlabAccessTokenForm = lazy(() => import("./GitlabAccessTokenForm"));
+const Loader = lazy(() => import("../../loaders/Tombstone"));
 const axios = require("axios");
 
 const GitlabProfile = (props) => {
@@ -12,6 +16,8 @@ const GitlabProfile = (props) => {
     const [loading, setLoading] = useState(true);
     const [currentMergeRequest, setcurrentMergeRequest] = useState([]);
     const [mergeRequestToShow, setmergeRequestToShow] = useState([]);
+    const [teamLoading, teamData, teamError] = useFetchEmployeeTeamData();
+    const [teamMemberList, setList] = useState([]);
     useEffect(() => {
         if (props.user.doneGitlabAuth === true) {
             setUserAuthenticated(true);
@@ -24,12 +30,52 @@ const GitlabProfile = (props) => {
         if (props.gitlabDetails.length > 0) {
             setcurrentMergeRequest(props.gitlabDetails);
             const initial = props.gitlabDetails.filter((element) => {
-                return element[2] === "Ashutosh Gangwar";
+                return element[2] === props.user.name;
             });
             setmergeRequestToShow(initial);
             setLoading(false);
+            if (teamData) {
+                let list = teamData.map((element, idx) => {
+                    return { label: element.name, id: idx.toString() };
+                });
+                list.push({
+                    label: "Assigned to me",
+                    id: list.length.toString(),
+                });
+                setList(list);
+            }
         }
-    }, [props]);
+    }, [props, teamData]);
+
+    const loadMoreRows = function ({
+        startIndex,
+        stopIndex,
+        setLoading,
+
+        setList,
+        setLastLoadedIndex,
+        list,
+        setRemoteCount,
+    }) {
+        setLoading(true);
+
+        let myPromise = new Promise(function (myResolve, myReject) {
+            myResolve("OK");
+        });
+
+        return myPromise.then(() => {
+            let len = mergeRequestToShow.length;
+            let lastIndex = Math.min(len - 1, stopIndex);
+            if (startIndex <= lastIndex) {
+                let arr = mergeRequestToShow.slice(startIndex, lastIndex + 1);
+                setList([...list, ...arr]);
+            }
+
+            setLastLoadedIndex(lastIndex);
+            setLoading(false);
+            setRemoteCount(props.gitlabDetails.length);
+        });
+    };
 
     const submitToken = useCallback(
         async (token) => {
@@ -48,8 +94,6 @@ const GitlabProfile = (props) => {
         return a[2] - b[2];
     });
 
-    console.log("currentMergeRequest", currentMergeRequest);
-
     const [currentMergeRequestPage, setcurrentMergeRequestPage] = useState(1);
 
     const indexOfLastMergeRequest =
@@ -63,7 +107,9 @@ const GitlabProfile = (props) => {
     );
 
     const [project, setProject] = useState([]);
-    const [author, setauthor] = useState([]);
+    const [author, setauthor] = useState([
+        { label: "Assigned to me", id: "99" },
+    ]);
     const overRides = {
         ControlContainer: {
             style: () => ({
@@ -73,56 +119,75 @@ const GitlabProfile = (props) => {
     };
     const authorSelect = useCallback(
         (params) => {
-            console.log("before", params.value);
-
             if (params.value.length !== 0) {
-                let idx = parseInt(params.value[0].id);
-
-                let temp = currentMergeRequest.filter((element) => {
-                    return element[2] == params.value[0].label;
-                });
+                let temp;
+                if (params.value[0].label === "Assigned to me") {
+                    temp = currentMergeRequest.filter((element) => {
+                        return element[2] === props.user.name;
+                    });
+                } else {
+                    temp = currentMergeRequest.filter((element) => {
+                        return element[2] === params.value[0].label;
+                    });
+                }
 
                 setmergeRequestToShow(temp);
             }
+            if (params.value.length === 0) {
+                const initial = props.gitlabDetails.filter((element) => {
+                    return element[2] === props.user.name;
+                });
+                setmergeRequestToShow(initial);
+            }
             setauthor(params.value);
         },
-        [setcurrentMergeRequestPage, setauthor, author]
+        [setcurrentMergeRequestPage, setauthor, author,currentMergeRequest,props]
     );
-
-    const authorList = mergeRequestarray.map((element, idx) => {
-        return { label: element[2], id: idx.toString() };
-    });
-    const uniqueSelect = [...new Set(authorList)];
-    console.log(uniqueSelect);
 
     if (!isUserAuthenticated) {
         return <GitlabAccessTokenForm submitToken={submitToken} />;
     }
 
-    if (loading) {
-        return <Loader />;
+    if (loading || teamLoading) {
+        return (
+            <Suspense fallback={<div>Loading...</div>}>
+                <Loader />
+            </Suspense>
+        );
+    }
+    if (props.user.managerAccess !== true) {
+        return (
+            <div>
+                <Expe
+                    columnTitles={[
+                        "Project Name",
+                        "Merge Request",
+                        "Author",
+                        "Reviewer",
+                        "Target Branch",
+                        "Approval Status",
+                        "Pipeline Status",
+                    ]}
+                    loadMoreRows={loadMoreRows}
+                    author={author}
+                    minWidth="1050px"
+                />
+            </div>
+        );
     }
     return (
-        <div>
+        <>
             <Select
-                options={authorList}
+                options={teamMemberList}
                 value={author}
-                placeholder="Select Author"
+                placeholder="Select TeamMember"
                 onChange={authorSelect}
                 size={SIZE.compact}
                 overrides={overRides}
             />
 
             <br></br>
-
-            <Table
-                data={mergeRequestToShow}
-                pageNumber={currentMergeRequestPage}
-                totalPages={Math.ceil(
-                    mergeRequestToShow.length / props.mergeRequestPerPage
-                )}
-                setPageNumber={setcurrentMergeRequestPage}
-                loading={false}
+            <Expe
                 columnTitles={[
                     "Project Name",
                     "Merge Request",
@@ -132,8 +197,11 @@ const GitlabProfile = (props) => {
                     "Approval Status",
                     "Pipeline Status",
                 ]}
+                loadMoreRows={loadMoreRows}
+                author={author}
+                minWidth="1050px"
             />
-        </div>
+        </>
     );
 };
 

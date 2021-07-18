@@ -7,40 +7,6 @@
     top: 0;
     z-index: 10;
     @include flexCenter(row);
-    // h1 {
-    //     all: unset;
-    //     font-size: map-get($font-sizes, "medium");
-    //     font-weight: map-get($font-weights, "small");
-    //     color: $color-widget;
-    //     margin: auto;
-    //     text-align: center;
-    // }
-    // &__icon {
-    //     position: fixed;
-    //     right: 0;
-    //     font-size: map-get($font-sizes, "medium");
-    //     margin-right: 2rem;
-    //     cursor: pointer;
-    //     color: $color-widget;
-
-    //     &__description {
-    //         display: none;
-    //     }
-
-    //     &:hover + &__description {
-    //         display: block;
-    //         width: fit-content;
-    //         padding: 4px;
-    //         background-color: $color-primary;
-    //         color: $color-widget;
-    //         border-radius: $border-radius;
-    //         position: fixed;
-    //         // border: 1px solid black;
-    //         top: 3.6rem;
-    //         right: 1rem;
-    //         z-index: 2;
-    //     }
-    // }
 }
 
 .dashboardNavbar h1 {
@@ -81,9 +47,11 @@
 }
 
 .sectionContainer {
-    margin-left: 25rem + 2rem;
+    margin-left: 25 + 2rem;
     height: fit-content;
     @include flexCenter(column);
+    padding: 2rem;
+    margin-top: 3.5rem;
 }
 .section {
     width: 100%;
@@ -102,6 +70,5 @@
         font-weight: map-get($font-weights, "small");
     }
 }
-
 
 @import "media";
