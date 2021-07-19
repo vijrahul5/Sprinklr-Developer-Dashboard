@@ -3,9 +3,9 @@ import React from "react";
 import { useState, useEffect, lazy } from "react";
 import { FcApproval, FcCancel } from "react-icons/fc";
 import RequestPipeline from "./components/PipelineProcessor";
-import getArrayOfProjects from "./Functions/GetArrayOfProjects";
-import getMergeRequests from "./Functions/GetMergeRequests";
-import getPipeline from "./Functions/GetPipeline";
+import getArrayOfProjects from "./functions/GetArrayOfProjects";
+import getMergeRequests from "./functions/GetMergeRequests";
+import getPipeline from "./functions/GetPipeline";
 //utils
 const Profile = lazy(() => import("./components/GitlabProfile"));
 const axios = require("axios");
@@ -59,7 +59,10 @@ function GitlabApp({ user }) {
                     if (pipelineResult[pi].length !== 0) {
                         arr.push([
                             projectName[i][1],
-                            <a href={mergeRequestsResult[i][j].web_url}>
+                            <a
+                                href={mergeRequestsResult[i][j].web_url}
+                                className="jiraIssueUrl"
+                            >
                                 {mergeRequestsResult[i][j].title}
                             </a>,
                             mergeRequestsResult[i][j].author.name,
@@ -82,7 +85,10 @@ function GitlabApp({ user }) {
                     } else {
                         arr.push([
                             projectName[i][1],
-                            <a href={mergeRequestsResult[i][j].web_url}>
+                            <a
+                                href={mergeRequestsResult[i][j].web_url}
+                                className="jiraIssueUrl"
+                            >
                                 {mergeRequestsResult[i][j].title}
                             </a>,
                             mergeRequestsResult[i][j].author.name,

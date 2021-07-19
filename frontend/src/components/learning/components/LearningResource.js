@@ -45,9 +45,9 @@ function LearningResource({ resource, user, team, fetchLearningResources }) {
     }, [resource, user]);
 
     const handleChange = useCallback(
-        (e) => {
+        async (e) => {
             setValue(() => !value);
-            updateLearningResource({
+            await updateLearningResource({
                 resourceId: resource["_id"],
                 marked: !value,
             });

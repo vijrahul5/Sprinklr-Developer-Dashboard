@@ -4,6 +4,7 @@ import React, { useCallback, useState, useEffect, lazy, Suspense } from "react";
 import useFetchEmployeeTeamData from "../../../../src/hooks/useFetchEmployeeTeamData";
 import { Select, SIZE } from "baseui/select";
 import Expe from "../../table/Expe";
+import Notification from "./Notification";
 
 //import loadMoreRows from "./LoadRows";
 
@@ -160,6 +161,7 @@ const GitlabProfile = (props) => {
                     author={author}
                     minWidth="1050px"
                 />
+                <Notification />
             </div>
         );
     }
@@ -189,6 +191,7 @@ const GitlabProfile = (props) => {
                 author={author}
                 minWidth="1050px"
             />
+            <Notification />
         </>
     );
 };

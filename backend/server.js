@@ -2,6 +2,7 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const { protectRoute } = require("./controller/authController");
 const jiraNotificationRouter = require("./router/jiraNotificationRouter");
+const gitlabNotificationRouter = require("./router/gitlabNotificationRouter");
 const authRouter = require("./router/authRouter");
 const employeeRouter = require("./router/employeeRouter");
 const jiraRouter = require("./router/jiraRouter");
@@ -18,6 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use("/api/auth", authRouter);
 app.use("/api/jiranotification", jiraNotificationRouter);
+app.use("/api/gitlabnotification", gitlabNotificationRouter);
 app.use("/api/admin", adminRouter);
 app.use(protectRoute);
 app.use("/api/employee", employeeRouter);
