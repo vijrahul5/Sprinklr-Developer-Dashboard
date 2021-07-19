@@ -1,4 +1,4 @@
-@import "base";
+@import "../../../scss/base";
 .dashboardNavbar {
     background-color: $color-nav;
     width: 100%;
@@ -40,35 +40,4 @@
 .dashboardNavbar__icon__description {
     display: none;
 }
-
-.dashboardContainer {
-    margin-top: 3.5rem;
-    padding: map-get($paddings, "medium");
-}
-
-.sectionContainer {
-    margin-left: 25 + 2rem;
-    height: fit-content;
-    @include flexCenter(column);
-    padding: 2rem;
-    margin-top: 3.5rem;
-}
-.section {
-    width: 100%;
-    height: fit-content;
-    margin-bottom: map-get($margins, "medium");
-    padding: map-get($paddings, "medium");
-    border-top: $border;
-    box-shadow: $shadow;
-    border-radius: $border-radius;
-
-    h1 {
-        color: $color-primary;
-        padding-bottom: 0.5rem;
-        border-bottom: 2px solid $color-primary;
-        margin-bottom: map-get($margins, "medium");
-        font-weight: map-get($font-weights, "small");
-    }
-}
-
-@import "media";
+@import "../../../scss/media";

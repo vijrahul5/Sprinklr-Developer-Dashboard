@@ -6,8 +6,8 @@ import Loader from "../loaders/Loader";
 import DashboardNavbar from "../dashboardNavbar/index";
 import Profile from "../profile/index";
 import StandUp from "../standUp/index";
-import JiraDashboard from "../jiraDashboard/components/jira/Jira";
-import GitlabDashboard from "../gitlabDashboard/GitlabDashboard";
+import JiraDashboard from "../jiraDashboard/index";
+import GitlabDashboard from "../gitlabDashboard/index";
 import Learning from "../learning/index";
 // hooks
 import useFetchEmployeeData from "../../hooks/useFetchEmployeeData";

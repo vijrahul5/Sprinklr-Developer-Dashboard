@@ -49,8 +49,8 @@ function TeamForm({
                 addTeamMember(value);
             } else if (type === "Delete") {
                 deleteTeamMember(value);
-                handleClose();
             }
+            handleClose();
         },
         [addTeamMember, deleteTeamMember, handleClose, setValue, value, type]
     );

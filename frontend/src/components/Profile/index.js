@@ -3,7 +3,7 @@ import React from "react";
 // components
 import Profile from "./components/Profile";
 // styles
-import "../../scss/basicInfo.scss";
+import "./styles/profile.scss";
 
 function index({user}) {
     return <Profile user={user}/>;

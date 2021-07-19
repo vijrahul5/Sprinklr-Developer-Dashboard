@@ -11,7 +11,7 @@ import { Button, SIZE } from "baseui/button";
 // components
 import TeamMember from "./TeamMember";
 import Loader from "../../loaders/Tombstone";
-import TeamForm from "../../teamForm/components/TeamForm";
+import TeamForm from "../../teamForm/index";
 import Instruction from "../../instruction/Instruction";
 // hooks
 import useFetchEmployeeTeamData from "../../../hooks/useFetchEmployeeTeamData";

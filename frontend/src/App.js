@@ -10,7 +10,6 @@ import { PublicRoute, ProtectedRoute } from "./routes/Routes";
 import Loader from "./components/loaders/Loader";
 import LandingPage from "./components/landingPage/index";
 // styles
-import "./scss/loader.scss";
 
 const Dashboard = lazy(() => import("./components/dashboard/index"));
 
