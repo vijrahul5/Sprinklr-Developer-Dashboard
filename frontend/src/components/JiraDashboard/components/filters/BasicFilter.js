@@ -22,42 +22,63 @@ const BasicFilter = ({ handleSwitch, setJqlQuery, user }) => {
   const [employeeFilterValue, setEmployeeFilterValue] = useState([
     { label: "Assigned to me", id: user.email },
   ]);
-
   const handleFilter = useCallback(
     (params) => {
       setFilterValue(params.value);
-
+      let left = "";
+      let right = "";
+      if (params.value.length > 0) left = `filter=${params.value[0].id}`;
+      if (employeeFilterValue.length > 0)
+        right = `assignee in ("${employeeFilterValue[0].id}")`;
+      if (
+        employeeFilterValue.length > 0 &&
+        employeeFilterValue[0].id === "myteam"
+      ) {
+        let team = `"${user.email}"`;
+        employeeDetails.map((employee) => {
+          team += `,"${employee.id}"`;
+        });
+        right = `assignee in (${team})`;
+      }
       if (params.value.length > 0 && employeeFilterValue.length > 0) {
-        setJqlQuery(
-          `filter=${params.value[0].id} AND assignee in ("${employeeFilterValue[0].id}")`
-        );
+        setJqlQuery(`${left} AND ${right}`);
       } else if (params.value.length > 0) {
-        setJqlQuery(`filter=${params.value[0].id}`);
+        setJqlQuery(`${left}`);
       } else if (employeeFilterValue.length > 0) {
-        setJqlQuery(`assignee in ("${employeeFilterValue[0].id}")`);
+        setJqlQuery(`${right}`);
       } else {
         setJqlQuery("");
       }
     },
-    [employeeFilterValue, filterValue]
+    [employeeFilterValue, filterValue, employeeDetails]
   );
 
   const handleEmployeeFilter = useCallback(
     (params) => {
       setEmployeeFilterValue(params.value);
+      let left = "";
+      let right = "";
+      if (filterValue.length > 0) left = `filter=${filterValue[0].id}`;
+      if (params.value.length > 0)
+        right = `assignee in ("${params.value[0].id}")`;
+      if (params.value.length > 0 && params.value[0].id === "myteam") {
+        let team = `"${user.email}"`;
+        employeeDetails.map((employee) => {
+          team += `,"${employee.id}"`;
+        });
+        right = `assignee in (${team})`;
+      }
       if (params.value.length > 0 && filterValue.length > 0) {
-        setJqlQuery(
-          `filter=${filterValue[0].id} AND assignee in ("${params.value[0].id}")`
-        );
+        setJqlQuery(`${left} AND ${right}`);
       } else if (params.value.length > 0) {
-        setJqlQuery(`assignee in ("${params.value[0].id}")`);
+        setJqlQuery(`${right}`);
       } else if (filterValue.length > 0) {
-        setJqlQuery(`filter=${filterValue[0].id}`);
+        setJqlQuery(`${left}`);
       } else {
         setJqlQuery("");
       }
     },
-    [filterValue, employeeFilterValue]
+    [filterValue, employeeFilterValue, employeeDetails]
   );
   return (
     <>
@@ -74,19 +95,24 @@ const BasicFilter = ({ handleSwitch, setJqlQuery, user }) => {
             />
           </FormControl>
         </div>
+        {user.managerAccess ? (
+          <div className="jiraWid__filter">
+            <FormControl>
+              <Select
+                clearable={false}
+                size={SIZE.compact}
+                options={employeeDetails}
+                value={employeeFilterValue}
+                placeholder="Select Assignee"
+                onChange={handleEmployeeFilter}
+                overrides={controlContainerOverride}
+              />
+            </FormControl>
+          </div>
+        ) : (
+          <></>
+        )}
 
-        <div className="jiraWid__filter">
-          <FormControl>
-            <Select
-              size={SIZE.compact}
-              options={employeeDetails}
-              value={employeeFilterValue}
-              placeholder="Select Assignee"
-              onChange={handleEmployeeFilter}
-              overrides={controlContainerOverride}
-            />
-          </FormControl>
-        </div>
         <Button
           onClick={handleSwitch}
           className="btn--white"

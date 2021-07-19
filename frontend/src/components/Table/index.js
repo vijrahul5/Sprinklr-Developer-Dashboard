@@ -1,10 +1,9 @@
 // libraries
 import React from "react";
 // components
-import Table from "./Table";
-
+import Expe from "./Expe";
 function index() {
-    return <Table />;
+  return <Expe />;
 }
 
 export default index;
