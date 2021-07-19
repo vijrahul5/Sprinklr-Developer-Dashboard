@@ -8,12 +8,10 @@ import useGetJiraData from "../../hooks/useGetJiraData";
 //components
 import JqlFilter from "../filters/JqlFilter";
 import BasicFilter from "../filters/BasicFilter";
-import Table from "../../../table/Table";
 import loadMoreRows from "../../apis/LoadRows";
 import Expe from "../../../table/Expe";
 //constants
 const columnTitles = ["Type", "Key", "Summary", "Status", "Priority"];
-const title = "All Issues";
 
 const Widgetjira = ({ user }) => {
   const [jqlQuery, setJqlQuery] = useState(`assignee in ("${user.email}")`);
@@ -52,16 +50,6 @@ const Widgetjira = ({ user }) => {
         loadMoreRows={loadMoreRows}
         minWidth="750px"
       />
-      {/* <Table
-        columnTitles={columnTitles}
-        title={title}
-        data={data}
-        pageNumber={pageNumber}
-        totalPages={totalPages}
-        setPageNumber={setPageNumber}
-        loading={loading}
-        errMessage={errMessage}
-      /> */}
     </div>
   );
 };

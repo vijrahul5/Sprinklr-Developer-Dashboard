@@ -24,7 +24,7 @@ import {
 
 //constants
 const minimumBatchSize = 20;
-
+const overscanRowCount = 10;
 const Expe = ({ jql = "", columnTitles, loadMoreRows, author, minWidth }) => {
   const [css] = useStyletron();
   useEffect(() => {
@@ -102,6 +102,7 @@ const Expe = ({ jql = "", columnTitles, loadMoreRows, author, minWidth }) => {
                       height={height}
                       width={width}
                       rowCount={remoteRowCount}
+                      overscanRowCount={overscanRowCount}
                       rowHeight={cache.rowHeight}
                       deferredMeasurementCache={cache}
                       rowRenderer={({ index, key, parent, style }) => {

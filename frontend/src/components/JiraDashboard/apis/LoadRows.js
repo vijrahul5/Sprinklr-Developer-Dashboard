@@ -42,6 +42,8 @@ const loadMoreRows = function ({
         setLastLoadedIndex(stopIndex);
         setRemoteCount(Math.min(result.total, stopIndex + 20));
       }
+    } else {
+      setRemoteCount(1);
     }
     setLoading(false);
   });
