@@ -1,28 +1,36 @@
 //hooks
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-
+import axios from "axios";
 //hooks
-import useFetchEmployeeTeamData from "../../../hooks/useFetchEmployeeTeamData";
-
-let employeeDetails = [];
+let listOfFilters = [];
 const useEmployeeFilter = (user) => {
-  const [loading, data, error] = useFetchEmployeeTeamData();
+  const [employeeDetails, setEmployeeDetails] = useState([]);
   const selfDetail = {
     label: "Assigned to me",
     id: user.email,
   };
-  useEffect(() => {
-    if (data) {
-      employeeDetails = data.map((employee) => {
+  const teamDetails = {
+    label: "My team",
+    id: "myteam",
+  };
+
+  async function getEmployees() {
+    let response = await axios.get("/api/employee/team");
+    if (response.data.status === "Success") {
+      listOfFilters = response.data.teamStandUp.map((item) => {
         return {
-          label: employee.name,
-          id: employee.email,
+          label: item.name,
+          id: item.email,
         };
       });
+      setEmployeeDetails([selfDetail, teamDetails, ...listOfFilters]);
     }
-    employeeDetails = [selfDetail, ...employeeDetails];
-  }, [data]);
+  }
+  // const res = await axios.get("/api/employee/team");
+  useEffect(() => {
+    getEmployees();
+  }, []);
 
   return { employeeDetails };
 };
