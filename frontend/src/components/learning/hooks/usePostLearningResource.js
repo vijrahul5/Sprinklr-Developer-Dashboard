@@ -17,12 +17,14 @@ export default function usePostLearningResource() {
                         "Learning Resource Shared Successfully !",
                         5000
                     );
+                    return true;
                 } else {
                     throw new Error(res.data.status);
                 }
             } catch (err) {
                 setError(err.message);
                 NotificationManager.error("Error", err.message, 5000);
+                return false;
             }
         },
         [setError]

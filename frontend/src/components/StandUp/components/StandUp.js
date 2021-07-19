@@ -20,9 +20,9 @@ function StandUp() {
     const [view, setView] = useState(false);
 
     const handleSubmit = useCallback(
-        (data) => {
+        async (data) => {
             if (checkFieldEmpty(data)) return;
-            addStandUp(data);
+            await addStandUp(data);
             fetchStandUp();
         },
         [fetchStandUp, addStandUp]

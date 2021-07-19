@@ -26,11 +26,12 @@ function PostLearningResource({
     );
 
     const handleSubmit = useCallback(
-        (e) => {
+        async (e) => {
             e.preventDefault();
-            postResource(value);
-            fetchLearningResources();
-            handleClose();
+            if (await postResource(value)) {
+                handleClose();
+                fetchLearningResources();
+            }
         },
         [postResource, fetchLearningResources, handleClose, value]
     );
