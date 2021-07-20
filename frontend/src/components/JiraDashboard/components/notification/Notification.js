@@ -13,43 +13,47 @@ import { NotificationManager } from "react-notifications";
 const channelid = process.env.REACT_APP_CHANNEL_ID_JIRA;
 const notificationDisplayTime = 0; // 0 represents, it will not hide until we refresh
 const pusher = new Pusher(channelid, {
-  cluster: "ap2",
+    cluster: "ap2",
 });
 
 let cid = "";
 let channel = "";
 
-async function configureConnection() {
-  let response = await axios.get("/api/jira/webhookToken");
-  if (response.data.status === "Success") {
-    cid = response.data.webhookId;
-  } else {
-    NotificationManager.error(
-      "Server Error",
-      "Can't bind to notification channel",
-      notificationDisplayTime
-    );
-  }
+async function configureConnection(user) {
+    let response = await axios.get("/api/jira/webhookToken");
+    if (response.data.status === "Success") {
+        cid = response.data.webhookId;
+    } else {
+        NotificationManager.error(
+            "Server Error",
+            "Can't bind to notification channel",
+            notificationDisplayTime
+        );
+    }
 
-  channel = pusher.subscribe("my-channel");
-  channel.bind(cid, function (data) {
-    NotificationManager.success(
-      `${data.details.type}`,
-      `${data.details.key}`,
-      notificationDisplayTime
-    );
-  });
+    channel = pusher.subscribe("my-channel");
+    console.log(user, "Hellll");
+    channel.bind(cid, function (data) {
+        const url = user.jiraBaseUrl + "/browse" + `/${data.details.key}`;
+        NotificationManager.info(
+            <a href={url} className="notification__url">
+                {data.details.key}
+            </a>,
+            `${data.details.type}`,
+            notificationDisplayTime
+        );
+    });
 }
-const Notification = () => {
-  useEffect(() => {
-    configureConnection();
+const Notification = ({ user }) => {
+    useEffect(() => {
+        configureConnection(user);
 
-    return () => {
-      pusher.unsubscribe("my-channel");
-    };
-  }, []);
+        return () => {
+            pusher.unsubscribe("my-channel");
+        };
+    }, []);
 
-  return <></>;
+    return <></>;
 };
 
 export default Notification;

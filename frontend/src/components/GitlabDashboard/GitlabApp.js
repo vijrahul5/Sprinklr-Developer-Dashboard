@@ -15,7 +15,7 @@ const axios = require("axios");
 function GitlabApp({ user }) {
     const mergeRequestPerPage = 8;
     const [gitlabDetails, setgitlabDetails] = useState([]);
-    const [tombstoneTable, settombstoneTable] = useState([]);
+
     const accessToken = user.gitlabAccessToken;
 
     async function shouldExecuteNext(next, prev) {
@@ -60,59 +60,68 @@ function GitlabApp({ user }) {
         for (let i = 0; i < mergeRequestsResult.length; i++) {
             if (mergeRequestsResult[i].length !== 0) {
                 for (let j = 0; j < mergeRequestsResult[i].length; j++) {
-                    if (pipelineResult[pi].length !== 0) {
-                        arr.push([
-                            projectName[i][1],
-                            <a
-                                href={mergeRequestsResult[i][j].web_url}
-                                className="jiraIssueUrl"
-                            >
-                                {mergeRequestsResult[i][j].title}
-                            </a>,
-                            mergeRequestsResult[i][j].author.name,
-                            mergeRequestsResult[i][j].merged_by === null
-                                ? null
-                                : mergeRequestsResult[i][j].merged_by.name,
-                            mergeRequestsResult[i][j].target_branch,
-                            pipelineResult[pi][0].status === "success" ? (
-                                <FcApproval size={30} />
-                            ) : (
-                                <FcCancel size={30} />
-                            ),
-                            pipelineResult[pi][0].status === "success" ? (
-                                <FcApproval size={30} />
-                            ) : (
-                                <FcCancel size={30} />
-                            ),
-                        ]);
+                    if (mergeRequestsResult[i][j].state === "opened") {
+                        if (pipelineResult[pi].length !== 0) {
+                            arr.push([
+                                projectName[i][1],
+                                <a
+                                    href={mergeRequestsResult[i][j].web_url}
+                                    className="jiraIssueUrl"
+                                >
+                                    {mergeRequestsResult[i][j].title}
+                                </a>,
+                                mergeRequestsResult[i][j].author.name,
+                                mergeRequestsResult[i][j].merged_by === null
+                                    ? null
+                                    : mergeRequestsResult[i][j].merged_by.name,
+                                mergeRequestsResult[i][j].target_branch,
 
-                        pi++;
+                                mergeRequestsResult[i][j]
+                                    .allow_maintainer_to_push === true ? (
+                                    <FcApproval size={30} />
+                                ) : (
+                                    <FcCancel size={30} />
+                                ),
+                                pipelineResult[pi][0].status === "success" ? (
+                                    <FcApproval size={30} />
+                                ) : (
+                                    <FcCancel size={30} />
+                                ),
+                            ]);
+
+                            pi++;
+                        } else {
+                            arr.push([
+                                projectName[i][1],
+                                <a
+                                    href={mergeRequestsResult[i][j].web_url}
+                                    className="jiraIssueUrl"
+                                >
+                                    {mergeRequestsResult[i][j].title}
+                                </a>,
+                                mergeRequestsResult[i][j].author.name,
+                                mergeRequestsResult[i][j].merged_by === null
+                                    ? null
+                                    : mergeRequestsResult[i][j].merged_by.name,
+                                mergeRequestsResult[i][j].target_branch,
+                                mergeRequestsResult[i][j]
+                                    .allow_maintainer_to_push === false ? (
+                                    <FcApproval size={30} />
+                                ) : (
+                                    <FcCancel size={30} />
+                                ),
+                                null,
+                            ]);
+
+                            pi++;
+                        }
                     } else {
-                        arr.push([
-                            projectName[i][1],
-                            <a
-                                href={mergeRequestsResult[i][j].web_url}
-                                className="jiraIssueUrl"
-                            >
-                                {mergeRequestsResult[i][j].title}
-                            </a>,
-                            mergeRequestsResult[i][j].author.name,
-                            mergeRequestsResult[i][j].merged_by === null
-                                ? null
-                                : mergeRequestsResult[i][j].merged_by.name,
-                            mergeRequestsResult[i][j].target_branch,
-                            null,
-                            null,
-                        ]);
-
                         pi++;
                     }
                 }
             }
         }
-        console.log(arr,"%%%%");
         setgitlabDetails(arr);
-        settombstoneTable(tombstone);
     }
 
     useEffect(() => {

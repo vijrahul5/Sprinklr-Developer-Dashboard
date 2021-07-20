@@ -44,14 +44,12 @@ const GitlabProfile = (props) => {
     }, []);
 
     useEffect(() => {
-      console.log(props.gitlabDetails, "$$$$$$$****");
         if (props.gitlabDetails.length > 0) {
             setcurrentMergeRequest(props.gitlabDetails);
 
             const initial = props.gitlabDetails.filter((element) => {
                 return element[2] === props.user.name;
             });
-            console.log(initial, "$$$$$$$$");
             setmergeRequestToShow(initial);
             setLoading(false);
             if (teamData) {
@@ -288,7 +286,7 @@ const GitlabProfile = (props) => {
                 ]}
                 loadMoreRows={loadMoreRows}
                 author={author}
-                minWidth="1050px"
+                minWidth="1070px"
             />
             <Notification />
         </>
