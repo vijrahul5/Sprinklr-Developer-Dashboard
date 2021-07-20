@@ -4,24 +4,29 @@
     margin-top: 3.5rem;
     padding: map-get($paddings, "medium");
 }
-.basicInfo {
-    width: 100%;
+.basicInfo__wrapper {
+    width: 32rem;
     height: 100%;
-    margin-bottom: 100%;
-}
-.basicInfo__OuterWrapper {
-    padding: 2rem;
-    width: 29rem;
-    position: fixed;
-    overflow: auto;
-    height: 95vh;
+    padding: map-get($paddings, "medium");
+    padding-right: 4rem;
     z-index: 1;
+    position: fixed;
+    right: 0;
+}
+.progress{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 2rem;
 }
 .sectionContainer {
-    margin-left: 25 + 2rem;
+    margin-right: 28 + 4rem;
     height: fit-content;
     @include flexCenter(column);
     padding: 2rem;
+    padding-left: 4rem;
     margin-top: 3.5rem;
 }
 .section {
@@ -39,6 +44,7 @@
         border-bottom: 2px solid $color-primary;
         margin-bottom: map-get($margins, "medium");
         font-weight: map-get($font-weights, "small");
+        font-size: 1.8rem;
     }
 }
 

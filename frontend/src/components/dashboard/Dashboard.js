@@ -22,19 +22,17 @@ export default function Dashboard() {
     }
     return (
         <>
-            <DashboardNavbar />
-            {/* <div className="dashboardContainer"> */}
-            <div className="basicInfo__OuterWrapper">
-                <div className="basicInfo">
-                    <div className="basicInfo__wrapper">
-                        <Profile user={user} />
-                        <StandUp />
-                    </div>
-                    <Learning user={user} />
-                </div>
+            <DashboardNavbar user={user} />
+            <div className="basicInfo__wrapper">
+                <StandUp />
             </div>
-
             <div className="sectionContainer">
+                {user.managerAccess || user.manager ? (
+                    <div className="section">
+                        <Learning user={user} />
+                    </div>
+                ) : null}
+
                 {user.managerAccess ? (
                     <Suspense
                         fallback={() => {

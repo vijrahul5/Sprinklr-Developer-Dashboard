@@ -1,21 +1,21 @@
 @import "../../../scss/base";
-
+@import "~pretty-checkbox/src/pretty-checkbox.scss";
 .learning {
     width: 100%;
+    height: fit-content;
     border-top: $border;
     border-radius: $border-radius;
     box-shadow: $shadow;
-    margin-top: map-get($margins, "medium");
     position: relative;
-    padding-bottom: 1rem;
+    padding: 2rem;
 }
 .learning__heading {
     color: $color-primary;
-    padding-bottom: 0.2rem;
+    padding-bottom: 0.5rem;
     border-bottom: 2px solid $color-primary;
-    margin: map-get($margins, "small");
     font-weight: map-get($font-weights, "small");
-    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
     display: flex;
     justify-content: space-between;
 }
@@ -56,20 +56,19 @@
 }
 
 .resourceList__container {
-    height: 8rem;
+    height: 30rem;
     overflow-y: auto;
     @include flexCenter(column);
     list-style: none;
-
 }
-.resourceList__wrapper{
+.resourceList__wrapper {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    padding:0 1rem;
+    padding: 0 1rem;
 }
 .learningResource {
     width: 100%;
@@ -85,20 +84,18 @@
     padding: 1rem;
 }
 
-.learningResource__value {
-    width: 70%;
-    border-radius: $border-radius;
-    a {
-        text-decoration: none;
-        color: $color-primary;
-        text-decoration: underline;
-        &:hover {
-            color: blue;
-        }
+.learningResource__link {
+    text-decoration: none;
+    color: $color-primary;
+    text-decoration: underline;
+    &:hover {
+        color: blue;
     }
 }
 .learningResource__mark {
-    border: 6px solid $color-primary !important;
+    color: $color-primary !important;
+    font-size: 1rem;
+    // border: 6px solid $color-primary !important;
     cursor: pointer;
 }
 .learningResource__btnContainer {
@@ -110,7 +107,7 @@
         align-items: center;
     }
 }
-.learningResource__toolTipHeading{
+.learningResource__toolTipHeading {
     color: $color-primary;
     padding-bottom: 0.2rem;
     border-bottom: 2px solid $color-primary;
@@ -121,10 +118,10 @@
     justify-content: space-between;
     align-items: center;
 }
-.learningResource__toolTipEmail{
+.learningResource__toolTipEmail {
     font-size: 0.8rem;
     font-weight: map-get($font-weights, "small");
-
 }
+
 
 @import "../../../scss/media";

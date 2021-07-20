@@ -14,6 +14,15 @@ const JiraTableBuilder = () => {
       this.issueName = issueName;
       return this;
     },
+
+    setIssueSummary: function (issueSummary) {
+      this.issueSummary = issueSummary;
+      return this;
+    },
+    setIssueStatus: function (issueStatus) {
+      this.issueStatus = issueStatus;
+      return this;
+    },
     setIssueKey: function (jiraBaseUrl, issueKey) {
       const url = jiraBaseUrl + "/browse" + `/${issueKey}`;
       this.issueKey = (
@@ -21,14 +30,6 @@ const JiraTableBuilder = () => {
           {issueKey}
         </a>
       );
-      return this;
-    },
-    setIssueSummary: function (issueSummary) {
-      this.issueSummary = issueSummary;
-      return this;
-    },
-    setIssueStatus: function (issueStatus) {
-      this.issueStatus = issueStatus;
       return this;
     },
     setIssuePriority: function (issuePriority) {
