@@ -76,8 +76,8 @@ function GitlabApp({ user }) {
                                     : mergeRequestsResult[i][j].merged_by.name,
                                 mergeRequestsResult[i][j].target_branch,
 
-                                mergeRequestsResult[i][j]
-                                    .allow_maintainer_to_push === true ? (
+                                mergeRequestsResult[i][j].merge_status ===
+                                "can_be_merged" ? (
                                     <FcApproval size={30} />
                                 ) : (
                                     <FcCancel size={30} />
@@ -104,8 +104,8 @@ function GitlabApp({ user }) {
                                     ? null
                                     : mergeRequestsResult[i][j].merged_by.name,
                                 mergeRequestsResult[i][j].target_branch,
-                                mergeRequestsResult[i][j]
-                                    .allow_maintainer_to_push === false ? (
+                                mergeRequestsResult[i][j].merge_status ===
+                                "can_be_merged" ? (
                                     <FcApproval size={30} />
                                 ) : (
                                     <FcCancel size={30} />
