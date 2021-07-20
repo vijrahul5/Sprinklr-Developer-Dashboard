@@ -6,6 +6,7 @@ import RequestPipeline from "./components/PipelineProcessor";
 import getArrayOfProjects from "./Functions/GetArrayOfProjects";
 import getMergeRequests from "./Functions/GetMergeRequests";
 import getPipeline from "./Functions/GetPipeline";
+import Loader from "../loaders/Tombstone";
 //utils
 const Profile = lazy(() => import("./components/GitlabProfile"));
 const axios = require("axios");
@@ -13,6 +14,7 @@ const axios = require("axios");
 function GitlabApp({ user }) {
     const mergeRequestPerPage = 8;
     const [gitlabDetails, setgitlabDetails] = useState([]);
+    const [tombstoneTable, settombstoneTable] = useState([]);
     const accessToken = user.gitlabAccessToken;
 
     async function shouldExecuteNext(next, prev) {
@@ -53,6 +55,7 @@ function GitlabApp({ user }) {
         }
         let pi = 0;
         const arr = [];
+        const tombstone = [];
         for (let i = 0; i < mergeRequestsResult.length; i++) {
             if (mergeRequestsResult[i].length !== 0) {
                 for (let j = 0; j < mergeRequestsResult[i].length; j++) {
@@ -78,6 +81,7 @@ function GitlabApp({ user }) {
                                 <FcCancel size={30} />
                             ),
                         ]);
+
                         pi++;
                     } else {
                         arr.push([
@@ -100,6 +104,7 @@ function GitlabApp({ user }) {
             }
         }
         setgitlabDetails(arr);
+        settombstoneTable(tombstone);
     }
 
     useEffect(() => {
