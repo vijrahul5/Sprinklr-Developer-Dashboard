@@ -202,6 +202,8 @@ async function getTeam(req, res) {
                     standUp: standUp,
                 });
             }
+            employee.teamSize = teamStandUp.length;
+            await employee.save();
             return res.json({
                 status: "Success",
                 teamStandUp,
@@ -268,7 +270,6 @@ async function getManagerAccess(req, res) {
         const email = req.email;
         const employee = await employeeModel.findOne({ email: email });
         const checkManager = await managerModel.findOne({ email: email });
-        console.log(checkManager);
         if (!checkManager || !employee) {
             throw new Error("Request Denied !");
         } else {
@@ -279,7 +280,6 @@ async function getManagerAccess(req, res) {
             });
         }
     } catch (err) {
-
         res.json({
             status: "Failed",
             error: err.message,

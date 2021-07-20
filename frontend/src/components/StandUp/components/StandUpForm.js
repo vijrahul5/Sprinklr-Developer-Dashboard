@@ -60,18 +60,18 @@ function StandUpForm({ data, handleEdit, handleSubmit, view }) {
                                     className="standUp__input "
                                     onChange={changeValue}
                                     placeholder="Answer"
-                                    size={SIZE.mini}
-                                    // overrides={rootOverride}
-                                    overrides={{
-                                        Root: {
-                                            style: ({ $theme }) => ({
-                                                backgroundColor: "#eeeeee",
-                                                borderRadius: "4px",
-                                                width: "100%",
-                                                height: "3.2rem"
-                                            }),
-                                        },
-                                    }}
+                                    size={SIZE.compact}
+                                    overrides={rootOverride}
+                                    // overrides={{
+                                    //     Root: {
+                                    //         style: ({ $theme }) => ({
+                                    //             backgroundColor: "#eeeeee",
+                                    //             borderRadius: "4px",
+                                    //             width: "100%",
+                                    //             height: "3.2rem"
+                                    //         }),
+                                    //     },
+                                    // }}
                                 />
                             </FormControl>
 
@@ -79,7 +79,7 @@ function StandUpForm({ data, handleEdit, handleSubmit, view }) {
                     })}
                     <Button
                         className="btnCustom"
-                        size={SIZE.mini}
+                        size={SIZE.compact}
                         onClick={data ? editStandUp : submitStandUp}
                     >
                         {data ? "Edit" : "Submit"}

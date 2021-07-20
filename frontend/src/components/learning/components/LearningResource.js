@@ -5,8 +5,35 @@ import MaterialTooltip from "@material-ui/core/Tooltip";
 import { withStyles } from "@material-ui/core/styles";
 import "react-circular-progressbar/dist/styles.css";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import { withStyle, useStyletron } from "baseui";
+import {
+    StyledTable,
+    StyledHead,
+    StyledHeadCell,
+    StyledBody,
+    StyledRow,
+    StyledCell,
+} from "baseui/table";
+import Checkbox from "@material-ui/core/Checkbox";
+
 // hooks
 import useUpdateLearningResource from "../hooks/useUpdateLearningResource";
+const TitleHeadCell = withStyle(StyledHeadCell, {
+    minWidth: "200px",
+    width: "40%",
+});
+const MarkedHeadCell = withStyle(StyledHeadCell, {
+    minWidth: "100px",
+    width: "20%",
+});
+const PercentageHeadCell = withStyle(StyledHeadCell, {
+    minWidth: "100px",
+    width: "20%",
+});
+const AuthorHeadCell = withStyle(StyledHeadCell, {
+    minWidth: "100px",
+    width: "20%",
+});
 
 const Tooltip = withStyles((theme) => ({
     tooltip: {
@@ -31,12 +58,12 @@ function checkMarked(resource, email) {
     return false;
 }
 
-function LearningResource({ resource, user, team, fetchLearningResources }) {
+function LearningResource({ resource, user,fetchLearningResources }) {
     const [value, setValue] = useState(false);
     const [updateError, updateLearningResource] = useUpdateLearningResource();
 
     const percentage = Math.ceil(
-        (resource.markedBy.length / (team.length + 1)) * 100
+        (resource.markedBy.length / (resource.teamManager.teamSize + 1)) * 100
     );
     useEffect(() => {
         if (checkMarked(resource, user.email)) {
@@ -63,77 +90,94 @@ function LearningResource({ resource, user, team, fetchLearningResources }) {
     );
     return (
         <>
-            {resource.teamManager.email === user.email ? (
-                <Tooltip
-                    arrow
-                    PopperProps={{
-                        modifiers: {
-                            offset: {
-                                enabled: true,
-                                offset: "0px, -10px",
-                            },
-                        },
-                    }}
-                    title={
-                        <>
-                            <h1 className="learningResource__toolTipHeading">
-                                Marked By:
-                                <div
-                                    style={{
-                                        height: "2.5rem",
-                                        width: "2.5rem",
-                                    }}
-                                >
-                                    <CircularProgressbar
-                                        value={percentage}
-                                        text={`${percentage}%`}
-                                        styles={buildStyles({
-                                            pathColor: `rgb(12, 102, 194)`,
-                                            textColor: "rgb(12, 102, 194)",
-                                            trailColor: "#d6d6d6",
-                                        })}
-                                    />
-                                </div>
-                            </h1>
-                            <div>
-                                {resource.markedBy.map((markPerson) => {
-                                    return (
-                                        <div className="learningResource__toolTipEmail">
-                                            {markPerson.email}
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        </>
-                    }
-                >
-                    <li className="learningResource">
-                        <p className="learningResource__value">
-                            <a href={resource.link}>{resource.title}</a>
-                        </p>
-
-                        <input
-                            type="checkbox"
-                            className="learningResource__mark"
-                            onChange={handleChange}
-                            checked={value}
-                        />
-                    </li>
-                </Tooltip>
-            ) : (
-                <li className="learningResource">
-                    <p className="learningResource__value">
-                        <a href={resource.link}>{resource.title}</a>
-                    </p>
-
-                    <input
-                        type="checkbox"
+            <StyledHead
+                style={{
+                    borderBottom: "1px solid rgb(200,200,200)",
+                }}
+            >
+                <TitleHeadCell>
+                    <a className="learningResource__link" href={resource.link}>
+                        {resource.title}
+                    </a>
+                </TitleHeadCell>
+                <MarkedHeadCell>
+                    <Checkbox
                         className="learningResource__mark"
                         onChange={handleChange}
                         checked={value}
                     />
-                </li>
-            )}
+                </MarkedHeadCell>
+                {resource.teamManager.email === user.email ? (
+                    <Tooltip
+                        arrow
+                        PopperProps={{
+                            modifiers: {
+                                offset: {
+                                    enabled: true,
+                                    offset: "0px, -10px",
+                                },
+                            },
+                        }}
+                        title={
+                            <>
+                                <h1 className="learningResource__toolTipHeading">
+                                    Completed By:
+                                </h1>
+                                <div>
+                                    {resource.markedBy.map((markPerson) => {
+                                        return (
+                                            <div className="learningResource__toolTipEmail">
+                                                {markPerson.email}
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </>
+                        }
+                    >
+                        <PercentageHeadCell>
+                            <div
+                                style={{
+                                    height: "2.5rem",
+                                    width: "2.5rem",
+                                }}
+                            >
+                                <CircularProgressbar
+                                    value={percentage}
+                                    text={`${percentage}%`}
+                                    styles={buildStyles({
+                                        pathColor: `rgb(12, 102, 194)`,
+                                        textColor: "rgb(12, 102, 194)",
+                                        trailColor: "#d6d6d6",
+                                    })}
+                                />
+                            </div>
+                        </PercentageHeadCell>
+                    </Tooltip>
+                ) : (
+                    <PercentageHeadCell>
+                        <div
+                            style={{
+                                height: "2.5rem",
+                                width: "2.5rem",
+                            }}
+                        >
+                            <CircularProgressbar
+                                value={percentage}
+                                text={`${percentage}%`}
+                                styles={buildStyles({
+                                    pathColor: `rgb(12, 102, 194)`,
+                                    textColor: "rgb(12, 102, 194)",
+                                    trailColor: "#d6d6d6",
+                                })}
+                            />
+                        </div>
+                    </PercentageHeadCell>
+                )}
+                <AuthorHeadCell style={{ fontWeight: "350" }}>
+                    {resource.author.name}
+                </AuthorHeadCell>
+            </StyledHead>
         </>
     );
 }

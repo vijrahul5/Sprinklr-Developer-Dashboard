@@ -12,11 +12,11 @@
 }
 .standUp__heading {
     color: $color-primary;
-    padding-bottom: 0.2rem;
+    padding-bottom: 0.5rem;
     border-bottom: 2px solid $color-primary;
-    margin-bottom: map-get($margins, "small");
+    margin-bottom: 0.5rem;
     font-weight: map-get($font-weights, "small");
-    font-size: 1.3rem;
+    font-size: 1.8rem;
 }
 
 .standUp__input {
@@ -30,7 +30,6 @@
     justify-content: start;
     align-items: center;
     color: $color-primary;
-    margin-bottom: map-get($margins, "small");
     h3 {
         margin-left: 0.5rem;
         font-weight: map-get($font-weights, "medium");

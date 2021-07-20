@@ -1,7 +1,6 @@
 //libraries
 import React from "react";
 import Pusher from "pusher-js";
-import axios from "axios";
 
 //hooks
 import { useEffect } from "react";
@@ -22,9 +21,14 @@ let channel = "";
 function configureConnection() {
     channel = pusher.subscribe("gitlab-channel");
     channel.bind(cid, function (data) {
-        NotificationManager.success(
-            `New merge Request`,
-            `Notification`,
+        NotificationManager.info(
+            <a
+                href={data.details.object_attributes.url}
+                style={{ color: "white" }}
+            >
+                {data.details.object_attributes.title}
+            </a>,
+            `${data.details.object_attributes.source.name}`,
             notificationDisplayTime
         );
     });

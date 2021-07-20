@@ -1,55 +1,90 @@
 @import "../../../scss/base";
 
 .profile {
-    width: 100%;
+    width: 20rem;
     height: fit-content;
     @include flexCenter(column);
     box-shadow: $shadow;
-    padding: map-get($paddings, "small");
+    padding: 1rem;
     border-radius: $border-radius;
     margin-bottom: map-get($margins, "medium");
-    border-top: $border;
-    img {
-        width: 100%;
-        height: 100%;
-        border-radius: 70px;
-    }
-
+    position: relative;
+    top: 0.5rem;
+    right: 17rem;
+    z-index: 11 !important;
+    background-color: white;
     ul {
         width: 100%;
         list-style: none;
-        margin-top: map-get($paddings, "small");
         border-radius: $border-radius;
     }
 
     li {
         font-size: map-get($font-sizes, "small");
         display: flex;
-        justify-content: space-around;
-        align-items: center;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
         margin-bottom: 0.5rem;
     }
 }
-.profile__imgHolder {
-    width: 6rem;
-    height: 6rem;
-    object-fit: cover;
-    margin: 0px auto;
-}
+.profile__signOut {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+    margin-top: 1rem;
+
+    h1 {
+        font-weight: 300;
+        color: $color-primary;
+        width: fit-content;
+        text-align: center;
+        font-size: 1rem;
+    }
+    &:hover {
+        opacity: 0.8;
+    }
+    &__icon {
+        color: $color-primary;
+        height: 100%;
+        font-size: 1rem;
+        margin-left: 0.5rem;
+    }
+    &__link {
+        text-decoration: none;
+        font-weight: 300;
+    }
+}
+.managerAccess {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+}
+.managerAccess h2 {
+    width: fit-content;
+    color: black;
+    font-size: 0.8rem;
+    text-decoration: underline;
+    font-weight: 300;
+    &:hover {
+        opacity: 0.8;
+    }
+}
 .profile__param {
     width: 25%;
     font-weight: map-get($font-weights, "medium");
-    text-decoration: underline;
+    color: black;
 }
 
 .profile__value {
-    width: 75%;
+    width: 100%;
     word-break: break-all;
     background-color: $color-widget;
     padding: map-get($paddings, "extraSmall");
     border-radius: $border-radius;
-    margin-left: map-get($margins, "small");
+    // margin-left: map-get($margins, "small");
     background-color: $color-secondary;
 }
 

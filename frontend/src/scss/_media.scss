@@ -1,37 +1,49 @@
 @import "base";
-
-@media only screen and (max-width: 1350px) {
-    .basicInfo {
-        margin-bottom: 0;
-    }
-    .basicInfo__OuterWrapper {
-        margin-top: 3.5rem;
-        width: 100%;
-        height: fit-content;
-        position: unset;
-        @include flexCenter(column);
-        align-items: flex-start;
-        padding-bottom: 1rem;
-    }
+@media only screen and (max-width: 1400px) {
     .basicInfo__wrapper {
-        @include flexCenter(row);
-        width: 100%;
-        align-items: flex-start;
+        padding-right: 2rem;
     }
     .sectionContainer {
-        margin-top: 0;
-        margin-left: 0;
-        padding-top: 1rem;
+        margin-right: 24 + 2rem;
+        padding-left: 2rem;
     }
-
+    .basicInfo__wrapper {
+        width: 28rem;
+        padding-right: 2rem;
+    }
+    .learningTable {
+        width: 900px;
+    }
+}
+@media only screen and (max-width: 1250px) {
+    .basicInfo__wrapper {
+        width: 100%;
+        position: unset;
+        height: fit-content;
+        margin-top: 3.5rem;
+    }
+    .learningTable {
+        width: unset;
+    }
+    .sectionContainer {
+        width: 100%;
+        margin: 0;
+        padding-top: 0;
+    }
+    .standUp {
+        padding: 2rem;
+    }
+    .standUp__heading {
+        padding-bottom: 0.5rem;
+        margin-bottom: 2rem;
+        font-size: 2rem;
+    }
     .learning {
-        margin-bottom: 0;
         padding-bottom: 2rem;
     }
     .learning__heading {
         padding-bottom: 0.5rem;
         font-size: 2rem;
-        margin: 2rem;
     }
     .add__icon {
         font-size: 1.5rem;
@@ -42,16 +54,7 @@
     .resourceList__wrapper {
         padding: 0 2rem;
     }
-    .profile {
-        margin-right: 2rem;
-        margin-bottom: 0;
-        width: 85%;
-    }
-    .profile__imgHolder {
-        width: 8rem;
-        height: 8rem;
-        margin-bottom: map-get($margins, "small");
-    }
+
     .jiraWid__search {
         flex-direction: column;
     }
@@ -86,45 +89,24 @@
 }
 
 @media only screen and (max-width: 950px) {
-    .profile {
-        width: 100%;
+    .learningTable {
+        width: 1000px;
     }
     .basicInfo__wrapper {
-        margin: 0;
-        @include flexCenter(column);
-        width: 100%;
-    }
-    .basicInfo__OuterWrapper {
-        @include flexCenter(column);
         padding: 1rem;
-        padding-top: 2rem;
-    }
-    .learning {
-        padding-bottom: 1rem;
-    }
-    .learning__heading {
-        margin: 1rem;
-    }
-    .resourceList__wrapper {
-        padding: 0 1rem;
+        padding-bottom: 2rem;
     }
     .sectionContainer {
         padding: 1rem;
+        padding-top: 0;
     }
-    .profile {
-        margin: 0;
-        width: 100%;
-    }
-    .section {
-        padding: map-get($paddings, "small");
-    }
-    .teamStandUpList {
-        padding: 0;
-        h1 {
-            margin: 1rem;
-            margin-bottom: 2rem;
-        }
-    }
+    // .teamStandUpList {
+    //     padding: 0;
+    //     h1 {
+    //         margin: 1rem;
+    //         margin-bottom: 2rem;
+    //     }
+    // }
 
     .teamForm {
         form {
@@ -136,19 +118,13 @@
             width: 30rem;
         }
     }
-    .standUp {
-        margin-top: 2rem;
-    }
-    .teamInstruction {
-        margin: 1rem;
-    }
-    .teamStandUpList__add {
-        margin: 0 1rem;
-        margin-bottom: map-get($margins, "small");
-    }
+
+    // .teamStandUpList__add {
+    //     margin: 0 1rem;
+    //     margin-bottom: map-get($margins, "small");
+    // }
     .ReactVirtualized__Grid__innerScrollContainer[style] {
-        margin-bottom: 5rem;
-        padding: 1rem;
+        padding: 0 2rem;
         overflow: visible !important;
     }
     .landingPage__wrapper {
@@ -156,9 +132,31 @@
     }
 }
 
-@media only screen and (max-width: 650px) {
-    html {
-        font-size: 100%;
+@media only screen and (max-width: 760px) {
+    .profile__imgHolder {
+        width: 2.5rem;
+        height: 2.5rem;
+        top: 0.5rem;
+        right: 0.5rem;
+    }
+    .section {
+        padding: 1rem;
+    }
+    .standUp {
+        padding: 1rem;
+    }
+    .teamStandUpList {
+        padding: 0;
+        h1 {
+            margin: 1rem;
+            margin-bottom: 2rem;
+        }
+    }
+    .teamInstruction {
+        margin: 1rem;
+    }
+    .ReactVirtualized__Grid__innerScrollContainer[style] {
+        padding: 0 1rem;
     }
     .landingPage__wrapper {
         display: flex;
@@ -229,6 +227,14 @@
 }
 
 @media only screen and (max-width: 400px) {
+    .basicInfo__wrapper {
+        padding: 0.5rem;
+        padding-bottom: 2rem;
+    }
+    .sectionContainer {
+        padding: 0.5rem;
+        padding-top: 0;
+    }
     html {
         font-size: 100%;
     }
@@ -271,7 +277,7 @@
 
     .teamStandUpList__add {
         margin: 0 0.5rem;
-        margin-bottom: map-get($margins, "small");
+        margin-bottom: 0.5rem;
     }
 
     .teamStandUpList ul {
@@ -281,8 +287,7 @@
         }
     }
     .ReactVirtualized__Grid__innerScrollContainer[style] {
-        margin-bottom: 5rem;
-        padding: 0.5rem;
+        padding: 0 0.5rem;
         overflow: visible !important;
     }
     .teamInstruction {
