@@ -4,9 +4,9 @@ import { useState, useEffect, lazy } from "react";
 import { FcApproval, FcCancel } from "react-icons/fc";
 import RequestPipeline from "./components/PipelineProcessor";
 
-import getArrayOfProjects from "./Functions/GetArrayOfProjects";
-import getMergeRequests from "./Functions/GetMergeRequests";
-import getPipeline from "./Functions/GetPipeline";
+import getArrayOfProjects from "./functions/GetArrayOfProjects";
+import getMergeRequests from "./functions/GetMergeRequests";
+import getPipeline from "./functions/GetPipeline";
 import Loader from "../loaders/Tombstone";
 //utils
 const Profile = lazy(() => import("./components/GitlabProfile"));
@@ -110,6 +110,7 @@ function GitlabApp({ user }) {
                 }
             }
         }
+        console.log(arr,"%%%%");
         setgitlabDetails(arr);
         settombstoneTable(tombstone);
     }

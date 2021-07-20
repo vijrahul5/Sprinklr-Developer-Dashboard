@@ -88,7 +88,6 @@ function LearningResource({ resource, user,fetchLearningResources }) {
             value,
         ]
     );
-    console.log(resource);
     return (
         <>
             <StyledHead
@@ -122,7 +121,7 @@ function LearningResource({ resource, user,fetchLearningResources }) {
                         title={
                             <>
                                 <h1 className="learningResource__toolTipHeading">
-                                    Marked By:
+                                    Completed By:
                                 </h1>
                                 <div>
                                     {resource.markedBy.map((markPerson) => {

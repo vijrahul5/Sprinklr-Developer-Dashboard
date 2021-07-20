@@ -41,9 +41,9 @@
         width: fit-content;
         text-align: center;
         font-size: 1rem;
-        &:hover {
-            opacity: 0.8;
-        }
+    }
+    &:hover {
+        opacity: 0.8;
     }
     &__icon {
         color: $color-primary;
@@ -84,6 +84,7 @@
     background-color: $color-widget;
     padding: map-get($paddings, "extraSmall");
     border-radius: $border-radius;
+    // margin-left: map-get($margins, "small");
     background-color: $color-secondary;
 }
 

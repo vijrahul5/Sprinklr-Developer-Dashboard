@@ -17,7 +17,7 @@ function StandUp() {
     const [loading, data, error, fetchStandUp] = useFetchEmployeeStandUp();
     const [addError, editError, addStandUp, editStandUp] =
         useUpdateEmployeeStandUp();
-    const [view, setView] = useState(false);
+    const [view, setView] = useState(true);
 
     const handleSubmit = useCallback(
         async (data) => {
