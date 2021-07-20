@@ -11,8 +11,7 @@ const pusher = new Pusher({
 
 function handleNotification(req, res) {
     res.sendStatus(200);
-    console.log("hello", req);
-
+    // console.log("req",req.body);
     pusher.trigger("gitlab-channel", `gitlabWebhook`, {
         details: req.body,
     });
