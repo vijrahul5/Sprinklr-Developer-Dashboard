@@ -18,17 +18,20 @@ import Checkbox from "@material-ui/core/Checkbox";
 
 // hooks
 import useUpdateLearningResource from "../hooks/useUpdateLearningResource";
-
 const TitleHeadCell = withStyle(StyledHeadCell, {
+    minWidth: "200px",
     width: "40%",
 });
 const MarkedHeadCell = withStyle(StyledHeadCell, {
+    minWidth: "100px",
     width: "20%",
 });
 const PercentageHeadCell = withStyle(StyledHeadCell, {
+    minWidth: "100px",
     width: "20%",
 });
 const AuthorHeadCell = withStyle(StyledHeadCell, {
+    minWidth: "100px",
     width: "20%",
 });
 
@@ -55,12 +58,12 @@ function checkMarked(resource, email) {
     return false;
 }
 
-function LearningResource({ resource, user, team, fetchLearningResources }) {
+function LearningResource({ resource, user,fetchLearningResources }) {
     const [value, setValue] = useState(false);
     const [updateError, updateLearningResource] = useUpdateLearningResource();
 
     const percentage = Math.ceil(
-        (resource.markedBy.length / (team.length + 1)) * 100
+        (resource.markedBy.length / (resource.teamManager.teamSize + 1)) * 100
     );
     useEffect(() => {
         if (checkMarked(resource, user.email)) {
@@ -85,6 +88,7 @@ function LearningResource({ resource, user, team, fetchLearningResources }) {
             value,
         ]
     );
+    console.log(resource);
     return (
         <>
             <StyledHead
@@ -103,7 +107,6 @@ function LearningResource({ resource, user, team, fetchLearningResources }) {
                         onChange={handleChange}
                         checked={value}
                     />
-                    
                 </MarkedHeadCell>
                 {resource.teamManager.email === user.email ? (
                     <Tooltip
@@ -153,9 +156,28 @@ function LearningResource({ resource, user, team, fetchLearningResources }) {
                         </PercentageHeadCell>
                     </Tooltip>
                 ) : (
-                    <PercentageHeadCell>N.A.</PercentageHeadCell>
+                    <PercentageHeadCell>
+                        <div
+                            style={{
+                                height: "2.5rem",
+                                width: "2.5rem",
+                            }}
+                        >
+                            <CircularProgressbar
+                                value={percentage}
+                                text={`${percentage}%`}
+                                styles={buildStyles({
+                                    pathColor: `rgb(12, 102, 194)`,
+                                    textColor: "rgb(12, 102, 194)",
+                                    trailColor: "#d6d6d6",
+                                })}
+                            />
+                        </div>
+                    </PercentageHeadCell>
                 )}
-                <AuthorHeadCell style={{fontWeight: "350"}}>{resource.author.name}</AuthorHeadCell>
+                <AuthorHeadCell style={{ fontWeight: "350" }}>
+                    {resource.author.name}
+                </AuthorHeadCell>
             </StyledHead>
         </>
     );

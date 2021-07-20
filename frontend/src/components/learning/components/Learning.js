@@ -20,15 +20,19 @@ import useFetchLearningResources from "../hooks/useFetchLearningResources";
 import useFetchEmployeeTeamData from "../../../hooks/useFetchEmployeeTeamData";
 
 const TitleHeadCell = withStyle(StyledHeadCell, {
+    minWidth: "200px",
     width: "40%",
 });
 const MarkedHeadCell = withStyle(StyledHeadCell, {
+    minWidth: "100px",
     width: "20%",
 });
 const PercentageHeadCell = withStyle(StyledHeadCell, {
+    minWidth: "100px",
     width: "20%",
 });
 const AuthorHeadCell = withStyle(StyledHeadCell, {
+    minWidth: "100px",
     width: "20%",
 });
 
@@ -38,13 +42,11 @@ function Learning({ user }) {
     const [loading, data, error, fetchLearningResources] =
         useFetchLearningResources();
 
-    const [teamLoading, teamData, teamError, fetchTeamData] =
-        useFetchEmployeeTeamData();
+    
     const [css] = useStyletron();
-
-    if (loading || teamLoading) {
+    if (loading) {
         return (
-            <div className="learning">
+            <>
                 <h1 className="learning__heading">Learning Resources</h1>
                 <div className={css({ height: "600px" })}>
                     <StyledTable>
@@ -106,55 +108,51 @@ function Learning({ user }) {
                         </StyledBody>
                     </StyledTable>
                 </div>
-            </div>
+            </>
         );
     }
     return (
         <>
-            <div className="learning">
-                <h1 className="learning__heading">
-                    Learning Resources
-                    {user.managerAccess || user.manager ? (
-                        <div className="learning__wrapper">
-                            <BiAddToQueue
-                                className="add__icon"
-                                onClick={() => setPostLearningResource(true)}
-                            />
-                        </div>
-                    ) : null}
-                </h1>
-                {data && data.length ? (
-                    <div className={css({ height: "600px" })}>
-                        <StyledTable>
-                            <StyledHead
-                                style={{
-                                    borderBottom: "1px solid rgb(200,200,200)",
-                                }}
-                            >
-                                <TitleHeadCell>Title</TitleHeadCell>
-                                <MarkedHeadCell>Mark/Unmark</MarkedHeadCell>
-                                <PercentageHeadCell>
-                                    Completion %
-                                </PercentageHeadCell>
-                                <AuthorHeadCell>Author</AuthorHeadCell>
-                            </StyledHead>
-                            <StyledBody>
-                                {data.map((resource, index) => (
-                                    <LearningResource
-                                        user={user}
-                                        key={resource["_id"]}
-                                        resource={resource}
-                                        team={teamData}
-                                        fetchLearningResources={
-                                            fetchLearningResources
-                                        }
-                                    />
-                                ))}
-                            </StyledBody>
-                        </StyledTable>
-                    </div>
-                ) : null}
-            </div>
+            <h1 className="learning__heading">
+                Learning Resources
+                <div className="learning__wrapper">
+                    <BiAddToQueue
+                        className="add__icon"
+                        onClick={() => setPostLearningResource(true)}
+                    />
+                </div>
+            </h1>
+            {data && data.length ? (
+                <div className={css({ height: "600px" })}>
+                    <StyledTable>
+                        <StyledHead
+                            style={{
+                                borderBottom: "1px solid rgb(200,200,200)",
+                            }}
+                            className="learningTable"
+                        >
+                            <TitleHeadCell>Title</TitleHeadCell>
+                            <MarkedHeadCell>Mark/Unmark</MarkedHeadCell>
+                            <PercentageHeadCell>
+                                Completion %
+                            </PercentageHeadCell>
+                            <AuthorHeadCell>Author</AuthorHeadCell>
+                        </StyledHead>
+                        <StyledBody className="learningTable">
+                            {data.map((resource, index) => (
+                                <LearningResource
+                                    user={user}
+                                    key={resource["_id"]}
+                                    resource={resource}
+                                    fetchLearningResources={
+                                        fetchLearningResources
+                                    }
+                                />
+                            ))}
+                        </StyledBody>
+                    </StyledTable>
+                </div>
+            ) : null}
             {postLearningResource ? (
                 <PostLearningResource
                     setPostLearningResource={setPostLearningResource}

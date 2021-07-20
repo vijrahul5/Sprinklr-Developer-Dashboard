@@ -73,6 +73,9 @@ const employeeSchema = new Schema({
     gitlabAccessToken: {
         type: String,
     },
+    teamSize: {
+        type: Number,
+    },
 });
 employeeSchema.pre("save", () => {
     employeeModel.managerAccess = false;

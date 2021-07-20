@@ -35,29 +35,25 @@ function Profile({ user }) {
                             {user.manager ? user.manager.email : "None"}
                         </p>
                     </li>
-                    <li>
-                        <h1>
-                            Sign Out
-                            <FaSignOutAlt
-                                onClick={() => Auth.logout()}
-                                className="dashboardNavbar__icon"
-                            >
-                                <Link to="/" />
-                            </FaSignOutAlt>
-                        </h1>
-                    </li>
-                </ul>
-
-                {user.managerAccess === false ? (
-                    <Button
-                        type="submit"
-                        className="submit btnCustom--tertiary"
-                        size={SIZE.mini}
-                        onClick={handleClick}
+                    {user.managerAccess === false ? (
+                        <div
+                            className="managerAccess"
+                            onClick={handleClick}
+                        >
+                            <h2>Request Manager Access</h2>
+                        </div>
+                    ) : null}
+                    <Link
+                        to="/"
+                        onClick={() => Auth.logout()}
+                        className="profile__signOut__link"
                     >
-                        Request Manager Access
-                    </Button>
-                ) : null}
+                        <div className="profile__signOut">
+                            <h1>Sign Out</h1>
+                            <FaSignOutAlt className="profile__signOut__icon"></FaSignOutAlt>
+                        </div>
+                    </Link>
+                </ul>
             </div>
         </>
     );

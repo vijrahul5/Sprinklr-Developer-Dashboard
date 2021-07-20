@@ -9,7 +9,6 @@
     font-size: map-get($font-sizes, "small");
     background-color: $color-widget;
     border-top: $border;
-    // margin-left: 2rem;
 }
 .standUp__heading {
     color: $color-primary;
@@ -31,7 +30,6 @@
     justify-content: start;
     align-items: center;
     color: $color-primary;
-    // margin-bottom: map-get($margins, "small");
     h3 {
         margin-left: 0.5rem;
         font-weight: map-get($font-weights, "medium");

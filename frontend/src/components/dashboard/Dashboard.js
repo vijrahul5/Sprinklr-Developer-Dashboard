@@ -26,11 +26,12 @@ export default function Dashboard() {
             <div className="basicInfo__wrapper">
                 <StandUp />
             </div>
-
             <div className="sectionContainer">
-                <div className="progress">
-                    <Learning user={user} />
-                </div>
+                {user.managerAccess || user.manager ? (
+                    <div className="section">
+                        <Learning user={user} />
+                    </div>
+                ) : null}
 
                 {user.managerAccess ? (
                     <Suspense
