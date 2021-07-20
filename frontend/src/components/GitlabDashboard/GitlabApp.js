@@ -14,7 +14,7 @@ const axios = require("axios");
 function GitlabApp({ user }) {
     const mergeRequestPerPage = 8;
     const [gitlabDetails, setgitlabDetails] = useState([]);
-    const [tombstoneTable, settombstoneTable] = useState([]);
+
     const accessToken = user.gitlabAccessToken;
 
     async function shouldExecuteNext(next, prev) {
@@ -104,7 +104,6 @@ function GitlabApp({ user }) {
             }
         }
         setgitlabDetails(arr);
-        settombstoneTable(tombstone);
     }
 
     useEffect(() => {
