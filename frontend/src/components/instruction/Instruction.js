@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 const Instruction = ({ instructions }) => {
   return (
     <>
-      <ul className="instruction">
+      <ul className="instruction" data-testid="instruction">
         {instructions.map((instruction, index) => {
           return (
             <li className="instruction__item" key={index}>

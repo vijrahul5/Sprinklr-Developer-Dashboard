@@ -41,6 +41,7 @@ const JiraAuth = () => {
           }}
           size={SIZE.compact}
           overrides={btnOverride}
+          data-testid="authorize"
         >
           Authorize
         </Button>

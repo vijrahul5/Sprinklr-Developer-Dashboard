@@ -74,7 +74,7 @@ const JqlFilter = ({ errMessage, handleSwitch, handleClick, user }) => {
           </FormControl>
         </div>
         {user.managerAccess ? (
-          <div className="jiraWid__filter">
+          <div className="jiraWid__filter" data-testid="basicfilter-1">
             <FormControl>
               <Select
                 clearable={false}

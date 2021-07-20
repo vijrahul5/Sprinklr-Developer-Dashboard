@@ -43,7 +43,7 @@ const loadMoreRows = function ({
         setRemoteCount(Math.min(result.total, stopIndex + 20));
       }
     } else {
-      setRemoteCount(1);
+      setRemoteCount(0);
     }
     setLoading(false);
   });

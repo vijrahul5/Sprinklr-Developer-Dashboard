@@ -1,7 +1,7 @@
 //libraries
 import React, { lazy, Suspense } from "react";
 import PropTypes from "prop-types";
-import "react-notifications/lib/notifications.css";
+// import "react-notifications/lib/notifications.css";
 
 //hooks
 import useAuthorize from "../../hooks/useAuthorize";
@@ -9,13 +9,14 @@ import useAuthorize from "../../hooks/useAuthorize";
 //components
 import Notification from "../notification/Notification";
 import Loader from "../../../loaders/Tombstone";
-
+import JiraAuth from "../jiraAuthorization/JiraAuth";
+import Widgetjira from "../widgetJira/WidgetJira";
 const Jira = ({ user }) => {
-  const { doneAuthentication, loading } = useAuthorize();
+  const { doneAuthentication, loading } = useAuthorize([true, false]);
 
-  //lazy loading
-  const Widgetjira = lazy(() => import("../widgetJira/WidgetJira"));
-  const JiraAuth = lazy(() => import("../jiraAuthorization/JiraAuth"));
+  // lazy loading
+  // const Widgetjira = lazy(() => import("../widgetJira/WidgetJira"));
+  // const JiraAuth = lazy(() => import("../jiraAuthorization/JiraAuth"));
   return (
     <>
       {loading ? <Loader /> : <></>}

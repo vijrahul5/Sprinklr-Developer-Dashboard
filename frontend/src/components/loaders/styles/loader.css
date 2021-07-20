@@ -1,0 +1,73 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+html {
+  font-size: 100%;
+  font-family: system-ui, Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+.btnCustom {
+  background-color: #0c66c2 !important;
+  color: white !important;
+  border-radius: 4px !important;
+}
+
+.btnCustom:hover {
+  opacity: 0.9;
+}
+
+.btnCustom--tertiary {
+  color: #0c66c2 !important;
+  border-radius: 4px !important;
+  background-color: white !important;
+}
+
+.btnCustom--tertiary:hover {
+  background-color: #eeeeee !important;
+}
+
+.inputCustom {
+  border-radius: 4px !important;
+  color: black;
+}
+
+.ml1 {
+  margin-left: 1rem !important;
+}
+
+.ml12 {
+  margin-left: 0.5rem !important;
+}
+
+.mt1 {
+  margin-top: 0.8rem !important;
+}
+
+.loader {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+/*# sourceMappingURL=loader.css.map */

@@ -1,0 +1,541 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+html {
+  font-size: 100%;
+  font-family: system-ui, Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+.btnCustom {
+  background-color: #0c66c2 !important;
+  color: white !important;
+  border-radius: 4px !important;
+}
+
+.btnCustom:hover {
+  opacity: 0.9;
+}
+
+.btnCustom--tertiary {
+  color: #0c66c2 !important;
+  border-radius: 4px !important;
+  background-color: white !important;
+}
+
+.btnCustom--tertiary:hover {
+  background-color: #eeeeee !important;
+}
+
+.inputCustom {
+  border-radius: 4px !important;
+  color: black;
+}
+
+.ml1 {
+  margin-left: 1rem !important;
+}
+
+.ml12 {
+  margin-left: 0.5rem !important;
+}
+
+.mt1 {
+  margin-top: 0.8rem !important;
+}
+
+.teamForm {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: 2;
+  top: 3.5rem;
+  left: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.teamForm form {
+  width: 40rem;
+  margin: auto;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+          box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 4px;
+  border-top: 4px solid #0c66c2;
+}
+
+.teamForm form div {
+  width: 100%;
+}
+
+.teamForm form h2 {
+  color: #0c66c2;
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+.teamForm form h2 span {
+  color: black;
+  text-decoration: underline;
+}
+
+.teamForm__btnHolder {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  margin-top: 3rem;
+}
+
+.teamForm__modal__close {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.teamForm__modal__close__icon {
+  color: #0c66c2;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+html {
+  font-size: 100%;
+  font-family: system-ui, Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+.btnCustom {
+  background-color: #0c66c2 !important;
+  color: white !important;
+  border-radius: 4px !important;
+}
+
+.btnCustom:hover {
+  opacity: 0.9;
+}
+
+.btnCustom--tertiary {
+  color: #0c66c2 !important;
+  border-radius: 4px !important;
+  background-color: white !important;
+}
+
+.btnCustom--tertiary:hover {
+  background-color: #eeeeee !important;
+}
+
+.inputCustom {
+  border-radius: 4px !important;
+  color: black;
+}
+
+.ml1 {
+  margin-left: 1rem !important;
+}
+
+.ml12 {
+  margin-left: 0.5rem !important;
+}
+
+.mt1 {
+  margin-top: 0.8rem !important;
+}
+
+@media only screen and (max-width: 1350px) {
+  .basicInfo {
+    margin-bottom: 0;
+  }
+  .basicInfo__OuterWrapper {
+    margin-top: 3.5rem;
+    width: 100%;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    position: unset;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    padding-bottom: 1rem;
+  }
+  .basicInfo__wrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    width: 100%;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+  }
+  .sectionContainer {
+    margin-top: 0;
+    margin-left: 0;
+    padding-top: 1rem;
+  }
+  .learning {
+    margin-bottom: 0;
+    padding-bottom: 2rem;
+  }
+  .learning__heading {
+    padding-bottom: 0.5rem;
+    font-size: 2rem;
+    margin: 2rem;
+  }
+  .add__icon {
+    font-size: 1.5rem;
+  }
+  .resourceList__container {
+    height: 20rem;
+  }
+  .resourceList__wrapper {
+    padding: 0 2rem;
+  }
+  .profile {
+    margin-right: 2rem;
+    margin-bottom: 0;
+    width: 85%;
+  }
+  .profile__imgHolder {
+    width: 8rem;
+    height: 8rem;
+    margin-bottom: 1rem;
+  }
+  .jiraWid__search {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .jiraWid__jqlFilter {
+    width: 100%;
+    margin-right: 0rem;
+  }
+  .jiraWid__filter {
+    margin-right: 0rem;
+    width: 100%;
+  }
+  .btn--blue {
+    margin-left: 0rem !important;
+  }
+  .btn--white {
+    margin-left: 0rem !important;
+  }
+  .learning__heading {
+    padding-bottom: 0.2rem;
+    font-size: 1.5rem;
+  }
+  .standUp__heading {
+    padding-bottom: 0.2rem;
+    font-size: 1.5rem;
+  }
+  .section h1 {
+    padding-bottom: 0.2rem;
+    font-size: 1.5rem;
+  }
+}
+
+@media only screen and (max-width: 950px) {
+  .profile {
+    width: 100%;
+  }
+  .basicInfo__wrapper {
+    margin: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    width: 100%;
+  }
+  .basicInfo__OuterWrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    padding: 1rem;
+    padding-top: 2rem;
+  }
+  .learning {
+    padding-bottom: 1rem;
+  }
+  .learning__heading {
+    margin: 1rem;
+  }
+  .resourceList__wrapper {
+    padding: 0 1rem;
+  }
+  .sectionContainer {
+    padding: 1rem;
+  }
+  .profile {
+    margin: 0;
+    width: 100%;
+  }
+  .section {
+    padding: 1rem;
+  }
+  .teamStandUpList {
+    padding: 0;
+  }
+  .teamStandUpList h1 {
+    margin: 1rem;
+    margin-bottom: 2rem;
+  }
+  .teamForm form {
+    width: 30rem;
+  }
+  .postResource form {
+    width: 30rem;
+  }
+  .standUp {
+    margin-top: 2rem;
+  }
+  .teamInstruction {
+    margin: 1rem;
+  }
+  .teamStandUpList__add {
+    margin: 0 1rem;
+    margin-bottom: 1rem;
+  }
+  .ReactVirtualized__Grid__innerScrollContainer[style] {
+    margin-bottom: 5rem;
+    padding: 1rem;
+    overflow: visible !important;
+  }
+  .landingPage__wrapper {
+    width: 95%;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  html {
+    font-size: 100%;
+  }
+  .landingPage__wrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: white;
+  }
+  .signInSection {
+    width: 100%;
+    background-color: #fafafa;
+    border-radius: 1rem;
+  }
+  .signin__modal {
+    height: 15rem;
+    padding: 1rem;
+  }
+  .landingPage__navbar__heading {
+    font-size: 1.5rem;
+  }
+  .signin__modal__content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .teamMember__list__item {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: start;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .teamStandUpList__param {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  .teamStandUpList__value {
+    width: 100%;
+  }
+  .dashboardNavbar {
+    width: 100%;
+    height: 3.5rem;
+  }
+  .dashboardNavbar h1 {
+    font-size: 1.5rem;
+  }
+  .dashboardNavbar__icon {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+  }
+  .teamForm form {
+    width: 23rem;
+  }
+  .postResource form {
+    width: 23rem;
+  }
+  .instruction__item {
+    font-size: 1rem;
+  }
+  .teamStandUpList__add {
+    margin: 0 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  html {
+    font-size: 100%;
+  }
+  .section {
+    padding: 0.5rem;
+  }
+  .dashboardContainer {
+    padding: 0.5rem;
+  }
+  .profile {
+    padding: 0.5rem;
+  }
+  .standUp {
+    padding: 0.5rem;
+  }
+  .learning__heading {
+    margin: 0.5rem;
+  }
+  .resourceList__wrapper {
+    padding: 0 0.5rem;
+  }
+  .dashboardNavbar {
+    width: 100%;
+    height: 3.5rem;
+  }
+  .dashboardNavbar h1 {
+    font-size: 1.3rem;
+  }
+  .dashboardNavbar__icon {
+    font-size: 1.3rem;
+    margin-right: 0.5rem;
+  }
+  .teamStandUpList {
+    padding: 0;
+  }
+  .teamStandUpList h1 {
+    margin: 0.5rem;
+    margin-bottom: 2rem;
+  }
+  .teamStandUpList__add {
+    margin: 0 0.5rem;
+    margin-bottom: 1rem;
+  }
+  .teamStandUpList ul ul {
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  .ReactVirtualized__Grid__innerScrollContainer[style] {
+    margin-bottom: 5rem;
+    padding: 0.5rem;
+    overflow: visible !important;
+  }
+  .teamInstruction {
+    margin: 0.5rem;
+  }
+}
+/*# sourceMappingURL=teamForm.css.map */

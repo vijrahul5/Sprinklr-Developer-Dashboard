@@ -11,10 +11,10 @@ import NotificationManager from "react-notifications/lib/NotificationManager";
 const StartLenghtUrlForAuthCode = 37;
 const EndLenghtUrlForAuthCode = 12;
 const NotificationDisplayTime = 5000; // in milliseconds
-const useAuthorize = () => {
+const useAuthorize = (temp1 = false, temp2 = true) => {
   const history = useHistory();
-  const [doneAuthentication, setDoneAuthentication] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [doneAuthentication, setDoneAuthentication] = useState(temp1);
+  const [loading, setLoading] = useState(temp2);
 
   useEffect(() => {
     isAuthenticated();
@@ -44,7 +44,7 @@ const useAuthorize = () => {
   }
 
   function showAuthPage(URL) {
-    window.location.href = URL;
+    // window.location.href = URL;
   }
   function getAuthCode() {
     let len = window.location.href.length;

@@ -83,7 +83,7 @@ const BasicFilter = ({ handleSwitch, setJqlQuery, user }) => {
   return (
     <>
       <div className="jiraWid__search">
-        <div className="jiraWid__filter">
+        <div className="jiraWid__filter" data-testid="basicfilter-1">
           <FormControl>
             <Select
               size={SIZE.compact}
@@ -96,7 +96,7 @@ const BasicFilter = ({ handleSwitch, setJqlQuery, user }) => {
           </FormControl>
         </div>
         {user.managerAccess ? (
-          <div className="jiraWid__filter">
+          <div className="jiraWid__filter" data-testid="basicfilter-2">
             <FormControl>
               <Select
                 clearable={false}

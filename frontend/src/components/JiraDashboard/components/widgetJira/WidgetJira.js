@@ -11,7 +11,7 @@ import BasicFilter from "../filters/BasicFilter";
 import loadMoreRows from "../../apis/LoadRows";
 import Expe from "../../../table/Expe";
 //constants
-const columnTitles = ["Type", "Key", "Summary", "Status", "Priority"];
+const columnTitles = ["Type", "Key", "Status", "Priority", "Summary"];
 
 const Widgetjira = ({ user }) => {
   const [jqlQuery, setJqlQuery] = useState(`assignee in ("${user.email}")`);
@@ -48,7 +48,7 @@ const Widgetjira = ({ user }) => {
         jql={jqlQuery}
         columnTitles={columnTitles}
         loadMoreRows={loadMoreRows}
-        minWidth="750px"
+        minWidth="1000px"
       />
     </div>
   );

@@ -59,9 +59,9 @@ const JiraTableBuilder = () => {
       return [
         this.issueName,
         this.issueKey,
-        this.issueSummary,
         this.issueStatus,
         this.issuePriority,
+        this.issueSummary,
       ];
     },
   };
