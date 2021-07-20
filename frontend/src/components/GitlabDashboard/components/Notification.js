@@ -21,6 +21,7 @@ let channel = "";
 function configureConnection() {
     channel = pusher.subscribe("gitlab-channel");
     channel.bind(cid, function (data) {
+
         NotificationManager.info(
             <a
                 href={data.details.object_attributes.url}

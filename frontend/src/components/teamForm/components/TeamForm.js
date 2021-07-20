@@ -30,7 +30,6 @@ function TeamForm({
 
     const handleClose = useCallback(
         (e) => {
-            fetchTeamData();
             if (type === "Add") {
                 setAddTeamMember(false);
             } else {
@@ -41,16 +40,21 @@ function TeamForm({
     );
 
     const handleSubmit = useCallback(
-        (e) => {
+        async (e) => {
             e.preventDefault();
             if (checkFieldEmpty(value)) return;
             if (type === "Add") {
-                setValue({ employeeEmail: "" });
-                addTeamMember(value);
+                if (await addTeamMember(value)) {
+                    setValue({ employeeEmail: "" });
+                    handleClose();
+                    fetchTeamData();
+                }
             } else if (type === "Delete") {
-                deleteTeamMember(value);
+                if (await deleteTeamMember(value)) {
+                    handleClose();
+                    fetchTeamData();
+                }
             }
-            handleClose();
         },
         [addTeamMember, deleteTeamMember, handleClose, setValue, value, type]
     );

@@ -10,7 +10,7 @@ import {
 import { Button, SIZE } from "baseui/button";
 // components
 import TeamMember from "./TeamMember";
-import Loader from "../../loaders/Tombstone";
+import Loader from "../../loaders/TeamTombstone";
 import TeamForm from "../../teamForm/index";
 import Instruction from "../../instruction/Instruction";
 // hooks

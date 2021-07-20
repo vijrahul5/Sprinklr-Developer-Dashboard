@@ -18,12 +18,14 @@ export default function useUpdateEmployeeTeam() {
                         "Team Member Added",
                         5000
                     );
+                    return true;
                 } else {
                     throw new Error(res.data.status);
                 }
             } catch (err) {
                 setAddError(err.message);
                 NotificationManager.error("Error!", err.message, 5000);
+                return false;
             }
         },
         [setAddError]
@@ -42,12 +44,14 @@ export default function useUpdateEmployeeTeam() {
                         "Team Member Deleted",
                         5000
                     );
+                    return true;
                 } else {
                     throw new Error(res.data.status);
                 }
             } catch (err) {
                 setDeleteError(err.message);
                 NotificationManager.error("Error!", err.message, 5000);
+                return false;
             }
         },
         [setDeleteError]
