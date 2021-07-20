@@ -2,6 +2,15 @@
 import React, { useState, useEffect } from "react";
 import { Button, SIZE } from "baseui/button";
 import { BiAddToQueue } from "react-icons/bi";
+import { withStyle, useStyletron } from "baseui";
+import {
+    StyledTable,
+    StyledHead,
+    StyledHeadCell,
+    StyledBody,
+    StyledRow,
+    StyledCell,
+} from "baseui/table";
 // components
 import PostLearningResource from "./PostLearningResource";
 import Loader from "../../loaders/Tombstone";
@@ -9,6 +18,19 @@ import LearningResource from "./LearningResource";
 // hooks
 import useFetchLearningResources from "../hooks/useFetchLearningResources";
 import useFetchEmployeeTeamData from "../../../hooks/useFetchEmployeeTeamData";
+
+const TitleHeadCell = withStyle(StyledHeadCell, {
+    width: "40%",
+});
+const MarkedHeadCell = withStyle(StyledHeadCell, {
+    width: "20%",
+});
+const PercentageHeadCell = withStyle(StyledHeadCell, {
+    width: "20%",
+});
+const AuthorHeadCell = withStyle(StyledHeadCell, {
+    width: "20%",
+});
 
 function Learning({ user }) {
     const [postLearningResource, setPostLearningResource] = useState(false);
@@ -18,21 +40,75 @@ function Learning({ user }) {
 
     const [teamLoading, teamData, teamError, fetchTeamData] =
         useFetchEmployeeTeamData();
+    const [css] = useStyletron();
 
     if (loading || teamLoading) {
         return (
-            <div className="learning" style={{ padding: "1rem" }}>
-                <h1
-                    className="learning__heading"
-                    style={{ margin: "0rem", marginBottom: "1rem" }}
-                >
-                    Learning Resources
-                </h1>
-                <Loader />
+            <div className="learning">
+                <h1 className="learning__heading">Learning Resources</h1>
+                <div className={css({ height: "600px" })}>
+                    <StyledTable>
+                        <StyledHead
+                            style={{
+                                borderBottom: "1px solid rgb(200,200,200)",
+                            }}
+                        >
+                            <TitleHeadCell>Title</TitleHeadCell>
+                            <MarkedHeadCell>Mark/UnMark</MarkedHeadCell>
+                            <PercentageHeadCell>
+                                Completion %
+                            </PercentageHeadCell>
+                            <AuthorHeadCell>Author</AuthorHeadCell>
+                        </StyledHead>
+                        <StyledBody>
+                            {[...Array(10)].map((x, i) => (
+                                <StyledHead
+                                    style={{
+                                        borderBottom:
+                                            "1px solid rgb(200,200,200)",
+                                    }}
+                                >
+                                    <TitleHeadCell>
+                                        <Loader
+                                            style={{
+                                                height: "40px",
+                                                width: "100%",
+                                            }}
+                                        />
+                                    </TitleHeadCell>
+                                    <MarkedHeadCell>
+                                        <Loader
+                                            style={{
+                                                height: "40px",
+                                                width: "100%",
+                                            }}
+                                        />
+                                    </MarkedHeadCell>
+                                    <PercentageHeadCell>
+                                        <Loader
+                                            style={{
+                                                height: "40px",
+                                                width: "100%",
+                                            }}
+                                        />
+                                    </PercentageHeadCell>
+                                    <AuthorHeadCell>
+                                        <Loader
+                                            style={{
+                                                height: "40px",
+                                                width: "100%",
+                                                marginRight: "8%",
+                                            }}
+                                        />
+                                    </AuthorHeadCell>
+                                </StyledHead>
+                            ))}
+                        </StyledBody>
+                    </StyledTable>
+                </div>
             </div>
         );
     }
-
     return (
         <>
             <div className="learning">
@@ -48,13 +124,22 @@ function Learning({ user }) {
                     ) : null}
                 </h1>
                 {data && data.length ? (
-                    <div className="resourceList__container">
-                        <ul
-                            className="resourceList__wrapper"
-                            style={{ width: "100%", height: "100%" }}
-                        >
-                            {data.map((resource) => {
-                                return (
+                    <div className={css({ height: "600px" })}>
+                        <StyledTable>
+                            <StyledHead
+                                style={{
+                                    borderBottom: "1px solid rgb(200,200,200)",
+                                }}
+                            >
+                                <TitleHeadCell>Title</TitleHeadCell>
+                                <MarkedHeadCell>Mark/Unmark</MarkedHeadCell>
+                                <PercentageHeadCell>
+                                    Completion %
+                                </PercentageHeadCell>
+                                <AuthorHeadCell>Author</AuthorHeadCell>
+                            </StyledHead>
+                            <StyledBody>
+                                {data.map((resource, index) => (
                                     <LearningResource
                                         user={user}
                                         key={resource["_id"]}
@@ -64,9 +149,9 @@ function Learning({ user }) {
                                             fetchLearningResources
                                         }
                                     />
-                                );
-                            })}
-                        </ul>
+                                ))}
+                            </StyledBody>
+                        </StyledTable>
                     </div>
                 ) : null}
             </div>

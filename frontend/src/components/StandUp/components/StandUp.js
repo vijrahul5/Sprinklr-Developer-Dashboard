@@ -5,7 +5,7 @@ import { Button } from "baseui/button";
 import { SIZE } from "baseui/input";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 // components
-import Loader from "../../loaders/Tombstone";
+import Loader from "../../loaders/standUpTombstone";
 import StandUpForm from "./StandUpForm";
 // hooks
 import useUpdateEmployeeStandUp from "../hooks/useUpdateEmployeeStandUp";

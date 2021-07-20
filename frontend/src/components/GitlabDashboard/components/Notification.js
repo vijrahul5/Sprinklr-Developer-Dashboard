@@ -23,8 +23,10 @@ function configureConnection() {
     channel = pusher.subscribe("gitlab-channel");
     channel.bind(cid, function (data) {
         NotificationManager.success(
-            `New merge Request`,
-            `Notification`,
+            <a href={data.details.object_attributes.url}>
+                {data.details.object_attributes.title}
+            </a>,
+            `${data.details.object_attributes.source.name}`,
             notificationDisplayTime
         );
     });

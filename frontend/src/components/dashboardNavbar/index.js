@@ -4,8 +4,8 @@ import React from "react";
 import DashboardNavbar from "./DashboardNavbar";
 import "./styles/dashboardNavbar.scss";
 
-function index() {
-    return <DashboardNavbar />;
+function index({ user }) {
+    return <DashboardNavbar user={user} />;
 }
 
 export default index;
