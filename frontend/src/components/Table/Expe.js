@@ -6,9 +6,15 @@ import { useEffect, useState } from "react";
 import { useStyletron, withStyle } from "baseui";
 
 //components
-import { StyledTable, StyledHead, StyledHeadCell } from "baseui/table";
+import {
+  StyledTable,
+  StyledHead,
+  StyledHeadCell,
+  StyledBody,
+} from "baseui/table";
 
 import Loader from "../../components/loaders/Loader";
+import Tombstone from "../../components/loaders/Tombstone";
 import {
   InfiniteLoader,
   List,
@@ -25,7 +31,14 @@ const TitleHeadCell = withStyle(StyledHeadCell, {
   maxWidth: "150px",
 });
 
-const Expe = ({ jql = "", columnTitles, loadMoreRows, author, minWidth }) => {
+const Expe = ({
+  jql = "",
+  columnTitles,
+  loadMoreRows,
+  author,
+  minWidth,
+  loadtumbstone = false,
+}) => {
   let ColumnLength = columnTitles.length;
   const [css] = useStyletron();
   useEffect(() => {
@@ -47,6 +60,46 @@ const Expe = ({ jql = "", columnTitles, loadMoreRows, author, minWidth }) => {
     defaultHeight: 50,
     fixedWidth: true,
   });
+
+  if (loadtumbstone) {
+    return (
+      <div className={css({ height: "600px" })}>
+        <StyledTable>
+          <StyledHead
+            style={{
+              borderBottom: "1px solid rgb(200,200,200)",
+            }}
+          >
+            <StyledHeadCell>Type</StyledHeadCell>
+            <StyledHeadCell>Key</StyledHeadCell>
+            <StyledHeadCell>Status</StyledHeadCell>
+            <StyledHeadCell>Priority</StyledHeadCell>
+            <StyledHeadCell>Summary</StyledHeadCell>
+          </StyledHead>
+          <StyledBody>
+            {[...Array(10)].map((x, i) => (
+              <StyledHead
+                style={{
+                  borderBottom: "1px solid rgb(200,200,200)",
+                }}
+              >
+                {[...Array(ColumnLength)].map(() => (
+                  <StyledHeadCell>
+                    <Tombstone
+                      style={{
+                        height: "40px",
+                        width: "100%",
+                      }}
+                    />
+                  </StyledHeadCell>
+                ))}
+              </StyledHead>
+            ))}
+          </StyledBody>
+        </StyledTable>
+      </div>
+    );
+  }
 
   return (
     <div className="table__Container">
