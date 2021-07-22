@@ -7,6 +7,7 @@ import Expe from "../../table/Expe";
 import Notification from "./Notification";
 import { withStyle, useStyletron } from "baseui";
 import Loader from "../../loaders/Tombstone";
+
 import {
     StyledTable,
     StyledHead,
@@ -274,6 +275,7 @@ const GitlabProfile = (props) => {
             />
 
             <br></br>
+
             <Expe
                 columnTitles={[
                     "Project Name",

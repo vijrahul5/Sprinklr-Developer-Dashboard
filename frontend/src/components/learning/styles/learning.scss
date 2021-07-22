@@ -1,5 +1,5 @@
 @import "../../../scss/base";
-@import "~pretty-checkbox/src/pretty-checkbox.scss";
+
 .learning {
     width: 100%;
     height: fit-content;
@@ -122,6 +122,5 @@
     font-size: 0.8rem;
     font-weight: map-get($font-weights, "small");
 }
-
 
 @import "../../../scss/media";
