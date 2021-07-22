@@ -29,12 +29,12 @@ const GitlabAccessTokenForm = (props) => {
         <div data-testid="form">
             <Instruction
                 instructions={[
-                    "Login to your gitlab account.",
-                    "Select your gitlab icon and open preferences.",
-                    "Select access token in user settings.",
+                    "Login to your Gitlab account.",
+                    "Select your Gitlab icon and open Preferences.",
+                    "Select access token in User settings.",
                     "Write token name in the input box.",
-                    "Select scope as API and just click on create access token.",
-                    "Now use this token to use our dashboard.",
+                    "Select scope as API and click on 'Create Access Token'.",
+                    "Now use submit this token here in order to use the dashboard for Gitlab.",
                 ]}
             />
             <Input

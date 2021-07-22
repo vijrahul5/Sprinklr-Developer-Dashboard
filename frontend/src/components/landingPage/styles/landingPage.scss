@@ -42,7 +42,7 @@
     width: fit-content;
     color: black;
     font-family: $font-primary;
-    font-weight: map-get($font-weights, "medium");
+    font-weight: 300;
 }
 
 @import "../../../scss/media";

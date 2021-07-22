@@ -9,62 +9,62 @@ import low_jira from "../../assets/images/low_jira.svg";
 import lowest_jira from "../../assets/images/lowest_jira.svg";
 
 const JiraTableBuilder = () => {
-  return {
-    setIssueName: function (issueName) {
-      this.issueName = issueName;
-      return this;
-    },
+    return {
+        setIssueName: function (issueName) {
+            this.issueName = issueName;
+            return this;
+        },
 
-    setIssueSummary: function (issueSummary) {
-      this.issueSummary = issueSummary;
-      return this;
-    },
-    setIssueStatus: function (issueStatus) {
-      this.issueStatus = issueStatus;
-      return this;
-    },
-    setIssueKey: function (jiraBaseUrl, issueKey) {
-      const url = jiraBaseUrl + "/browse" + `/${issueKey}`;
-      this.issueKey = (
-        <a href={url} className="jiraIssueUrl">
-          {issueKey}
-        </a>
-      );
-      return this;
-    },
-    setIssuePriority: function (issuePriority) {
-      this.issuePriority = "";
-      let imgSrc = new Map();
-      imgSrc.set("Highest", highest_jira);
-      imgSrc.set("High", high_jira);
-      imgSrc.set("Medium", medium_jira);
-      imgSrc.set("Low", low_jira);
-      imgSrc.set("Lowest", lowest_jira);
+        setIssueSummary: function (issueSummary) {
+            this.issueSummary = issueSummary;
+            return this;
+        },
+        setIssueStatus: function (issueStatus) {
+            this.issueStatus = issueStatus;
+            return this;
+        },
+        setIssueKey: function (jiraBaseUrl, issueKey) {
+            const url = jiraBaseUrl + "/browse" + `/${issueKey}`;
+            this.issueKey = (
+                <a href={url} className="jiraIssueUrl">
+                    {issueKey}
+                </a>
+            );
+            return this;
+        },
+        setIssuePriority: function (issuePriority) {
+            this.issuePriority = "";
+            let imgSrc = new Map();
+            imgSrc.set("Highest", highest_jira);
+            imgSrc.set("High", high_jira);
+            imgSrc.set("Medium", medium_jira);
+            imgSrc.set("Low", low_jira);
+            imgSrc.set("Lowest", lowest_jira);
 
-      if (imgSrc.has(issuePriority)) {
-        this.issuePriority = (
-          <>
-            <img
-              className="jp"
-              src={imgSrc.get(issuePriority)}
-              alt={issuePriority}
-            ></img>
-            <p className="jp__description">{issuePriority}</p>
-          </>
-        );
-      }
-      return this;
-    },
-    build: function () {
-      return [
-        this.issueName,
-        this.issueKey,
-        this.issueSummary,
-        this.issueStatus,
-        this.issuePriority,
-      ];
-    },
-  };
+            if (imgSrc.has(issuePriority)) {
+                this.issuePriority = (
+                    <>
+                        <img
+                            className="jp"
+                            src={imgSrc.get(issuePriority)}
+                            alt={issuePriority}
+                        ></img>
+                        <p className="jp__description">{issuePriority}</p>
+                    </>
+                );
+            }
+            return this;
+        },
+        build: function () {
+            return [
+                this.issueName,
+                this.issueKey,
+                this.issueStatus,
+                this.issuePriority,
+                this.issueSummary,
+            ];
+        },
+    };
 };
 
 export default JiraTableBuilder;

@@ -21,10 +21,10 @@ const btnOverride = {
   },
 };
 const instructions = [
-  "Click on Authorize for Jira Authorization.",
-  "It will Redirect to jira permission page.",
-  "Select account/domain and click allow",
-  "Now you can get Issues based on filter and JQL",
+  "Click on authorize for Jira Authorization.",
+  "You will be redirected to the Jira permission page.",
+  "Select account/domain and click on 'Allow'",
+  "Now you will be getting issues based on filters and JQL queries on your dashboard.",
 ];
 
 const JiraAuth = () => {

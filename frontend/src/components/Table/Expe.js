@@ -3,17 +3,18 @@ import React from "react";
 
 //hooks
 import { useEffect, useState } from "react";
-import { useStyletron } from "baseui";
+import { useStyletron, withStyle } from "baseui";
 
 //components
 import {
   StyledTable,
   StyledHead,
   StyledHeadCell,
-  StyledCell,
+  StyledBody,
 } from "baseui/table";
 
 import Loader from "../../components/loaders/Loader";
+import Tombstone from "../../components/loaders/Tombstone";
 import {
   InfiniteLoader,
   List,
@@ -25,7 +26,20 @@ import {
 //constants
 const minimumBatchSize = 20;
 const overscanRowCount = 10;
-const Expe = ({ jql = "", columnTitles, loadMoreRows, author, minWidth }) => {
+const TitleHeadCell = withStyle(StyledHeadCell, {
+  minwidth: "150px",
+  maxWidth: "150px",
+});
+
+const Expe = ({
+  jql = "",
+  columnTitles,
+  loadMoreRows,
+  author,
+  minWidth,
+  loadtumbstone = false,
+}) => {
+  let ColumnLength = columnTitles.length;
   const [css] = useStyletron();
   useEffect(() => {
     setList([]);
@@ -47,32 +61,67 @@ const Expe = ({ jql = "", columnTitles, loadMoreRows, author, minWidth }) => {
     fixedWidth: true,
   });
 
+  if (loadtumbstone) {
+    return (
+      <div className={css({ height: "600px" })}>
+        <StyledTable>
+          <StyledHead
+            style={{
+              borderBottom: "1px solid rgb(200,200,200)",
+            }}
+          >
+            <StyledHeadCell>Type</StyledHeadCell>
+            <StyledHeadCell>Key</StyledHeadCell>
+            <StyledHeadCell>Status</StyledHeadCell>
+            <StyledHeadCell>Priority</StyledHeadCell>
+            <StyledHeadCell>Summary</StyledHeadCell>
+          </StyledHead>
+          <StyledBody>
+            {[...Array(10)].map((x, i) => (
+              <StyledHead
+                style={{
+                  borderBottom: "1px solid rgb(200,200,200)",
+                }}
+              >
+                {[...Array(ColumnLength)].map(() => (
+                  <StyledHeadCell>
+                    <Tombstone
+                      style={{
+                        height: "40px",
+                        width: "100%",
+                      }}
+                    />
+                  </StyledHeadCell>
+                ))}
+              </StyledHead>
+            ))}
+          </StyledBody>
+        </StyledTable>
+      </div>
+    );
+  }
+
   return (
     <div className="table__Container">
       <div
         className={css({
           height: "600px",
           width: "100%",
-
           minWidth: minWidth,
         })}
       >
-        <StyledTable
-          role="grid"
-          aria-colcount={columnTitles.length}
-          aria-rowcount={remoteRowCount}
-        >
-          <StyledHead role="row">
-            {columnTitles.map((column, index) => (
-              <StyledHeadCell
-                role="columnheader"
-                key={index}
-                className="table__headCell"
-              >
+        <StyledTable>
+          <StyledHead className="table__headRow">
+            {columnTitles.slice(0, ColumnLength - 1).map((column, index) => (
+              <TitleHeadCell key={index} className="table__headCell">
                 {column}
-              </StyledHeadCell>
+              </TitleHeadCell>
             ))}
+            <StyledHeadCell key={ColumnLength - 1} className="table__headCell">
+              {columnTitles[ColumnLength - 1]}
+            </StyledHeadCell>
           </StyledHead>
+
           <div className={css({ height: "100%" })}>
             <InfiniteLoader
               isRowLoaded={isRowLoaded}
@@ -114,32 +163,34 @@ const Expe = ({ jql = "", columnTitles, loadMoreRows, author, minWidth }) => {
                             parent={parent}
                             rowIndex={index}
                           >
-                            <div style={style}>
-                              {isRowLoaded({
-                                index: index,
-                              }) ? (
-                                <StyledHead
-                                  role="row"
-                                  key={key}
-                                  className="table__row"
-                                >
-                                  {list[index].map((cell, ind) => (
-                                    <StyledHeadCell
-                                      role="gridcell"
+                            {isRowLoaded({
+                              index: index,
+                            }) ? (
+                              <StyledHead
+                                key={key}
+                                className="table__row"
+                                style={style}
+                              >
+                                {list[index]
+                                  .slice(0, ColumnLength - 1)
+                                  .map((cell, ind) => (
+                                    <TitleHeadCell
                                       key={ind}
                                       className="table__cell"
                                     >
                                       {cell}
-                                    </StyledHeadCell>
+                                    </TitleHeadCell>
                                   ))}
-                                </StyledHead>
-                              ) : (
-                                <StyledCell
-                                  role="gridcell"
-                                  key={index}
-                                ></StyledCell>
-                              )}
-                            </div>
+                                <StyledHeadCell
+                                  key={ColumnLength - 1}
+                                  className="table__cell"
+                                >
+                                  {list[index][ColumnLength - 1]}
+                                </StyledHeadCell>
+                              </StyledHead>
+                            ) : (
+                              <></>
+                            )}
                           </CellMeasurer>
                         );
                       }}

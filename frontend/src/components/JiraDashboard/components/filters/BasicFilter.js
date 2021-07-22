@@ -119,7 +119,7 @@ const BasicFilter = ({ handleSwitch, setJqlQuery, user }) => {
           size={SIZE.compact}
           overrides={rootOverride}
         >
-          Switch to jql
+          Switch to JQL
         </Button>
       </div>
     </>

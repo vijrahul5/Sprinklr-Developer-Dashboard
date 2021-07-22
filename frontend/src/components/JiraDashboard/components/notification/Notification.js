@@ -8,6 +8,7 @@ import { useEffect } from "react";
 
 //components
 import { NotificationManager } from "react-notifications";
+import noti from "../../../../assets/noti.wav";
 
 //constants
 const channelid = process.env.REACT_APP_CHANNEL_ID_JIRA;
@@ -19,7 +20,7 @@ const pusher = new Pusher(channelid, {
 let cid = "";
 let channel = "";
 
-async function configureConnection() {
+async function configureConnection(user) {
   let response = await axios.get("/api/jira/webhookToken");
   if (response.data.status === "Success") {
     cid = response.data.webhookId;
@@ -33,23 +34,33 @@ async function configureConnection() {
 
   channel = pusher.subscribe("my-channel");
   channel.bind(cid, function (data) {
-    NotificationManager.success(
+    const url = user.jiraBaseUrl + "/browse" + `/${data.details.key}`;
+    NotificationManager.info(
+      <a href={url} className="notification__url">
+        {data.details.key}
+      </a>,
       `${data.details.type}`,
-      `${data.details.key}`,
       notificationDisplayTime
     );
+    const audioEl = document.getElementsByClassName("audio-element-jira")[0];
+    audioEl.currentTime = 0;
+    audioEl.play();
   });
 }
-const Notification = () => {
+const Notification = ({ user }) => {
   useEffect(() => {
-    configureConnection();
+    configureConnection(user);
 
     return () => {
       pusher.unsubscribe("my-channel");
     };
   }, []);
 
-  return <></>;
+  return (
+    <audio className="audio-element-jira">
+      <source src={noti}></source>
+    </audio>
+  );
 };
 
 export default Notification;

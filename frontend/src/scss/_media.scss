@@ -93,7 +93,6 @@
         width: 1000px;
     }
     .basicInfo__wrapper {
-       
         padding: 1rem;
         padding-bottom: 2rem;
     }
@@ -120,15 +119,11 @@
         }
     }
 
-    .teamInstruction {
-        margin: 1rem;
-    }
     // .teamStandUpList__add {
     //     margin: 0 1rem;
     //     margin-bottom: map-get($margins, "small");
     // }
     .ReactVirtualized__Grid__innerScrollContainer[style] {
-        margin-bottom: 5rem;
         padding: 0 2rem;
         overflow: visible !important;
     }
@@ -144,10 +139,10 @@
         top: 0.5rem;
         right: 0.5rem;
     }
-    .section{
+    .section {
         padding: 1rem;
     }
-    .standUp{
+    .standUp {
         padding: 1rem;
     }
     .teamStandUpList {
@@ -156,6 +151,9 @@
             margin: 1rem;
             margin-bottom: 2rem;
         }
+    }
+    .teamInstruction {
+        margin: 1rem;
     }
     .ReactVirtualized__Grid__innerScrollContainer[style] {
         padding: 0 1rem;
@@ -230,7 +228,6 @@
 
 @media only screen and (max-width: 400px) {
     .basicInfo__wrapper {
-       
         padding: 0.5rem;
         padding-bottom: 2rem;
     }
@@ -290,7 +287,6 @@
         }
     }
     .ReactVirtualized__Grid__innerScrollContainer[style] {
-        margin-bottom: 5rem;
         padding: 0 0.5rem;
         overflow: visible !important;
     }

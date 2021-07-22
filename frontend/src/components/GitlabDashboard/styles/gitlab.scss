@@ -81,6 +81,7 @@
     color: $color-secondary;
     border-radius: $border-radius;
     position: absolute;
+    top: 2.5rem;
     z-index: 1;
 }
 .jiraIssueUrl {
@@ -93,6 +94,8 @@
 }
 .table__headCell {
     padding: 16px !important;
+}
+.table__headRow {
     border-bottom: 1px solid rgb(200, 200, 200) !important;
 }
 .table__row {
@@ -101,11 +104,16 @@
 .table__cell {
     font-weight: 350 !important;
     padding: 16px !important;
-    overflow: auto !important;
+    display: flex;
+    justify-content: start;
 }
 .table__Container {
-    overflow: auto;
+    overflow: auto !important;
 }
+.table__body {
+    height: 500px !important;
+}
+
 a:hover {
     color: blue !important;
 }

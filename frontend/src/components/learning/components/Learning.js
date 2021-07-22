@@ -56,7 +56,7 @@ function Learning({ user }) {
                             }}
                         >
                             <TitleHeadCell>Title</TitleHeadCell>
-                            <MarkedHeadCell>Mark/UnMark</MarkedHeadCell>
+                            <MarkedHeadCell>Completed</MarkedHeadCell>
                             <PercentageHeadCell>
                                 Completion %
                             </PercentageHeadCell>
@@ -132,7 +132,7 @@ function Learning({ user }) {
                             className="learningTable"
                         >
                             <TitleHeadCell>Title</TitleHeadCell>
-                            <MarkedHeadCell>Mark/Unmark</MarkedHeadCell>
+                            <MarkedHeadCell>Completed</MarkedHeadCell>
                             <PercentageHeadCell>
                                 Completion %
                             </PercentageHeadCell>

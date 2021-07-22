@@ -42,6 +42,7 @@ function configureConnection() {
         )[0];
         audioEl.currentTime = 0;
         audioEl.play();
+
     });
 }
 const Notification = () => {

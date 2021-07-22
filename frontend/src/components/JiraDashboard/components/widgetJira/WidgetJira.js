@@ -1,6 +1,6 @@
 //libraries
 import React from "react";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 
 //hooks
 import useGetJiraData from "../../hooks/useGetJiraData";
@@ -10,8 +10,17 @@ import JqlFilter from "../filters/JqlFilter";
 import BasicFilter from "../filters/BasicFilter";
 import loadMoreRows from "../../apis/LoadRows";
 import Expe from "../../../table/Expe";
+import Loader from "../../../loaders/Tombstone";
+import { useStyletron } from "baseui";
+import {
+  StyledTable,
+  StyledHead,
+  StyledHeadCell,
+  StyledBody,
+} from "baseui/table";
+
 //constants
-const columnTitles = ["Type", "Key", "Summary", "Status", "Priority"];
+const columnTitles = ["Type", "Key", "Status", "Priority", "Summary"];
 
 const Widgetjira = ({ user }) => {
   const [jqlQuery, setJqlQuery] = useState(`assignee in ("${user.email}")`);
@@ -27,6 +36,7 @@ const Widgetjira = ({ user }) => {
     if (!basicMode) setJqlQuery(`assignee in ("${user.email}")`);
     setBasicMode((prevMode) => !prevMode);
   }, [basicMode]);
+  const [css] = useStyletron();
 
   return (
     <div className="jiraWid">
@@ -48,7 +58,8 @@ const Widgetjira = ({ user }) => {
         jql={jqlQuery}
         columnTitles={columnTitles}
         loadMoreRows={loadMoreRows}
-        minWidth="750px"
+        minWidth="1000px"
+        loadtumbstone={loading}
       />
     </div>
   );
