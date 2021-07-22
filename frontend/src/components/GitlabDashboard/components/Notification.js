@@ -35,12 +35,14 @@ function configureConnection() {
                 `${data.details.object_attributes.source.name}`,
                 notificationDisplayTime
             );
-            const audioEl = document.getElementsByClassName(
-                "audio-element-gitlab"
-            )[0];
-            audioEl.currentTime = 0;
-            audioEl.play();
         }
+
+        const audioEl = document.getElementsByClassName(
+            "audio-element-gitlab"
+        )[0];
+        audioEl.currentTime = 0;
+        audioEl.play();
+
     });
 }
 const Notification = () => {

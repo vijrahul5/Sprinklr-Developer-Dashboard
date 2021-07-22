@@ -18,7 +18,10 @@ async function getArrayOfProjects(token) {
         }
 
         const projects = fetch(
-            "https://gitlab.com/api/v4/users/" + resolvedId[0].id + "/projects"
+            "https://gitlab.com/api/v4/users/" +
+                resolvedId[0].id +
+                "/projects?access_token=" +
+                token
         ).then((res) => res.json());
         if (!projects) {
             throw "url not valid";
@@ -28,8 +31,9 @@ async function getArrayOfProjects(token) {
         const projectIds = resolvedProject.map((element) => {
             return [element.id, element.name];
         });
-        projectIds.push([36528, "BTC"]);
-        return projectIds;
+        console.log("project", projectIds);
+
+        return [projectIds, token];
     } catch (err) {
         return ["error"];
     }

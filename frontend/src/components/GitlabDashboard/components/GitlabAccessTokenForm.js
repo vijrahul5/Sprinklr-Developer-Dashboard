@@ -26,7 +26,7 @@ const GitlabAccessTokenForm = (props) => {
         },
     };
     return (
-        <>
+        <div data-testid="form">
             <Instruction
                 instructions={[
                     "Login to your Gitlab account.",
@@ -48,11 +48,13 @@ const GitlabAccessTokenForm = (props) => {
                 onClick={submitToken}
                 className="btn--auth btnCustom mt1"
                 size={SIZE.compact}
+                data-testid="btn"
             >
                 Submit Token
             </Button>
-        </>
+        </div>
     );
 };
 
 export default GitlabAccessTokenForm;
+export { Button };
