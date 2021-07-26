@@ -13,8 +13,8 @@ import {
   StyledBody,
 } from "baseui/table";
 
-import Loader from "../../components/loaders/Loader";
-import Tombstone from "../../components/loaders/Tombstone";
+import Loader from "../loaders/Loader";
+import Tombstone from "../loaders/Tombstone";
 import {
   InfiniteLoader,
   List,

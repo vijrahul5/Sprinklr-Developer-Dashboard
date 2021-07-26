@@ -1,7 +1,7 @@
 //libraries
 import React, { useCallback, useState, useEffect, lazy, Suspense } from "react";
 //utils
-import useFetchEmployeeTeamData from "../../../../src/hooks/useFetchEmployeeTeamData";
+import useFetchEmployeeTeamData from "../../../hooks/useFetchEmployeeTeamData";
 import { Select, SIZE } from "baseui/select";
 import Expe from "../../table/Expe";
 import Notification from "./Notification";
